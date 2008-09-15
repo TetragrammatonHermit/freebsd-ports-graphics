@@ -51,6 +51,6 @@ do-install:
 	fi
 	if [ ! -z "${ADDON_INSTALL_HEADERS}" ]; then \
 		${INSTALL_DATA_DIR} ${PREFIX}/include/io/${ADDON_NAME}; \
-		${CP} -f ${SRC_DIR}/source/*.h ${PREFIX}/include/io/${ADDON_NAME
+		${CP} -f ${SRC_DIR}/source/*.h ${PREFIX}/include/io/${ADDON_NAME}
 	fi
 
