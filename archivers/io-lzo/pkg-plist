@@ -8,12 +8,12 @@ lib/io/addons/LZO/_build/lib/libIoLZO.a
 lib/io/addons/LZO/_build/objs/minilzo.o
 lib/io/addons/LZO/build.io
 lib/io/addons/LZO/io/LZO.io
-@dirrm lib/io/addons/LZO/io
-@dirrm lib/io/addons/LZO/_build/objs
-@dirrm lib/io/addons/LZO/_build/lib
-@dirrm lib/io/addons/LZO/_build/headers
-@dirrm lib/io/addons/LZO/_build/dll
-@dirrm lib/io/addons/LZO/_build
-@dirrm lib/io/addons/LZO
-@dirrm lib/io/addons
-@dirrm lib/io
+@dirrmtry lib/io/addons/LZO/io
+@dirrmtry lib/io/addons/LZO/_build/objs
+@dirrmtry lib/io/addons/LZO/_build/lib
+@dirrmtry lib/io/addons/LZO/_build/headers
+@dirrmtry lib/io/addons/LZO/_build/dll
+@dirrmtry lib/io/addons/LZO/_build
+@dirrmtry lib/io/addons/LZO
+@dirrmtry lib/io/addons
+@dirrmtry lib/io
