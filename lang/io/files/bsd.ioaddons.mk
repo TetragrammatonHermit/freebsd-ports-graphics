@@ -45,8 +45,8 @@ do-install:
 	if [ -d ${SRC_DIR}/depends ]; then \
 		${CP} -rf ${SRC_DIR}/depends ${TARGET_DIR}/; \
 	fi
-	if [ -e ${SRC_DIR}/protos ]; then \ 
-		${CP} -f ${SRC_DIR}/protos ${TARGET_DIR}/; \ 
+	if [ -d ${SRC_DIR}/protos ]; then \
+		${CP} -rf ${SRC_DIR}/protos ${TARGET_DIR}/; \
 	fi
 	if [ -d ${SRC_DIR}/io ]; then \
 		${CP} -rf ${SRC_DIR}/io ${TARGET_DIR}/; \
