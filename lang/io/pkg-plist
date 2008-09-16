@@ -99,68 +99,6 @@ include/io/utf8internal.h
 include/io/utf_convert.h
 lib/libiovmall.a
 lib/libiovmall.so
-%%PORTDOCS%%%%DOCSDIR%%/IoGuide.html
-%%PORTDOCS%%%%DOCSDIR%%/IoReference.html
-%%PORTDOCS%%%%DOCSDIR%%/IoTutorial.html
-%%PORTDOCS%%%%DOCSDIR%%/docs.css
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Account.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Ackerman.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/BottlesOfBeer.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Brackets.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Cards.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/CommandLineArgs.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Conditions.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Control.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/ControlFlow.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Decompile.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Dir.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/ErlangChallenge.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Foreach.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Hanoi.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/HelloWorld.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Inheritance.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/MainFile.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/SimpleCoro.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Sort.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/Super.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/WeakLink.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/except.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/qsort.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/tailtest.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/misc/vtest.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/binarytrees.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/chameneos.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/cheapconcurrency.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/fannkuch.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/fasta.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/mandelbrot-output.txt
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/mandelbrot.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/mandelbrot.rb
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/nbody.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/nbody.rb
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/nsieve.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/nsievebits.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/partialsums.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/recursive.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/reverse-complement.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/spectral-norm.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/sumcol-input.txt
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/sumcol-output.txt
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/sumcol.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/shootout/sumcol.rb
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/speed/SpeedResults
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/speed/SpeedResults.html
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/speed/speed.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/speed/speed.py
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/speed/speed.rb
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/speed/speed.rebol
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/speed/speedResults.io
-%%PORTEXAMPLES%%%%EXAMPLESDIR%%/speed/speedResults2.io
-%%PORTEXAMPLES%%@dirrm %%EXAMPLESDIR%%/speed
-%%PORTEXAMPLES%%@dirrm %%EXAMPLESDIR%%/shootout
-%%PORTEXAMPLES%%@dirrm %%EXAMPLESDIR%%/misc
-%%PORTEXAMPLES%%@dirrm %%EXAMPLESDIR%%
-%%PORTDOCS%%@dirrm %%DOCSDIR%%
 @dirrmtry lib/io/addons
 @dirrmtry lib/io
 @dirrmtry include/io

@@ -7,6 +7,10 @@
 
 IOVERSION?=	20080904
 
+IO_BIN=		${LOCALBASE}/bin/io
+IO_PORT=	${PORTSDIR}/lang/io
+
+BUILD_DEPENDS+=	${IO_BIN}:${IO_PORT} 
 
 WRKSRC?=		${WRKDIR}/io
 DEFAULT_ADDONS?=	${PORTNAME}
@@ -37,6 +41,12 @@ do-install:
 	fi
 	if [ -d ${SRC_DIR}/_build/headers ]; then \
 		${CP} -rf ${SRC_DIR}/_build/headers ${TARGET_DIR}/_build/; \
+	fi
+	if [ -d ${SRC_DIR}/depends ]; then \
+		${CP} -rf ${SRC_DIR}/depends ${TARGET_DIR}/; \
+	fi
+	if [ -e ${SRC_DIR}/protos ]; then \ 
+		${CP} -f ${SRC_DIR}/protos ${TARGET_DIR}/; \ 
 	fi
 	if [ -d ${SRC_DIR}/io ]; then \
 		${CP} -rf ${SRC_DIR}/io ${TARGET_DIR}/; \

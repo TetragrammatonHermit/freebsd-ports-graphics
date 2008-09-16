@@ -29,9 +29,9 @@ PORTEXAMPLES=	*
 post-patch:
 	@cd ${WRKSRC}/addons && for addon in *; do \
        if ! ${ECHO_CMD} ${DEFAULT_ADDONS} | ${GREP} $$addon > /dev/null; then \
-                       ${RM} -fr $$addon; \
-               fi; \
-       done
+       ${RM} -fr $$addon; \
+       fi; \
+done
 	@${REINPLACE_CMD} -e 's|CFLAGS = $$(OPTIMIZE)|CFLAGS +=|' \
 		${WRKSRC}/Makefile.lib
 	@${REINPLACE_CMD} -e '/CC = gcc/ d' \
