@@ -1,9 +1,12 @@
 #
+# bsd.ioaddons.mk -- Support lang/io addons ports
+# 
+# Created by:	Martin Wilke <miwi@FreeBSD.org>
+# Data:		15 Sep 2008
 #
-#
-#
-#
+# Maintainer:	miwi@FreeBSD.org
 # $FreeBSD$
+#
 
 IOVERSION?=	20080904
 
@@ -17,7 +20,6 @@ DEFAULT_ADDONS?=	${PORTNAME}
 ADDON_DIR= 	${PREFIX}/lib/io/addons/${DEFAULT_ADDONS}
 BUILD_DIR= 	${WRKSRC}/addons/${DEFAULT_ADDONS}
 HEADER_PATHS=	append("${PREFIX}/include/io")
-
 
 post-patch:
 	cd ${WRKSRC}/addons && for addon in *; do \
