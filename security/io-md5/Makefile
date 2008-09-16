@@ -1,4 +1,4 @@
-# New ports collection makefile for:	io-sha1
+# New ports collection makefile for:	io-md5
 # Date created:		2008-09-15
 # Whom:			Martin Wilke <miwi@FreeBSD.org>
 #
