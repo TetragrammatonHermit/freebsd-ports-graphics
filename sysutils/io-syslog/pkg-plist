@@ -1,11 +1,11 @@
 lib/io/addons/Syslog/_build/headers/IoSyslog.h
 lib/io/addons/Syslog/_build/lib/libIoSyslog.a
 lib/io/addons/Syslog/build.io
-@dirrmtry lib/io/addons/Syslog/_build/objs
-@dirrmtry lib/io/addons/Syslog/_build/lib
-@dirrmtry lib/io/addons/Syslog/_build/headers
-@dirrmtry lib/io/addons/Syslog/_build/dll
-@dirrmtry lib/io/addons/Syslog/_build
-@dirrmtry lib/io/addons/Syslog
-@dirrmtry lib/io/addons
-@dirrmtry lib/io
+@dirrm lib/io/addons/Syslog/_build/objs
+@dirrm lib/io/addons/Syslog/_build/lib
+@dirrm lib/io/addons/Syslog/_build/headers
+@dirrm lib/io/addons/Syslog/_build/dll
+@dirrm lib/io/addons/Syslog/_build
+@dirrm lib/io/addons/Syslog
+@dirrm lib/io/addons
+@dirrm lib/io
