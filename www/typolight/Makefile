@@ -23,6 +23,8 @@ WWWDIR?=	${PREFIX}/www/${PORTNAME}
 
 do-install:
 	@${MKDIR} ${WWWDIR}
+	@${TOUCH} ${WWWDIR}/system/config/localconfig.php
+	@${CHOWN} ${WWWOWN} ${WWWDIR}/system/config/localconfig.php
 	${CP} -R ${WRKSRC}/ ${WWWDIR}
 	@${CAT} ${PKGMESSAGE}
 
