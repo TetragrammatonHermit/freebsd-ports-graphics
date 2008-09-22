@@ -15,7 +15,6 @@ COMMENT=	PEAR XXTEA encryption algorithm
 BUILD_DEPENDS+=	${PEARDIR}/PEAR.php:${PORTSDIR}/devel/pear
 RUN_DEPENDS+=	${PEARDIR}/PEAR.php:${PORTSDIR}/devel/pear
 
-CATEGORY=	Crypt
 FILES=		Crypt/XXTEA.php
 TESTS=		decrypt.phpt encrypt.phpt long2str.phpt setkey.phpt \
 		str2long.phpt
