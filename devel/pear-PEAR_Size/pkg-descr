@@ -1,0 +1,5 @@
+A commandline tool modeled on the Unix 'df' that lists how much filespace
+each installed package consumes. A subset of packages can be specified as
+can channels.
+
+WWW:	http://pear.php.net/package/PEAR_Size
