@@ -12,10 +12,9 @@ CATEGORIES=	security www pear
 MAINTAINER=	miwi@FreeBSD.org
 COMMENT=	Encrypts text which is later decoded using javascript on the client side
 
-BUILD_DEPENDS+=
-RUN_DEPENDS+=	
+BUILD_DEPENDS+=	${PEARDIR}/PEAR.php:${PORTSDIR}/devel/pear
+RUN_DEPENDS+=	${PEARDIR}/PEAR.php:${PORTSDIR}/devel/pear
 
-CATEGORY=	HTML
 FILES=		HTML/Crypt.php
 EXAMPLES=	html-abc.php html-nojavascript.php html.php \
 		simple.php		
