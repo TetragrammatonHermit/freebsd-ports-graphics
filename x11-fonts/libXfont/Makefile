@@ -1,0 +1,21 @@
+# New ports collection makefile for:   libXfont
+# Date Created:			29 Oct, 2003
+# Whom:				Eric Anholt <anholt@FreeBSD.org>
+#
+# $FreeBSD: ports/x11-fonts/libXfont/Makefile,v 1.21 2009/01/23 16:28:03 flz Exp $
+#
+
+PORTNAME=	libXfont
+PORTVERSION=	1.3.4
+PORTEPOCH=	1
+CATEGORIES=	x11-fonts
+
+MAINTAINER=	x11@FreeBSD.org
+COMMENT=	X font libary
+
+LIB_DEPENDS=	freetype.9:${PORTSDIR}/print/freetype2
+
+XORG_CAT=	lib
+USE_XORG=	xproto:both xtrans fontsproto:both fontenc
+
+.include <bsd.port.mk>

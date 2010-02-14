@@ -1,0 +1,17 @@
+# New ports collection makefile for:    font-xfree86-type1
+# Date created:		28 Aug 2005
+# Whom:			Pawel Worach
+#
+# $FreeBSD: ports/x11-fonts/font-xfree86-type1/Makefile,v 1.2 2009/01/23 16:28:02 flz Exp $
+#
+
+PORTNAME=	font-xfree86-type1
+PORTVERSION=	1.0.1
+CATEGORIES=	x11-fonts
+
+MAINTAINER=	x11@FreeBSD.org
+COMMENT=	X.Org XFree86 Type1 font
+
+XORG_CAT=	font
+
+.include <bsd.port.mk>
