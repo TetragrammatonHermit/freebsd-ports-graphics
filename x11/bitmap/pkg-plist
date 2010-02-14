@@ -14,4 +14,8 @@ include/X11/bitmaps/RotateRight
 include/X11/bitmaps/Stipple
 include/X11/bitmaps/Term
 include/X11/bitmaps/Up
-@dirrm include/X11/bitmaps
+share/X11/app-defaults/Bitmap
+share/X11/app-defaults/Bitmap-color
+share/X11/app-defaults/Bitmap-nocase
+@dirrmtry share/X11/app-defaults
+@dirrmtry share/X11

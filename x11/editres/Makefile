@@ -15,8 +15,6 @@ COMMENT=	Dynamic resource editor for X Toolkit Applications
 XORG_CAT=	app
 USE_XORG=	x11 xt xmu xaw
 
-PLIST_FILES=	bin/editres
-
 MAN1=		editres.1
 
 .include <bsd.port.mk>
