@@ -15,7 +15,7 @@ COMMENT=	Create an X cursor file from a collection of PNG images
 LIB_DEPENDS=	png.5:${PORTSDIR}/graphics/png
 
 XORG_CAT=	app
-USE_XORG=	x11 xcursor
+USE_XORG=	x11 xcursor xextproto
 
 PLIST_FILES=	bin/xcursorgen
 

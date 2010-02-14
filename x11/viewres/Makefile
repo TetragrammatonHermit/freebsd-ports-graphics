@@ -15,8 +15,6 @@ COMMENT=	Graphical class browser for Xt
 XORG_CAT=	app
 USE_XORG=	xt xaw
 
-PLIST_FILES=	bin/${PORTNAME}
-
 MAN1=		viewres.1
 
 .include <bsd.port.mk>
