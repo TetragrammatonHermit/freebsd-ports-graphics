@@ -33,6 +33,7 @@ USE_XORG=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		videoproto compositeproto trapproto recordproto xineramaproto \
 		xinerama evieproto xfont fontenc xkbui pixman pciaccess
 
+MAKE_JOBS_UNSAFE=	yes
 USE_OPENSSL=	yes
 USE_PERL5_BUILD=yes
 CONFIGURE_ARGS=	--disable-dmx --disable-xvfb --disable-xnest \
