@@ -350,6 +350,7 @@ share/X11/xkb/xkbcomp
 %%NLS%%@dirrmtry share/locale/ky/LC_MESSAGES
 %%NLS%%@dirrmtry share/locale/ky
 %%NLS%%@dirrmtry share/locale/crh/LC_MESSAGES
+@exec mkdir -p /var/lib/xkb
 @dirrmtry share/locale/crh
 @dirrm share/X11/xkb/types
 @dirrm share/X11/xkb/symbols/xfree68_vndr
@@ -379,3 +380,4 @@ share/X11/xkb/xkbcomp
 @dirrm share/X11/xkb/compat
 @dirrm share/X11/xkb
 @dirrm share/X11
+@dirrmtry var/lib/xkb
