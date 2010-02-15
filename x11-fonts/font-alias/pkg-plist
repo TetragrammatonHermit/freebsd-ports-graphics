@@ -2,3 +2,7 @@ lib/X11/fonts/100dpi/fonts.alias
 lib/X11/fonts/75dpi/fonts.alias
 lib/X11/fonts/cyrillic/fonts.alias
 lib/X11/fonts/misc/fonts.alias
+@dirrmtry lib/X11/fonts/misc
+@dirrmtry lib/X11/fonts/cyrillic
+@dirrmtry lib/X11/fonts/75dpi
+@dirrmtry lib/X11/fonts/100dpi
