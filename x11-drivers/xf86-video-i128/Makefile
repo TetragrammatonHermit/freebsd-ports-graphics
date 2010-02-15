@@ -1,0 +1,19 @@
+# New ports collection makefile for:	xf86-video-i128
+# Date Created:				17 Feb 2006
+# Whom:					Florent Thoumie <flz@FreeBSD.org>
+#
+# $FreeBSD: ports/x11-drivers/xf86-video-i128/Makefile,v 1.6 2009/05/07 19:42:36 rnoland Exp $
+#
+
+PORTNAME=	xf86-video-i128
+PORTVERSION=	1.3.3
+CATEGORIES=	x11-drivers
+
+MAINTAINER=	x11@FreeBSD.org
+COMMENT=	X.Org i128 display driver
+
+XORG_CAT=	driver
+USE_XORG=	videoproto xextproto
+MAN4=		i128.4x
+
+.include <bsd.port.mk>
