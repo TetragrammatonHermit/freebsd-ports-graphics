@@ -1,13 +1,11 @@
-share/fonts/X11/Type1/UTBI____.afm
-share/fonts/X11/Type1/UTBI____.pfa
-share/fonts/X11/Type1/UTB_____.afm
-share/fonts/X11/Type1/UTB_____.pfa
-share/fonts/X11/Type1/UTI_____.afm
-share/fonts/X11/Type1/UTI_____.pfa
-share/fonts/X11/Type1/UTRG____.afm
-share/fonts/X11/Type1/UTRG____.pfa
-share/fonts/X11/Type1/fonts.dir
-share/fonts/X11/Type1/fonts.scale
-@dirrmtry share/fonts/X11/Type1
-@dirrmtry share/fonts/X11
-@dirrmtry share/fonts
+lib/X11/fonts/Type1/UTBI____.afm
+lib/X11/fonts/Type1/UTBI____.pfa
+lib/X11/fonts/Type1/UTB_____.afm
+lib/X11/fonts/Type1/UTB_____.pfa
+lib/X11/fonts/Type1/UTI_____.afm
+lib/X11/fonts/Type1/UTI_____.pfa
+lib/X11/fonts/Type1/UTRG____.afm
+lib/X11/fonts/Type1/UTRG____.pfa
+lib/X11/fonts/Type1/fonts.dir
+lib/X11/fonts/Type1/fonts.scale
+@dirrmtry lib/X11/fonts/Type1
