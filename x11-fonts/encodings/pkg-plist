@@ -49,5 +49,3 @@ lib/X11/fonts/encodings/suneu-greek.enc.gz
 lib/X11/fonts/encodings/tcvn-0.enc.gz
 lib/X11/fonts/encodings/tis620-2.enc.gz
 lib/X11/fonts/encodings/viscii1.1-1.enc.gz
-@dirrmtry lib/X11/fonts/encodings/large
-@dirrmtry lib/X11/fonts/encodings
