@@ -2,7 +2,7 @@
 # Date created:				Jun 22 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xorg-drivers/Makefile,v 1.17 2009/05/07 19:42:40 rnoland Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xorg-drivers
@@ -59,17 +59,15 @@ VIDEO_EXCL=	via:openchrome
 INPUT_ON=	mouse \
 		keyboard
 INPUT_OFF=	acecad \
-		calcomp citron \
-		digitaledge dmc	dynapro \
-		elo2300	elographics \
+		citron \
+		elographics \
 		fpit \
 		hyperpen \
-		jamstudio joystick \
-		magellan magictouch microtouch mutouch \
-		palmax penmount \
-		spaceorb summa synaptics \
-		tek4957 \
-		vmmouse void
+		joystick \
+		magictouch microtouch mutouch \
+		penmount \
+		synaptics \
+				vmmouse void
 
 QUIRKS=		keyboard:kbd jamstudio:js_x
 
