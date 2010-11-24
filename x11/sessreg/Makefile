@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/sessreg/Makefile,v 1.4 2010/01/18 09:01:25 ed Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	sessreg
-PORTVERSION=	1.0.5
+PORTVERSION=	1.0.6
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
@@ -17,7 +17,7 @@ BUILD_DEPENDS+=	${LOCALBASE}/share/aclocal/xorg-macros.m4:${PORTSDIR}/devel/xorg
 XORG_CAT=	app
 USE_XORG=	x11
 
-USE_AUTOTOOLS=	aclocal:110 autoheader:262 automake:110 autoconf:262
+USE_AUTOTOOLS=	aclocal:111 autoheader:268 automake:111 autoconf:268
 ACLOCAL_ARGS=	-I${LOCALBASE}/share/aclocal
 
 PLIST_FILES=	bin/sessreg
