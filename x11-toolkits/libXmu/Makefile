@@ -2,11 +2,11 @@
 # Date Created:			25 Jan, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-toolkits/libXmu/Makefile,v 1.19 2009/01/23 16:28:07 flz Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libXmu
-PORTVERSION=	1.0.5
+PORTVERSION=	1.1.0
 PORTEPOCH=	1
 CATEGORIES=	x11-toolkits
 

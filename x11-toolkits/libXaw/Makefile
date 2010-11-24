@@ -2,11 +2,11 @@
 # Date Created:			25 Jan, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-toolkits/libXaw/Makefile,v 1.21 2009/01/23 16:28:07 flz Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libXaw
-PORTVERSION=	1.0.7
+PORTVERSION=	1.0.8
 PORTEPOCH=	1
 CATEGORIES=	x11-toolkits
 
