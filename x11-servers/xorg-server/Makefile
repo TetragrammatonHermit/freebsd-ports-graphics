@@ -2,7 +2,7 @@
 # Date created:		7 May 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/x11-servers/xorg-server/Makefile,v 1.75 2010/02/08 00:20:08 marius Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xorg-server
@@ -104,9 +104,8 @@ EXTRA_PATCHES=  ${.CURDIR}/files/extra-arch-ia64
 PLIST_SUB+=     IA64_NA=""
 .endif
 
-.if ${ARCH} == powerpc
+.if ${ARCH} == powerpc || ${ARCH} == powerpc64
 PLIST_SUB+=	PPC_NA="@comment "
-MAN4+=		nv.4x
 EXTRA_PATCHES=	${.CURDIR}/files/extra-arch-powerpc
 .else
 PLIST_SUB+=	PPC_NA=""
