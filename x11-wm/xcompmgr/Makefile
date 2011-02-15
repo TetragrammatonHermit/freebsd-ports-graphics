@@ -2,7 +2,7 @@
 # Date Created:			16 Oct, 2004
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-wm/xcompmgr/Makefile,v 1.10 2009/01/23 16:28:09 flz Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xcompmgr
