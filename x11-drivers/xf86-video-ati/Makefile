@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-ati/Makefile,v 1.23 2010/12/27 19:55:37 pgollucci Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-ati
@@ -18,10 +18,4 @@ XORG_CAT=	driver
 USE_XORG=	xf86driproto xineramaproto videoproto xf86miscproto xextproto glproto
 MAN4=		ati.4x radeon.4x
 
-.include <bsd.port.pre.mk>
-
-.if ${OSVERSION} < 700000
-USE_GCC=	4.2+
-.endif
-
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
