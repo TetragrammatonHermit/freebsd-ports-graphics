@@ -2,7 +2,7 @@
 # Date created:				2008-05-18
 # Whom:					Max Brazhnikov <makc@issp.ac.ru>
 #
-# $FreeBSD: ports/x11-servers/xephyr/Makefile,v 1.9 2010/02/07 15:24:06 rnoland Exp $
+# $FreeBSD: ports/x11-servers/xephyr/Makefile,v 1.10 2010/05/01 11:41:04 miwi Exp $
 #
 
 PORTNAME=	xephyr

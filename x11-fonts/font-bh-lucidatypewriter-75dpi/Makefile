@@ -2,7 +2,7 @@
 # Date created:		28 Aug 2005
 # Whom:			Pawel Worach
 #
-# $FreeBSD: ports/x11-fonts/font-bh-lucidatypewriter-75dpi/Makefile,v 1.1 2007/05/19 20:29:12 flz Exp $
+# $FreeBSD: ports/x11-fonts/font-bh-lucidatypewriter-75dpi/Makefile,v 1.2 2010/05/01 11:40:53 miwi Exp $
 #
 
 PORTNAME=	font-bh-lucidatypewriter-75dpi

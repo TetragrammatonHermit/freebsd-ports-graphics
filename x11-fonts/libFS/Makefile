@@ -2,7 +2,7 @@
 # Date Created:				21 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-fonts/libFS/Makefile,v 1.5 2009/08/02 19:36:14 mezz Exp $
+# $FreeBSD: ports/x11-fonts/libFS/Makefile,v 1.7 2010/12/04 07:34:11 ade Exp $
 #
 
 PORTNAME=	libFS
@@ -14,6 +14,6 @@ COMMENT=	The FS library
 
 XORG_CAT=	lib
 USE_XORG=	fontsproto:both xproto:both xtrans
-USE_AUTOTOOLS=	libtool:22
+USE_AUTOTOOLS=	libtool
 
 .include <bsd.port.mk>

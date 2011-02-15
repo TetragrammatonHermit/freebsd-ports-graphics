@@ -2,7 +2,7 @@
 # Date Created:				28 Aug 2005
 # Whom:					Pawel Worach
 #
-# $FreeBSD: ports/x11-fonts/bdftopcf/Makefile,v 1.2 2007/07/02 17:25:42 lesi Exp $
+# $FreeBSD: ports/x11-fonts/bdftopcf/Makefile,v 1.3 2010/05/01 11:40:49 miwi Exp $
 #
 
 PORTNAME=	bdftopcf

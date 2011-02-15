@@ -2,7 +2,7 @@
 # Date created:		28 Aug 2005
 # Whom:			Pawel Worach
 #
-# $FreeBSD: ports/x11-fonts/font-arabic-misc/Makefile,v 1.1 2007/05/19 20:29:11 flz Exp $
+# $FreeBSD: ports/x11-fonts/font-arabic-misc/Makefile,v 1.2 2010/05/01 11:40:51 miwi Exp $
 #
 
 PORTNAME=	font-arabic-misc

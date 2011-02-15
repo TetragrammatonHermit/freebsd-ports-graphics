@@ -2,7 +2,7 @@
 # Date Created:				Nov 2 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-themes/xcursor-themes/Makefile,v 1.1 2007/05/19 20:30:35 flz Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xcursor-themes

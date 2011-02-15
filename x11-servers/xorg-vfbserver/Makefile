@@ -2,7 +2,7 @@
 # Date created:		17 June 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/x11-servers/xorg-vfbserver/Makefile,v 1.19 2010/02/07 15:24:07 rnoland Exp $
+# $FreeBSD: ports/x11-servers/xorg-vfbserver/Makefile,v 1.20 2010/05/01 11:41:06 miwi Exp $
 #
 
 PORTNAME=	xorg-vfbserver

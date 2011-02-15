@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $FreeBSD: ports/x11-fonts/xfs/files/xfs.in,v 1.2 2009/01/28 16:37:59 flz Exp $
+# $FreeBSD: ports/x11-fonts/xfs/files/xfs.in,v 1.5 2010/05/09 09:07:33 miwi Exp $
 #
 
 # PROVIDE: xfs
@@ -16,7 +16,7 @@
 #
 # Please see xfs(1), rc.conf(5) and rc(8) for further details.
 
-. %%RC_SUBR%%
+. /etc/rc.subr
 
 name="xfs"
 rcvar=`set_rcvar`

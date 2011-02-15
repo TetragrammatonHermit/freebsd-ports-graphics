@@ -2,7 +2,7 @@
 # Date created:		28 Aug 2005
 # Whom:			Pawel Worach
 #
-# $FreeBSD: ports/x11-fonts/font-schumacher-misc/Makefile,v 1.2 2008/12/31 08:59:06 hrs Exp $
+# $FreeBSD: ports/x11-fonts/font-schumacher-misc/Makefile,v 1.3 2010/05/01 11:40:58 miwi Exp $
 #
 
 PORTNAME=	font-schumacher-misc

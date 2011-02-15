@@ -2,7 +2,7 @@
 # Date created:		28 Aug 2005
 # Whom:			Pawel Worach
 #
-# $FreeBSD: ports/x11-fonts/font-adobe-100dpi/Makefile,v 1.1 2007/05/19 20:29:10 flz Exp $
+# $FreeBSD: ports/x11-fonts/font-adobe-100dpi/Makefile,v 1.2 2010/05/01 11:40:50 miwi Exp $
 #
 
 PORTNAME=	font-adobe-100dpi

@@ -2,7 +2,7 @@
 # Date Created:				21 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-fonts/libXfontcache/Makefile,v 1.1 2007/05/19 20:29:31 flz Exp $
+# $FreeBSD: ports/x11-fonts/libXfontcache/Makefile,v 1.2 2010/05/01 11:41:01 miwi Exp $
 #
 
 PORTNAME=	libXfontcache

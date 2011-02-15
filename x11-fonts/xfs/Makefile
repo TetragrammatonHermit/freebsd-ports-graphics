@@ -2,11 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-fonts/xfs/Makefile,v 1.17 2009/01/28 16:37:59 flz Exp $
+# $FreeBSD: ports/x11-fonts/xfs/Makefile,v 1.20 2010/05/09 16:01:23 fluffy Exp $
 #
 
 PORTNAME=	xfs
 PORTVERSION=	1.1.0
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	x11-fonts
 
@@ -17,6 +18,7 @@ XORG_CAT=	app
 USE_XORG=	libfs xfont xtrans
 USE_RC_SUBR=	xfs
 ALL_TARGET=	all config
+CONFIGURE_ENV+=	ac_cv_path_XMLTO=""
 
 MAN1=		xfs.1
 

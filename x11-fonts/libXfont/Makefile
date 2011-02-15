@@ -2,7 +2,7 @@
 # Date Created:			29 Oct, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-fonts/libXfont/Makefile,v 1.21 2009/01/23 16:28:03 flz Exp $
+# $FreeBSD: ports/x11-fonts/libXfont/Makefile,v 1.22 2010/05/01 11:41:01 miwi Exp $
 #
 
 PORTNAME=	libXfont

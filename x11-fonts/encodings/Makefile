@@ -2,7 +2,7 @@
 # Date created:				Oct 29 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD$
+# $FreeBSD: ports/x11-fonts/encodings/Makefile,v 1.2 2010/05/01 11:40:50 miwi Exp $
 #
 
 PORTNAME=	encodings

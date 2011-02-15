@@ -2,7 +2,7 @@
 # Date created:		30 May 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/x11-fonts/xorg-fonts-type1/Makefile,v 1.14 2009/01/23 16:28:05 flz Exp $
+# $FreeBSD: ports/x11-fonts/xorg-fonts-type1/Makefile,v 1.15 2010/05/01 11:41:04 miwi Exp $
 #
 
 PORTNAME=	xorg-fonts-type1

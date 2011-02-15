@@ -2,7 +2,7 @@
 # Date created:		28 Aug 2005
 # Whom:			Pawel Worach
 #
-# $FreeBSD: ports/x11-fonts/font-xfree86-type1/Makefile,v 1.2 2009/01/23 16:28:02 flz Exp $
+# $FreeBSD: ports/x11-fonts/font-xfree86-type1/Makefile,v 1.3 2010/05/01 11:41:00 miwi Exp $
 #
 
 PORTNAME=	font-xfree86-type1

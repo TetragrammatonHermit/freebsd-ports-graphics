@@ -2,7 +2,7 @@
 # Date created:		21 July 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/x11-servers/xorg-nestserver/Makefile,v 1.16 2010/02/07 15:24:07 rnoland Exp $
+# $FreeBSD: ports/x11-servers/xorg-nestserver/Makefile,v 1.17 2010/05/01 11:41:05 miwi Exp $
 #
 
 PORTNAME=	xorg-nestserver

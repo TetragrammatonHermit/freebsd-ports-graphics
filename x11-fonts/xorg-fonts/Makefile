@@ -2,7 +2,7 @@
 # Date created:				Jun 22 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-fonts/xorg-fonts/Makefile,v 1.4 2009/01/23 16:28:05 flz Exp $
+# $FreeBSD: ports/x11-fonts/xorg-fonts/Makefile,v 1.5 2010/05/01 11:41:02 miwi Exp $
 #
 
 PORTNAME=	xorg-fonts
