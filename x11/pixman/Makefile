@@ -2,18 +2,18 @@
 # Date Created:				Aug 9 2003
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/pixman/Makefile,v 1.14 2010/02/11 16:26:04 rnoland Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	pixman
-PORTVERSION=	0.16.6
+PORTVERSION=	0.18.4
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Low-level pixel manipulation library
 
 XORG_CAT=	lib
-USE_AUTOTOOLS=	libtool:22
+USE_AUTOTOOLS=	libtool
 USE_PERL5_BUILD=yes
 USE_GNOME=	ltverhack:9
 
