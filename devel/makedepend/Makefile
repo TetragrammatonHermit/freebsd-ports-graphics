@@ -2,7 +2,7 @@
 # Date created:				August 15th 1997
 # Whom:					Ian Vaudrey <i.vaudrey@bigfoot.com>
 #
-# $FreeBSD: ports/devel/makedepend/Makefile,v 1.16 2010/05/01 11:40:06 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	makedepend

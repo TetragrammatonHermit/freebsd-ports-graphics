@@ -2,7 +2,7 @@
 # Date Created:				24 Mar 2007
 # Whom:					Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/devel/xorg-macros/Makefile,v 1.4 2010/05/01 11:40:06 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xorg-macros

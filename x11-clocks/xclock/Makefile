@@ -2,11 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-clocks/xclock/Makefile,v 1.5 2009/01/28 16:32:52 flz Exp $
+# $FreeBSD: ports/x11-clocks/xclock/Makefile,v 1.7 2010/08/07 14:10:01 naddy Exp $
 #
 
 PORTNAME=	xclock
 PORTVERSION=	1.0.4
+PORTREVISION=	1
 CATEGORIES=	x11-clocks
 
 MAINTAINER=	x11@FreeBSD.org

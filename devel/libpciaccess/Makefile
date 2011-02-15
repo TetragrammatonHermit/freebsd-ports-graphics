@@ -2,7 +2,7 @@
 # Date Created:				May 11 2008
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/devel/libpciaccess/Makefile,v 1.11 2010/10/01 00:58:34 sunpoet Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libpciaccess

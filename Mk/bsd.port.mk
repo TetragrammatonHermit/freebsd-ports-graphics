@@ -1,7 +1,7 @@
 #-*- mode: makefile; tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: ports/Mk/bsd.port.mk,v 1.655 2010/11/17 21:06:43 pav Exp $
+# $FreeBSD: ports/Mk/bsd.port.mk,v 1.667 2011/02/05 15:55:58 erwin Exp $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -371,8 +371,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  should not be used in Makefile.
 ##
 # USE_BISON		- Implies that the port uses bison in one way or another:
-#				  'yes' (backwards compatibility) - use bison for building
-#				  new features: 'build', 'run', 'both', implying build,
+#				  'build', 'run', 'both', implying build,
 #				  runtime, and both build/run dependencies
 ##
 # USE_IMAKE		- If set, this port uses imake.
@@ -551,6 +550,12 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  pattern meta-characters "*", "?", "[", "]", and "!".
 #				  Example: apache*-1.2* apache*-1.3.[012345] apache-*+ssl_*
 #
+# CONFLICTS_BUILD
+#				- Check conflict prior to the build.
+#
+# CONFLICTS_INSTALL
+#				- Check conflict prior to the installation stage.
+#
 # Various directory definitions and variables to control them.
 # You rarely need to redefine any of these except WRKSRC and NO_WRKSUBDIR.
 #
@@ -603,6 +608,8 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  Default: ${MASTERDIR}/files
 # PKGDIR		- A directory containing any package creation files.
 #				  Default: ${MASTERDIR}
+# SRC_BASE		- The root of the src tree.  (Some ports require this to get
+#				  kernel sources).  Default: /usr/src
 # UID_FILES		- A list of files containing information about registered UIDs.
 # 				  Note that files have decreasing priority.
 # GID_FILES		- A list of files containing information about registered GIDs.
@@ -834,7 +841,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # FETCH_BINARY	- Path to ftp/http fetch command if not in $PATH.
 #				  Default: "/usr/bin/fetch"
 # FETCH_ARGS	- Arguments to ftp/http fetch command.
-#				  Default: "-ApRr"
+#				  Default: "-AFpr"
 # FETCH_CMD		- ftp/http fetch command.
 #				  Default: ${FETCH_BINARY} ${FETCH_ARGS}
 # FETCH_BEFORE_ARGS
@@ -1152,6 +1159,7 @@ LINUXBASE?=		/compat/linux
 DISTDIR?=		${PORTSDIR}/distfiles
 _DISTDIR?=		${DISTDIR}/${DIST_SUBDIR}
 INDEXDIR?=		${PORTSDIR}
+SRC_BASE?=		/usr/src
 
 .include "${PORTSDIR}/Mk/bsd.commands.mk"
 
@@ -1545,7 +1553,7 @@ PERL=		${LOCALBASE}/bin/perl
 .include "${PORTSDIR}/Mk/bsd.qt.mk"
 .endif
 
-.if defined(WANT_GECKO) || defined(USE_GECKO)
+.if defined(WANT_GECKO) || defined(USE_GECKO) || defined(USE_FIREFOX) || defined(USE_FIREFOX_BUILD) || defined(USE_SEAMONKEY) || defined(USE_SEAMONKEY_BUILD) || defined(USE_THUNDERBIRD) || defined(USE_THUNDERBIRD_BUILD)
 .include "${PORTSDIR}/Mk/bsd.gecko.mk"
 .endif
 
@@ -2043,13 +2051,6 @@ RUN_DEPENDS+=	${_GL_${_component}_RUN_DEPENDS}
 .if defined(USE_BISON)
 _BISON_DEPENDS=	bison:${PORTSDIR}/devel/bison
 
-# XXX: backwards compatibility
-. if ${USE_BISON:L} == "yes"
-USE_BISON=	build
-pre-everything::
-	@${ECHO_MSG} "WARNING: USE_BISON=yes deprecated, use build/run/both"
-. endif
-
 . if ${USE_BISON:L} == "build"
 BUILD_DEPENDS+= ${_BISON_DEPENDS}
 . elif ${USE_BISON:L} == "run"
@@ -2316,7 +2317,7 @@ PTHREAD_LIBS?=		-pthread
 
 .if exists(/usr/bin/fetch)
 FETCH_BINARY?=	/usr/bin/fetch
-FETCH_ARGS?=	-ApRr
+FETCH_ARGS?=	-AFpr
 FETCH_REGET?=	1
 .if !defined(DISABLE_SIZE)
 FETCH_BEFORE_ARGS+=	$${CKSIZE:+-S $$CKSIZE}
@@ -2503,6 +2504,9 @@ PKG_ARGS+=		-o ${PKGORIGIN}
 .endif
 .if defined(CONFLICTS) && !defined(DISABLE_CONFLICTS)
 PKG_ARGS+=		-C "${CONFLICTS}"
+.endif
+.if defined(CONFLICTS_INSTALL) && !defined(DISABLE_CONFLICTS)
+PKG_ARGS+=		-C "${CONFLICTS_INSTALL}"
 .endif
 .endif
 .if defined(PKG_NOCOMPRESS)
@@ -3080,12 +3084,8 @@ check-makevars::
 	@${FALSE}
 .endif
 _MLINKS=	${_MLINKS_PREPEND}
-# XXX 20040119 This next line should read:
-# .for lang in ${MANLANG:S%^%man/%:S%^man/""$%man%}
-# but there is currently a bug in make(1) that prevents the double-quote
-# substitution from working correctly.  Once that problem is addressed,
-# and has had a enough time to mature, this hack should be removed.
-.for lang in ${MANLANG:S%^%man/%:S%^man/""$%man%:S%^man/"$%man%}
+
+.for lang in ${MANLANG:S%^%man/%:S%^man/""$%man%}
 .for ___pmlinks in ${__pmlinks}
 .for __lang in ${lang}
 _MLINKS+=	${___pmlinks:S// /g}
@@ -3103,12 +3103,7 @@ _COUNT=1
 .endif
 .endfor
 
-# XXX 20040119 This next line should read:
-# .for manlang in ${MANLANG:S%^%man/%:S%^man/""$%man%}
-# but there is currently a bug in make(1) that prevents the double-quote
-# substitution from working correctly.  Once that problem is addressed,
-# and has had a enough time to mature, this hack should be removed.
-.for manlang in ${MANLANG:S%^%man/%:S%^man/""$%man%:S%^man/"$%man%}
+.for manlang in ${MANLANG:S%^%man/%:S%^man/""$%man%}
 
 .for sect in 1 2 3 4 5 6 7 8 9 L N
 # MAN${sect} is for man pages installed for all languages in MANLANG for a given
@@ -3414,9 +3409,9 @@ build: configure
 .endif
 
 # Disable install
-.if defined(NO_INSTALL) && !target(install)
-install: build
-	@${TOUCH} ${TOUCH_FLAGS} ${INSTALL_COOKIE}
+.if defined(NO_INSTALL) && !target(do-install)
+do-install:
+	@${DO_NADA}
 .endif
 
 # Disable package
@@ -3445,8 +3440,6 @@ describe:
 
 # Pre-everything
 
-# XXX MCL suggests deprecating this in favor of something
-# less likely to be abused by overloading
 pre-everything::
 	@${DO_NADA}
 
@@ -3467,9 +3460,6 @@ options-message:
 .endif
 .if defined(_OPTIONS_READ)
 	@${ECHO_MSG} "===>  Found saved configuration for ${_OPTIONS_READ}"
-.if ${OPTIONSFILE} != ${OPTIONSFILE}
-	@${ECHO_MSG} "===>  *** CAUTION *** Using wrong configuration file ${OPTIONSFILE}"
-.endif
 .endif
 
 
@@ -3508,7 +3498,7 @@ check-vulnerable:
 		vlist=`${_EXTRACT_AUDITFILE} | ${GREP} "${PORTNAME}" | \
 			${AWK} -F\| ' /^[^#]/ { \
 				if (!system("${PKG_VERSION} -T \"${PKGNAME}\" \"" $$1 "\"")) \
-					print "=> " $$3 ".\n   Reference: <" $$2 ">" \
+					print "=> " $$3 ".\n   Reference: " $$2 \
 			} \
 		'`; \
 		if [ -n "$$vlist" ]; then \
@@ -3759,6 +3749,11 @@ do-patch:
 	fi
 .endif
 
+.if !target(configure-autotools)
+configure-autotools:
+	@${DO_NADA}
+.endif
+
 .if !target(run-autotools)
 run-autotools:
 	@${DO_NADA}
@@ -3829,9 +3824,92 @@ do-build:
 # Check conflicts
 
 .if !target(check-conflicts)
-check-conflicts:
-.if defined(CONFLICTS) && !defined(DISABLE_CONFLICTS)
-	@found=`${PKG_INFO} -I ${CONFLICTS:C/.+/'&'/} 2>/dev/null | ${AWK} '{print $$1}'`; \
+check-conflicts: check-build-conflicts check-install-conflicts
+.endif
+
+.if !target(check-build-conflicts)
+check-build-conflicts:
+.if ( defined(CONFLICTS) || defined(CONFLICTS_BUILD) ) && !defined(DISABLE_CONFLICTS) && !defined(DEFER_CONFLICTS_CHECK)
+	@found=`${PKG_INFO} -I ${CONFLICTS:C/.+/'&'/} ${CONFLICTS_BUILD:C/.+/'&'/} 2>/dev/null | ${AWK} '{print $$1}'`; \
+	conflicts_with=; \
+	for entry in $${found}; do \
+		if ${PKG_INFO} -e $${entry} ; then \
+			prfx=`${PKG_INFO} -q -p "$${entry}" 2> /dev/null | ${SED} -ne '1s/^@cwd //p'`; \
+			orgn=`${PKG_INFO} -q -o "$${entry}" 2> /dev/null`; \
+			if [ "/${PREFIX}" = "/$${prfx}" -a "/${PKGORIGIN}" != "/$${orgn}" ]; then \
+				conflicts_with="$${conflicts_with} $${entry}"; \
+			fi; \
+		fi; \
+	done; \
+	if [ -n "$${conflicts_with}" ]; then \
+		${ECHO_MSG}; \
+		${ECHO_MSG} "===>  ${PKGNAME} conflicts with installed package(s): "; \
+		for entry in $${conflicts_with}; do \
+			${ECHO_MSG} "      $${entry}"; \
+		done; \
+		${ECHO_MSG}; \
+		${ECHO_MSG} "      They will not build together."; \
+		${ECHO_MSG} "      Please remove them first with pkg_delete(1)."; \
+		exit 1; \
+	fi
+.endif
+.endif
+
+.if !target(identify-install-conflicts)
+identify-install-conflicts:
+.if ( defined(CONFLICTS) || defined(CONFLICTS_INSTALL) ) && !defined(DISABLE_CONFLICTS)
+	@found=`${PKG_INFO} -I ${CONFLICTS:C/.+/'&'/} ${CONFLICTS_INSTALL:C/.+/'&'/} 2>/dev/null | ${AWK} '{print $$1}'`; \
+	conflicts_with=; \
+	for entry in $${found}; do \
+		if ${PKG_INFO} -e $${entry} ; then \
+			prfx=`${PKG_INFO} -q -p "$${entry}" 2> /dev/null | ${SED} -ne '1s/^@cwd //p'`; \
+			orgn=`${PKG_INFO} -q -o "$${entry}" 2> /dev/null`; \
+			if [ "/${PREFIX}" = "/$${prfx}" -a "/${PKGORIGIN}" != "/$${orgn}" ]; then \
+				conflicts_with="$${conflicts_with} $${entry}"; \
+			fi; \
+		fi; \
+	done; \
+	if [ -n "$${conflicts_with}" ]; then \
+		${ECHO_MSG}; \
+		${ECHO_MSG} "===>  ${PKGNAME} conflicts with installed package(s): "; \
+		for entry in $${conflicts_with}; do \
+			${ECHO_MSG} "      $${entry}"; \
+		done; \
+		${ECHO_MSG}; \
+		${ECHO_MSG} "      They install files into the same place."; \
+		${ECHO_MSG} "      You may want to stop build with Ctrl + C."; \
+		sleep 10; \
+	fi
+.endif
+.endif
+
+.if !target(check-install-conflicts)
+check-install-conflicts:
+.if ( defined(CONFLICTS) || defined(CONFLICTS_INSTALL) || ( defined(CONFLICTS_BUILD) && defined(DEFER_CONFLICTS_CHECK) ) ) && !defined(DISABLE_CONFLICTS) 
+.if defined(DEFER_CONFLICTS_CHECK)
+	@found=`${PKG_INFO} -I ${CONFLICTS:C/.+/'&'/} ${CONFLICTS_BUILD:C/.+/'&'/} ${CONFLICTS_INSTALL:C/.+/'&'/} 2>/dev/null | ${AWK} '{print $$1}'`; \
+	conflicts_with=; \
+	for entry in $${found}; do \
+		if ${PKG_INFO} -e $${entry} ; then \
+			prfx=`${PKG_INFO} -q -p "$${entry}" 2> /dev/null | ${SED} -ne '1s/^@cwd //p'`; \
+			orgn=`${PKG_INFO} -q -o "$${entry}" 2> /dev/null`; \
+			if [ "/${PREFIX}" = "/$${prfx}" -a "/${PKGORIGIN}" != "/$${orgn}" ]; then \
+				conflicts_with="$${conflicts_with} $${entry}"; \
+			fi; \
+		fi; \
+	done; \
+	if [ -n "$${conflicts_with}" ]; then \
+		${ECHO_MSG}; \
+		${ECHO_MSG} "===>  ${PKGNAME} conflicts with installed package(s): "; \
+		for entry in $${conflicts_with}; do \
+			${ECHO_MSG} "      $${entry}"; \
+		done; \
+		${ECHO_MSG}; \
+		${ECHO_MSG} "      Please remove them first with pkg_delete(1)."; \
+		exit 1; \
+	fi
+.else
+	@found=`${PKG_INFO} -I ${CONFLICTS:C/.+/'&'/} ${CONFLICTS_INSTALL:C/.+/'&'/} 2>/dev/null | ${AWK} '{print $$1}'`; \
 	conflicts_with=; \
 	for entry in $${found}; do \
 		if ${PKG_INFO} -e $${entry} ; then \
@@ -3853,7 +3931,8 @@ check-conflicts:
 		${ECHO_MSG} "      Please remove them first with pkg_delete(1)."; \
 		exit 1; \
 	fi
-.endif  # CONFLICTS
+.endif # defined(DEFER_CONFLICTS_CHECK)
+.endif
 .endif
 
 # Install
@@ -3886,20 +3965,7 @@ do-package: ${TMPPLIST}
 		fi; \
 	fi
 	@__softMAKEFLAGS='${__softMAKEFLAGS:S/'/'\''/g}'; \
-	_LATE_PKG_ARGS=""; \
-	if [ -f ${PKGINSTALL} ]; then \
-		_LATE_PKG_ARGS="$${_LATE_PKG_ARGS} -i ${PKGINSTALL}"; \
-	fi; \
-	if [ -f ${PKGDEINSTALL} ]; then \
-		_LATE_PKG_ARGS="$${_LATE_PKG_ARGS} -k ${PKGDEINSTALL}"; \
-	fi; \
-	if [ -f ${PKGREQ} ]; then \
-		_LATE_PKG_ARGS="$${_LATE_PKG_ARGS} -r ${PKGREQ}"; \
-	fi; \
-	if [ -f ${PKGMESSAGE} ]; then \
-		_LATE_PKG_ARGS="$${_LATE_PKG_ARGS} -D ${PKGMESSAGE}"; \
-	fi; \
-	if ${PKG_CMD} ${PKG_ARGS} ${PKGFILE}; then \
+	if ${PKG_CMD} -b ${PKGNAME} ${PKGFILE}; then \
 		if [ -d ${PACKAGES} ]; then \
 			cd ${.CURDIR} && eval ${MAKE} $${__softMAKEFLAGS} package-links; \
 		fi; \
@@ -4340,28 +4406,28 @@ _CHROOT_SEQ=
 .endif
 _SANITY_SEQ=	${_CHROOT_SEQ} pre-everything check-makefile \
 				check-categories check-makevars check-desktop-entries \
-				check-conflicts check-depends check-deprecated \
+				check-depends identify-install-conflicts check-deprecated \
 				check-vulnerable check-license buildanyway-message \
 				options-message
 _FETCH_DEP=		check-sanity
 _FETCH_SEQ=		fetch-depends pre-fetch pre-fetch-script \
 				do-fetch post-fetch post-fetch-script
 _EXTRACT_DEP=	fetch
-_EXTRACT_SEQ=	extract-message checksum extract-depends pre-extract \
-				pre-extract-script do-extract \
+_EXTRACT_SEQ=	check-build-conflicts extract-message checksum extract-depends \
+				pre-extract pre-extract-script do-extract \
 				post-extract post-extract-script
 _PATCH_DEP=		extract
 _PATCH_SEQ=		ask-license patch-message patch-depends patch-dos2unix pre-patch \
 				pre-patch-script do-patch post-patch post-patch-script
 _CONFIGURE_DEP=	patch
 _CONFIGURE_SEQ=	build-depends lib-depends configure-message \
-				pre-configure pre-configure-script \
+				configure-autotools pre-configure pre-configure-script \
 				run-autotools do-configure post-configure post-configure-script
 _BUILD_DEP=		configure
 _BUILD_SEQ=		build-message pre-build pre-build-script do-build \
 				post-build post-build-script
 _INSTALL_DEP=	build
-_INSTALL_SEQ=	install-message run-depends lib-depends apply-slist pre-install \
+_INSTALL_SEQ=	install-message check-install-conflicts run-depends lib-depends apply-slist pre-install \
 				pre-install-script generate-plist check-already-installed
 _INSTALL_SUSEQ= check-umask install-mtree pre-su-install \
 				pre-su-install-script create-users-groups do-install \
@@ -5947,6 +6013,7 @@ fake-pkg:
 		fi; \
 		if [ -f ${PKGMESSAGE} ]; then \
 			${CP} ${PKGMESSAGE} ${PKG_DBDIR}/${PKGNAME}/+DISPLAY; \
+			${ECHO_CMD} "@display +DISPLAY" >> ${PKG_DBDIR}/${PKGNAME}/+CONTENTS; \
 		fi; \
 		for dep in `${PKG_INFO} -qf ${PKGNAME} | ${AWK} '/^@pkgdep / {print $$2}' | ${SORT} -u`; do \
 			if [ -d ${PKG_DBDIR}/$$dep -a -z `${ECHO_CMD} $$dep | ${GREP} -E ${PKG_IGNORE_DEPENDS}` ]; then \
@@ -6007,10 +6074,6 @@ config:
 .if !defined(OPTIONS)
 	@${ECHO_MSG} "===> No options to configure"
 .else
-.if ${OPTIONSFILE} != ${OPTIONSFILE}
-	@${ECHO_MSG} "===> Using wrong configuration file ${OPTIONSFILE}"
-	@exit 1
-.endif
 .if ${UID} != 0 && !defined(INSTALL_AS_USER)
 	@optionsdir=${OPTIONSFILE}; optionsdir=$${optionsdir%/*}; \
 	${ECHO_MSG} "===>  Switching to root credentials to create $${optionsdir}"; \
@@ -6336,7 +6399,7 @@ install-desktop-entries:
 		${ECHO_CMD} "@cwd ${DESKTOPDIR}" >> ${TMPPLIST}; \
 	fi; \
 	while [ $$# -gt 6 ]; do \
-		filename="$$4.desktop"; \
+		filename="`${ECHO_CMD} "$$4" | ${TR} -cd [:alnum:]`.desktop"; \
 		pathname="${DESKTOPDIR}/$$filename"; \
 		categories="$$5"; \
 		if [ -z "$$categories" ]; then \

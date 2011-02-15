@@ -2,7 +2,7 @@
 # Date created:         18 Jun 2004
 # Whom:                 anholt
 #
-# $FreeBSD: ports/devel/imake/Makefile,v 1.20 2010/05/01 11:40:06 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	imake
