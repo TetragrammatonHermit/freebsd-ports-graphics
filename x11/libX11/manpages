@@ -634,7 +634,6 @@ XkbGetBounceKeysDelay.3 \
 XkbGetCompatMap.3 \
 XkbGetControlsChanges.3 \
 XkbGetControls.3 \
-XkbGetDetectableAutorepeat.3 \
 XkbGetDeviceButtonActions.3 \
 XkbGetDeviceInfoChanges.3 \
 XkbGetDeviceInfo.3 \
