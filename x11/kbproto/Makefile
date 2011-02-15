@@ -2,7 +2,7 @@
 # Date Created:				08 Aug 2005
 # Whom:					Dejan Lesjak <lesi@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/kbproto/Makefile,v 1.2 2010/05/01 11:40:09 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	kbproto
