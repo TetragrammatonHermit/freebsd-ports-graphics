@@ -135,8 +135,4 @@ pre-everything::
 	@${ECHO_MSG} "NO_SUID_XSERVER=YES in /etc/make.conf."
 .endif
 
-.if ${OSVERSION} < 700000
-USE_GCC=	4.2+
-.endif
-
 .include <bsd.port.post.mk>

@@ -2,7 +2,7 @@
 # Date Created:				24 Oct 2008
 # Whom:					Dominic Fandrey <kamikaze@bsdforen.de>
 #
-# $FreeBSD: ports/x11-drivers/input-wacom/Makefile,v 1.12 2010/02/07 15:25:21 rnoland Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	input-wacom
