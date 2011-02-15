@@ -2,7 +2,7 @@
 # Date Created:			29 Oct, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXres/Makefile,v 1.22 2008/03/13 10:33:55 flz Exp $
+# $FreeBSD: ports/x11/libXres/Makefile,v 1.23 2010/05/01 11:40:13 miwi Exp $
 #
 
 PORTNAME=	libXres

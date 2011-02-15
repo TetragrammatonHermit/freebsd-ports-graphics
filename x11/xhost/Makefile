@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xhost/Makefile,v 1.2 2007/09/13 19:45:03 flz Exp $
+# $FreeBSD: ports/x11/xhost/Makefile,v 1.3 2010/05/01 11:40:22 miwi Exp $
 #
 
 PORTNAME=	xhost

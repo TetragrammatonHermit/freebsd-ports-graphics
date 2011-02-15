@@ -2,7 +2,7 @@
 # Date Created:			13 Nov, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXdamage/Makefile,v 1.13 2007/05/19 20:26:49 flz Exp $
+# $FreeBSD: ports/x11/libXdamage/Makefile,v 1.14 2010/05/01 11:40:11 miwi Exp $
 #
 
 PORTNAME=	libXdamage

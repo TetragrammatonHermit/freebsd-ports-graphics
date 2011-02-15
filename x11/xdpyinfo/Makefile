@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xdpyinfo/Makefile,v 1.4 2009/01/23 16:28:18 flz Exp $
+# $FreeBSD: ports/x11/xdpyinfo/Makefile,v 1.5 2010/05/01 11:40:20 miwi Exp $
 #
 
 PORTNAME=	xdpyinfo

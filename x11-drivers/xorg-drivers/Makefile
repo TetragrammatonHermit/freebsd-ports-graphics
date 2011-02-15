@@ -2,7 +2,7 @@
 # Date created:				Jun 22 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD$
+# $FreeBSD: ports/x11-drivers/xorg-drivers/Makefile,v 1.20 2010/05/01 11:40:49 miwi Exp $
 #
 
 PORTNAME=	xorg-drivers

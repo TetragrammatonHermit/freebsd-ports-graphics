@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xwud/Makefile,v 1.1 2007/05/19 20:28:21 flz Exp $
+# $FreeBSD: ports/x11/xwud/Makefile,v 1.2 2010/05/01 11:40:31 miwi Exp $
 #
 
 PORTNAME=	xwud

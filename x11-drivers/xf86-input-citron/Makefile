@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-citron/Makefile,v 1.7 2010/02/07 15:25:22 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-input-citron/Makefile,v 1.10 2010/05/23 20:18:46 pav Exp $
 #
 
 PORTNAME=	xf86-input-citron

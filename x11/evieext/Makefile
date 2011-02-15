@@ -2,7 +2,7 @@
 # Date Created:				25 Apr 2006
 # Whom:					Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/evieext/Makefile,v 1.1 2007/05/19 20:26:14 flz Exp $
+# $FreeBSD: ports/x11/evieext/Makefile,v 1.2 2010/05/01 11:40:08 miwi Exp $
 #
 
 PORTNAME=	evieext

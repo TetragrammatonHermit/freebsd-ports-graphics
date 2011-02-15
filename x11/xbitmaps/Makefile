@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Dejan Lesjak <lesi@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xbitmaps/Makefile,v 1.1 2007/05/19 20:27:37 flz Exp $
+# $FreeBSD: ports/x11/xbitmaps/Makefile,v 1.2 2010/05/01 11:40:19 miwi Exp $
 #
 
 PORTNAME=	xbitmaps

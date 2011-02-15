@@ -2,7 +2,7 @@
 # Date Created:			2 Jul, 2003
 # Whom:				Foxfair Hu <foxfair@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXrender/Makefile,v 1.24 2008/03/13 10:33:55 flz Exp $
+# $FreeBSD: ports/x11/libXrender/Makefile,v 1.25 2010/05/01 11:40:12 miwi Exp $
 #
 
 PORTNAME=	libXrender

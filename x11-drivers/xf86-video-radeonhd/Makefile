@@ -2,7 +2,7 @@
 # Date Created:				20 Oct 2007
 # Whom:					Rene Ladan <r.c.ladan@gmail.com>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-radeonhd/Makefile,v 1.16 2010/03/12 04:01:38 fluffy Exp $
+# $FreeBSD: ports/x11-drivers/xf86-video-radeonhd/Makefile,v 1.18 2010/05/07 05:12:33 miwi Exp $
 #
 
 PORTNAME=	xf86-video-radeonhd

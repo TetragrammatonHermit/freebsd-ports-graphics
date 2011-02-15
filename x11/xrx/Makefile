@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xrx/Makefile,v 1.5 2009/08/02 19:36:11 mezz Exp $
+# $FreeBSD: ports/x11/xrx/Makefile,v 1.7 2010/12/04 07:34:08 ade Exp $
 #
 
 PORTNAME=	xrx
@@ -15,7 +15,7 @@ COMMENT=	RX helper program
 XORG_CAT=	app
 USE_XORG=	x11 xt xext xtrans xproxymngproto xau xaw
 USE_LDCONFIG=	yes
-USE_AUTOTOOLS=	libtool:22
+USE_AUTOTOOLS=	libtool
 
 MAN1=		xrx.1 libxrx.1
 

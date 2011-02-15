@@ -2,7 +2,7 @@
 # Date Created:			13 Nov, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXv/Makefile,v 1.22 2009/01/23 16:28:13 flz Exp $
+# $FreeBSD: ports/x11/libXv/Makefile,v 1.23 2010/05/01 11:40:13 miwi Exp $
 #
 
 PORTNAME=	libXv

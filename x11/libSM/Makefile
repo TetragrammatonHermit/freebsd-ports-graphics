@@ -2,11 +2,12 @@
 # Date Created:			09 Nov, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libSM/Makefile,v 1.26 2009/08/02 19:36:07 mezz Exp $
+# $FreeBSD: ports/x11/libSM/Makefile,v 1.33 2010/12/04 07:34:03 ade Exp $
 #
 
 PORTNAME=	libSM
 PORTVERSION=	1.1.1
+PORTREVISION=	3
 PORTEPOCH=	1
 CATEGORIES=	x11
 
@@ -15,7 +16,7 @@ COMMENT=	Session Management library for X11
 
 BUILD_DEPENDS=	${LOCALBASE}/share/aclocal/xorg-macros.m4:${PORTSDIR}/devel/xorg-macros
 
-USE_AUTOTOOLS=	aclocal:110 autoheader:262 automake:110 autoconf:262 libtool:22
+USE_AUTOTOOLS=	aclocal autoheader automake autoconf libtool
 ACLOCAL_ARGS=	-I . -I ${LOCALBASE}/share/aclocal
 AUTOMAKE_ARGS=	--add-missing
 XORG_CAT=	lib

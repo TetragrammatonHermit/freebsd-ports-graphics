@@ -2,7 +2,7 @@
 # Date Created:			8 Feb 2006
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXtst/Makefile,v 1.6 2009/08/02 19:36:08 mezz Exp $
+# $FreeBSD: ports/x11/libXtst/Makefile,v 1.8 2010/12/04 07:34:05 ade Exp $
 #
 
 PORTNAME=	libXtst
@@ -15,6 +15,6 @@ COMMENT=	X Test extension
 XORG_CAT=	lib
 USE_XORG=	x11 xext recordproto:both xextproto inputproto:both \
 		xi
-USE_AUTOTOOLS=	libtool:22
+USE_AUTOTOOLS=	libtool
 
 .include <bsd.port.mk>

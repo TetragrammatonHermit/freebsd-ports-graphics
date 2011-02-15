@@ -2,7 +2,7 @@
 # Date Created:				08 Aug 2005
 # Whom:					Dejan Lesjak <lesi@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xtrans/Makefile,v 1.3 2009/01/23 16:28:25 flz Exp $
+# $FreeBSD: ports/x11/xtrans/Makefile,v 1.4 2010/05/01 11:40:29 miwi Exp $
 #
 
 PORTNAME=	xtrans

@@ -2,7 +2,7 @@
 # Date Created:			8 Feb 2006
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libdmx/Makefile,v 1.3 2008/03/13 10:33:55 flz Exp $
+# $FreeBSD: ports/x11/libdmx/Makefile,v 1.4 2010/05/01 11:40:14 miwi Exp $
 #
 
 PORTNAME=	libdmx

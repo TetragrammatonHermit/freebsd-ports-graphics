@@ -2,11 +2,12 @@
 # Date created:				Jun 22 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xorg-apps/Makefile,v 1.7 2009/01/23 19:31:36 flz Exp $
+# $FreeBSD: ports/x11/xorg-apps/Makefile,v 1.10 2010/12/31 08:57:57 kevlo Exp $
 #
 
 PORTNAME=	xorg-apps
 PORTVERSION=	7.5
+PORTREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	# none
 DISTFILES=	# none
@@ -26,7 +27,7 @@ COMPONENTS=	appres bitmap xf86dga:dga iceauth luit \
 		xwud
 
 # These three are added for convenience purposes only.
-COMPONENTS+=	x11-wm/twm:twm xinit xterm
+COMPONENTS+=	x11-wm/twm:twm x11-clocks/xclock:xclock xinit xterm
 
 NO_BUILD=	yes
 

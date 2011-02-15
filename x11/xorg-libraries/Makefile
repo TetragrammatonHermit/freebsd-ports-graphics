@@ -2,7 +2,7 @@
 # Date created:		29 May 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/x11/xorg-libraries/Makefile,v 1.26 2009/01/23 16:28:22 flz Exp $
+# $FreeBSD: ports/x11/xorg-libraries/Makefile,v 1.27 2010/05/01 11:40:26 miwi Exp $
 #
 
 PORTNAME=	xorg-libraries

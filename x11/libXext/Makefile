@@ -2,7 +2,7 @@
 # Date Created:			29 Oct, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXext/Makefile,v 1.19 2009/01/29 23:19:59 rnoland Exp $
+# $FreeBSD: ports/x11/libXext/Makefile,v 1.20 2010/05/01 11:40:11 miwi Exp $
 #
 
 PORTNAME=	libXext

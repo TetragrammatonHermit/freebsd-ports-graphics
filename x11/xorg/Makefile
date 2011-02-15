@@ -2,7 +2,7 @@
 # Date created:		18 Jun 2004
 # Whom:			anholt
 #
-# $FreeBSD: ports/x11/xorg/Makefile,v 1.30 2010/02/07 15:25:21 rnoland Exp $
+# $FreeBSD: ports/x11/xorg/Makefile,v 1.32 2010/05/01 11:40:26 miwi Exp $
 #
 
 PORTNAME=	xorg

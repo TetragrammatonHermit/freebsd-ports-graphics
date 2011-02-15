@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-i128/Makefile,v 1.6 2009/05/07 19:42:36 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-video-i128/Makefile,v 1.9 2010/05/07 05:12:31 miwi Exp $
 #
 
 PORTNAME=	xf86-video-i128

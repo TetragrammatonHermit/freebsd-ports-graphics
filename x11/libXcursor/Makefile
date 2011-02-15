@@ -2,7 +2,7 @@
 # Date Created:			22 Nov, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXcursor/Makefile,v 1.23 2008/03/13 10:33:54 flz Exp $
+# $FreeBSD: ports/x11/libXcursor/Makefile,v 1.24 2010/05/01 11:40:11 miwi Exp $
 #
 
 PORTNAME=	libXcursor

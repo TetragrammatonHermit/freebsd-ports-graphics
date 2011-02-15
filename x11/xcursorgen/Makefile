@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD$
+# $FreeBSD: ports/x11/xcursorgen/Makefile,v 1.5 2010/05/01 11:40:20 miwi Exp $
 #
 
 PORTNAME=	xcursorgen

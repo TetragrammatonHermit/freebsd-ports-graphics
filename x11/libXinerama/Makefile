@@ -2,7 +2,7 @@
 # Date Created:			7 May, 2004
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXinerama/Makefile,v 1.15 2009/08/02 19:36:07 mezz Exp $
+# $FreeBSD: ports/x11/libXinerama/Makefile,v 1.17 2010/12/04 07:34:04 ade Exp $
 #
 
 PORTNAME=	libXinerama
@@ -15,7 +15,7 @@ COMMENT=	X11 Xinerama library
 
 XORG_CAT=	lib
 USE_XORG=	x11 xext xextproto xineramaproto:both
-USE_AUTOTOOLS=	libtool:22
+USE_AUTOTOOLS=	libtool
 
 MAN3=		Xinerama.3 \
 		XineramaQueryExtension.3 \

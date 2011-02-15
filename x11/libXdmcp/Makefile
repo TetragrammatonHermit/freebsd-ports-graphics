@@ -2,7 +2,7 @@
 # Date Created:			28 Oct, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXdmcp/Makefile,v 1.15 2008/03/13 10:33:54 flz Exp $
+# $FreeBSD: ports/x11/libXdmcp/Makefile,v 1.16 2010/05/01 11:40:11 miwi Exp $
 #
 
 PORTNAME=	libXdmcp

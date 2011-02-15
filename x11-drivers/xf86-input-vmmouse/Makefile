@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					NIIMI Satoshi <sa2c@sa2c.net>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-vmmouse/Makefile,v 1.12 2009/05/07 19:42:35 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-input-vmmouse/Makefile,v 1.16 2010/08/13 07:41:15 jsa Exp $
 #
 
 PORTNAME=	xf86-input-vmmouse
-PORTVERSION=	12.6.6
+PORTVERSION=	12.6.9
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -14,6 +14,7 @@ COMMENT=	X.Org vmmouse input driver
 
 XORG_CAT=	driver
 CONFIGURE_ARGS=	--with-hal-callouts-dir=${PREFIX}/libexec/hal/scripts
+USE_GMAKE=	yes
 
 MAN1=		vmmouse_detect.1
 MAN4=		vmmouse.4x

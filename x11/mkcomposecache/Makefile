@@ -2,7 +2,7 @@
 # Date Created:				30 Jan 2007
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/mkcomposecache/Makefile,v 1.1 2007/05/19 20:27:05 flz Exp $
+# $FreeBSD: ports/x11/mkcomposecache/Makefile,v 1.2 2010/05/01 11:40:15 miwi Exp $
 #
 
 PORTNAME=	mkcomposecache

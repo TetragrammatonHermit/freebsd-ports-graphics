@@ -2,11 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xinit/Makefile,v 1.7 2009/03/19 16:55:13 pav Exp $
+# $FreeBSD: ports/x11/xinit/Makefile,v 1.9 2010/08/15 09:33:46 arved Exp $
 #
 
 PORTNAME=	xinit
 PORTVERSION=	1.2.0
+PORTREVISION=	1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
@@ -22,5 +23,6 @@ MAN1=		startx.1 xinit.1
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|hexdump|/usr/bin/hexdump|' ${WRKSRC}/startx.cpp
+	@${REINPLACE_CMD} -e 's|/usr/local|${PREFIX}|g' ${WRKSRC}/xinit.man
 
 .include <bsd.port.mk>

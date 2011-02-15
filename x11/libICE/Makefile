@@ -2,7 +2,7 @@
 # Date Created:			09 Nov, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libICE/Makefile,v 1.20 2008/03/13 10:33:53 flz Exp $
+# $FreeBSD: ports/x11/libICE/Makefile,v 1.21 2010/05/01 11:40:09 miwi Exp $
 #
 
 PORTNAME=	libICE

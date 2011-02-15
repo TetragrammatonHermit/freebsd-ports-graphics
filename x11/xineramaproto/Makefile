@@ -2,7 +2,7 @@
 # Date Created:				06 Feb 2006
 # Whom:					Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xineramaproto/Makefile,v 1.1 2007/05/19 20:27:55 flz Exp $
+# $FreeBSD: ports/x11/xineramaproto/Makefile,v 1.2 2010/05/01 11:40:23 miwi Exp $
 #
 
 PORTNAME=	xineramaproto

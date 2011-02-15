@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-keyboard/Makefile,v 1.7 2009/05/07 19:42:33 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-input-keyboard/Makefile,v 1.10 2010/05/07 03:37:44 miwi Exp $
 #
 
 PORTNAME=	xf86-input-keyboard

@@ -2,7 +2,7 @@
 # Date Created:			28 Oct, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD$
+# $FreeBSD: ports/x11/libX11/Makefile,v 1.36 2010/12/04 07:34:04 ade Exp $
 #
 
 PORTNAME=	libX11
@@ -20,9 +20,9 @@ RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/xcb.pc:${PORTSDIR}/x11/libxcb
 XORG_CAT=	lib
 USE_XORG=	bigreqsproto xau xcmiscproto xdmcp xextproto xtrans \
 		kbproto:both inputproto xf86bigfontproto xproto:both
-USE_AUTOTOOLS=	aclocal:111 autoheader:268 automake:111 autoconf:268 libtool:22
-#ACLOCAL_ARGS=	-I . -I ${LOCALBASE}/share/aclocal
-#AUTOMAKE_ARGS=	--add-missing
+USE_AUTOTOOLS=	aclocal autoheader automake autoconf libtool
+ACLOCAL_ARGS=	-I . -I ${LOCALBASE}/share/aclocal
+AUTOMAKE_ARGS=	--add-missing
 CONFIGURE_ARGS+=	--datadir=${PREFIX}/lib \
 			--with-xcb=yes
 CONFIGURE_ENV+=	ac_cv_path_PS2PDF=""

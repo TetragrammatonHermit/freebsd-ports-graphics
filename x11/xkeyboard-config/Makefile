@@ -2,11 +2,12 @@
 # Date Created:				Dec 20 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xkeyboard-config/Makefile,v 1.16 2009/05/29 12:44:56 rnoland Exp $
+# $FreeBSD: ports/x11/xkeyboard-config/Makefile,v 1.18 2010/05/31 02:01:42 ade Exp $
 #
 
 PORTNAME=	xkeyboard-config
 PORTVERSION=	1.8
+PORTREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	http://xlibs.freedesktop.org/xkbdesc/
 DISTNAME=	xkeyboard-config-${PORTVERSION}

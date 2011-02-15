@@ -2,12 +2,12 @@
 # Date Created:				2008-09-07
 # Whom:					nork@FreeBSD.org
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-radeonhd-devel/Makefile,v 1.28 2010/02/07 15:25:30 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-video-radeonhd-devel/Makefile,v 1.34 2010/12/04 07:34:09 ade Exp $
 #
 
 PORTNAME=	xf86-video-radeonhd
 PORTVERSION=	1.3.0.20091101
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	x11-drivers
 MASTER_SITES=	${MASTER_SITE_LOCAL}
 MASTER_SITE_SUBDIR=	nork
@@ -22,7 +22,7 @@ LIB_DEPENDS=	pciaccess.0:${PORTSDIR}/devel/libpciaccess
 
 XORG_CAT=	driver
 USE_XORG=	damageproto glproto videoproto xextproto xf86driproto
-USE_AUTOTOOLS=	aclocal:19 autoconf:262 libtool:22
+USE_AUTOTOOLS=	automake:env aclocal:env autoconf libtool
 
 CONFLICTS=	xf86-video-radeonhd-[0-9]*
 
@@ -31,7 +31,7 @@ MAN4=		radeonhd.4x
 ACLOCAL_ARGS=	--acdir=${LOCALBASE}/share/aclocal
 
 pre-configure:
-	cd ${WRKSRC} && ${AUTORECONF} -i
+	cd ${WRKSRC} && ${SETENV} ${AUTOTOOLS_ENV} ${AUTORECONF} --force -v --install
 
 post-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/utils/conntest/rhd_conntest ${PREFIX}/sbin

@@ -2,7 +2,7 @@
 # Date Created:				29 Jan 2009
 # Whom:					Anonymous <swell.k@gmail.com>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-nouveau/Makefile,v 1.9 2010/02/07 15:25:29 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-video-nouveau/Makefile,v 1.11 2010/05/23 20:23:38 pav Exp $
 #
 
 PORTNAME=	xf86-video-nouveau

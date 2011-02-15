@@ -2,7 +2,7 @@
 # Date created:				Nov 18 2006
 # Whom:					Dave Grochowski
 #
-# $FreeBSD: ports/x11/xorg-cf-files/Makefile,v 1.2 2009/01/23 16:28:22 flz Exp $
+# $FreeBSD: ports/x11/xorg-cf-files/Makefile,v 1.3 2010/05/01 11:40:26 miwi Exp $
 #
 
 PORTNAME=	xorg-cf-files

@@ -2,7 +2,7 @@
 # Date Created:				08 Aug 2005
 # Whom:					Dejan Lesjak <lesi@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/damageproto/Makefile,v 1.1 2007/05/19 20:25:58 flz Exp $
+# $FreeBSD: ports/x11/damageproto/Makefile,v 1.2 2010/05/01 11:40:07 miwi Exp $
 #
 
 PORTNAME=	damageproto

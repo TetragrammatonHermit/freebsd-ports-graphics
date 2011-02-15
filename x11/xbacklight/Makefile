@@ -2,7 +2,7 @@
 # Date Created:				11 Sep 2007
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xbacklight/Makefile,v 1.1 2007/09/13 19:45:01 flz Exp $
+# $FreeBSD: ports/x11/xbacklight/Makefile,v 1.2 2010/05/01 11:40:18 miwi Exp $
 #
 
 PORTNAME=	xbacklight

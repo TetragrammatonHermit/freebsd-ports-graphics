@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xrandr/Makefile,v 1.4 2009/04/04 04:03:55 rnoland Exp $
+# $FreeBSD: ports/x11/xrandr/Makefile,v 1.5 2010/05/01 11:40:27 miwi Exp $
 #
 
 PORTNAME=	xrandr

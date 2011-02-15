@@ -2,7 +2,7 @@
 # Date Created:				15 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/appres/Makefile,v 1.1 2007/05/19 20:25:49 flz Exp $
+# $FreeBSD: ports/x11/appres/Makefile,v 1.2 2010/05/01 11:40:06 miwi Exp $
 #
 
 PORTNAME=	appres

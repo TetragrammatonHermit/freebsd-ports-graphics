@@ -2,7 +2,7 @@
 # Date Created:			29 Oct, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXau/Makefile,v 1.16 2009/01/23 16:28:12 flz Exp $
+# $FreeBSD: ports/x11/libXau/Makefile,v 1.17 2010/05/01 11:40:10 miwi Exp $
 #
 
 PORTNAME=	libXau

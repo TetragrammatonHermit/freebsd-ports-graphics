@@ -2,7 +2,7 @@
 # Date Created:			8 Feb 2006
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXxf86vm/Makefile,v 1.2 2009/01/23 16:28:13 flz Exp $
+# $FreeBSD: ports/x11/libXxf86vm/Makefile,v 1.3 2010/05/01 11:40:14 miwi Exp $
 #
 
 PORTNAME=	libXxf86vm

@@ -2,7 +2,7 @@
 # Date Created:				Jul 28 2008
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/dri2proto/Makefile,v 1.4 2010/02/07 15:24:06 rnoland Exp $
+# $FreeBSD: ports/x11/dri2proto/Makefile,v 1.5 2010/05/01 11:40:08 miwi Exp $
 #
 
 PORTNAME=	dri2proto

@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-magictouch/Makefile,v 1.8 2010/02/07 15:25:24 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-input-magictouch/Makefile,v 1.10 2010/12/04 07:34:09 ade Exp $
 #
 
 PORTNAME=	xf86-input-magictouch
@@ -17,6 +17,6 @@ IGNORE=		needs xf86_ansic.h which doesn't exist with recent xserver
 
 XORG_CAT=	driver
 MAN4=		magictouch.4x
-USE_AUTOTOOLS=	libtool:22
+USE_AUTOTOOLS=	libtool
 
 .include <bsd.port.mk>

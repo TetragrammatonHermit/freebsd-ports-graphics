@@ -2,7 +2,7 @@
 # Date Created:			7 May 2004
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libxkbfile/Makefile,v 1.7 2009/01/23 16:28:14 flz Exp $
+# $FreeBSD: ports/x11/libxkbfile/Makefile,v 1.8 2010/05/01 11:40:14 miwi Exp $
 #
 
 PORTNAME=	libxkbfile

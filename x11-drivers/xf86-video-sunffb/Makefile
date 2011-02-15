@@ -2,12 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-sunffb/Makefile,v 1.8 2010/02/07 15:25:32 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-video-sunffb/Makefile,v 1.10 2010/05/30 19:53:07 marius Exp $
 #
 
 PORTNAME=	xf86-video-sunffb
-PORTVERSION=	1.2.0
-PORTREVISION=	5
+PORTVERSION=	1.2.1
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

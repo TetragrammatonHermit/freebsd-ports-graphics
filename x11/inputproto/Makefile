@@ -2,7 +2,7 @@
 # Date Created:				08 Aug 2005
 # Whom:					Dejan Lesjak <lesi@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/inputproto/Makefile,v 1.3 2009/01/23 16:28:11 flz Exp $
+# $FreeBSD: ports/x11/inputproto/Makefile,v 1.4 2010/05/01 11:40:09 miwi Exp $
 #
 
 PORTNAME=	inputproto

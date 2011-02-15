@@ -2,7 +2,7 @@
 # Date Created:				21 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXprintAppUtil/Makefile,v 1.3 2009/08/02 19:36:08 mezz Exp $
+# $FreeBSD: ports/x11/libXprintAppUtil/Makefile,v 1.4 2010/12/04 07:34:04 ade Exp $
 #
 
 PORTNAME=	libXprintAppUtil
@@ -14,6 +14,6 @@ COMMENT=	The XprintAppUtil library
 
 XORG_CAT=	lib
 USE_XORG=	printproto x11 xau xp xprintutil xproto:both
-USE_AUTOTOOLS=	libtool:22
+USE_AUTOTOOLS=	libtool
 
 .include <bsd.port.mk>

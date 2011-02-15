@@ -2,7 +2,7 @@
 # Date Created:			8 Feb 206
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXvMC/Makefile,v 1.2 2008/03/13 10:33:55 flz Exp $
+# $FreeBSD: ports/x11/libXvMC/Makefile,v 1.3 2010/05/01 11:40:13 miwi Exp $
 #
 
 PORTNAME=	libXvMC

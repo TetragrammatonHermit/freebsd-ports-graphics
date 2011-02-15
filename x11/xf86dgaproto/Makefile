@@ -2,7 +2,7 @@
 # Date Created:				06 Feb 2006
 # Whom:					Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xf86dgaproto/Makefile,v 1.2 2007/09/13 19:45:03 flz Exp $
+# $FreeBSD: ports/x11/xf86dgaproto/Makefile,v 1.3 2010/05/01 11:40:21 miwi Exp $
 #
 
 PORTNAME=	xf86dgaproto

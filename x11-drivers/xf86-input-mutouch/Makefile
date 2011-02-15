@@ -2,12 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-mutouch/Makefile,v 1.6 2010/02/07 15:25:25 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-input-mutouch/Makefile,v 1.9 2010/05/25 21:13:09 pav Exp $
 #
 
 PORTNAME=	xf86-input-mutouch
 PORTVERSION=	1.2.1
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

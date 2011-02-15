@@ -2,7 +2,7 @@
 # Date Created:			8 Feb 2006
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXxf86dga/Makefile,v 1.2 2007/09/13 19:45:00 flz Exp $
+# $FreeBSD: ports/x11/libXxf86dga/Makefile,v 1.3 2010/05/01 11:40:13 miwi Exp $
 #
 
 PORTNAME=	libXxf86dga

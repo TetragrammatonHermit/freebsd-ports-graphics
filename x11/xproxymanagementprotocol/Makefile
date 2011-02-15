@@ -2,7 +2,7 @@
 # Date Created:			Jun 21 2006
 # Whom:				Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xproxymanagementprotocol/Makefile,v 1.1 2007/05/19 20:28:10 flz Exp $
+# $FreeBSD: ports/x11/xproxymanagementprotocol/Makefile,v 1.2 2010/05/01 11:40:27 miwi Exp $
 #
 
 PORTNAME=	xproxymanagementprotocol

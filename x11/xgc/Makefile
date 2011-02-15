@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xgc/Makefile,v 1.2 2009/01/23 16:28:19 flz Exp $
+# $FreeBSD: ports/x11/xgc/Makefile,v 1.3 2010/05/01 11:40:22 miwi Exp $
 #
 
 PORTNAME=	xgc

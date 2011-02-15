@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-cyrix/Makefile,v 1.7 2010/02/07 15:25:27 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-video-cyrix/Makefile,v 1.8 2010/05/01 11:40:41 miwi Exp $
 #
 
 PORTNAME=	xf86-video-cyrix

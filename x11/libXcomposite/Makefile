@@ -2,7 +2,7 @@
 # Date Created:			29 Oct, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libXcomposite/Makefile,v 1.15 2007/09/13 19:44:59 flz Exp $
+# $FreeBSD: ports/x11/libXcomposite/Makefile,v 1.16 2010/05/01 11:40:11 miwi Exp $
 #
 
 PORTNAME=	libXcomposite

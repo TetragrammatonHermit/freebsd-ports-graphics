@@ -3,7 +3,7 @@
 # Whom:					Alexey Illarionov <littlesavage@orionet.ru>
 # Based on:             		x11-drivers/xf86-video-sis by flz@FreeBSD.org
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-sis-intel/Makefile,v 1.5 2010/02/07 15:25:31 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-video-sis-intel/Makefile,v 1.6 2010/05/01 11:40:47 miwi Exp $
 #
 
 PORTNAME=	xf86-video-sis-intel

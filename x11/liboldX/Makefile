@@ -2,7 +2,7 @@
 # Date Created:				Dec 16 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/liboldX/Makefile,v 1.3 2009/08/02 19:36:09 mezz Exp $
+# $FreeBSD: ports/x11/liboldX/Makefile,v 1.4 2010/12/04 07:34:05 ade Exp $
 #
 
 PORTNAME=	liboldX
@@ -14,6 +14,6 @@ COMMENT=	Old X library
 
 XORG_CAT=	lib
 USE_XORG=	x11
-USE_AUTOTOOLS=	libtool:22
+USE_AUTOTOOLS=	libtool
 
 .include <bsd.port.mk>

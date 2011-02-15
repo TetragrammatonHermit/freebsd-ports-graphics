@@ -2,7 +2,7 @@
 # Date Created:				25 Sep 2008
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-synaptics/Makefile,v 1.6 2009/05/28 22:20:48 rnoland Exp $
+# $FreeBSD: ports/x11-drivers/xf86-input-synaptics/Makefile,v 1.11 2010/05/07 03:37:44 miwi Exp $
 #
 
 PORTNAME=	xf86-input-synaptics
