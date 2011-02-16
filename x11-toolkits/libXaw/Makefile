@@ -2,7 +2,7 @@
 # Date Created:			25 Jan, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-toolkits/libXaw/Makefile,v 1.22 2010/05/01 11:41:06 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libXaw
@@ -15,6 +15,7 @@ COMMENT=	X Athena Widgets library
 
 XORG_CAT=	lib
 USE_XORG=	printproto:both x11 xau xext xextproto xmu xp xpm xproto:both xt
+USE_GMAKE=	yes
 
 MAN3=		Xaw.3
 
