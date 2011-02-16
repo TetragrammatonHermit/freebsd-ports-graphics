@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xcalc/Makefile,v 1.4 2010/05/01 11:40:19 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xcalc
-PORTVERSION=	1.0.3
+PORTVERSION=	1.0.4.1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org

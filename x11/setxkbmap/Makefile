@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/setxkbmap/Makefile,v 1.4 2010/05/01 11:40:17 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	setxkbmap

@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xedit/Makefile,v 1.2 2009/01/23 16:28:18 flz Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xedit
-PORTVERSION=	1.1.2
+PORTVERSION=	1.2.0
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org

@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/rgb/Makefile,v 1.2 2010/05/01 11:40:16 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	rgb
-PORTVERSION=	1.0.3
+PORTVERSION=	1.0.4
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
