@@ -15,8 +15,7 @@ COMMENT=	X Toolkit library
 XORG_CAT=	lib
 USE_XORG=	x11 sm xproto:both kbproto
 
-MAN1=		makestrs.1
-MAN3=		XtNew.3 \
+MAN1=		XtNew.3 \
 		XtAddGrab.3 \
 		XtAppLock.3 \
 		XtAddActions.3 \
