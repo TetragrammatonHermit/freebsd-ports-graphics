@@ -2,12 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xconsole/Makefile,v 1.3 2009/01/23 16:28:17 flz Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xconsole
 PORTVERSION=	1.0.4
-PORTREVISION=	1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
