@@ -638,6 +638,8 @@ XkbGetDeviceButtonActions.3 \
 XkbGetDeviceInfoChanges.3 \
 XkbGetDeviceInfo.3 \
 XkbGetDeviceLedInfo.3 \
+XkbGetDetectableAutoRepeat.3 \
+XkbSetDetectableAutoRepeat.3 \
 XkbGetGeometry.3 \
 XkbGetIndicatorChanges.3 \
 XkbGetIndicatorMap.3 \
@@ -733,7 +735,6 @@ XkbSetBounceKeysDelay.3 \
 XkbSetCompatMap.3 \
 XkbSetControls.3 \
 XkbSetDebuggingFlags.3 \
-XkbSetDetectableAutorepeat.3 \
 XkbSetDeviceButtonActions.3 \
 XkbSetDeviceInfo.3 \
 XkbSetIgnoreLockMods.3 \
@@ -816,3 +817,4 @@ XwcTextPerCharExtents.3 \
 XwcTextPropertyToTextList.3
 MAN5= \
 Compose.5 \
+XCompose.5 \
