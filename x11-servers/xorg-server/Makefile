@@ -19,8 +19,6 @@ LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm
 
 RUN_DEPENDS=	${LOCALBASE}/share/X11/xkb/rules/base.xml:${PORTSDIR}/x11/xkeyboard-config
 
-CONFLICTS=	XFree86-Server-*
-
 XORG_CAT=	xserver
 
 USE_GMAKE=	yes
