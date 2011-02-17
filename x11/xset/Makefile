@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xset/Makefile,v 1.4 2010/05/01 11:40:28 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xset
-PORTVERSION=	1.1.0
+PORTVERSION=	1.2.1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
