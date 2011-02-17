@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xgamma/Makefile,v 1.3 2010/05/01 11:40:22 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xgamma
-PORTVERSION=	1.0.3
+PORTVERSION=	1.0.4
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
