@@ -64,6 +64,7 @@ IGNORE=		is for sparc64 only
 
 . if ${XORG_CAT} == "font"
 FONTDIR?=	${PORTNAME:C/.*-//g:S/type/Type/:S/ttf/TTF/:S/speedo/Speedo/}
+CONFIGURE_ARGS+=	--with-fontrootdir=${PREFIX}/lib/X11/fonts
 CONFIGURE_ENV+=	FONTROOTDIR=${PREFIX}/lib/X11/fonts
 NEED_MKFONTFOO=	yes
 
