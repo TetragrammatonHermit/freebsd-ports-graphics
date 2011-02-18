@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-savage/Makefile,v 1.9 2010/05/07 05:12:34 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-savage
-PORTVERSION=	2.3.1
+PORTVERSION=	2.3.2
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

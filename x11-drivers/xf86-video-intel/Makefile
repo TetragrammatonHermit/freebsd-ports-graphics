@@ -2,12 +2,12 @@
 # Date Created:				28 May 2007
 # Whom:					lesi@FreeBSD.org
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-intel/Makefile,v 1.19 2010/05/07 05:12:32 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-intel
 PORTVERSION=	2.7.1
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

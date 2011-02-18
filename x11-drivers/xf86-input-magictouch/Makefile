@@ -2,12 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-magictouch/Makefile,v 1.10 2010/12/04 07:34:09 ade Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-input-magictouch
 PORTVERSION=	1.0.0.5
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

@@ -2,13 +2,13 @@
 # Date Created:				29 Jan 2009
 # Whom:					Anonymous <swell.k@gmail.com>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-nouveau/Makefile,v 1.11 2010/05/23 20:23:38 pav Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-nouveau
 PORTVERSION=	0.0.10.${SNAPDATE}
 DISTVERSIONSUFFIX=.${SNAPREV}
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	x11-drivers
 MASTER_SITES=	ftp://ftp.lissyara.su/users/Guest/distfiles/
 

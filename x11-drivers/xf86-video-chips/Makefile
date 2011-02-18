@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-chips/Makefile,v 1.9 2010/05/07 05:12:30 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-chips
-PORTVERSION=	1.2.2
+PORTVERSION=	1.2.3
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

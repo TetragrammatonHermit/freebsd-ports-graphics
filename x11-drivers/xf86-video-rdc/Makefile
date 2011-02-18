@@ -6,10 +6,10 @@
 #
 
 PORTNAME=	xf86-video-rdc
-MASTER_SITES=	http://www.SpringDaemons.com/stas/
 PORTVERSION=	0.5
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	x11-drivers
+MASTER_SITES=	http://www.SpringDaemons.com/stas/
 
 MAINTAINER=	stas@FreeBSD.org
 COMMENT=	X.Org RDC display driver

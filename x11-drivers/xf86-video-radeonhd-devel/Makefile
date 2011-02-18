@@ -2,12 +2,12 @@
 # Date Created:				2008-09-07
 # Whom:					nork@FreeBSD.org
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-radeonhd-devel/Makefile,v 1.34 2010/12/04 07:34:09 ade Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-radeonhd
 PORTVERSION=	1.3.0.20091101
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	x11-drivers
 MASTER_SITES=	${MASTER_SITE_LOCAL}
 MASTER_SITE_SUBDIR=	nork

@@ -2,12 +2,12 @@
 # Date Created:				17 Sep 2007
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-openchrome/Makefile,v 1.19 2010/05/07 05:12:33 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-openchrome
 PORTVERSION=	0.2.904
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	x11-drivers
 MASTER_SITES=	http://www.openchrome.org/releases/
 

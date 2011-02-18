@@ -2,11 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-acecad/Makefile,v 1.9 2010/05/07 03:37:43 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-input-acecad
 PORTVERSION=	1.4.0
+PORTREVISION=	1
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

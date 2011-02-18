@@ -2,11 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-vmware/Makefile,v 1.12 2011/01/06 22:11:56 mi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-vmware
 PORTVERSION=	11.0.3
+PORTREVISION=	1
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

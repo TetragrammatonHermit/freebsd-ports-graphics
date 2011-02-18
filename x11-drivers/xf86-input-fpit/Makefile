@@ -2,12 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-fpit/Makefile,v 1.8 2010/05/23 20:21:12 pav Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-input-fpit
 PORTVERSION=	1.3.0
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

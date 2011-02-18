@@ -2,12 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-sis/Makefile,v 1.12 2010/05/10 14:40:56 rnoland Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-sis
 PORTVERSION=	0.10.2
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

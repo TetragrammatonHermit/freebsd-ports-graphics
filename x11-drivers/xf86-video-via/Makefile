@@ -2,12 +2,12 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-via/Makefile,v 1.9 2010/05/01 11:40:48 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-via
 PORTVERSION=	0.2.2
-PORTREVISION=	7
+PORTREVISION=	8
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

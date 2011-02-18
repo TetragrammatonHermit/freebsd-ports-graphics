@@ -2,11 +2,11 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-rendition/Makefile,v 1.9 2010/05/07 05:12:34 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-rendition
-PORTVERSION=	4.2.3
+PORTVERSION=	4.2.4
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

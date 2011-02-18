@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-mga/Makefile,v 1.13 2010/05/07 05:12:32 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-mga
