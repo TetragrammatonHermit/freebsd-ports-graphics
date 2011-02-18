@@ -1,7 +1,7 @@
 #-*- mode: makefile; tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: ports/Mk/bsd.port.mk,v 1.667 2011/02/05 15:55:58 erwin Exp $
+# $FreeBSD: ports/Mk/bsd.port.mk,v 1.669 2011/02/16 10:43:53 erwin Exp $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -3574,7 +3574,7 @@ do-fetch:
 				SORTED_MASTER_SITES_CMD_TMP="${SORTED_MASTER_SITES_DEFAULT_CMD}" ; \
 			fi; \
 			for site in `eval $$SORTED_MASTER_SITES_CMD_TMP ${_RANDOMIZE_SITES}`; do \
-			    ${ECHO_MSG} "=> Attempting to fetch from $${site}."; \
+			    ${ECHO_MSG} "=> Attempting to fetch $${site}/$${file}"; \
 				CKSIZE=`alg=SIZE; ${DISTINFO_DATA}`; \
 				case $${file} in \
 				*/*)	${MKDIR} $${file%/*}; \
@@ -3626,7 +3626,7 @@ do-fetch:
 				SORTED_PATCH_SITES_CMD_TMP="${SORTED_PATCH_SITES_DEFAULT_CMD}" ; \
 			fi; \
 			for site in `eval $$SORTED_PATCH_SITES_CMD_TMP`; do \
-			    ${ECHO_MSG} "=> Attempting to fetch from $${site}."; \
+			    ${ECHO_MSG} "=> Attempting to fetch $${site}/$${file}"; \
 				CKSIZE=`alg=SIZE; ${DISTINFO_DATA}`; \
 				case $${file} in \
 				*/*)	${MKDIR} $${file%/*}; \
@@ -5564,8 +5564,13 @@ ACTUAL-PACKAGE-DEPENDS?= \
 			fi; \
 		done); \
 		for dir in ${_LIB_RUN_DEPENDS:C,[^:]*:([^:]*):?.*,\1,}; do \
-			tmp=$${dir%/*}; \
-			dir=$${tmp\#\#*/}/$${dir\#\#*/}; \
+			tmp=$${dir\#${PORTSDIR}/}; \
+			if [ "$$tmp" = "$$dir" ]; then \
+				tmp=$${dir%/*}; \
+				dir=$${tmp\#\#*/}/$${dir\#\#*/}; \
+			else \
+				dir=$$tmp; \
+			fi; \
 			set -- $$origins; \
 			while [ $$\# -gt 1 ]; do \
 				if [ ! -d "${PORTSDIR}/$$2" ]; then \
