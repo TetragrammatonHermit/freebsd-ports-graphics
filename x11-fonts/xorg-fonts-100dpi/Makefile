@@ -2,11 +2,11 @@
 # Date created:		30 May 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/x11-fonts/xorg-fonts-100dpi/Makefile,v 1.15 2010/05/01 11:41:03 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xorg-fonts-100dpi
-PORTVERSION=	7.5
+PORTVERSION=	7.5.1
 CATEGORIES=	x11-fonts
 MASTER_SITES=	# none
 DISTFILES=	# none

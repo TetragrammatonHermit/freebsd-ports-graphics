@@ -2,11 +2,11 @@
 # Date created:		30 May 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/x11-fonts/xorg-fonts-type1/Makefile,v 1.15 2010/05/01 11:41:04 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xorg-fonts-type1
-PORTVERSION=	7.5
+PORTVERSION=	7.5.1
 CATEGORIES=	x11-fonts
 MASTER_SITES=	# none
 DISTFILES=	# none
