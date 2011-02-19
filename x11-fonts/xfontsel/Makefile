@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-fonts/xfontsel/Makefile,v 1.2 2009/01/23 16:28:03 flz Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xfontsel
