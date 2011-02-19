@@ -33,7 +33,7 @@ VIDEO_ON=	ati \
 
 .if ${ARCH} == "sparc64"
 VIDEO_ON+=	sunffb
-.else
+.elif ${ARCH} == "amd64" || ${ARCH} == "i386" || ${ARCH} == "ia64"
 VIDEO_ON+=	openchrome
 .endif
 
