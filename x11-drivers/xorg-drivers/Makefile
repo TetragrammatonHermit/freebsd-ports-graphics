@@ -48,7 +48,7 @@ VIDEO_OFF=	apm ark \
 		glint \
 		i128 i740 imstt \
 		mga \
-		neomagic newport nsc \
+		neomagic newport \
 		rendition \
 		s3 s3virge savage siliconmotion	sis \
 		tdfx tga trident tseng \
@@ -64,7 +64,7 @@ INPUT_OFF=	acecad \
 		fpit \
 		hyperpen \
 		joystick \
-		magictouch microtouch mutouch \
+		magictouch mutouch \
 		penmount \
 		synaptics \
 				vmmouse void
