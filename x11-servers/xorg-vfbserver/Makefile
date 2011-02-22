@@ -2,18 +2,16 @@
 # Date created:		17 June 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/x11-servers/xorg-vfbserver/Makefile,v 1.20 2010/05/01 11:41:06 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xorg-vfbserver
-PORTVERSION=	1.7.5
+PORTVERSION=	1.7.7
 PORTEPOCH=	1
 CATEGORIES=	x11-servers
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X virtual framebuffer server from X.Org
-
-CONFLICTS=	XFree86-VirtualFramebufferServer-*
 
 XORG_CAT=	xserver
 
