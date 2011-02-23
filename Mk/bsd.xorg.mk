@@ -102,8 +102,8 @@ RUN_DEPENDS+=	${LOCALBASE}/bin/mkfontdir:${PORTSDIR}/x11-fonts/mkfontdir \
 post-install:
 .  if ${INSTALLS_TTF} == "yes"
 .   for _fontdir in ${FONTDIR}
-	@${ECHO_CMD} "@exec fc-cache -v %D/lib/X11/fonts/${_fontdir} 2>/dev/null || true" >> ${TMPPLIST}
-	@${ECHO_CMD} "@unexec fc-cache -v %D/lib/X11/fonts/${_fontdir} 2>/dev/null || true" >> ${TMPPLIST}
+	@${ECHO_CMD} "@exec fc-cache -s %D/lib/X11/fonts/${_fontdir} 2>/dev/null || true" >> ${TMPPLIST}
+	@${ECHO_CMD} "@unexec fc-cache -s %D/lib/X11/fonts/${_fontdir} 2>/dev/null || true" >> ${TMPPLIST}
 	@${ECHO_CMD} "@unexec rmdir %D/lib/X11/fonts/${_fontdir} 2>/dev/null || true" >> ${TMPPLIST}
 .   endfor
 .  endif
