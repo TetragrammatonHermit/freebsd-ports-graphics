@@ -6,4 +6,4 @@ libdata/pkgconfig/inputproto.pc
 %%DOCSDIR%%/XI2proto.txt
 %%DOCSDIR%%/XIproto.txt
 @dirrm %%DOCSDIR%%
-@dirrm include/X11/extensions
+@dirrmtry include/X11/extensions
