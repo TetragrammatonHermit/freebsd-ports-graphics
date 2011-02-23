@@ -205,9 +205,6 @@ lib/libX11.so
 lib/libX11.so.6
 libdata/pkgconfig/x11-xcb.pc
 libdata/pkgconfig/x11.pc
-man/man3/XkbGetDetectableAutoRepeat.3
-man/man3/XkbSetDetectableAutoRepeat.3
-man/man5/XCompose.5
 %%DOCSDIR%%/specs/XIM/xim.html
 %%DOCSDIR%%/specs/XIM/xim.ps
 %%DOCSDIR%%/specs/XIM/xim.txt
