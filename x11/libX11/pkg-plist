@@ -205,29 +205,6 @@ lib/libX11.so
 lib/libX11.so.6
 libdata/pkgconfig/x11-xcb.pc
 libdata/pkgconfig/x11.pc
-%%DOCSDIR%%/specs/XIM/xim.html
-%%DOCSDIR%%/specs/XIM/xim.ps
-%%DOCSDIR%%/specs/XIM/xim.txt
-%%DOCSDIR%%/specs/i18n/Framework.html
-%%DOCSDIR%%/specs/i18n/Framework.ps
-%%DOCSDIR%%/specs/i18n/Framework.txt
-%%DOCSDIR%%/specs/i18n/LocaleDB.html
-%%DOCSDIR%%/specs/i18n/LocaleDB.ps
-%%DOCSDIR%%/specs/i18n/LocaleDB.txt
-%%DOCSDIR%%/specs/i18n/Trans.html
-%%DOCSDIR%%/specs/i18n/Trans.ps
-%%DOCSDIR%%/specs/i18n/Trans.txt
-%%DOCSDIR%%/specs/libX11/libX11.html
-%%DOCSDIR%%/specs/libX11/libX11.ps
-%%DOCSDIR%%/specs/libX11/libX11.txt
-@dirrm %%DOCSDIR%%/specs/libX11/images
-@dirrm %%DOCSDIR%%/specs/libX11
-@dirrm %%DOCSDIR%%/specs/i18n/images
-@dirrm %%DOCSDIR%%/specs/i18n
-@dirrm %%DOCSDIR%%/specs/XIM/images
-@dirrm %%DOCSDIR%%/specs/XIM
-@dirrm %%DOCSDIR%%/specs
-@dirrm %%DOCSDIR%%
 @dirrm lib/X11/locale/zh_TW.big5
 @dirrm lib/X11/locale/zh_TW.UTF-8
 @dirrm lib/X11/locale/zh_TW
