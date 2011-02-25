@@ -2,7 +2,7 @@
 # Date created:		7 May 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/graphics/libGL/Makefile,v 1.16 2010/08/15 09:27:28 arved Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libGL
