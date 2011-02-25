@@ -1,7 +1,7 @@
 #-*- mode: makefile; tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: ports/Mk/bsd.port.mk,v 1.669 2011/02/16 10:43:53 erwin Exp $
+# $FreeBSD: ports/Mk/bsd.port.mk,v 1.672 2011/02/25 11:00:59 pav Exp $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -871,14 +871,6 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  change the owner and group of all files under ${WRKDIR}
 #				  to 0:0.  Set this variable if you want to turn off this
 #				  feature.
-#
-# For makesum:
-#
-# NO_SIZE		- Don't record size data in distinfo, needed
-#				  when the master site does not report file
-#				  sizes, or when multiple valid versions of
-#				  a distfile, having different sizes, exist.
-#
 # For patch:
 #
 # EXTRA_PATCHES	- Define this variable if you have patches not in
@@ -1229,7 +1221,7 @@ OSREL!=	${UNAME} -r | ${SED} -e 's/[-(].*//'
 .if exists(/usr/include/sys/param.h)
 OSVERSION!=	${AWK} '/^\#define[[:blank:]]__FreeBSD_version/ {print $$3}' < /usr/include/sys/param.h
 .elif exists(/usr/src/sys/sys/param.h)
-OSVERSION!=	${AWK} '/^\#define[[:blank::]]__FreeBSD_version/ {print $$3}' < /usr/src/sys/sys/param.h
+OSVERSION!=	${AWK} '/^\#define[[:blank:]]__FreeBSD_version/ {print $$3}' < /usr/src/sys/sys/param.h
 .else
 OSVERSION!=	${SYSCTL} -n kern.osreldate
 .endif
@@ -1347,6 +1339,11 @@ TMPDIR?=	/tmp
 MAKE_ENV+=	TMPDIR="${TMPDIR}"
 CONFIGURE_ENV+=	TMPDIR="${TMPDIR}"
 .endif # defined(TMPDIR)
+
+# Reset value from bsd.own.mk.
+.if defined(WITH_DEBUG) && !defined(WITHOUT_DEBUG)
+STRIP=	#none
+.endif
 
 
 # Start of pre-makefile section.
@@ -1638,7 +1635,7 @@ SUB_LIST+=	PREFIX=${PREFIX} LOCALBASE=${LOCALBASE} X11BASE=${X11BASE} \
 		WWWDIR=${WWWDIR} ETCDIR=${ETCDIR}
 
 PLIST_REINPLACE+=	dirrmtry stopdaemon rmtry
-PLIST_REINPLACE_DIRRMTRY=s!^@dirrmtry \(.*\)!@unexec rmdir %D/\1 2>/dev/null || true!
+PLIST_REINPLACE_DIRRMTRY=s!^@dirrmtry \(.*\)!@unexec rmdir "%D/\1" 2>/dev/null || true!
 PLIST_REINPLACE_RMTRY=s!^@rmtry \(.*\)!@unexec rm -f %D/\1 2>/dev/null || true!
 PLIST_REINPLACE_STOPDAEMON=s!^@stopdaemon \(.*\)!@unexec %D/etc/rc.d/\1 forcestop 2>/dev/null || true!
 
@@ -1655,7 +1652,6 @@ CFLAGS:=	${CFLAGS:C/${_CPUCFLAGS}//}
 .endif
 
 .if defined(WITH_DEBUG) && !defined(WITHOUT_DEBUG)
-STRIP=	#none
 STRIP_CMD=	${TRUE}
 DEBUG_FLAGS?=	-g
 CFLAGS:=		${CFLAGS:N-O*:N-fno-strict*} ${DEBUG_FLAGS}
@@ -1953,7 +1949,7 @@ USE_LINUX=	${OVERRIDE_LINUX_BASE_PORT}
 LINUX_BASE_PORT=	${LINUXBASE}/bin/sh:${PORTSDIR}/emulators/linux_base-${USE_LINUX}
 .	else
 .		if ${USE_LINUX:L} == "yes"
-.			if ${OSVERSION} < 800076
+.			if ${OSVERSION} < 800076 || ${LINUX_OSRELEASE} == "2.4.2"
 LINUX_BASE_PORT=	${LINUXBASE}/etc/fedora-release:${PORTSDIR}/emulators/linux_base-fc4
 .			else
 LINUX_BASE_PORT=	${LINUXBASE}/etc/fedora-release:${PORTSDIR}/emulators/linux_base-f10
@@ -3574,7 +3570,7 @@ do-fetch:
 				SORTED_MASTER_SITES_CMD_TMP="${SORTED_MASTER_SITES_DEFAULT_CMD}" ; \
 			fi; \
 			for site in `eval $$SORTED_MASTER_SITES_CMD_TMP ${_RANDOMIZE_SITES}`; do \
-			    ${ECHO_MSG} "=> Attempting to fetch $${site}/$${file}"; \
+			    ${ECHO_MSG} "=> Attempting to fetch $${site}$${file}"; \
 				CKSIZE=`alg=SIZE; ${DISTINFO_DATA}`; \
 				case $${file} in \
 				*/*)	${MKDIR} $${file%/*}; \
@@ -3626,7 +3622,7 @@ do-fetch:
 				SORTED_PATCH_SITES_CMD_TMP="${SORTED_PATCH_SITES_DEFAULT_CMD}" ; \
 			fi; \
 			for site in `eval $$SORTED_PATCH_SITES_CMD_TMP`; do \
-			    ${ECHO_MSG} "=> Attempting to fetch $${site}/$${file}"; \
+			    ${ECHO_MSG} "=> Attempting to fetch $${site}$${file}"; \
 				CKSIZE=`alg=SIZE; ${DISTINFO_DATA}`; \
 				case $${file} in \
 				*/*)	${MKDIR} $${file%/*}; \
@@ -4929,9 +4925,7 @@ makesum: check-checksum-algorithms
 					$$alg_executable $$file >> ${DISTINFO_FILE}; \
 				fi; \
 			done; \
-			if [ -z "${NO_SIZE}" ]; then \
-				${ECHO_CMD} "SIZE ($$file) = "`${LS} -ALln $$file | ${AWK} '{print $$5}'` >> ${DISTINFO_FILE}; \
-			fi; \
+			${ECHO_CMD} "SIZE ($$file) = "`${LS} -ALln $$file | ${AWK} '{print $$5}'` >> ${DISTINFO_FILE}; \
 		done \
 	)
 	@for file in ${_IGNOREFILES}; do \
