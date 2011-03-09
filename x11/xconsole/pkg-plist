@@ -1,4 +1,0 @@
-bin/xconsole
-share/X11/app-defaults/XConsole
-@dirrmtry share/X11/app-defaults
-@dirrmtry share/X11
