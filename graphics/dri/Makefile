@@ -22,8 +22,9 @@ MAKE_JOBS_UNSAFE=	yes
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 #USE_GCC=	4.5+
 
-#EXTRA_PATCHES+=	${FILESDIR}/patch-mach64_context.h \
-#		${FILESDIR}/patch-sis_context.h
+EXTRA_PATCHES+=	${FILESDIR}/patch-mach64_context.h \
+		${FILESDIR}/patch-configure \
+		${FILESDIR}/patch-sis_context.h
 
 do-install:
 	cd ${WRKSRC}/src/mesa; ${GMAKE} install-dri
