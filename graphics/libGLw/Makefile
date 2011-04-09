@@ -13,10 +13,10 @@ COMMENT=	OpenGL widgets library
 
 BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 		${PYTHON_SITELIBDIR}/libxml2mod.so:${PORTSDIR}/textproc/py-libxml2
-LIB_DEPENDS+=	Xm.3:${PORTSDIR}/x11-toolkits/open-motif
 
 USE_PYTHON=	yes
 USE_GL=		gl
+USE_MOTIF=	yes
 USE_XORG=	glproto xt x11 xext xxf86vm xdamage xfixes dri2proto
 
 do-install:
