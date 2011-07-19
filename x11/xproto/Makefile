@@ -2,11 +2,11 @@
 # Date Created:			29 Oct, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xproto/Makefile,v 1.17 2010/05/01 11:40:27 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xproto
-PORTVERSION=	7.0.17
+PORTVERSION=	7.0.22
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
