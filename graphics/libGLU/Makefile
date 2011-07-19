@@ -2,7 +2,7 @@
 # Date created:		7 May 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/graphics/libGLU/Makefile,v 1.14 2011/02/25 16:52:06 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libGLU

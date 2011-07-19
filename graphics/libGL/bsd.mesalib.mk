@@ -21,31 +21,22 @@
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
-.ifdef	WITHOUT_NOUVEAU
-BROKEN=		please unset WITHOUT_NOUVEAU, support for this isn't there yet.
-MESABASEVERSION=	7.6.1
+MESABASEVERSION=	7.10.3
 MESASUBVERSION=
-PLIST_SUB+=		MESALIB76= MESALIB74="@comment "
-.else
-MESABASEVERSION=	7.10.1
-MESASUBVERSION=
-PLIST_SUB+=		MESALIB74= MESALIB76="@comment "
-#EXTRA_PATCHES+=		${PATCHDIR}/mesalib74-configure
-.endif
 
-MASTER_SITES?=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/:mesa,glut,demos
-MASTER_SITE_SUBDIR=	mesa3d
-DISTFILES=		MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}:mesa
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/:mesa,glut
+MASTER_SITES=	LOCAL/kwm:mesa,glut
+DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}:mesa
 MAINTAINER?=	x11@FreeBSD.org
 
-USE_BZIP2=		yes
-USE_GMAKE=		yes
+USE_BZIP2=	yes
+USE_GMAKE=	yes
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 MAKE_JOBS_SAFE=	yes
 
-CONFIGURE_ENV=		CPPFLAGS=-I${LOCALBASE}/include \
-			LDFLAGS=-L${LOCALBASE}/lib
+CPPFLAGS+=	-I${LOCALBASE}/include
+CONFIGURE_ENV=		LDFLAGS=-L${LOCALBASE}/lib
 CONFIGURE_ARGS=		--disable-gallium
 
 ALL_TARGET=		default
@@ -55,12 +46,6 @@ WRKSRC=			${WRKDIR}/Mesa-${MESABASEVERSION}
 
 .if !defined(ARCH)
 ARCH!=			uname -p
-.endif
-
-.if ${ARCH} == alpha
-FAST_MATH=
-.else
-FAST_MATH=      -ffast-math
 .endif
 
 COMPONENT=		${PORTNAME:L:C/^lib//:C/mesa-//}
@@ -81,12 +66,7 @@ CONFIGURE_ARGS+=	--disable-glw
 CONFIGURE_ARGS+=	--enable-motif
 .endif
 
-.if ${COMPONENT:Mdemos} == ""
 CONFIGURE_ARGS+=	--with-demos=no
-.else
-DISTFILES+=		MesaDemos-${MESADISTVERSION}${EXTRACT_SUFX}:demos
-CONFIGURE_ARGS+=	--with-demos=demos,xdemos
-.endif
 
 .if ${COMPONENT:Mdri} == ""
 CONFIGURE_ARGS+=	--with-dri-drivers=no
@@ -109,11 +89,4 @@ post-patch:
 .if ${COMPONENT:Mglut} != ""
 	@${REINPLACE_CMD} -e 's|[$$](INSTALL_LIB_DIR)/pkgconfig|${PREFIX}/libdata/pkgconfig|' \
 		${WRKSRC}/src/glut/glx/Makefile
-.endif
-.if ${COMPONENT:Mdemos} != ""
-	@${REINPLACE_CMD} -e 's|../images/|${DATADIR}/images/|g' \
-		-e 's|geartrain.dat|${DATADIR}/data/geartrain.dat|g' \
-		-e 's|terrain.dat|${DATADIR}/data/terrain.dat|g' \
-		-e 's|isosurf.dat|${DATADIR}/data/isosurf.dat|g' \
-			${WRKSRC}/progs/demos/*.c ${WRKSRC}/progs/xdemos/*.c
 .endif

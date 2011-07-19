@@ -2,7 +2,7 @@
 # Date created:		7 May 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/graphics/libGLw/Makefile,v 1.10 2011/02/25 16:52:07 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libGLw

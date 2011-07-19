@@ -2,7 +2,7 @@
 # Date created:		7 May 2004
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/graphics/libGL/Makefile,v 1.17 2011/02/25 16:52:06 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libGL
@@ -16,6 +16,7 @@ BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 LIB_DEPENDS+=	drm:${PORTSDIR}/graphics/libdrm \
 		expat.6:${PORTSDIR}/textproc/expat2
 
+USE_BISON=	build
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both
 USE_PYTHON=	yes
 

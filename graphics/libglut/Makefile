@@ -2,7 +2,7 @@
 # Date created:         Tue Feb  7 12:02:49  1995
 # Whom:                 anholt
 #
-# $FreeBSD: ports/graphics/libglut/Makefile,v 1.25 2011/02/25 16:52:07 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libglut
