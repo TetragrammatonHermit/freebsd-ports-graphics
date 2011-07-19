@@ -2,11 +2,11 @@
 # Date Created:			25 Jan, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-toolkits/libXt/Makefile,v 1.25 2011/02/25 16:52:50 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libXt
-PORTVERSION=	1.1.0
+PORTVERSION=	1.1.1
 CATEGORIES=	x11-toolkits
 
 MAINTAINER=	x11@FreeBSD.org
