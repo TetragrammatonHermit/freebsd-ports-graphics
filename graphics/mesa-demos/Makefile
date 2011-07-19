@@ -2,15 +2,15 @@
 # Date created:         7 Nov 2003
 # Whom:                 anholt@FreeBSD.org
 #
-# $FreeBSD: ports/graphics/mesa-demos/Makefile,v 1.35 2011/03/02 23:59:52 linimon Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	mesa-demos
 PORTVERSION=	7.6.1
 CATEGORIES=	graphics
-MASTER_SITES=	CRITICAL/mesa3d:mesa,glut,demos
-DISTFILES=	MesaLib-${PORTVERSION}${EXTRACT_SUFX}:mesa \
-		MesaDemos-${PORTVERSION}${EXTRACT_SUFX}:demos
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${PORTVERSION}/
+DISTFILES=	MesaLib-${PORTVERSION}${EXTRACT_SUFX} \
+		MesaDemos-${PORTVERSION}${EXTRACT_SUFX}
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	OpenGL demos distributed with Mesa
@@ -22,21 +22,17 @@ GNU_CONFIGURE=	yes
 MAKE_JOBS_SAFE=	yes
 USE_GL=		glu glut
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
-CPPFLAGS=	-I${LOCALBASE}/include
-CONFIGURE_ENV=	LDFLAGS=-L${LOCALBASE}/lib
+CPPFLAGS+=	-I${LOCALBASE}/include ${PTHREAD_CFLAGS}
+CONFIGURE_ENV=	LDFLAGS="-L${LOCALBASE}/lib ${PTHREAD_LIBS}"
 CONFIGURE_ARGS=	--disable-gallium --with-demos=demos,xdemos
 
 #ALL_TARGET=	yes
 
-#PATCHDIR=	${.CURDIR}/../../graphics/libGL/files
 WRKSRC=		${WRKDIR}/Mesa-${PORTVERSION}/
 
 DATADIR=	${PREFIX}/share/${PKGNAMEPREFIX}${PORTNAME}
 
 OPTIONS=	NVIDIA_GL	"Use NVIDIA's libraries"	off
-
-#EXTRA_PATCHES+=	${FILESDIR}/patch-progs-xdemos-glxpixmap.c \
-#		${FILESDIR}/patch-progs-xdemos-yuvrect_client.c
 
 .if defined(WITHOUT_XCB)
 CONFIGURE_ARGS+=	--disable-xcb
@@ -79,8 +75,6 @@ do-install:
 		done
 
 .include <bsd.port.pre.mk>
-CONFIGURE_ENV=	CPPFLAGS="${PTHREAD_CFLAGS} -I${LOCALBASE}/include" \
-		LDFLAGS="${PTHREAD_LIBS} -L${LOCALBASE}/lib"
 
 .if defined(WITH_NVIDIA_GL)
 CFLAGS+=	-DWITH_NVIDIA_GL=1
