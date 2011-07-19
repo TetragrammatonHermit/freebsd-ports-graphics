@@ -15,4 +15,6 @@ COMMENT=	X11 protocol headers
 XORG_CAT=	proto
 USE_GNOME=	pkgconfig
 
+CONFIGURE_ARGS+=--disable-specs
+
 .include <bsd.port.mk>
