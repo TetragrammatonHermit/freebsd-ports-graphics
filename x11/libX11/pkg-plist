@@ -205,6 +205,8 @@ lib/libX11.so
 lib/libX11.so.6
 libdata/pkgconfig/x11-xcb.pc
 libdata/pkgconfig/x11.pc
+@dirrm share/doc/libX11/Compose
+@dirrm share/doc/libX11
 @dirrm lib/X11/locale/zh_TW.big5
 @dirrm lib/X11/locale/zh_TW.UTF-8
 @dirrm lib/X11/locale/zh_TW

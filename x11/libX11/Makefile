@@ -2,11 +2,11 @@
 # Date Created:			28 Oct, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libX11/Makefile,v 1.37 2011/02/25 16:52:11 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libX11
-PORTVERSION=	1.4.1
+PORTVERSION=	1.4.3
 PORTEPOCH=	1
 CATEGORIES=	x11
 
