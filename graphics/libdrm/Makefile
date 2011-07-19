@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	libdrm
-PORTVERSION=	${LIBDRM_VERSION}
+PORTVERSION=	2.4.26
 CATEGORIES=	graphics x11
 MASTER_SITES=	http://dri.freedesktop.org/libdrm/
 
@@ -21,7 +21,6 @@ USE_BZIP2=	yes
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 
-LIBDRM_VERSION=	2.4.26
 CONFIGURE_ARGS=	--enable-nouveau-experimental-api
 
 MAKE_JOBS_SAFE=	yes
@@ -31,8 +30,11 @@ OPTIONS=	KMS "Enable KMS support (very experimental)" off
 .include <bsd.port.options.mk>
 
 .if defined(WITH_KMS)
-EXTRA_PATCHES+=	${FILESDIR}/extra-configure \
-		${FILESDIR}/extra-xf86drmMode.c
+CONFIGURE_ARGS+=--enable-libkms
+EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c
+PLIST_SUB+=	KMS=""
+.else
+PLIST_SUB+=	KMS="@comment "
 .endif
 
 pre-patch:

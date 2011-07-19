@@ -18,6 +18,7 @@ include/libdrm/radeon_drm.h
 include/libdrm/savage_drm.h
 include/libdrm/sis_drm.h
 include/libdrm/via_drm.h
+%%KMS%%include/libkms/libkms.h
 include/nouveau/nouveau_bo.h
 include/nouveau/nouveau_channel.h
 include/nouveau/nouveau_device.h
@@ -42,9 +43,14 @@ lib/libdrm_nouveau.so.1
 lib/libdrm_radeon.la
 lib/libdrm_radeon.so
 lib/libdrm_radeon.so.1
+%%KMS%%lib/libkms.la
+%%KMS%%lib/libkms.so
+%%KMS%%lib/libkms.so.1
 libdata/pkgconfig/libdrm.pc
 libdata/pkgconfig/libdrm_intel.pc
 libdata/pkgconfig/libdrm_nouveau.pc
 libdata/pkgconfig/libdrm_radeon.pc
+%%KMS%%libdata/pkgconfig/libkms.pc
 @dirrm include/nouveau
+%%KMS%%@dirrm include/libkms
 @dirrm include/libdrm
