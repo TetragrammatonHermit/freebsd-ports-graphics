@@ -2,7 +2,7 @@
 # Date created:		8 Nov 2003
 # Whom:			anholt@FreeBSD.org
 #
-# $FreeBSD: ports/graphics/dri/Makefile,v 1.36 2011/02/25 16:52:06 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	dri
@@ -18,11 +18,12 @@ BUILD_DEPENDS=	makedepend:${PORTSDIR}/devel/makedepend \
 		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
 
 CONFLICTS=		dri-6.2.2005* dri-6.5.2006*
+
+USE_BISON=		build
 USE_PYTHON_BUILD=	yes
 MAKE_JOBS_UNSAFE=	yes
 
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
-#USE_GCC=	4.5+
 
 EXTRA_PATCHES+=	${FILESDIR}/patch-mach64_context.h \
 		${FILESDIR}/patch-configure \
