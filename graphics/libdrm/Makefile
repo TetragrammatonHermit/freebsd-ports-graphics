@@ -14,7 +14,8 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Userspace interface to kernel Direct Rendering Module services
 
 BUILD_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/pthread-stubs.pc:${PORTSDIR}/devel/libpthread-stubs
-LIB_DEPENDS=	pciaccess.0:${PORTSDIR}/devel/libpciaccess
+LIB_DEPENDS=	pciaccess.0:${PORTSDIR}/devel/libpciaccess \
+		pthread-stubs.0:${PORTSDIR}/devel/libpthread-stubs
 RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/pthread-stubs.pc:${PORTSDIR}/devel/libpthread-stubs
 
 USE_BZIP2=	yes
