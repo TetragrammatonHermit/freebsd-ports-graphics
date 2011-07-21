@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xorg-server
-PORTVERSION=	1.9.5
+PORTVERSION=	1.10.3
 PORTEPOCH=	1
 CATEGORIES=	x11-servers
 MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/xserver/
@@ -44,7 +44,7 @@ MAN1=		Xorg.1 \
 		gtf.1
 MAN4=		exa.4 \
 		fbdevhw.4
-MAN5=		xorg.conf.5
+MAN5=		xorg.conf.5 xorg.conf.d.5
 
 NOT_FOR_ARCHS=	alpha
 
@@ -88,13 +88,6 @@ CONFIGURE_ARGS+=--enable-install-setuid=yes
 CONFIGURE_ARGS+=--enable-install-setuid=no
 .endif
 
-.if ${ARCH} == alpha
-PLIST_SUB+=	ALPHA_NA="@comment "
-EXTRA_PATCHES=	${.CURDIR}/files/extra-arch-alpha
-.else
-PLIST_SUB+=	ALPHA_NA=""
-.endif
-
 .if ${ARCH} == ia64
 PLIST_SUB+=     IA64_NA="@comment "
 EXTRA_PATCHES=  ${.CURDIR}/files/extra-arch-ia64
@@ -132,5 +125,8 @@ pre-everything::
 	@${ECHO_MSG} "which will still run the server as root), you can cancel the build and set"
 	@${ECHO_MSG} "NO_SUID_XSERVER=YES in /etc/make.conf."
 .endif
+
+post-install:
+	@${MKDIR} ${PREFIX}/share/X11/xorg.conf.d
 
 .include <bsd.port.post.mk>

@@ -6,11 +6,9 @@ include/xorg/BT.h
 include/xorg/IBM.h
 include/xorg/TI.h
 include/xorg/XIstubs.h
-include/xorg/bstore.h
-include/xorg/bstorestr.h
+include/xorg/Xprintf.h
 include/xorg/bt829.h
 include/xorg/callback.h
-include/xorg/cfb8_16.h
 include/xorg/closestr.h
 include/xorg/closure.h
 include/xorg/colormap.h
@@ -73,6 +71,8 @@ include/xorg/misc.h
 include/xorg/miscstruct.h
 include/xorg/mispans.h
 include/xorg/mistruct.h
+include/xorg/misync.h
+include/xorg/misyncstr.h
 include/xorg/miwideline.h
 include/xorg/mizerarc.h
 include/xorg/mioverlay.h
@@ -93,7 +93,6 @@ include/xorg/randrstr.h
 include/xorg/region.h
 include/xorg/regionstr.h
 include/xorg/registry.h
-include/xorg/renderedge.h
 include/xorg/resource.h
 include/xorg/rgb.h
 include/xorg/rrtransform.h
@@ -108,6 +107,7 @@ include/xorg/shmint.h
 include/xorg/site.h
 include/xorg/swaprep.h
 include/xorg/swapreq.h
+include/xorg/syncsdk.h
 include/xorg/tda8425.h
 include/xorg/tda9850.h
 include/xorg/tda9885.h
@@ -121,7 +121,6 @@ include/xorg/wfbrename.h
 include/xorg/window.h
 include/xorg/windowstr.h
 include/xorg/xaa.h
-include/xorg/xaaWrapper.h
 include/xorg/xaalocal.h
 include/xorg/xaarop.h
 include/xorg/xace.h
@@ -199,8 +198,6 @@ lib/xorg/modules/libwfb.la
 lib/xorg/modules/libwfb.so
 lib/xorg/modules/libxaa.la
 lib/xorg/modules/libxaa.so
-lib/xorg/modules/libxf8_16bpp.la
-lib/xorg/modules/libxf8_16bpp.so
 lib/xorg/modules/multimedia/bt829_drv.la
 lib/xorg/modules/multimedia/bt829_drv.so
 lib/xorg/modules/multimedia/fi1236_drv.la
@@ -218,6 +215,7 @@ lib/xorg/modules/multimedia/uda1380_drv.so
 lib/xorg/protocol.txt
 libdata/pkgconfig/xorg-server.pc
 share/aclocal/xorg-server.m4
+@exec /bin/mkdir -p %D/share/X11/xorg.conf.d
 @dirrm share/doc/xorg-server
 @dirrm include/xorg
 @dirrm lib/xorg/modules/extensions
@@ -231,5 +229,6 @@ share/aclocal/xorg-server.m4
 @dirrmtry lib/X11/xserver
 @dirrmtry lib/xorg/modules
 @dirrmtry lib/xorg
+@dirrmtry share/X11/xorg.conf.d
 @dirrmtry share/X11/app-defaults
 @dirrmtry share/X11
