@@ -1,0 +1,8 @@
+lib/libIntelXvMC.la
+lib/libIntelXvMC.so.1
+lib/libIntelXvMC.so
+lib/xorg/modules/drivers/intel_drv.la
+lib/xorg/modules/drivers/intel_drv.so
+@dirrmtry lib/xorg/modules/drivers
+@dirrmtry lib/xorg/modules
+@dirrmtry lib/xorg
