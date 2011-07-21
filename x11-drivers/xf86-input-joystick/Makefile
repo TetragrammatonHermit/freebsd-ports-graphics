@@ -1,0 +1,23 @@
+# New ports collection makefile for:	xf86-input-joystick
+# Date Created:				17 Feb 2006
+# Whom:					Florent Thoumie <flz@FreeBSD.org>
+#
+# $FreeBSD: ports/x11-drivers/xf86-input-joystick/Makefile,v 1.11 2011/02/25 16:52:30 miwi Exp $
+#
+
+PORTNAME=	xf86-input-joystick
+PORTVERSION=	1.6.0
+CATEGORIES=	x11-drivers
+
+MAINTAINER=	x11@FreeBSD.org
+COMMENT=	X.Org joystick input driver
+
+XORG_CAT=	driver
+
+MAN4=		joystick.4x
+
+post-patch:
+	@${REINPLACE_CMD} -e 's|[(]libdir[)]/pkgconfig|(prefix)/libdata/pkgconfig|g' \
+		${WRKSRC}/Makefile.in
+
+.include <bsd.port.mk>
