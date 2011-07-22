@@ -28,6 +28,7 @@ CONFIGURE_ENV+=	ac_cv_path_PS2PDF=""
 .include "${.CURDIR}/manpages"
 
 post-patch:
-	@${REINPLACE_CMD} '/^DIST_SUBDIR/s/specs//' ${WRKSRC}/Makefile.in
+	@${REINPLACE_CMD} '/^install-data-am:/,/^$$/ \
+		s/install-specDATA//' ${WRKSRC}/nls/Makefile.in
 
 .include <bsd.port.mk>
