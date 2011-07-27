@@ -21,7 +21,6 @@ XORG_CAT=	lib
 USE_XORG=	bigreqsproto xau xcmiscproto xdmcp xextproto xtrans \
 		kbproto:both inputproto xf86bigfontproto xproto:both
 CONFIGURE_ARGS+=	--datadir=${PREFIX}/lib \
-			--with-xcb=yes \
 			--disable-specs
 CONFIGURE_ENV+=	ac_cv_path_PS2PDF=""
 
