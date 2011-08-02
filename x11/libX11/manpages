@@ -218,7 +218,7 @@ XFreeFontNames.3 \
 XFreeFontPath.3 \
 XFreeFontSet.3 \
 XFreeGC.3 \
-XFreeModifierMap.3 \
+XFreeModifiermap.3 \
 XFreePixmap.3 \
 XFreeStringList.3 \
 XGCValues.3 \
