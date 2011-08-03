@@ -12,10 +12,6 @@ CATEGORIES=	graphics
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	OpenGL utility toolkit
 
-BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
-		${PYTHON_SITELIBDIR}/libxml2mod.so:${PORTSDIR}/textproc/py-libxml2
-
-USE_PYTHON=	yes
 USE_GL=		glu
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes xi xmu dri2proto
 

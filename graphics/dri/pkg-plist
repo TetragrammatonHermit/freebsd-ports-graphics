@@ -4,6 +4,7 @@ lib/dri/i915_dri.so
 lib/dri/i965_dri.so
 lib/dri/mach64_dri.so
 lib/dri/mga_dri.so
+lib/dri/nouveau_vieux_dri.so
 lib/dri/r128_dri.so
 lib/dri/r200_dri.so
 lib/dri/r300_dri.so

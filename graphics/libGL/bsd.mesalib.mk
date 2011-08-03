@@ -21,14 +21,19 @@
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
-MESABASEVERSION=	7.10.3
-MESASUBVERSION=
+MESABASEVERSION=	7.11
+# if there is a subversion, include the '-' between 7.11-rc2 for example.
+MESASUBVERSION=		
 
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/:mesa,glut
-MASTER_SITES=	LOCAL/kwm:mesa,glut
 DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}:mesa
 MAINTAINER?=	x11@FreeBSD.org
 
+BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
+		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
+
+USE_BISON=	build
+USE_PYTHON_BUILD=yes
 USE_BZIP2=	yes
 USE_GMAKE=	yes
 USE_LDCONFIG=	yes
@@ -36,13 +41,14 @@ GNU_CONFIGURE=	yes
 MAKE_JOBS_SAFE=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include
-CONFIGURE_ENV=		LDFLAGS=-L${LOCALBASE}/lib
-CONFIGURE_ARGS=		--disable-gallium
+CONFIGURE_ENV+=	LDFLAGS=-L${LOCALBASE}/lib
+CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
+		--disable-egl
 
 ALL_TARGET=		default
 
 PATCHDIR=		${.CURDIR}/../../graphics/libGL/files
-WRKSRC=			${WRKDIR}/Mesa-${MESABASEVERSION}
+WRKSRC=			${WRKDIR}/Mesa-${MESABASEVERSION}${MESASUBVERSION}
 
 .if !defined(ARCH)
 ARCH!=			uname -p
@@ -65,8 +71,6 @@ CONFIGURE_ARGS+=	--disable-glw
 .else
 CONFIGURE_ARGS+=	--enable-motif
 .endif
-
-CONFIGURE_ARGS+=	--with-demos=no
 
 .if ${COMPONENT:Mdri} == ""
 CONFIGURE_ARGS+=	--with-dri-drivers=no

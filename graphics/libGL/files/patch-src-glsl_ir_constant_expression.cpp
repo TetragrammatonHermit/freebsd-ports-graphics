@@ -1,5 +1,5 @@
---- src/glsl/ir_constant_expression.cpp.orgi	2011-03-10 18:30:39.000000000 +0800
-+++ src/glsl/ir_constant_expression.cpp	2011-03-10 18:31:19.000000000 +0800
+--- src/glsl/ir_constant_expression.cpp.orig	2011-07-23 15:08:44.000000000 +0200
++++ src/glsl/ir_constant_expression.cpp	2011-07-23 15:09:03.000000000 +0200
 @@ -39,6 +39,11 @@
  #include "ir_visitor.h"
  #include "glsl_types.h"

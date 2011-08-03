@@ -11,14 +11,10 @@ CATEGORIES=	graphics
 
 COMMENT=	OpenGL library that renders using GLX or DRI
 
-BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
-		${PYTHON_SITELIBDIR}/libxml2mod.so:${PORTSDIR}/textproc/py-libxml2
 LIB_DEPENDS+=	drm:${PORTSDIR}/graphics/libdrm \
 		expat.6:${PORTSDIR}/textproc/expat2
 
-USE_BISON=	build
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both
-USE_PYTHON=	yes
 
 do-install:
 	${RM} -f ${WRKSRC}/include/GL/glu*.h

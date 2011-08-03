@@ -14,19 +14,10 @@ COMMENT=	OpenGL hardware acceleration drivers for the DRI
 
 LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm \
 		expat.6:${PORTSDIR}/textproc/expat2
-BUILD_DEPENDS=	makedepend:${PORTSDIR}/devel/makedepend \
-		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
-
-CONFLICTS=		dri-6.2.2005* dri-6.5.2006*
-
-USE_BISON=		build
-USE_PYTHON_BUILD=	yes
-MAKE_JOBS_UNSAFE=	yes
 
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
 EXTRA_PATCHES+=	${FILESDIR}/patch-mach64_context.h \
-		${FILESDIR}/patch-configure \
 		${FILESDIR}/patch-sis_context.h
 
 do-install:
