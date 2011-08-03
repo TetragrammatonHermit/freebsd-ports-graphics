@@ -35,6 +35,7 @@ MAKE_JOBS_UNSAFE=	yes
 USE_OPENSSL=	yes
 USE_PERL5_BUILD=yes
 CONFIGURE_ARGS=	--disable-dmx --disable-xvfb --disable-xnest \
+		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
 		--enable-record=yes
 
