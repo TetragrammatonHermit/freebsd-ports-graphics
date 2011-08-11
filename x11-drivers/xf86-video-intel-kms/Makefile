@@ -6,16 +6,13 @@
 #
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.15.0.${SNAPDATE}
+PORTVERSION=	2.15.901
 CATEGORIES=	x11-drivers
-MASTER_SITES=	LOCAL/kwm
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Driver for Intel integrated graphics chipsets
 
 CONFLICTS=	xf86-video-intel-2.7.[0-9]* xf86-video-intel-2.9.[0-9]*
-
-SNAPDATE=	20110717
 
 ONLY_FOR_ARCHS=	amd64 i386
 USE_GL=		gl
