@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-mach64/Makefile,v 1.8 2011/02/25 16:52:33 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-mach64

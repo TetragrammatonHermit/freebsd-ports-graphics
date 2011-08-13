@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-fpit/Makefile,v 1.10 2011/02/28 04:43:28 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-input-fpit

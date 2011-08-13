@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					NIIMI Satoshi <sa2c@sa2c.net>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-vmmouse/Makefile,v 1.17 2011/02/25 16:52:31 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-input-vmmouse

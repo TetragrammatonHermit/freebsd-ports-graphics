@@ -15,7 +15,7 @@
 #    - graphics/libglut
 #    - graphics/dri
 #
-# $FreeBSD: ports/graphics/libGL/bsd.mesalib.mk,v 1.17 2011/02/25 16:52:06 miwi Exp $
+# $FreeBSD$
 #
 
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}

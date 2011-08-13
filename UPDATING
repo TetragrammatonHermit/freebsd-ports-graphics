@@ -5,3 +5,12 @@
     USE_PYTHON and py-libxml2 is now must have dependens
     it should go to bsd.mesalib
     dri patch-configre should be global
+
+Skipped now: 
+xorg-docs
+
+x11/xmh -> xbitmaps
+include/X11/include/bitmaps/black6 box6
+
+x11/xorg-docs lost Xprint.7 -> x11/printproto
+

@@ -2,7 +2,7 @@
 # Date created:		13 Mar 2005
 # Whom:			lesi@FreeBSD.org
 #
-# $FreeBSD: ports/x11-servers/xorg-dmx/Makefile,v 1.18 2011/02/25 16:52:49 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xorg-dmx
