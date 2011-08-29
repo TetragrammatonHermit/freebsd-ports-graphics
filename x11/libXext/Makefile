@@ -7,6 +7,7 @@
 
 PORTNAME=	libXext
 PORTVERSION=	1.3.0
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	x11
 
@@ -15,6 +16,7 @@ COMMENT=	X11 Extension library
 
 XORG_CAT=	lib
 USE_XORG=	xproto x11 xextproto:both xau
+CONFIGURE_ARGS+=--disable-specs --without-xmlto
 
 MAN3=		DBE.3 \
 		DPMSCapable.3 \
