@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.15.901
+PORTVERSION=	2.16.0
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -20,8 +20,6 @@ USE_GL=		gl
 XORG_CAT=	driver
 USE_XORG=	xvmc xineramaproto xextproto x11 xf86driproto glproto
 MAN4=		intel.4x
-
-#CONFIGURE_ARGS+=--enable-kms-only \
-#		--enable-sna
+MAKE_JOBS_UNSAFE=yes
 
 .include <bsd.port.mk>
