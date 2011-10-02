@@ -1,15 +1,6 @@
 --- xf86drmMode.c.orig	2010-09-08 14:23:39.000000000 +0200
-+++ xf86drmMode.c	2011-07-18 18:59:11.000000000 +0200
-@@ -54,7 +54,7 @@
- 
- static inline DRM_IOCTL(int fd, int cmd, void *arg)
- {
--	int ret = drmIoctl(fd, cmd, arg);
-+	int ret = drmIoctl(fd, (unsigned)cmd, arg);
- 	return ret < 0 ? -errno : ret;
- }
- 
-@@ -659,7 +659,7 @@
++++ xf86drmMode.c	2011-10-02 14:45:33.000000000 +0200
+@@ -659,7 +659,7 @@ int drmModeConnectorSetProperty(int fd, 
  */
  int drmCheckModesettingSupported(const char *busid)
  {
@@ -18,12 +9,43 @@
  	char pci_dev_dir[1024];
  	int domain, bus, dev, func;
  	DIR *sysdir;
-@@ -709,6 +709,8 @@
+@@ -709,6 +709,39 @@ int drmCheckModesettingSupported(const c
  	closedir(sysdir);
  	if (found)
  		return 0;
 +#elif defined(__FreeBSD__)
-+	return 0;
++	char kbusid[1024], sbusid[1024];
++	char oid[128];
++	int domain, bus, dev, func;
++	int i, modesetting, ret;
++	size_t len;
++
++	ret = sscanf(busid, "pci:%04x:%02x:%02x.%d", &domain, &bus, &dev,
++	    &func);
++	if (ret != 4)
++		return -EINVAL;
++	snprintf(kbusid, sizeof(kbusid), "pci:%04x:%02x:%02x.%d", domain, bus,
++	    dev, func);
++
++	/* How many GPUs do we expect in the machine ? */
++	for (i = 0; i < 16; i++) {
++		snprintf(oid, sizeof(oid), "hw.dri.%d.busid", i);
++		len = sizeof(sbusid);
++		ret = sysctlbyname(oid, sbusid, &len, NULL, 0);
++		if (ret == -1) {
++			if (errno == ENOENT)
++				continue;
++			return -EINVAL;
++		}
++		if (strcmp(sbusid, kbusid) != 0)
++			continue;
++		snprintf(oid, sizeof(oid), "hw.dri.%d.modesetting", i);
++		len = sizeof(modesetting);
++		ret = sysctlbyname(oid, &modesetting, &len, NULL, 0);
++		if (ret == -1 || len != sizeof(modesetting))
++			return -EINVAL;
++		return (modesetting ? 0 : -ENOSYS);
++	}
  #endif
  	return -ENOSYS;
  
