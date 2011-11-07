@@ -14,8 +14,8 @@ COMMENT=	X Keyboard Configuration Database
 
 LICENSE=	MIT
 
-BUILD_DEPENDS=	xkbcomp:${PORTSDIR}/x11/xkbcomp
-
+BUILD_DEPENDS=	xkbcomp:${PORTSDIR}/x11/xkbcomp \
+		xsltproc:${PORTSDIR}/textproc/libxslt
 XORG_CAT=	data
 
 USE_BZIP2=	yes
