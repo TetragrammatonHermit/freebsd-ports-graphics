@@ -216,7 +216,6 @@ lib/xorg/protocol.txt
 libdata/pkgconfig/xorg-server.pc
 share/aclocal/xorg-server.m4
 @exec /bin/mkdir -p %D/share/X11/xorg.conf.d
-@dirrm share/doc/xorg-server
 @dirrm include/xorg
 @dirrm lib/xorg/modules/extensions
 @dirrm lib/xorg/modules/multimedia
