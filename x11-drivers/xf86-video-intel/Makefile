@@ -50,12 +50,14 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-src_ch7017_ch7017.c \
 		${PATCHDIR}/extra-uxa_uxa-priv.h
 .endif
 
+.include <bsd.port.pre.mk>
+
 .if defined(WITH_NEW_XORG)
 pre-configure:
 .if !exists(${LOCALBASE}/lib/libkms.so)
-	@${ECHO} "${PKGNAME}: This driver needs graphics/libdrm build with the WITH_KMS option."
+	@${ECHO} "${PKGNAME}: Rebuild graphics/libdrm with the WITH_KMS option."
 	@${FALSE}
 .endif
 .endif
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
