@@ -5,16 +5,16 @@
 # $FreeBSD$
 #
 
-PORTNAME=	xorg-server
-PORTVERSION=	1.10.4
-PORTREVISION=	1
-PORTEPOCH=	1
+PORTNAME?=	xorg-server
+PORTVERSION=	${XORG_VERSION}
+PORTREVISION?=	${XORG_REVISION}
+PORTEPOCH?=	1
 CATEGORIES=	x11-servers
 MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/xserver/
 DISTFILES=	xorg-server-${PORTVERSION}.tar.bz2
 
 MAINTAINER=	x11@FreeBSD.org
-COMMENT=	X.Org X server and related programs
+COMMENT?=	X.Org X server and related programs
 
 LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm
 
@@ -22,9 +22,19 @@ RUN_DEPENDS=	${LOCALBASE}/share/X11/xkb/rules/base.xml:${PORTSDIR}/x11/xkeyboard
 
 XORG_CAT=	xserver
 
+.if defined(WITH_NEW_XORG)
+XORG_VERSION=	1.10.4
+XORG_REVISION=	1
+PLIST_SUB+=	OLD="@comment " NEW=""
+.else
+XORG_VERSION=	1.7.7
+XORG_REVISION=	3
+PLIST_SUB+=	OLD="" NEW="@comment "
+.endif
+
 USE_GMAKE=	yes
 USE_GL=		gl
-USE_XORG=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
+USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		xmu xt xpm xext randrproto renderproto fixesproto damageproto \
 		dri2proto xcmiscproto xextproto xproto xtrans xf86miscproto \
 		xf86vidmodeproto xf86bigfontproto scrnsaverproto bigreqsproto \
@@ -35,20 +45,28 @@ USE_XORG=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 MAKE_JOBS_UNSAFE=	yes
 USE_OPENSSL=	yes
 USE_PERL5_BUILD=yes
-CONFIGURE_ARGS=	--disable-dmx --disable-xvfb --disable-xnest \
+CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
 		--enable-record=yes
 
+.if !defined(SLAVE_PORT)
 MAN1=		Xorg.1 \
 		Xserver.1 \
 		cvt.1 \
 		gtf.1
 MAN4=		exa.4 \
 		fbdevhw.4
-MAN5=		xorg.conf.5 xorg.conf.d.5
+MAN5=		xorg.conf.5
 
-NOT_FOR_ARCHS=	alpha
+.if (WITH_NEW_XORG)
+MAN5+=		xorg.conf.d.5
+.endif
+.else
+# for slave ports we need to overwrite PLIST, so it doesn't overwrite
+# PLIST_FILES, with the masterport plist.
+PLIST=		${.CURDIR}/pkg-plist
+.endif
 
 .if !defined(ARCH)
 ARCH!=	/usr/bin/uname -p
@@ -128,7 +146,13 @@ pre-everything::
 	@${ECHO_MSG} "NO_SUID_XSERVER=YES in /etc/make.conf."
 .endif
 
+.if defined(WITH_NEW_XORG)
 post-install:
 	@${MKDIR} ${PREFIX}/share/X11/xorg.conf.d
+
+PLIST_SUB+=	OLD="@comment " NEW=""
+.else
+PLIST_SUB+=	OLD="" NEW="@comment "
+.endif
 
 .include <bsd.port.post.mk>

@@ -17,9 +17,6 @@ LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm \
 
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
-EXTRA_PATCHES+=	${FILESDIR}/patch-mach64_context.h \
-		${FILESDIR}/patch-sis_context.h
-
 do-install:
 	cd ${WRKSRC}/src/mesa; ${GMAKE} install-dri
 
@@ -29,6 +26,6 @@ do-install:
 
 .if ${ARCH} == "ia64"
 BROKEN=		Does not install on ia64
-.endif
+[4~[4~.endif
 
 .include <bsd.port.post.mk>

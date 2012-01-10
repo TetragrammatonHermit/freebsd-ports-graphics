@@ -21,9 +21,16 @@
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
+.if defined(WITH_NEW_XORG)
 MESABASEVERSION=	7.11.2
 # if there is a subversion, include the '-' between 7.11-rc2 for example.
 MESASUBVERSION=		
+PLIST_SUB+=	OLD="@comment " NEW=""
+.else
+MESABASEVERSION=	7.6.1
+MESASUBVERSION=		
+PLIST_SUB+=	OLD="" NEW="@comment "
+.endif
 
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/:mesa,glut
 DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}:mesa
@@ -41,9 +48,20 @@ GNU_CONFIGURE=	yes
 MAKE_JOBS_SAFE=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include
-CONFIGURE_ENV+=	LDFLAGS=-L${LOCALBASE}/lib
+LDFLAGS+=	-L${LOCALBASE}/lib
 CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
 		--disable-egl
+
+.if defined(WITH_NEW_XORG)
+EXTRA_PATCHES+=	${PATCHDIR}/extra-mach64_context.h \
+		${PATCHDIR}/extra-sis_context.h \
+		${PATCHDIR}/extra-src-glsl_ir_constant_expression.cpp
+.else
+EXTRA_PATCHES+=	${PATCHDIR}/extra-src__mesa__x86-64__glapi_x86-64.S \
+		${PATCHDIR}/extra-src__mesa__x86-64__xform4.S \
+		${PATCHDIR}/extra-src__mesa__x86__glapi_x86.S \
+		${PATCHDIR}/extra-src__mesa__x86__read_rgba_span_x86.S
+.endif
 
 ALL_TARGET=		default
 
