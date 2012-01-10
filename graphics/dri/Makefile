@@ -26,6 +26,6 @@ do-install:
 
 .if ${ARCH} == "ia64"
 BROKEN=		Does not install on ia64
-[4~[4~.endif
+.endif
 
 .include <bsd.port.post.mk>
