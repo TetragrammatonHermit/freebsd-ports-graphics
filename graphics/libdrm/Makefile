@@ -40,7 +40,7 @@ PLIST_SUB+=	KMS=""
 PLIST_SUB+=	KMS="@comment "
 .endif
 
-LIBDRM_VERSION=	2.4.29
+LIBDRM_VERSION=	2.4.30
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 LIBDRM_VERSION=	2.4.17
