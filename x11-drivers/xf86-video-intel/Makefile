@@ -16,6 +16,7 @@ COMMENT=	Driver for Intel integrated graphics chipsets
 ONLY_FOR_ARCHS=	amd64 i386
 USE_GL=		gl
 
+USE_LDCONFIG=	yes
 XORG_CAT=	driver
 USE_XORG=	xvmc xineramaproto xextproto x11 xf86driproto glproto
 MAN4=		intel.4x
@@ -37,15 +38,15 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-src_ch7017_ch7017.c \
 		${PATCHDIR}/extra-src_i810_driver.c \
 		${PATCHDIR}/extra-src_i915_hwmc.c \
 		${PATCHDIR}/extra-src_i810_hwmc.c \
-		${PATCHDIR}/extra-src_i915_render.c
+		${PATCHDIR}/extra-src_i915_render.c \
 		${PATCHDIR}/extra-src_i810_video.c \
-		${PATCHDIR}/extra-src_i965_render.c
+		${PATCHDIR}/extra-src_i965_render.c \
 		${PATCHDIR}/extra-src_i830_dri.c \
-		${PATCHDIR}/extra-src_ivch_ivch.c
+		${PATCHDIR}/extra-src_ivch_ivch.c \
 		${PATCHDIR}/extra-src_i830_driver.c \
-		${PATCHDIR}/extra-src_sil164_sil164.c
+		${PATCHDIR}/extra-src_sil164_sil164.c \
 		${PATCHDIR}/extra-src_i830_dvo.c \
-		${PATCHDIR}/extra-src_tfp410_tfp410.c
+		${PATCHDIR}/extra-src_tfp410_tfp410.c \
 		${PATCHDIR}/extra-src_i830_i2c.c \
 		${PATCHDIR}/extra-uxa_uxa-priv.h
 .endif
