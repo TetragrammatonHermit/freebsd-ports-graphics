@@ -68,8 +68,6 @@ MAN5+=		xorg.conf.d.5
 PLIST=		${.CURDIR}/pkg-plist
 .endif
 
-.include <bsd.port.pre.mk>
-
 OPTIONS=	AIGLX	"Compile with Accelerated Indirect GLX support" on \
 		SUID	"Install the Xorg server with setuid bit set" on
 .if ${ARCH} == sparc64
@@ -78,6 +76,7 @@ OPTIONS+=	HAL	"Compile with HAL config support" off
 OPTIONS+=	HAL	"Compile with HAL config support" on
 .endif
 
+.include <bsd.port.pre.mk>
 
 .if defined(WITH_OPENSSL_BASE)
 # The reason why I use this is cause openssl from base doesn't install a .pc file
