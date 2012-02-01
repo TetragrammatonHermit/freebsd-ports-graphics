@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xkeyboard-config
-PORTVERSION=	2.5
+PORTVERSION=	2.5.1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
