@@ -13,6 +13,7 @@
 %%OLD%%include/drm/via_drm.h
 %%OLD%%include/intel_bufmgr.h
 %%NEW%%include/libdrm/drm.h
+%%NEW%%include/libdrm/drm_fourcc.h
 %%NEW%%include/libdrm/drm_mode.h
 %%NEW%%include/libdrm/drm_sarea.h
 %%NEW%%include/libdrm/i915_drm.h

@@ -7,6 +7,7 @@
 
 PORTNAME=	libdrm
 PORTVERSION=	${LIBDRM_VERSION}
+PORTREVISION=	${LIBDRM_REVISION}
 CATEGORIES=	graphics x11
 MASTER_SITES=	http://dri.freedesktop.org/libdrm/
 
@@ -41,9 +42,11 @@ PLIST_SUB+=	KMS="@comment "
 .endif
 
 LIBDRM_VERSION=	2.4.30
+LIBDRM_REVISION=1
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 LIBDRM_VERSION=	2.4.17
+LIBDRM_REVISION=0
 PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
