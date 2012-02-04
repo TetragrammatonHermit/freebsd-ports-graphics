@@ -30,9 +30,9 @@ post-install:
 		${PREFIX}/share/hal/fdi/policy/10osvendor/
 
 .if defined(WITH_NEW_XORG)
-PLIST_SUB+=	NEW=""
+PLIST_SUB+=	NEW="" OLD="@comment "
 .else
-PLIST_SUB+=	NEW="@comment "
+PLIST_SUB+=	NEW="@comment " OLD=""
 .endif
 
 .include <bsd.port.mk>
