@@ -6,8 +6,7 @@
 #
 
 PORTNAME=	xf86-input-mutouch
-PORTVERSION=	${TOUCH_VERSION}
-PORTREVISION=	${TOUCH_REVISION}
+PORTVERSION=	1.3.0
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -17,12 +16,10 @@ XORG_CAT=	driver
 USE_XORG=	xextproto videoproto
 MAN4=		mutouch.4x
 
-.if defined(WITH_NEW_XORG)
-TOUCH_VERSION=	1.3.0
-TOUCH_REVISION=	0
+.if !defined(WITH_NEW_XORG)
+IGNORE=		does not build with xorg-server 1.7.7
 .else
-TOUCH_VERSION=	1.2.1
-TOUCH_REVISION=	6
+
 .endif
 
 .include <bsd.port.mk>
