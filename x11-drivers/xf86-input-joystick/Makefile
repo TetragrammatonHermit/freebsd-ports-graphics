@@ -13,7 +13,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org joystick input driver
 
 XORG_CAT=	driver
-
+USE_XORG=	xextproto videoproto
 MAN4=		joystick.4x
 
 post-patch:

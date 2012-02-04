@@ -13,7 +13,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org fpit input driver
 
 XORG_CAT=	driver
-USE_XORG=	xrandr
+USE_XORG=	xrandr xextproto videoproto
 
 MAN4=		fpit.4x
 

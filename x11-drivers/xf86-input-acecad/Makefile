@@ -13,6 +13,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org acecad input driver
 
 XORG_CAT=	driver
+USE_XORG=	xextproto videoproto
 MAN4=		acecad.4x
 
 .include <bsd.port.mk>
