@@ -17,4 +17,8 @@ USE_XORG=	xrandr xextproto videoproto
 
 MAN4=		fpit.4x
 
+.if !defined(WITH_NEW_XORG)
+IGNORE=		does not build with X server 1.7.7
+.endif
+
 .include <bsd.port.mk>

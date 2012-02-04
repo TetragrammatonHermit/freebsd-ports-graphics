@@ -29,4 +29,10 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/conf/11-x11-synaptics.fdi \
 		${PREFIX}/share/hal/fdi/policy/10osvendor/
 
+.if defined(WITH_NEW_XORG)
+PLIST_SUB+=	NEW=""
+.else
+PLIST_SUB+=	NEW="@comment "
+.endif
+
 .include <bsd.port.mk>

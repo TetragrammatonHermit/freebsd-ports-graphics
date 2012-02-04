@@ -25,4 +25,10 @@ MAN4=		vmmouse.4x
 ONLY_FOR_ARCHS=	i386 amd64
 ONLY_FOR_ARCHS_REASON=	The vmmouse protocol is only supported on x86-compatible architectures.
 
+.if defined(WITH_NEW_XORG)
+PLIST_SUB+=	NEW=""
+.else
+PLIST_SUB+=	NEW="@comment "
+.endif
+
 .include <bsd.port.mk>
