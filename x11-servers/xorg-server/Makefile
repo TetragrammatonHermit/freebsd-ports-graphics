@@ -28,8 +28,9 @@ XORG_REVISION=	1
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 XORG_VERSION=	1.7.7
-XORG_REVISION=	3
+XORG_REVISION=	4
 PLIST_SUB+=	OLD="" NEW="@comment "
+EXTRA_PATCHES+=	${FILESDIR}/extra-include_eventstr.h
 .endif
 
 USE_GMAKE=	yes
