@@ -1,0 +1,22 @@
+
+** This needs at least a review **
+
+20120105:
+  AFFECTS: users of mesa based ports (libGL etc) and xorg-server.
+  AUTHOR: x11@FreeBSD.org
+
+  Update default mesa (libGL and friends) to 7.6.1 and xorg-server to 1.7.7.
+  Add a new switch WITH_NEW_XORG, for people that want mesa 7.11.x and
+  xorg-server 1.10.4, this will also update xf86-video-intel to the version
+  that only supports KMS. If you FreeBSD version doesn't have KMS then you
+  shouldn't use the WITH_NEW_XORG macro on machines with intel graphics.
+  Supported versions of FreeBSD with KMS kernel support:
+  10.0-Current with a patch
+
+  When switching xorg-server versions make sure to rebuild your xf86-* ports.
+
+  Mention acceleration issues with KDE and 1.10.x. Nvidia should be without
+  any problems. Ati should work, but acceleration might be botched. 
+  The nouveau driver is sadly a casualty, it needs both a update and kernel
+  support needs to be written. Other rarer drivers aren't tested.
+
