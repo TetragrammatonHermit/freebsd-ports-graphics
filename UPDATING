@@ -1,3 +1,14 @@
+** This also needs a review, as well as a correct date **
+20120205:
+  AFFECTS: users of libGLUT and freeglut, as well as probably everyone using
+	   OpenGL.
+  AUTHOR: x11@FreeBSD.org
+
+  The default implementation of the OpenGL Utility Toolkit was changed from the
+  old and unmaintained libGLUT to a new implementation called freeglut.
+  Freeglut is already used as the GLUT implementation in many Linux
+  distributions.  This change requires that all ports linking to libGLUT be
+  recompiled since libGLUT and freeglut differ in shared library version.
 
 ** This needs at least a review **
 
