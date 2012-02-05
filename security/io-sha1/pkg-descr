@@ -1,4 +1,0 @@
-An object for calculating SHA1 hashes. Each has calculation should
-instiate it's own SHA1 instance.
-
-WWW:	http://iolanguage.com
