@@ -15,8 +15,8 @@
 
   When switching xorg-server versions make sure to rebuild your xf86-* ports.
 
-  Mention acceleration issues with KDE and 1.10.x. Nvidia should be without
-  any problems. Ati should work, but acceleration might be botched. 
-  The nouveau driver is sadly a casualty, it needs both a update and kernel
+  Mention acceleration issues with KDE and 1.10.x. Nvidia shouldn't have any
+  problems. Ati should work, but acceleration might be botched. 
+  The nouveau driver is sadly a casualty, it needs to be updated and kernel
   support needs to be written. Other rarer drivers aren't tested.
 
