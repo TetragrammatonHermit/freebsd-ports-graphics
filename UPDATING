@@ -10,6 +10,9 @@
   distributions.  This change requires that all ports linking to libGLUT be
   recompiled since libGLUT and freeglut differ in shared library version.
 
+  portmaster -o graphics/freeglut graphics/libglut
+  portmaster -r freeglut
+
 ** This needs at least a review **
 
 20120105:
