@@ -1,5 +1,15 @@
 ** This also needs a review, as well as a correct date **
 
+20120208
+  AFFECTS: nvidia-driver users
+  AUTHOR: x11@FreeBSD.org
+
+  As of writing, the current nvidia-driver isn't compatible with 
+  xorg-server 1.12. A future version will support the new xorg-server.
+  Users of the legacy driver are adviced to not use the WITH_NEW_XORG switch.
+
+** This also needs a review, as well as a correct date **
+
 20120205:
   AFFECTS: users libglut, dri. 
   AUTHOR: x11@FreeBSD.org
