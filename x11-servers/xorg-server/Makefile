@@ -18,19 +18,20 @@ COMMENT?=	X.Org X server and related programs
 
 LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm
 
-RUN_DEPENDS=	${LOCALBASE}/share/X11/xkb/rules/base.xml:${PORTSDIR}/x11/xkeyboard-config
+RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config
 
 XORG_CAT=	xserver
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.10.4
-XORG_REVISION=	1
+XORG_VERSION=	1.11.99.902
+XORG_REVISION=	0
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 XORG_VERSION=	1.7.7
 XORG_REVISION=	4
 PLIST_SUB+=	OLD="" NEW="@comment "
-EXTRA_PATCHES+=	${FILESDIR}/extra-include_eventstr.h
+EXTRA_PATCHES+=	${FILESDIR}/extra-include_eventstr.h \
+		${FILESDIR}/extra-os-utils.c
 .endif
 
 USE_GMAKE=	yes
