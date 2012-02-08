@@ -6,17 +6,25 @@
 #
 
 PORTNAME=	libGLw
-PORTVERSION=	${MESAVERSION}
+PORTVERSION=	1.0.0
 CATEGORIES=	graphics
+MASTER_SITES=	LOCAL/kwm
+DISTNAME=	glw-${PORTVERSION}
+# when offical released. Set PORTEPOCH if needed and remove DIST_SUBDIR
+#PORTEPOCH=	1
+DIST_SUBDIR=	GL
 
 COMMENT=	OpenGL widgets library
 
+USE_BZIP2=	yes
+USE_GNOME=	gnomehack pkgconfig
+USE_LDCONFIG=	yes
 USE_GL=		gl
 USE_MOTIF=	yes
-USE_XORG=	glproto xt x11 xext xxf86vm xdamage xfixes dri2proto
+USE_XORG=	x11 xt xext
+GNU_CONFIGURE=	yes
+CONFIGURE_ARGS=	--disable-static --enable-motif
+CPPFLAGS+=	-I${LOCALBASE}/include
+LDFLAGS+=	-L${LOCALBASE}/lib
 
-do-install:
-	cd ${WRKSRC}/src/glw; ${GMAKE} install
-
-.include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 .include <bsd.port.mk>
