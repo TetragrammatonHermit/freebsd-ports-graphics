@@ -23,7 +23,7 @@ MAKE_JOBS_SAFE=	yes
 USE_GL=		glu glut
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 CPPFLAGS+=	-I${LOCALBASE}/include ${PTHREAD_CFLAGS}
-CONFIGURE_ENV=	LDFLAGS="-L${LOCALBASE}/lib ${PTHREAD_LIBS}"
+LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS}
 CONFIGURE_ARGS=	--disable-gallium --with-demos=demos,xdemos
 
 #ALL_TARGET=	yes
