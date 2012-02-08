@@ -11,8 +11,6 @@
 #
 #    - graphics/libGL
 #    - graphics/libGLU
-#    - graphics/libGLw
-#    - graphics/libglut
 #    - graphics/dri
 #
 # $FreeBSD$
@@ -22,9 +20,9 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_XORG)
-MESABASEVERSION=	7.11.2
+MESABASEVERSION=	8.0
 # if there is a subversion, include the '-' between 7.11-rc2 for example.
-MESASUBVERSION=		
+MESASUBVERSION=		rc2
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 MESABASEVERSION=	7.6.1
@@ -32,8 +30,8 @@ MESASUBVERSION=
 PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/:mesa,glut
-DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}:mesa
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
+DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
 MAINTAINER?=	x11@FreeBSD.org
 
 BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
@@ -50,12 +48,10 @@ MAKE_JOBS_SAFE=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
-		--disable-egl
+		--disable-egl --disable-glut --disable-glw
 
 .if defined(WITH_NEW_XORG)
-EXTRA_PATCHES+=	${PATCHDIR}/extra-mach64_context.h \
-		${PATCHDIR}/extra-sis_context.h \
-		${PATCHDIR}/extra-src-glsl_ir_constant_expression.cpp
+EXTRA_PATCHES+=	${PATCHDIR}/extra-src-glsl_ir_constant_expression.cpp
 .else
 EXTRA_PATCHES+=	${PATCHDIR}/extra-src__mesa__x86-64__glapi_x86-64.S \
 		${PATCHDIR}/extra-src__mesa__x86-64__xform4.S \
@@ -66,7 +62,7 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-src__mesa__x86-64__glapi_x86-64.S \
 ALL_TARGET=		default
 
 PATCHDIR=		${.CURDIR}/../../graphics/libGL/files
-WRKSRC=			${WRKDIR}/Mesa-${MESABASEVERSION}${MESASUBVERSION}
+WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
 
 .if !defined(ARCH)
 ARCH!=			uname -p
@@ -74,24 +70,14 @@ ARCH!=			uname -p
 
 COMPONENT=		${PORTNAME:L:C/^lib//:C/mesa-//}
 
-.if ${COMPONENT:Mglut} == ""
-. if ${COMPONENT:Mglu} == ""
-CONFIGURE_ARGS+=	--disable-glu --disable-glut
-. else
-CONFIGURE_ARGS+=	--disable-glut
-. endif
-.else
-DISTFILES+=		MesaGLUT-${MESADISTVERSION}${EXTRACT_SUFX}:glut
-.endif
-
-.if ${COMPONENT:Mglw} == ""
-CONFIGURE_ARGS+=	--disable-glw
-.else
-CONFIGURE_ARGS+=	--enable-motif
+.if ${COMPONENT:Mglu} == ""
+CONFIGURE_ARGS+=	--disable-glu
 .endif
 
 .if ${COMPONENT:Mdri} == ""
 CONFIGURE_ARGS+=	--with-dri-drivers=no
+.else
+CONFIGURE_ARGS+=	--with-dri-drivers="i915,i965,r200,radeon,swrast"
 .endif
 
 .if defined(WITHOUT_XCB)
@@ -105,10 +91,6 @@ post-patch:
 		${WRKSRC}/configure
 	@${REINPLACE_CMD} -e 's|[$$](INSTALL_LIB_DIR)/pkgconfig|${PREFIX}/libdata/pkgconfig|' \
 		${WRKSRC}/src/glu/Makefile \
-		${WRKSRC}/src/glw/Makefile \
 		${WRKSRC}/src/mesa/Makefile \
 		${WRKSRC}/src/mesa/drivers/dri/Makefile
-.if ${COMPONENT:Mglut} != ""
-	@${REINPLACE_CMD} -e 's|[$$](INSTALL_LIB_DIR)/pkgconfig|${PREFIX}/libdata/pkgconfig|' \
-		${WRKSRC}/src/glut/glx/Makefile
-.endif
+
