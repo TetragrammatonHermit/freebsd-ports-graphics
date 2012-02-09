@@ -4,8 +4,8 @@
   AFFECTS: nvidia-driver users
   AUTHOR: x11@FreeBSD.org
 
-  As of writing, the current nvidia-driver isn't compatible with 
-  xorg-server 1.12. A future version will support the new xorg-server.
+  As of writing, a update for the nvidia-driver is needed. The current 
+  nvidia-driver beta version 290.1 has support for xorg-server 1.12.  
   Users of the legacy driver are adviced to not use the WITH_NEW_XORG switch.
 
 ** This also needs a review, as well as a correct date **
