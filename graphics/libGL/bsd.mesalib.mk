@@ -22,7 +22,7 @@ MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 .if defined(WITH_NEW_XORG)
 MESABASEVERSION=	8.0
 # if there is a subversion, include the '-' between 7.11-rc2 for example.
-MESASUBVERSION=		rc2
+MESASUBVERSION=		
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 MESABASEVERSION=	7.6.1
@@ -48,7 +48,7 @@ MAKE_JOBS_SAFE=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
-		--disable-egl --disable-glut --disable-glw
+		--disable-egl
 
 .if defined(WITH_NEW_XORG)
 EXTRA_PATCHES+=	${PATCHDIR}/extra-src-glsl_ir_constant_expression.cpp
@@ -57,11 +57,15 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-src__mesa__x86-64__glapi_x86-64.S \
 		${PATCHDIR}/extra-src__mesa__x86-64__xform4.S \
 		${PATCHDIR}/extra-src__mesa__x86__glapi_x86.S \
 		${PATCHDIR}/extra-src__mesa__x86__read_rgba_span_x86.S
+CONFIGURE_ARGS+=--disable-glut --disable-glw
 .endif
 
 ALL_TARGET=		default
 
-PATCHDIR=		${.CURDIR}/../../graphics/libGL/files
+MASTERDIR=		${.CURDIR}/../../graphics/libGL
+PATCHDIR=		${MASTERDIR}/files
+DESCR=			${.CURDIR}/pkg-descr
+PLIST=			${.CURDIR}/pkg-plist
 WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
 
 .if !defined(ARCH)
