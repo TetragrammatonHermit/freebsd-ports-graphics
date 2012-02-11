@@ -22,8 +22,7 @@ USE_XORG=	x11 xf86driproto glproto randrproto renderproto fixesproto \
 
 CONFIGURE_ARGS=	--enable-kdrive --enable-xephyr	--disable-dmx --disable-xvfb \
 		--without-xmlto --disable-docs --disable-devel-docs \
-		--disable-xorg --disable-xnest \
-		--localstatedir=/var --without-dtrace
+		--disable-xnest --localstatedir=/var --without-dtrace
 
 SLAVE_PORT=	yes
 PLIST_FILES=	bin/Xephyr

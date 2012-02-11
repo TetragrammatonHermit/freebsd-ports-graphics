@@ -23,7 +23,7 @@ RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config
 XORG_CAT=	xserver
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.11.99.902
+XORG_VERSION=	1.11.99.903
 XORG_REVISION=	0
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else

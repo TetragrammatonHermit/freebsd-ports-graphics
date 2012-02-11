@@ -21,7 +21,7 @@ USE_XORG=	x11 xf86driproto glproto randrproto renderproto fixesproto \
 		xxf86misc xxf86vm xaw7 xmu xpm xext xrender xfixes xi dmxproto \
 		xau dmx xtst xres pixman xtrans
 
-CONFIGURE_ARGS=	--disable-xvfb --disable-xorg --disable-xnest \
+CONFIGURE_ARGS=	--disable-xvfb --disable-xnest \
 		--without-xmlto	--disable-docs --disable-devel-docs \
 		--enable-dmx --localstatedir=/var --without-dtrace
 

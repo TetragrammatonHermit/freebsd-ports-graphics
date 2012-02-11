@@ -6,7 +6,6 @@
 #
 
 PORTNAME=	xorg-nestserver
-PORTREVISION=	1
 
 COMMENT=	Nesting X server from X.Org
 
@@ -20,7 +19,7 @@ USE_XORG=	x11 xf86driproto glproto randrproto renderproto fixesproto \
 		xineramaproto xinerama evieproto xkbfile xfont fontenc xkbui \
 		xxf86misc xxf86vm xaw7 xmu xpm xext pixman xtrans
 
-CONFIGURE_ARGS=	--disable-dmx --disable-xvfb --disable-xorg \
+CONFIGURE_ARGS=	--disable-dmx --disable-xvfb \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace
 
