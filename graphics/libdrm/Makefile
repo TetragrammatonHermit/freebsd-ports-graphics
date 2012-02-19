@@ -41,7 +41,7 @@ PLIST_SUB+=	KMS=""
 PLIST_SUB+=	KMS="@comment "
 .endif
 
-LIBDRM_VERSION=	2.4.30
+LIBDRM_VERSION=	2.4.31
 LIBDRM_REVISION=1
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
@@ -51,7 +51,8 @@ PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
 pre-patch:
-	@${REINPLACE_CMD} 's|{libdir}/pkgconfig|{prefix}/libdata/pkgconfig|g' \
-	    ${WRKSRC}/configure
+	@${REINPLACE_CMD} 's|{libdir}/pkgconfig|{prefix}/libdata/pkgconfig|g; \
+			   12661s/x86_/amd/g' \
+		${WRKSRC}/configure
 
 .include <bsd.port.mk>
