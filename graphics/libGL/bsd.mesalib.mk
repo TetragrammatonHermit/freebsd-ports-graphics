@@ -20,7 +20,7 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_XORG)
-MESABASEVERSION=	8.0
+MESABASEVERSION=	8.0.1
 # if there is a subversion, include the '-' between 7.11-rc2 for example.
 MESASUBVERSION=		
 PLIST_SUB+=	OLD="@comment " NEW=""
@@ -84,10 +84,12 @@ CONFIGURE_ARGS+=	--with-dri-drivers=no
 CONFIGURE_ARGS+=	--with-dri-drivers="i915,i965,r200,radeon,swrast"
 .endif
 
+.if !defined(WITH_NEW_XORG)
 .if defined(WITHOUT_XCB)
 CONFIGURE_ARGS+=	--disable-xcb
 .else
 CONFIGURE_ARGS+=	--enable-xcb
+.endif
 .endif
 
 post-patch:
