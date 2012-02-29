@@ -13,5 +13,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Input extension headers
 
 XORG_CAT=	proto
+CONFIGURE_ARGS=	--disable-specs \
+		--without-asciidoc
 
 .include <bsd.port.mk>
