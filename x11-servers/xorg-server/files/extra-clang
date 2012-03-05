@@ -1,0 +1,75 @@
+--- dix/events.c.orig	2012-02-17 21:43:30.000000000 +0100
++++ dix/events.c	2012-02-17 21:43:54.000000000 +0100
+@@ -5375,7 +5375,8 @@
+ InitEvents(void)
+ {
+     int i;
+-    QdEventPtr qe, tmp;
++    QdEventPtr qe = NULL;
++    QdEventPtr tmp;
+ 
+     inputInfo.numDevices = 0;
+     inputInfo.devices = (DeviceIntPtr)NULL;
+--- hw/xfree86/common/xf86Xinput.c.orig	2012-02-17 21:40:24.000000000 +0100
++++ hw/xfree86/common/xf86Xinput.c	2012-02-17 21:40:48.000000000 +0100
+@@ -519,7 +519,7 @@
+ MatchAttrToken(const char *attr, struct xorg_list *patterns,
+                int (*compare)(const char *attr, const char *pattern))
+ {
+-    const xf86MatchGroup *group;
++    const xf86MatchGroup *group = NULL;
+ 
+     /* If there are no patterns, accept the match */
+     if (xorg_list_is_empty(patterns))
+--- hw/xfree86/dri2/dri2.c.orig	2012-02-17 21:36:17.000000000 +0100
++++ hw/xfree86/dri2/dri2.c	2012-02-17 21:37:37.000000000 +0100
+@@ -235,7 +235,7 @@
+ static DRI2DrawableRefPtr
+ DRI2LookupDrawableRef(DRI2DrawablePtr pPriv, XID id)
+ {
+-    DRI2DrawableRefPtr ref;
++    DRI2DrawableRefPtr ref = NULL;
+ 
+     xorg_list_for_each_entry(ref, &pPriv->reference_list, link) {
+ 	if (ref->id == id)
+@@ -301,7 +301,8 @@
+ {
+     DRI2DrawablePtr pPriv = p;
+     DRI2ScreenPtr   ds = pPriv->dri2_screen;
+-    DRI2DrawableRefPtr ref, next;
++    DRI2DrawableRefPtr ref = NULL;
++    DRI2DrawableRefPtr next;
+     WindowPtr pWin;
+     PixmapPtr pPixmap;
+     DrawablePtr pDraw;
+@@ -579,7 +580,7 @@
+ DRI2InvalidateDrawable(DrawablePtr pDraw)
+ {
+     DRI2DrawablePtr pPriv = DRI2GetDrawable(pDraw);
+-    DRI2DrawableRefPtr ref;
++    DRI2DrawableRefPtr ref = NULL;
+ 
+     if (!pPriv || !pPriv->needInvalidate)
+         return;
+--- test/list.c.orig	2012-02-17 21:38:40.000000000 +0100
++++ test/list.c	2012-02-17 21:39:14.000000000 +0100
+@@ -175,7 +175,7 @@
+ {
+     struct parent parent = {0};
+     struct child child[3];
+-    struct child *c;
++    struct child *c = NULL;
+     int i = 0;
+ 
+     xorg_list_init(&parent.children);
+--- xfixes/cursor.c.orig	2012-02-17 21:42:30.000000000 +0100
++++ xfixes/cursor.c	2012-02-17 21:42:43.000000000 +0100
+@@ -1168,7 +1168,7 @@
+ barrier_find_nearest(CursorScreenPtr cs, int dir,
+ 		     int x1, int y1, int x2, int y2)
+ {
+-    struct PointerBarrierClient *c;
++    struct PointerBarrierClient *c = NULL;
+     struct PointerBarrier *nearest = NULL;
+     double min_distance = INT_MAX; /* can't get higher than that in X anyway */
+ 
