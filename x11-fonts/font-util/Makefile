@@ -2,7 +2,7 @@
 # Date Created:				28 Aug 2005
 # Whom:					Pawel Worach
 #
-# $FreeBSD: ports/x11-fonts/font-util/Makefile,v 1.3 2011/02/25 16:52:44 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	font-util

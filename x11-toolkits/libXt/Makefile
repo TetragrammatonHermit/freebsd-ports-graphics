@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	libXt
-PORTVERSION=	1.1.1
+PORTVERSION=	1.1.2
 CATEGORIES=	x11-toolkits
 
 MAINTAINER=	x11@FreeBSD.org
@@ -14,6 +14,7 @@ COMMENT=	X Toolkit library
 
 XORG_CAT=	lib
 USE_XORG=	x11 sm xproto:both kbproto
+CONFIGURE_ARGS=	--disable-specs
 
 MAN3=	MenuPopdown.3 \
 	MenuPopup.3 \

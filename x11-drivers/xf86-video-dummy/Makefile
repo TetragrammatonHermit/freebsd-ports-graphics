@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-dummy/Makefile,v 1.12 2011/11/09 15:25:57 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-dummy

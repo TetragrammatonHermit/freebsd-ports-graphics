@@ -2,7 +2,7 @@
 # Date created:			05 July 2003
 # Whom:				Martin Ranne <gasp@ridcully.dnsalias.org>
 #
-# $FreeBSD: ports/x11/xinput/Makefile,v 1.10 2012/01/07 04:41:15 eadler Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xinput

@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xcmsdb/Makefile,v 1.4 2011/09/20 08:23:00 bapt Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xcmsdb

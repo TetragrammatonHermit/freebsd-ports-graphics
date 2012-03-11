@@ -2,7 +2,7 @@
 # Date Created:				08 Aug 2005
 # Whom:					Dejan Lesjak <lesi@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-fonts/libfontenc/Makefile,v 1.5 2011/11/09 15:26:03 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libfontenc

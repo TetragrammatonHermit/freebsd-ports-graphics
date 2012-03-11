@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	libxcb
-PORTVERSION=	1.8
+PORTVERSION=	1.8.1
 CATEGORIES=	x11 python
 MASTER_SITES=	http://xcb.freedesktop.org/dist/
 

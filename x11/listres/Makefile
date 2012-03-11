@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/listres/Makefile,v 1.3 2010/05/01 11:40:15 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	listres

@@ -2,7 +2,7 @@
 # Date Created:			09 Nov, 2003
 # Whom:				Eric Anholt <anholt@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/libSM/Makefile,v 1.36 2011/11/09 15:25:47 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	libSM

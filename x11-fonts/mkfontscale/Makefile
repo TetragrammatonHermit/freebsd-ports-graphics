@@ -2,7 +2,7 @@
 # Date Created:				28 Aug 2005
 # Whom:					Pawel Worach
 #
-# $FreeBSD: ports/x11-fonts/mkfontscale/Makefile,v 1.5 2011/09/18 13:40:17 eadler Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	mkfontscale

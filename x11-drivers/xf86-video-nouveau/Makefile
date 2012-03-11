@@ -2,7 +2,7 @@
 # Date Created:				29 Jan 2009
 # Whom:					Anonymous <swell.k@gmail.com>
 #
-# $FreeBSD: ports/x11-drivers/xf86-video-nouveau/Makefile,v 1.14 2011/11/09 15:25:59 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-video-nouveau

@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xev/Makefile,v 1.4 2011/02/25 16:52:20 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xev

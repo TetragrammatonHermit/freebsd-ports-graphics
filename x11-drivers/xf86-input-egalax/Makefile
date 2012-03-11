@@ -2,7 +2,7 @@
 # Date Created:				2 June 2010
 # Whom:					Gleb Smirnoff <glebius@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-drivers/xf86-input-egalax/Makefile,v 1.5 2011/11/09 15:25:55 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xf86-input-egalax

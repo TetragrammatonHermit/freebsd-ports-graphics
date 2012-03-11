@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xclipboard/Makefile,v 1.7 2012/02/11 17:18:25 eadler Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xclipboard

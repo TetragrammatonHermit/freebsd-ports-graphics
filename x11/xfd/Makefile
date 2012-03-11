@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xfd/Makefile,v 1.3 2011/09/22 13:51:51 eadler Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xfd

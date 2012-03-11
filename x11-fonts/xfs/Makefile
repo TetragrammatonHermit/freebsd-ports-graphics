@@ -2,7 +2,7 @@
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11-fonts/xfs/Makefile,v 1.21 2011/02/25 16:52:47 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xfs

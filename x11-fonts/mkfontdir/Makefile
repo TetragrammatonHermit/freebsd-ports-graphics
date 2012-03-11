@@ -2,7 +2,7 @@
 # Date Created:				28 Aug 2005
 # Whom:					Pawel Worach
 #
-# $FreeBSD: ports/x11-fonts/mkfontdir/Makefile,v 1.6 2011/02/25 16:52:46 miwi Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	mkfontdir

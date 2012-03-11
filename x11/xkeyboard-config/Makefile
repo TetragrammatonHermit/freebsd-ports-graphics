@@ -2,7 +2,7 @@
 # Date Created:				Dec 20 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
-# $FreeBSD: ports/x11/xkeyboard-config/Makefile,v 1.21 2011/09/23 22:26:15 amdmi3 Exp $
+# $FreeBSD$
 #
 
 PORTNAME=	xkeyboard-config
