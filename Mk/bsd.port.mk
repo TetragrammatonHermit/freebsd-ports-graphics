@@ -1,7 +1,7 @@
 #-*- mode: makefile; tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: ports/Mk/bsd.port.mk,v 1.707 2012/03/11 21:30:49 simon Exp $
+# $FreeBSD: ports/Mk/bsd.port.mk,v 1.708 2012/03/13 08:14:45 zi Exp $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -3415,7 +3415,7 @@ check-vulnerable:
 				2>&1 | grep -vE '^[0-9]+ problem\(s\) found.' \
 				|| true`; \
 		else \
-			${ECHO_MSG} "===>  portaudit database exist, but portaudit not found!"; \
+			${ECHO_MSG} "===>  portaudit database exists, however, portaudit is not installed!"; \
 		fi; \
 		if [ -n "$$vlist" ]; then \
 			${ECHO_MSG} "===>  ${PKGNAME} has known vulnerabilities:"; \
