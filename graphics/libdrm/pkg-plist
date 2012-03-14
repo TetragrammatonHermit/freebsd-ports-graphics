@@ -24,6 +24,7 @@
 %%NEW%%include/libdrm/nouveau_drm.h
 %%NEW%%include/libdrm/nouveau_drmif.h
 %%NEW%%include/libdrm/r128_drm.h
+%%NEW%%include/libdrm/r600_pci_ids.h
 %%NEW%%include/libdrm/radeon_bo.h
 %%NEW%%include/libdrm/radeon_bo_gem.h
 %%NEW%%include/libdrm/radeon_bo_int.h
@@ -31,6 +32,7 @@
 %%NEW%%include/libdrm/radeon_cs_gem.h
 %%NEW%%include/libdrm/radeon_cs_int.h
 %%NEW%%include/libdrm/radeon_drm.h
+%%NEW%%include/libdrm/radeon_surface.h
 %%NEW%%include/libdrm/savage_drm.h
 %%NEW%%include/libdrm/sis_drm.h
 %%NEW%%include/libdrm/via_drm.h
