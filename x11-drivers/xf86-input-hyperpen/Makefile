@@ -6,7 +6,8 @@
 #
 
 PORTNAME=	xf86-input-hyperpen
-PORTVERSION=	1.4.1
+PORTVERSION=	${HYPERVER}
+PORTREVISION=	${HYPERREVISION}
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -16,7 +17,11 @@ XORG_CAT=	driver
 USE_XORG=	xextproto videoproto
 
 .if defined(WITH_NEW_XORG)
-IGNORE=		does not build with Xorg-server 1.7.7
+HYPERVER=	1.4.1
+HYPERREVISION=	0
+.else
+HYPERVER=	1.3.0
+HYPERREVISION=	5
 .endif
 
 .include <bsd.port.mk>
