@@ -13,6 +13,9 @@ MASTER_SITES=	http://xcb.freedesktop.org/dist/
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	The X protocol C-language Binding (XCB) library
 
+LICENSE=	MIT
+LICENSE_FILE=	${WRKSRC}/COPYING
+
 BUILD_DEPENDS=	${LOCALBASE}/lib/libcheck.a:${PORTSDIR}/devel/libcheck \
 		xsltproc:${PORTSDIR}/textproc/libxslt \
 		xcb-proto>=1.7:${PORTSDIR}/x11/xcb-proto \
@@ -20,9 +23,6 @@ BUILD_DEPENDS=	${LOCALBASE}/lib/libcheck.a:${PORTSDIR}/devel/libcheck \
 RUN_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/pthread-stubs.pc:${PORTSDIR}/devel/libpthread-stubs
 
 CONFIGURE_ARGS+=	--disable-build-docs --without-doxygen --enable-xinput
-
-LICENSE=	MIT
-LICENSE_FILE=	${WRKSRC}/COPYING
 
 USE_BZIP2=	yes
 USE_GNOME=	gnomehack
