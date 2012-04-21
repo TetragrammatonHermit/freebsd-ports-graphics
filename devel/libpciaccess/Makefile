@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	libpciaccess
-PORTVERSION=	0.13
+PORTVERSION=	0.13.1
 CATEGORIES=	devel
 
 MAINTAINER=	x11@FreeBSD.org
