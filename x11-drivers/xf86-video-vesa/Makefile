@@ -6,9 +6,8 @@
 #
 
 PORTNAME=	xf86-video-vesa
-PORTVERSION=	2.3.0.20120201
+PORTVERSION=	2.3.1
 CATEGORIES=	x11-drivers
-MASTER_SITES=	LOCAL/kwm
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org vesa display driver
