@@ -13,7 +13,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Print contents of X events
 
 XORG_CAT=	app
-USE_XORG=	x11
+USE_XORG=	x11 xrandr
 
 PLIST_FILES=	bin/xev
 
