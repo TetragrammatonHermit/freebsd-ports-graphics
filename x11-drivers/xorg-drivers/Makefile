@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xorg-drivers
-PORTVERSION=	1.6.99.901
+PORTVERSION=	7.6.99
 CATEGORIES=	x11-drivers
 MASTER_SITES=	# none
 DISTFILES=	# none
