@@ -32,7 +32,10 @@ XORG_VERSION=	1.7.7
 XORG_REVISION=	4
 PLIST_SUB+=	OLD="" NEW="@comment "
 EXTRA_PATCHES+=	${FILESDIR}/extra-include_eventstr.h \
-		${FILESDIR}/extra-os-utils.c
+		${FILESDIR}/extra-os-utils.c \
+		${FILESDIR}/extra-Xserver-hw-xfree86-os-support-bsd-sparc64_video.c \
+		${FILESDIR}/extra-Xserver-os-xprintf.c \
+		${FILESDIR}/extra-servermd.h
 .endif
 
 USE_GMAKE=	yes
