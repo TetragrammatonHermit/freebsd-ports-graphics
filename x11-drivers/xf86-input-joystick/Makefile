@@ -18,7 +18,7 @@ USE_XORG=	xextproto videoproto
 MAN4=		joystick.4x
 
 .if defined(WITH_NEW_XORG)
-JOYVER=		1.6.0
+JOYVER=		1.6.1
 JOYREVISION=	0
 .else
 JOYVER=		1.5.0

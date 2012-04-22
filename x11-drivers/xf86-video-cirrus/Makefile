@@ -1,18 +1,19 @@
-# New ports collection makefile for:	xf86-video-ark
+# New ports collection makefile for:	xf86-video-cirrus
 # Date Created:				17 Feb 2006
 # Whom:					Florent Thoumie <flz@FreeBSD.org>
 #
 # $FreeBSD$
 #
 
-PORTNAME=	xf86-video-ark
-PORTVERSION=	0.7.4
+PORTNAME=	xf86-video-cirrus
+PORTVERSION=	1.4.0
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
-COMMENT=	X.Org ark display driver
+COMMENT=	X.Org cirrus display driver
 
 XORG_CAT=	driver
-USE_XORG=	xextproto videoproto
+USE_XORG=	videoproto xextproto
+MAN4=		cirrus.4x
 
 .include <bsd.port.mk>
