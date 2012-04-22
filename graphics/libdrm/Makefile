@@ -14,16 +14,12 @@ MASTER_SITES=	http://dri.freedesktop.org/libdrm/
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Userspace interface to kernel Direct Rendering Module services
 
-BUILD_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/pthread-stubs.pc:${PORTSDIR}/devel/libpthread-stubs
 LIB_DEPENDS=	pciaccess.0:${PORTSDIR}/devel/libpciaccess \
 		pthread-stubs.0:${PORTSDIR}/devel/libpthread-stubs
-RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/pthread-stubs.pc:${PORTSDIR}/devel/libpthread-stubs
 
 USE_BZIP2=	yes
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
-
-CONFIGURE_ARGS=	--enable-nouveau-experimental-api
 
 MAKE_JOBS_SAFE=	yes
 
@@ -42,7 +38,7 @@ PLIST_SUB+=	KMS="@comment "
 .endif
 
 LIBDRM_VERSION=	2.4.33
-LIBDRM_REVISION=1
+LIBDRM_REVISION=2
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 LIBDRM_VERSION=	2.4.17
@@ -52,7 +48,7 @@ PLIST_SUB+=	OLD="" NEW="@comment "
 
 pre-patch:
 	@${REINPLACE_CMD} 's|{libdir}/pkgconfig|{prefix}/libdata/pkgconfig|g; \
-			   12661s/x86_/amd/g' \
+			   11721s/x86_/amd/g' \
 		${WRKSRC}/configure
 
 .include <bsd.port.mk>
