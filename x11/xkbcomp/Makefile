@@ -17,8 +17,13 @@ LICENSE=	MIT
 XORG_CAT=	app
 USE_XORG=	x11 xkbfile
 
-PLIST_FILES=	bin/xkbcomp
+PLIST_FILES=	bin/xkbcomp \
+		libdata/pkgconfig/xkbcomp.pc
 
 MAN1=		xkbcomp.1
+
+post-patch:
+	@${REINPLACE_CMD} -e 's|[(]libdir[)]/pkgconfig|(prefix)/libdata/pkgconfig|g' \
+	    ${WRKSRC}/Makefile.in
 
 .include <bsd.port.mk>
