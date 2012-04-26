@@ -7,7 +7,7 @@
 #
 # !!! Here be dragons !!! (yeah, here as well...)
 #
-# $FreeBSD: ports/Mk/bsd.xorg.mk,v 1.14 2011/03/01 10:11:42 kwm Exp $
+# $FreeBSD: ports/Mk/bsd.xorg.mk,v 1.15 2012/04/21 17:03:16 miwi Exp $
 #
 
 .if !defined(_POSTMKINCLUDED) && !defined(Xorg_Pre_Include)
