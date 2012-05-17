@@ -22,10 +22,11 @@ USE_XORG=	xvmc xineramaproto xextproto x11 xf86driproto glproto
 MAN4=		intel.4x
 
 .if defined(WITH_NEW_XORG)
-INTEL_VERSION=	2.18.0
+INTEL_VERSION=	2.19.0
 INTEL_REVISION=	0
 MAKE_JOBS_UNSAFE=yes
 PLIST_SUB+=	OLD="@comment "
+EXTRA_PATCHES+=	${PATCHDIR}/extra-i915kms
 .else
 INTEL_VERSION=	2.7.1
 INTEL_REVISION=	4
