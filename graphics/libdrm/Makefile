@@ -25,7 +25,7 @@ MAKE_JOBS_SAFE=	yes
 
 .if defined(WITH_NEW_XORG)
 
-OPTIONS=	KMS "Enable KMS support (very experimental)" off
+OPTIONS=	KMS "Enable KMS support" off
 
 .include <bsd.port.options.mk>
 
@@ -38,7 +38,7 @@ PLIST_SUB+=	KMS="@comment "
 .endif
 
 LIBDRM_VERSION=	2.4.34
-LIBDRM_REVISION=0
+LIBDRM_REVISION=1
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 LIBDRM_VERSION=	2.4.17
@@ -48,7 +48,7 @@ PLIST_SUB+=	OLD="" NEW="@comment "
 
 pre-patch:
 	@${REINPLACE_CMD} 's|{libdir}/pkgconfig|{prefix}/libdata/pkgconfig|g; \
-			   11721s/x86_/amd/g' \
+			   s,i?86|x86_64),i?86|amd64|x86_64),g' \
 		${WRKSRC}/configure
 
 .include <bsd.port.mk>
