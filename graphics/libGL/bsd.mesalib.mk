@@ -20,7 +20,7 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_XORG)
-MESABASEVERSION=	8.0.2
+MESABASEVERSION=	8.0.3
 # if there is a subversion, include the '-' between 7.11-rc2 for example.
 MESASUBVERSION=		
 PLIST_SUB+=	OLD="@comment " NEW=""
