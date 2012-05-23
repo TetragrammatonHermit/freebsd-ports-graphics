@@ -6,14 +6,13 @@
 #
 
 PORTNAME=	libGLw
-PORTVERSION=	1.0.0
+PORTVERSION=	8.0.0
 CATEGORIES=	graphics
-MASTER_SITES=	LOCAL/kwm
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/glw/
 DISTNAME=	glw-${PORTVERSION}
-# when offical released. Set PORTEPOCH if needed and remove DIST_SUBDIR
-#PORTEPOCH=	1
 DIST_SUBDIR=	GL
 
+MAINTAINER=	x11@FreeBSD.org
 COMMENT=	OpenGL widgets library
 
 USE_BZIP2=	yes
