@@ -15,8 +15,10 @@ COMMENT=	X Window System initializer
 
 LICENSE=	MIT
 
+BUILD_DEPENDS=	ucpp:${PORTSDIR}/devel/ucpp
 XORG_CAT=	app
 USE_XORG=	x11
+CONFIGURE_ENV+=	RAWCPP="${LOCALBASE}/bin/ucpp"
 
 PLIST_FILES=	bin/startx bin/xinit lib/X11/xinit/xinitrc
 PLIST_DIRS=	lib/X11/xinit

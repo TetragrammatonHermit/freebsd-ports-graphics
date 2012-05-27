@@ -14,10 +14,12 @@ COMMENT=	X.Org sis display driver
 
 CONFLICTS=	xf86-video-sis-intel-[0-9]*
 
+BUILD_DEPENDS=	ucpp:${PORTSDIR}/devel/ucpp
 USE_GL=		gl
 
 XORG_CAT=	driver
 USE_XORG=	xf86dgaproto xf86driproto xineramaproto videoproto xf86miscproto xextproto glproto
 MAN4=		sis.4x
+CONFIGURE_ENV+=	RAWCPP="${LOCALBASE}/bin/ucpp"
 
 .include <bsd.port.mk>

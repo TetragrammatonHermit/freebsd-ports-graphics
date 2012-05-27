@@ -13,9 +13,11 @@ CATEGORIES=	x11-toolkits
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X Toolkit library
 
+BUILD_DEPENDS=	ucpp:${PORTSDIR}/devel/ucpp
 XORG_CAT=	lib
 USE_XORG=	x11 sm xproto:both kbproto
 CONFIGURE_ARGS=	--disable-specs
+CONFIGURE_ENV+=	RAWCPP="${LOCALBASE}/bin/ucpp"
 
 MAN3=	MenuPopdown.3 \
 	MenuPopup.3 \
