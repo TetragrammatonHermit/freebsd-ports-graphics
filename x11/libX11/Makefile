@@ -26,7 +26,7 @@ USE_XORG=	bigreqsproto xau xcmiscproto xdmcp xextproto xtrans \
 CONFIGURE_ARGS+=	--datadir=${PREFIX}/lib \
 			--without-xmlto \
 			--disable-specs
-CONFIGURE_ENV+=	RAWCPP="${LOCALBASE}/bin/ucpp ac_cv_path_PS2PDF=""
+CONFIGURE_ENV+=	RAWCPP="${LOCALBASE}/bin/ucpp" ac_cv_path_PS2PDF=""
 
 .include "${.CURDIR}/manpages"
 
