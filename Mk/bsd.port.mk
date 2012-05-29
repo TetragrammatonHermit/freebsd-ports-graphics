@@ -1,7 +1,7 @@
-#-*- mode: makefile; tab-width: 4; -*-
+#-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: ports/Mk/bsd.port.mk,v 1.708 2012/03/13 08:14:45 zi Exp $
+# $FreeBSD: ports/Mk/bsd.port.mk,v 1.717 2012/05/29 16:55:02 bapt Exp $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -234,7 +234,9 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  $PATH (if it is an executable) and go into "dir" to do
 #				  a "make all install" if it's not found.  If the third
 #				  field ("target") exists, it will be used instead of
-#				  ${DEPENDS_TARGET}.
+#				  ${DEPENDS_TARGET}.  The first field also supports a
+#				  package name with a version range, in the form package>=1.2
+#				  if a particular version is desired.
 # PATCH_DEPENDS	- A list of "path:dir[:target]" tuples of other ports this
 #				  package depends on in the "patch" stage.  "path" is the
 #				  name of a file if it starts with a slash (/), an
@@ -243,7 +245,9 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  $PATH (if it is an executable) and go into "dir" to do
 #				  a "make all install" if it's not found.  If the third
 #				  field ("target") exists, it will be used instead of
-#				  ${DEPENDS_TARGET}.
+#				  ${DEPENDS_TARGET}.  The first field also supports a
+#				  package name with a version range, in the form package>=1.2
+#				  if a particular version is desired.
 # FETCH_DEPENDS	- A list of "path:dir[:target]" tuples of other ports this
 #				  package depends in the "fetch" stage.  "path" is the
 #				  name of a file if it starts with a slash (/), an
@@ -252,7 +256,9 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  it in your $PATH (if it is an executable) and go
 #				  into "dir" to do a "make all install" if it's not
 #				  found.  If the third field ("target") exists, it will
-#				  be used instead of ${DEPENDS_TARGET}.
+#				  be used instead of ${DEPENDS_TARGET}.  The first field
+#				  also supports a package name with a version range, in
+#				  the form package>=1.2 if a particular version is desired.
 # BUILD_DEPENDS	- A list of "path:dir[:target]" tuples of other ports this
 #				  package depends to build (between the "extract" and
 #				  "build" stages, inclusive).  The test done to
@@ -266,7 +272,9 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  "install" stage and the name of the dependency will
 #				  be put into the package as well.  If the third field
 #				  ("target") exists, it will be used instead of
-#				  ${DEPENDS_TARGET}.
+#				  ${DEPENDS_TARGET}.  The first field also supports a
+#				  package name with a version range, in the form package>=1.2
+#				  if a particular version is desired.
 # LIB_DEPENDS	- A list of "lib:dir[:target]" tuples of other ports this
 #				  package depends on.  "lib" is the name of a shared library.
 #				  make will use "ldconfig -r" to search for the library.
@@ -452,14 +460,19 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # USE_KDELIBS_VER		- Set to 3 to use the KDE libraries.
 #				  Implies inclusion of bsd.kde.mk.
 #
-# USE_KDE4			- A list of the KDE4 dependencies the port has (e.g.,
+# USE_KDE4		- A list of the KDE4 dependencies the port has (e.g.,
 #				  kdelibs, kdebase).  Implies that the port needs KDE.
 #				  Implies inclusion of bsd.kde4.mk.  See bsd.kde4.mk
 #				  for more details.
 #
-# USE_QT_VER			- Set to 3 or 4 to use the respective version
-#				  of the QT libraries.
-#				  Implies inclusion of bsd.kde.mk.
+# USE_QT_VER	- Set to 3 or 4 to use the respective version
+#				  of the Qt libraries.
+#				  Implies inclusion of bsd.kde.mk or bsd.qt.mk.
+#
+# USE_QT4		- A list of the QT4 dependencies the port has (e.g,
+#				  corelib, webkit).  Implies that the port needs Qt.
+#				  Implies the inclusion of bsd.qt.mk.  See bsd.qt.mk
+#				  for more details.
 #
 # USE_LINUX		- Set to yes to say the port needs the default linux base port.
 #				  Set to value <X>, if the port needs emulators/linux_base-<X>.
@@ -679,7 +692,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  installed.
 #				  Useful for dynamically generated examples.
 #
-# Set the following to specify all documentation your port installs into
+# Set the following to specify all files and directories your port installs into
 # ${DATADIR}
 #
 # PORTDATA		- A list of files and directories relative to DATADIR.
@@ -1254,46 +1267,6 @@ UNIQUENAME?=	${LATEST_LINK}
 .else
 UNIQUENAME?=	${PKGNAMEPREFIX}${PORTNAME}
 .endif
-OPTIONSFILE?=	${PORT_DBDIR}/${UNIQUENAME}/options
-.if defined(OPTIONS)
-# include OPTIONSFILE first if exists
-.	if exists(${OPTIONSFILE}) && !make(rmconfig)
-.	include "${OPTIONSFILE}"
-.	endif
-.	if exists(${OPTIONSFILE}.local)
-.	include "${OPTIONSFILE}.local"
-.	endif
-WITHOUT:=
-WITH:=
-.	if defined(OPTIONS)
-REALOPTIONS=${OPTIONS:C/".*"//g}
-.	for O in ${REALOPTIONS}
-RO:=${O}
-.	if ${RO:L} == off
-WITHOUT:=	${WITHOUT} ${OPT}
-.	endif
-.	if ${RO:L} == on
-WITH:=		${WITH} ${OPT}
-.	endif
-OPT:=${RO}
-.	endfor
-.	endif
-# define only if NO WITH/WITHOUT_${W} is defined
-.	for W in ${WITH}
-.   if !defined(WITH_${W}) && !defined(WITHOUT_${W})
-WITH_${W}:=	true
-.   endif
-.	endfor
-.	for W in ${WITHOUT}
-.   if !defined(WITH_${W}) && !defined(WITHOUT_${W})
-WITHOUT_${W}:=	true
-.   endif
-.	endfor
-.	undef WITH
-.	undef WITHOUT
-.	undef RO
-.	undef REALOPTIONS
-.endif
 
 .endif
 
@@ -1317,6 +1290,7 @@ CONFIGURE_ENV+=	TMPDIR="${TMPDIR}"
 STRIP=	#none
 .endif
 
+.include "${PORTSDIR}/Mk/bsd.options.mk"
 
 # Start of pre-makefile section.
 .if !defined(AFTERPORTMK) && !defined(INOPTIONSMK)
@@ -1466,7 +1440,7 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 .include "${PORTSDIR}/Mk/bsd.kde.mk"
 .endif
 
-.if defined (USE_QT_VER) && ${USE_QT_VER:L} == 4
+.if defined(USE_QT_VER) && ${USE_QT_VER:L} == 4 || defined(USE_QT4)
 .include "${PORTSDIR}/Mk/bsd.qt.mk"
 .endif
 
@@ -2027,7 +2001,7 @@ IGNORE=	uses unknown USE_BISON construct
 .include "${PORTSDIR}/Mk/bsd.linux-apps.mk"
 .endif
 
-.if defined (USE_QT_VER) && ${USE_QT_VER:L} == 4
+.if defined(USE_QT_VER) && ${USE_QT_VER:L} == 4 || defined(USE_QT4)
 .include "${PORTSDIR}/Mk/bsd.qt.mk"
 .endif
 
@@ -4279,7 +4253,7 @@ _CHROOT_SEQ=
 _SANITY_SEQ=	${_CHROOT_SEQ} pre-everything check-makefile \
 				check-categories check-makevars check-desktop-entries \
 				check-depends identify-install-conflicts check-deprecated \
-				check-vulnerable check-license buildanyway-message \
+				check-vulnerable check-license check-config buildanyway-message \
 				options-message
 
 _PKG_DEP=		check-sanity
@@ -4469,7 +4443,7 @@ checkpatch:
 .if !target(reinstall)
 reinstall:
 	@${RM} -f ${INSTALL_COOKIE} ${PACKAGE_COOKIE}
-	@cd ${.CURDIR} && DEPENDS_TARGET="${DEPENDS_TARGET}" ${MAKE} install
+	@cd ${.CURDIR} && DEPENDS_TARGET="${DEPENDS_TARGET}" ${MAKE} -DFORCE_PKG_REGISTER install
 .endif
 
 # Deinstall
@@ -5665,9 +5639,6 @@ generate-plist:
 	done
 	@${ECHO_CMD} '@cwd ${PREFIX}' >> ${TMPPLIST}
 .endif
-	@for i in $$(${ECHO_CMD} ${__MANPAGES} ${_TMLINKS:M${_PREFIX}*:S|^${_PREFIX}/||} ' ' | ${SED} -E -e 's|man([1-9ln])/([^/ ]+) |cat\1/\2 |g'); do \
-		${ECHO_CMD} "@unexec rm -f %D/$$i %D/$${i%.gz} %D/$${i%.bz2} %D/$$i.gz %D/$$i.bz2" >> ${TMPPLIST}; \
-	done
 .endfor
 	@if [ -f ${PLIST} ]; then \
 		${SED} ${PLIST_SUB:S/$/!g/:S/^/ -e s!%%/:S/=/%%!/} ${PLIST} >> ${TMPPLIST}; \
@@ -5959,9 +5930,108 @@ tags:
 	SYSTEMVERSION="${SYSTEMVERSION:S/"/"'"'"/g:S/\$/\$\$/g:S/\\/\\\\/g}"
 .endif
 
+.if !target(pre-check-config)
+pre-check-config:
+.for single in ${OPTIONS_SINGLE}
+.  for opt in ${OPTIONS_SINGLE_${single}}
+.    if empty(ALL_OPTIONS:M${single}) || !empty(PORT_OPTIONS:M${single})
+.      if !empty(PORT_OPTIONS:M${opt})
+.        if defined(OPTFOUND)
+OPTIONS_WRONG_SINGLE+=	${single}
+.        else
+OPTFOUND=	true
+.        endif
+.      endif
+.    else
+# if conditional and if the condition is unchecked, remove opt from the list of
+# set options
+PORT_OPTIONS:=	${PORT_OPTIONS:N${opt}}
+OPTNOCHECK=	true
+.    endif
+.  endfor
+.  if !defined(OPTFOUND) && !defined(OPTNOCHECK)
+OPTIONS_WRONG_SINGLE+=	${single}
+.  endif
+.  undef OPTFOUND
+.  undef OPTNOCHECK
+.endfor
+.undef single
+
+.for multi in ${OPTIONS_MULTI}
+.  for opt in ${OPTIONS_MULTI_${multi}}
+.    if empty(ALL_OPTIONS:M${multi}) || !empty(PORT_OPTIONS:M${multi})
+.      if !empty(PORT_OPTIONS:M${opt})
+OPTFOUND=	true
+.      endif
+.    else
+# if conditional and if the condition is unchecked, remove opt from the list of
+# set options
+PORT_OPTIONS:=	${PORT_OPTIONS:N${opt}}
+OPTNOCHECK=	true
+.    endif
+.  endfor
+.  if !defined(OPTFOUND) && !defined(OPTNOCHECK)
+OPTIONS_WRONG_MULTI+=	${opt}
+.  endif
+.  undef OPTFOUND
+.  undef OPTNOCHECK
+.endfor
+.undef multi
+.undef opt
+.endif #pre-check-config
+
+.if !target(check-config)
+check-config: pre-check-config
+.for multi in ${OPTIONS_WRONG_MULTI}
+	@${ECHO_MSG} "====> You must check at least one option in the ${multi} multi"
+	@exit 1
+.endfor
+.for single in ${OPTIONS_WRONG_SINGLE}
+	@${ECHO_MSG} "====> You must select one and only one option from the ${single} single"
+	@exit 1
+.endfor
+.endif # check-config
+
+.if !target(pre-config)
+pre-config:
+_COMPLETE_OPTIONS_LIST:=	${ALL_OPTIONS}
+.for opt in ${ALL_OPTIONS}
+.  if empty(PORT_OPTIONS:M${opt})
+DEFOPTIONS+=	${opt} "${${opt}_DESC:S|"||g:S|'| |g}" off
+.  else
+DEFOPTIONS+=	${opt} "${${opt}_DESC:S|"||g:S|'| |g}" on
+.  endif
+.endfor
+.for multi in ${OPTIONS_MULTI}
+.  for opt in ${OPTIONS_MULTI_${multi}}
+_COMPLETE_OPTIONS_LIST+=	${opt}
+.    if empty(PORT_OPTIONS:M${opt})
+DEFOPTIONS+=	${opt} "M(${multi}): ${${opt}_DESC}" off
+.    else
+DEFOPTIONS+=    ${opt} "M(${multi}): ${${opt}_DESC}" on
+.    endif
+.  endfor
+.endfor
+.for single in ${OPTIONS_SINGLE}
+.  for opt in ${OPTIONS_SINGLE_${single}}
+_COMPLETE_OPTIONS_LIST+=	${opt}
+.    if empty(PORT_OPTIONS:M${opt})
+DEFOPTIONS+=	${opt} "S(${single}): ${${opt}_DESC}" off
+.    else
+DEFOPTIONS+=	${opt} "S(${single}): ${${opt}_DESC}" on
+.    endif
+.  endfor
+.endfor
+
+_COMPLETE_OPTIONS_LIST:=	${_COMPLETE_OPTIONS_LIST:u}
+.undef multi
+.undef single
+.undef opt
+.endif # pre-config
+
 .if !target(config)
-config:
-.if !defined(OPTIONS)
+config: pre-config
+.if empty(ALL_OPTIONS) && empty(OPTIONS_SINGLE) && empty(OPTIONS_MULTI)
 	@${ECHO_MSG} "===> No options to configure"
 .else
 .if ${UID} != 0 && !defined(INSTALL_AS_USER)
@@ -5973,56 +6043,31 @@ config:
 .else
 	@(optionsdir=${OPTIONSFILE}; optionsdir=$${optionsdir%/*}; \
 	${MKDIR} $${optionsdir} 2> /dev/null) || \
-		(${ECHO_MSG} "===> Cannot create $${optionsdir}, check permissions"; exit 1)
+	(${ECHO_MSG} "===> Cannot create $${optionsdir}, check permissions"; exit 1)
 .endif
-	-@if [ -e ${OPTIONSFILE} ]; then \
-		. ${OPTIONSFILE}; \
-	fi; \
-	set -- ${OPTIONS} XXX; \
-	while [ $$# -gt 3 ]; do \
-		OPTIONSLIST="$${OPTIONSLIST} $$1"; \
-		defaultval=$$3; \
-		withvar=WITH_$$1; \
-		withoutvar=WITHOUT_$$1; \
-		withval=$$(eval ${ECHO_CMD} $$\{$${withvar}\}); \
-		withoutval=$$(eval ${ECHO_CMD} $$\{$${withoutvar}\}); \
-		if [ ! -z "$${withval}" ]; then \
-			val=on; \
-		elif [ ! -z "$${withoutval}" ]; then \
-			val=off; \
-		else \
-			val=$${defaultval}; \
-		fi; \
-		DEFOPTIONS="$${DEFOPTIONS} $$1 \"$$2\" $${val}"; \
-		shift 3; \
-	done; \
-	TMPOPTIONSFILE=$$(mktemp -t portoptions); \
+	@TMPOPTIONSFILE=$$(mktemp -t portoptions); \
 	trap "${RM} -f $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
-	${SH} -c "${DIALOG} --checklist \"Options for ${PKGNAME:C/-([^-]+)$/ \1/}\" 21 70 15 $${DEFOPTIONS} 2> $${TMPOPTIONSFILE}"; \
-	status=$$?; \
-	if [ $${status} -ne 0 ] ; then \
+	${SH} -c '${DIALOG} --checklist "Options for ${PKGNAME:C/-([^-]+)$/ \1/}" 21 70 15 ${DEFOPTIONS}' 2> $${TMPOPTIONSFILE} || { \
 		${RM} -f $${TMPOPTIONSFILE}; \
 		${ECHO_MSG} "===> Options unchanged"; \
 		exit 0; \
-	fi; \
-	if [ ! -e ${TMPOPTIONSFILE} ]; then \
+	}; \
+	if [ ! -e $${TMPOPTIONSFILE} ]; then \
 		${ECHO_MSG} "===> No user-specified options to save for ${PKGNAME}"; \
 		exit 0; \
 	fi; \
 	SELOPTIONS=$$(${CAT} $${TMPOPTIONSFILE}); \
-	${RM} -f $${TMPOPTIONSFILE}; \
 	TMPOPTIONSFILE=$$(mktemp -t portoptions); \
 	trap "${RM} -f $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
 	${ECHO_CMD} "# This file is auto-generated by 'make config'." > $${TMPOPTIONSFILE}; \
-	${ECHO_CMD} "# No user-servicable parts inside!" >> $${TMPOPTIONSFILE}; \
 	${ECHO_CMD} "# Options for ${PKGNAME}" >> $${TMPOPTIONSFILE}; \
 	${ECHO_CMD} "_OPTIONS_READ=${PKGNAME}" >> $${TMPOPTIONSFILE}; \
-	for i in $${OPTIONSLIST}; do \
-		${ECHO_CMD} $${SELOPTIONS} | ${GREP} -qw $${i}; \
-		if [ $$? -eq 0 ]; then \
-			${ECHO_CMD} WITH_$${i}=true >> $${TMPOPTIONSFILE}; \
+	${ECHO_CMD} "_FILE_COMPLETE_OPTIONS_LIST=${_COMPLETE_OPTIONS_LIST}" >> $${TMPOPTIONSFILE}; \
+	for i in ${_COMPLETE_OPTIONS_LIST}; do \
+		if ${ECHO_CMD} $${SELOPTIONS} | ${GREP} -qw $${i}; then \
+			${ECHO_CMD} "OPTIONS_FILE_SET+=$${i}" >> $${TMPOPTIONSFILE}; \
 		else \
-			${ECHO_CMD} WITHOUT_$${i}=true >> $${TMPOPTIONSFILE}; \
+			${ECHO_CMD} "OPTIONS_FILE_UNSET+=$${i}" >> $${TMPOPTIONSFILE}; \
 		fi; \
 	done; \
 	if [ ${UID} != 0 -a "x${INSTALL_AS_USER}" = "x" ]; then \
@@ -6034,7 +6079,7 @@ config:
 	fi; \
 	${RM} -f $${TMPOPTIONSFILE}
 .endif
-.endif
+.endif # config
 
 .if !target(config-recursive)
 config-recursive:
@@ -6042,68 +6087,69 @@ config-recursive:
 	@for dir in ${.CURDIR} $$(${ALL-DEPENDS-LIST}); do \
 		(cd $$dir; ${MAKE} config-conditional); \
 	done
-.endif
+.endif # config-recursive
 
 .if !target(config-conditional)
-config-conditional:
-.if defined(OPTIONS)
-.if exists(${OPTIONSFILE})
-# scan saved options and invalidate them, if the set of options does not match
-	@. ${OPTIONSFILE}; \
-	set ${OPTIONS} XXX; \
-	while [ $$# -gt 3 ]; do \
-		withvar=WITH_$$1; \
-		withoutvar=WITHOUT_$$1; \
-		withval=$$(eval ${ECHO_CMD} $$\{$${withvar}\}); \
-		withoutval=$$(eval ${ECHO_CMD} $$\{$${withoutvar}\}); \
-		if [ ! -z "$${withval}" ]; then \
-			val=on; \
-		elif [ ! -z "$${withoutval}" ]; then \
-			val=off; \
-		else \
-			val=missing; \
-		fi; \
-		if [ "$${val}" = "missing" ]; then \
-			OPTIONS_INVALID=yes; \
-		fi; \
-		shift 3; \
-	done; \
-	if [ "$${OPTIONS_INVALID}" = "yes" ]; then \
-		cd ${.CURDIR} && ${MAKE} config; \
-	fi;
-.else
+config-conditional: pre-config
+.if defined(_COMPLETE_OPTIONS_LIST) && !defined(NO_DIALOG)
+.  if ${_COMPLETE_OPTIONS_LIST} != "${_FILE_COMPLETE_OPTIONS_LIST}"
 	cd ${.CURDIR} && ${MAKE} config;
+.  endif
 .endif
-.endif
-.endif
+.endif # config-conditional
 
 .if !target(showconfig)
+.include "${PORTSDIR}/Mk/bsd.options.desc.mk"
 showconfig:
-.if defined(OPTIONS)
-	@${ECHO_MSG} "===> The following configuration options are available for ${PKGNAME}:"
-	-@if [ -e ${OPTIONSFILE} ]; then \
-		. ${OPTIONSFILE}; \
-	fi; \
-	set -- ${OPTIONS} XXX; \
-	while [ $$# -gt 3 ]; do \
-		defaultval=$$3; \
-		withvar=WITH_$$1; \
-		withoutvar=WITHOUT_$$1; \
-		withval=$$(eval ${ECHO_CMD} $$\{$${withvar}\}); \
-		withoutval=$$(eval ${ECHO_CMD} $$\{$${withoutvar}\}); \
-		if [ ! -z "$${withval}" ]; then \
-			val=on; \
-		elif [ ! -z "$${withoutval}" ]; then \
-			val=off; \
-		else \
-			val="$${defaultval} (default)"; \
-		fi; \
-		${ECHO_MSG} "     $$1=$${val} \"$$2\""; \
-		shift 3; \
-	done
+	@${ECHO_MSG} "===> The following configuration options are available for ${PKGNAME}":
+.for opt in ${ALL_OPTIONS}
+.  if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "     ${opt}=off"
+.  else
+	@${ECHO_MSG} -n "     ${opt}=on"
+.  endif
+.  if !empty(${opt}_DESC)
+	@${ECHO_MSG} -n ": "${${opt}_DESC}
+.  endif
+	@${ECHO_MSG} ""
+.endfor
+#multi and conditional multis
+.for multi in ${OPTIONS_MULTI}
+	@${ECHO_MSG} "====> Options available for the multi ${multi}: you have to choose at least one of them"
+.  for opt in ${OPTIONS_MULTI_${multi}}
+.    if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "     ${opt}=off"
+.    else
+	@${ECHO_MSG} -n "     ${opt}=on"
+.    endif
+.    if !empty(${opt}_DESC)
+	@${ECHO_MSG} -n ": "${${opt}_DESC}
+.    endif
+	@${ECHO_MSG} ""
+.  endfor
+.endfor
+#single and conditional singles
+
+.for single in ${OPTIONS_SINGLE}
+	@${ECHO_MSG} "====> Options available for the single ${single}: you have to select exactly one of them"
+.  for opt in ${OPTIONS_SINGLE_${single}}
+.    if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "     ${opt}=off"
+.    else
+	@${ECHO_MSG} -n "     ${opt}=on"
+.    endif
+.    if !empty(${opt}_DESC)
+	@${ECHO_MSG} -n ": "${${opt}_DESC}
+.    endif
+	@${ECHO_MSG} ""
+.  endfor
+.endfor
+
+.undef multi
+.undef single
+.undef opt
 	@${ECHO_MSG} "===> Use 'make config' to modify these settings"
-.endif
-.endif
+.endif # showconfig
 
 .if !target(showconfig-recursive)
 showconfig-recursive:
@@ -6111,7 +6157,7 @@ showconfig-recursive:
 	@for dir in ${.CURDIR} $$(${ALL-DEPENDS-LIST}); do \
 		(cd $$dir; ${MAKE} showconfig); \
 	done
-.endif
+.endif # showconfig-recursive
 
 .if !target(rmconfig)
 rmconfig:
@@ -6125,12 +6171,12 @@ rmconfig:
 		${ECHO_MSG} "===> Returning to user credentials"; \
 	else \
 		${RM} -f ${OPTIONSFILE}; \
-		${RMDIR} $${optionsdir}; \
+		${RMDIR} $${optionsdir} || return 0; \
 	fi
 .else
 	@${ECHO_MSG} "===> No user-specified options configured for ${PKGNAME}"
 .endif
-.endif
+.endif # rmconfig
 
 .if !target(rmconfig-recursive)
 rmconfig-recursive:
@@ -6138,7 +6184,44 @@ rmconfig-recursive:
 	@for dir in ${.CURDIR} $$(${ALL-DEPENDS-LIST}); do \
 		(cd $$dir; ${MAKE} rmconfig); \
 	done
-.endif
+.endif # rmconfig-recursive
+
+.if !target(pretty-print-config)
+pretty-print-config:
+.for opt in ${ALL_OPTIONS}
+.  if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "-${opt} "
+.  else
+	@${ECHO_MSG} -n "+${opt} "
+.  endif
+.endfor
+.for multi in ${OPTIONS_MULTI}
+	@${ECHO_MSG} -n "${multi}[ "
+.  for opt in ${OPTIONS_MULTI_${multi}}
+.    if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "-${opt} "
+.    else
+	@${ECHO_MSG} -n "+${opt} "
+.    endif
+.  endfor
+	@${ECHO_MSG} -n "] "
+.endfor
+.for single in ${OPTIONS_SINGLE}
+	@${ECHO_MSG} -n "${single}( "
+.  for opt in ${OPTIONS_SINGLE_${single}}
+.    if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "-${opt} "
+.    else
+	@${ECHO_MSG} -n "+${opt} "
+.    endif
+.  endfor
+	@${ECHO_MSG} -n ") "
+.endfor
+.undef multi
+.undef single
+.undef opt
+	@${ECHO_MSG} ""
+.endif # pretty-print-config
 
 desktop-categories:
 	@categories=""; \
