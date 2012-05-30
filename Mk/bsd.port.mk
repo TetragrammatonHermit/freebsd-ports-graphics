@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: ports/Mk/bsd.port.mk,v 1.717 2012/05/29 16:55:02 bapt Exp $
+# $FreeBSD: ports/Mk/bsd.port.mk,v 1.718 2012/05/30 09:55:54 bapt Exp $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -6093,7 +6093,7 @@ config-recursive:
 config-conditional: pre-config
 .if defined(_COMPLETE_OPTIONS_LIST) && !defined(NO_DIALOG)
 .  if ${_COMPLETE_OPTIONS_LIST} != "${_FILE_COMPLETE_OPTIONS_LIST}"
-	cd ${.CURDIR} && ${MAKE} config;
+	@cd ${.CURDIR} && ${MAKE} config;
 .  endif
 .endif
 .endif # config-conditional
