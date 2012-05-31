@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: ports/Mk/bsd.port.mk,v 1.723 2012/05/31 07:35:44 bapt Exp $
+# $FreeBSD: ports/Mk/bsd.port.mk,v 1.724 2012/05/31 14:27:23 bapt Exp $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -5971,7 +5971,7 @@ OPTNOCHECK=	true
 .    endif
 .  endfor
 .  if !defined(OPTFOUND) && !defined(OPTNOCHECK)
-OPTIONS_WRONG_MULTI+=	${opt}
+OPTIONS_WRONG_MULTI+=	${multi}
 .  endif
 .  undef OPTFOUND
 .  undef OPTNOCHECK
