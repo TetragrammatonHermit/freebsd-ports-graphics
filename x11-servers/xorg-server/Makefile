@@ -18,6 +18,7 @@ COMMENT?=	X.Org X server and related programs
 
 LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm
 
+BUILD_DEPENDS=	ucpp:${PORTSDIR}/devel/ucpp
 RUN_DEPENDS=	ucpp:${PORTSDIR}/devel/ucpp \
 		xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 		xkbcomp:${PORTSDIR}/x11/xkbcomp
