@@ -14,7 +14,7 @@ COMMENT=	Create an X cursor file from a collection of PNG images
 
 LICENSE=	MIT
 
-LIB_DEPENDS=	png.6:${PORTSDIR}/graphics/png
+LIB_DEPENDS=	png.15:${PORTSDIR}/graphics/png
 
 XORG_CAT=	app
 USE_XORG=	x11 xcursor xextproto
