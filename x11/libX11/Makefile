@@ -15,8 +15,7 @@ COMMENT=	X11 library
 
 LICENSE=	MIT
 
-BUILD_DEPENDS+=	ucpp:${PORTSDIR}/devel/ucpp \
-		${LOCALBASE}/libdata/pkgconfig/xcb.pc:${PORTSDIR}/x11/libxcb \
+BUILD_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/xcb.pc:${PORTSDIR}/x11/libxcb \
 		${LOCALBASE}/share/aclocal/xorg-macros.m4:${PORTSDIR}/devel/xorg-macros
 RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/xcb.pc:${PORTSDIR}/x11/libxcb
 
@@ -26,7 +25,7 @@ USE_XORG=	bigreqsproto xau xcmiscproto xdmcp xextproto xtrans \
 CONFIGURE_ARGS+=	--datadir=${PREFIX}/lib \
 			--without-xmlto \
 			--disable-specs
-CONFIGURE_ENV+=	RAWCPP="${LOCALBASE}/bin/ucpp" ac_cv_path_PS2PDF=""
+CONFIGURE_ENV+=	ac_cv_path_PS2PDF=""
 
 .include "${.CURDIR}/manpages"
 

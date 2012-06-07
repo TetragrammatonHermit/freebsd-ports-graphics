@@ -18,9 +18,7 @@ COMMENT?=	X.Org X server and related programs
 
 LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm
 
-BUILD_DEPENDS=	ucpp:${PORTSDIR}/devel/ucpp
-RUN_DEPENDS=	ucpp:${PORTSDIR}/devel/ucpp \
-		xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
+RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 		xkbcomp:${PORTSDIR}/x11/xkbcomp
 
 XORG_CAT=	xserver
@@ -57,7 +55,6 @@ CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
 		--enable-record=yes
-CONFIGURE_ENV+=	RAWCPP="${LOCALBASE}/bin/ucpp"
 
 .if !defined(SLAVE_PORT)
 MAN1=		Xorg.1 \
@@ -94,7 +91,7 @@ OPTIONS_DEFAULT:=	${OPTIONS_DEFAULT:NHAL}
 # The reason why I use this is cause openssl from base doesn't install a .pc file
 # and configure will fail trying to find it. Setting both of those variables to
 # a *non-empty* value by-passes the pkg-config check.
-CONFIGURE_ENV+=	SHA1_LIB="-L/usr/lib -lcrypto" SHA1_CFLAGS="-I/usr/include"
+CONFIGURE_ENV=	SHA1_LIB="-L/usr/lib -lcrypto" SHA1_CFLAGS="-I/usr/include"
 .endif
 
 .if ${PORT_OPTIONS:MHAL}
