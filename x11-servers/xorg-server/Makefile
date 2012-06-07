@@ -25,7 +25,7 @@ RUN_DEPENDS=	ucpp:${PORTSDIR}/devel/ucpp \
 XORG_CAT=	xserver
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.12.1
+XORG_VERSION=	1.12.2
 XORG_REVISION=	0
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
