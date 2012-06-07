@@ -1,4 +1,5 @@
-%%OLD%%include/drm/drm.h%%OLD%%include/drm/drm_mode.h
+%%OLD%%include/drm/drm.h
+%%OLD%%include/drm/drm_mode.h
 %%OLD%%include/drm/drm_sarea.h
 %%OLD%%include/drm/i915_drm.h
 %%OLD%%include/drm/mach64_drm.h
