@@ -1,5 +1,4 @@
-%%OLD%%include/drm/drm.h
-%%OLD%%include/drm/drm_mode.h
+%%OLD%%include/drm/drm.h%%OLD%%include/drm/drm_mode.h
 %%OLD%%include/drm/drm_sarea.h
 %%OLD%%include/drm/i915_drm.h
 %%OLD%%include/drm/mach64_drm.h
@@ -32,6 +31,7 @@
 %%NEW%%include/libdrm/radeon_cs_int.h
 %%NEW%%include/libdrm/radeon_drm.h
 %%NEW%%include/libdrm/radeon_surface.h
+%%NEW%%include/libdrm/nouveau.h
 %%NEW%%include/libdrm/savage_drm.h
 %%NEW%%include/libdrm/sis_drm.h
 %%NEW%%include/libdrm/via_drm.h
@@ -47,12 +47,16 @@ lib/libdrm_intel.so.1
 %%NEW%%lib/libdrm_radeon.la
 %%NEW%%lib/libdrm_radeon.so
 %%NEW%%lib/libdrm_radeon.so.1
+%%NEW%%lib/libdrm_nouveau.la
+%%NEW%%lib/libdrm_nouveau.so
+%%NEW%%lib/libdrm_nouveau.so.2
 %%NEW%%%%KMS%%lib/libkms.la
 %%NEW%%%%KMS%%lib/libkms.so
 %%NEW%%%%KMS%%lib/libkms.so.1
 libdata/pkgconfig/libdrm.pc
 libdata/pkgconfig/libdrm_intel.pc
 %%NEW%%libdata/pkgconfig/libdrm_radeon.pc
+%%NEW%%libdata/pkgconfig/libdrm_nouveau.pc
 %%NEW%%%%KMS%%libdata/pkgconfig/libkms.pc
 %%NEW%%%%KMS%%@dirrm include/libkms
 %%NEW%%@dirrm include/libdrm
