@@ -10,14 +10,14 @@ PORTVERSION=	${XORG_VERSION}
 PORTREVISION?=	${XORG_REVISION}
 PORTEPOCH?=	1
 CATEGORIES=	x11-servers
-MASTER_SITES=	http://xorg.freedesktop.org/releases/individual/xserver/
-DISTFILES=	xorg-server-${PORTVERSION}.tar.bz2
+MASTER_SITES=	XORG
+MASTER_SITE_SUBDIR=	individual/xserver
+DISTNAME=	xorg-server-${PORTVERSION}
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT?=	X.Org X server and related programs
 
 LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm
-
 RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 		xkbcomp:${PORTSDIR}/x11/xkbcomp
 
@@ -38,6 +38,7 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-include_eventstr.h \
 		${FILESDIR}/extra-servermd.h
 .endif
 
+USE_BZIP2=	yes
 USE_GMAKE=	yes
 USE_GL=		gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
@@ -86,7 +87,6 @@ OPTIONS_DEFAULT=	AIGLX SUID HAL
 OPTIONS_DEFAULT:=	${OPTIONS_DEFAULT:NHAL}
 .endif
 
-
 .if defined(WITH_OPENSSL_BASE)
 # The reason why I use this is cause openssl from base doesn't install a .pc file
 # and configure will fail trying to find it. Setting both of those variables to
@@ -95,7 +95,7 @@ CONFIGURE_ENV=	SHA1_LIB="-L/usr/lib -lcrypto" SHA1_CFLAGS="-I/usr/include"
 .endif
 
 .if ${PORT_OPTIONS:MHAL}
-LIB_DEPENDS+=	hal.1:${PORTSDIR}/sysutils/hal
+LIB_DEPENDS+=	hal:${PORTSDIR}/sysutils/hal
 CONFIGURE_ARGS+=	--enable-config-hal=yes
 .else
 CONFIGURE_ARGS+=	--enable-config-hal=no
@@ -114,10 +114,10 @@ CONFIGURE_ARGS+=--enable-install-setuid=no
 .endif
 
 .if ${ARCH} == ia64
-PLIST_SUB+=     IA64_NA="@comment "
-EXTRA_PATCHES=  ${.CURDIR}/files/extra-arch-ia64
+PLIST_SUB+=	IA64_NA="@comment "
+EXTRA_PATCHES=	${.CURDIR}/files/extra-arch-ia64
 .else
-PLIST_SUB+=     IA64_NA=""
+PLIST_SUB+=	IA64_NA=""
 .endif
 
 .if ${ARCH} == powerpc || ${ARCH} == powerpc64
