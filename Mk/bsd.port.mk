@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: ports/Mk/bsd.port.mk,v 1.728 2012/06/09 12:19:12 miwi Exp $
+# $FreeBSD: ports/Mk/bsd.port.mk,v 1.729 2012/06/15 12:04:52 bapt Exp $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -4728,12 +4728,12 @@ fetch-url-list-int:
 
 .if !target(fetch-urlall-list)
 fetch-urlall-list:
-	@LISTALL=yes ${MAKE} fetch-url-list-int
+	@cd ${.CURDIR} && LISTALL=yes ${MAKE} fetch-url-list-int
 .endif
 
 .if !target(fetch-url-list)
 fetch-url-list:
-	@${MAKE} fetch-url-list-int
+	@cd ${.CURDIR} && ${MAKE} fetch-url-list-int
 .endif
 
 # Generates patches.
@@ -6010,7 +6010,7 @@ sanity-config: _check-config
 	[Nn]|[Nn][Oo]) \
 		exit 0; \
 	esac; \
-	${MAKE} config
+	cd ${.CURDIR} && ${MAKE} config
 .endif
 .endif # sanity-config
 
@@ -6101,7 +6101,7 @@ config: pre-config
 		${CAT} $${TMPOPTIONSFILE} > ${OPTIONSFILE}; \
 	fi; \
 	${RM} -f $${TMPOPTIONSFILE}
-	@${MAKE} sanity-config
+	@cd ${.CURDIR} && ${MAKE} sanity-config
 .endif
 .endif # config
 
