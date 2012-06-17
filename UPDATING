@@ -24,7 +24,7 @@
   portmaster -r freeglut
 
   Starting with graphics/dri version 8.0. A number of older dri driver modules
-  where dropped. If you using one of the following you should consider not
+  were dropped. If you using one of the following you should consider not
   using the WITH_NEW_XORG switch.
 
   i810, mach64, mga, r128, r300, r600, savage, sis, tdfx and unichrome.  
