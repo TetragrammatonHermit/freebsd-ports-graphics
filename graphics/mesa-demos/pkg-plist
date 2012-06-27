@@ -3,7 +3,7 @@ bin/arbfslight
 bin/arbocclude
 bin/array
 bin/bezier
-bin/bitmap
+bin/bitmap_demo
 bin/bounce
 bin/brick
 bin/bump

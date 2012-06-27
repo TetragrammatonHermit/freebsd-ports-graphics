@@ -1,0 +1,46 @@
+--- src/glsl/Makefile.in.orig	2010-07-13 20:53:25.000000000 +0200
++++ src/glsl/Makefile.in	2012-06-27 15:19:03.000000000 +0200
+@@ -59,7 +59,7 @@
+ build_triplet = @build@
+ host_triplet = @host@
+ @HAVE_GLUT_TRUE@bin_PROGRAMS = array$(EXEEXT) bezier$(EXEEXT) \
+-@HAVE_GLUT_TRUE@	bitmap$(EXEEXT) brick$(EXEEXT) bump$(EXEEXT) \
++@HAVE_GLUT_TRUE@	bitmap_demo$(EXEEXT) brick$(EXEEXT) bump$(EXEEXT) \
+ @HAVE_GLUT_TRUE@	convolutions$(EXEEXT) deriv$(EXEEXT) \
+ @HAVE_GLUT_TRUE@	fragcoord$(EXEEXT) fsraytrace$(EXEEXT) \
+ @HAVE_GLUT_TRUE@	identity$(EXEEXT) linktest$(EXEEXT) \
+@@ -94,9 +94,9 @@
+ bezier_SOURCES = bezier.c
+ bezier_OBJECTS = bezier.$(OBJEXT)
+ bezier_DEPENDENCIES = ../util/libutil.la
+-bitmap_SOURCES = bitmap.c
+-bitmap_OBJECTS = bitmap.$(OBJEXT)
+-bitmap_DEPENDENCIES = ../util/libutil.la
++bitmap_demo_SOURCES = bitmap.c
++bitmap_demo_OBJECTS = bitmap.$(OBJEXT)
++bitmap_demo_DEPENDENCIES = ../util/libutil.la
+ brick_SOURCES = brick.c
+ brick_OBJECTS = brick.$(OBJEXT)
+ brick_DEPENDENCIES = ../util/libutil.la
+@@ -383,7 +383,7 @@
+ samplers_array_SOURCES = samplers.c
+ samplers_array_CFLAGS = $(AM_CFLAGS) -DSAMPLERS_ARRAY
+ array_LDADD = ../util/libutil.la
+-bitmap_LDADD = ../util/libutil.la
++bitmap_demo_LDADD = ../util/libutil.la
+ bezier_LDADD = ../util/libutil.la
+ brick_LDADD = ../util/libutil.la
+ bump_LDADD = ../util/libutil.la
+@@ -515,9 +515,9 @@
+ bezier$(EXEEXT): $(bezier_OBJECTS) $(bezier_DEPENDENCIES) 
+ 	@rm -f bezier$(EXEEXT)
+ 	$(AM_V_CCLD)$(LINK) $(bezier_OBJECTS) $(bezier_LDADD) $(LIBS)
+-bitmap$(EXEEXT): $(bitmap_OBJECTS) $(bitmap_DEPENDENCIES) 
+-	@rm -f bitmap$(EXEEXT)
+-	$(AM_V_CCLD)$(LINK) $(bitmap_OBJECTS) $(bitmap_LDADD) $(LIBS)
++bitmap_demo$(EXEEXT): $(bitmap_demo_OBJECTS) $(bitmap_demo_DEPENDENCIES) 
++	@rm -f bitmap_demo$(EXEEXT)
++	$(AM_V_CCLD)$(LINK) $(bitmap_demo_OBJECTS) $(bitmap_demo_LDADD) $(LIBS)
+ brick$(EXEEXT): $(brick_OBJECTS) $(brick_DEPENDENCIES) 
+ 	@rm -f brick$(EXEEXT)
+ 	$(AM_V_CCLD)$(LINK) $(brick_OBJECTS) $(brick_LDADD) $(LIBS)

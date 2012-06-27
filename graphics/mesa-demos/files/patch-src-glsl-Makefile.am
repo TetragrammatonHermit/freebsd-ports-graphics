@@ -1,0 +1,11 @@
+--- src/glsl/Makefile.am.orig	2012-06-27 15:11:40.000000000 +0200
++++ src/glsl/Makefile.am	2012-06-27 15:11:50.000000000 +0200
+@@ -34,7 +34,7 @@
+ bin_PROGRAMS = \
+ 	array \
+         bezier \
+-	bitmap \
++	bitmap-demo \
+ 	brick \
+ 	bump \
+ 	convolutions \
