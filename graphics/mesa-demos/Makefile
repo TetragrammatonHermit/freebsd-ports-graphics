@@ -25,7 +25,8 @@ LDFLAGS+=	-L${LOCALBASE}/lib ${PTHREAD_LIBS}
 
 DATADIR=	${PREFIX}/share/${PKGNAMEPREFIX}${PORTNAME}
 
-OPTIONS=	NVIDIA_GL	"Use NVIDIA's libraries"	off
+OPTIONS_DEFINE=	NVIDIA
+NVIDIA_DESC=	Use NVIDIA's libraries
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|-ffast-math|${FAST_MATH}|' -e 's|x86_64|amd64|' \
@@ -51,7 +52,7 @@ post-install:
 
 .include <bsd.port.pre.mk>
 
-.if defined(WITH_NVIDIA_GL)
+.if ${PORT_OPTIONS:MNVIDIA}
 CFLAGS+=	-DWITH_NVIDIA_GL=1
 .endif
 

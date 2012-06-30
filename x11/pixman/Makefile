@@ -18,11 +18,11 @@ USE_PERL5_BUILD=yes
 USE_GNOME=	ltverhack:9
 CONFIGURE_ARGS=	--disable-gtk
 
-OPTIONS=	SIMD "Enable SIMD features autodetection (MMX, SSE2, VMX)" off
+OPTIONS_DEFINE=	SIMD
 
 .include <bsd.port.pre.mk>
 
-.if defined(WITHOUT_SIMD)
+.if empty(${PORT_OPTIONS:MSIMD})
 CONFIGURE_ARGS=	--disable-vmx --disable-arm-simd
 . if ! ${MACHINE_CPU:Mmmx}
 CONFIGURE_ARGS+=	--disable-mmx

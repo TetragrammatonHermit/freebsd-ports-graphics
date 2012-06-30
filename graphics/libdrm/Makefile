@@ -25,11 +25,13 @@ MAKE_JOBS_SAFE=	yes
 
 .if defined(WITH_NEW_XORG)
 
-OPTIONS=	KMS "Enable KMS support" off
+OPTIONS_DEFINE=	KMS
+KMS_DESC=	Enable KMS support
+OPTIONS_DEFAULT=KMS
 
 .include <bsd.port.options.mk>
 
-.if defined(WITH_KMS)
+.if ${PORT_OPTIONS:MKMS}
 CONFIGURE_ARGS+=--enable-libkms
 EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c
 PLIST_SUB+=	KMS=""
