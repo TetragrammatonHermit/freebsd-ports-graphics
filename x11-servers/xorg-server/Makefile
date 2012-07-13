@@ -81,11 +81,9 @@ SUID_DESC=	Install the Xorg server with setuid bit set
 HAL_DESC=	Compile with HAL config support
 OPTIONS_DEFAULT=	AIGLX SUID HAL
 
-.include <bsd.port.pre.mk>
+OPTIONS_EXCLUDE_sparc64=	HAL
 
-.if ${ARCH} == sparc64
-OPTIONS_DEFAULT:=	${OPTIONS_DEFAULT:NHAL}
-.endif
+.include <bsd.port.pre.mk>
 
 .if defined(WITH_OPENSSL_BASE)
 # The reason why I use this is cause openssl from base doesn't install a .pc file
