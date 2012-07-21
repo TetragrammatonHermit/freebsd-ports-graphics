@@ -236,13 +236,6 @@ share/aclocal/xorg-server.m4
 %%OLD%%@dirrm lib/xorg/modules/linux
 @dirrm lib/xorg/modules
 @dirrm lib/xorg
-@dirrmtry include/X11/bitmaps
-@dirrmtry include/X11/pixmaps
-@dirrmtry lib/X11/doc
-@dirrmtry lib/X11/etc
-@dirrmtry lib/X11/xserver
-@dirrmtry lib/xorg/modules
-@dirrmtry lib/xorg
 %%NEW%%@dirrmtry share/X11/xorg.conf.d
 @dirrmtry share/X11/app-defaults
 @dirrmtry share/X11

@@ -24,7 +24,7 @@ RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 XORG_CAT=	xserver
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.12.2
+XORG_VERSION=	1.12.3
 XORG_REVISION=	0
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
@@ -156,10 +156,6 @@ post-patch:
 .if defined(WITH_NEW_XORG)
 post-install:
 	@${MKDIR} ${PREFIX}/share/X11/xorg.conf.d
-
-PLIST_SUB+=	OLD="@comment " NEW=""
-.else
-PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
 .include <bsd.port.post.mk>
