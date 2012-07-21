@@ -20,6 +20,8 @@ INPUTDIR=	${PREFIX}/lib/xorg/modules/input
 
 NO_BUILD=	yes
 
+NO_OPTIONS_SORT=yes
+
 .if !defined(ARCH)
 ARCH!=  /usr/bin/uname -p
 .endif
@@ -37,7 +39,7 @@ VIDEO_ON+=	sunffb
 VIDEO_ON+=	openchrome
 .endif
 
-.if (${ARCH} == "amd64" || ${ARCH} == "i386") && !defined(WITH_NEW_XORG)
+.if (${ARCH} == "amd64" || ${ARCH} == "i386")
 VIDEO_ON+=	intel
 .endif
 
@@ -84,7 +86,9 @@ ${type:U}_OFF:=	${${type:U}_OFF} ${B}
 .for default in on off
 . for type in input video
 .  for i in ${${type:U}_${default:U}}
-OPTIONS+=	${i:U} "Install ${i} ${type} driver" ${default}
+OPTIONS_DEFINE+=${i:U}
+${i:U}_DESC+=	Install ${i} ${type} driver
+OPTIONS_DEFAULT+=${all:U}
 .  endfor
 . endfor
 .endfor
