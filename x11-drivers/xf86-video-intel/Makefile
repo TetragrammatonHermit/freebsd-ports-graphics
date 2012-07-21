@@ -22,7 +22,7 @@ USE_XORG=	xvmc xineramaproto xextproto x11 xf86driproto glproto
 MAN4=		intel.4x
 
 .if defined(WITH_NEW_XORG)
-INTEL_VERSION=	2.19.0
+INTEL_VERSION=	2.20.0
 INTEL_REVISION=	0
 MAKE_JOBS_UNSAFE=yes
 PLIST_SUB+=	OLD="@comment "
@@ -51,6 +51,8 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-src_ch7017_ch7017.c \
 		${PATCHDIR}/extra-src_i830_i2c.c \
 		${PATCHDIR}/extra-uxa_uxa-priv.h
 .endif
+
+CONFIGURE_ARGS+=--disable-sna
 
 .include <bsd.port.pre.mk>
 
