@@ -37,7 +37,7 @@
      DRI2DrawablePtr pPriv = p;
      DRI2ScreenPtr ds = pPriv->dri2_screen;
 -    DRI2DrawableRefPtr ref, next;
-+    DRI2DrawableRefPtr ref = NULL
++    DRI2DrawableRefPtr ref = NULL;
 +    DRI2DrawableRefPtr next;
      WindowPtr pWin;
      PixmapPtr pPixmap;
