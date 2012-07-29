@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xf86-video-apm
-PORTVERSION=	1.2.4
+PORTVERSION=	1.2.5
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xf86-input-keyboard
-PORTVERSION=	1.6.1
+PORTVERSION=	1.6.2
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

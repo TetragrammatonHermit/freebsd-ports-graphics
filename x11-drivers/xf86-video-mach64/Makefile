@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xf86-video-mach64
-PORTVERSION=	6.9.1
+PORTVERSION=	6.9.3
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

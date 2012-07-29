@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xf86-video-rendition
-PORTVERSION=	4.2.4
+PORTVERSION=	4.2.5
 PORTREVISION=	1
 CATEGORIES=	x11-drivers
 

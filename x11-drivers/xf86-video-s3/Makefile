@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xf86-video-s3
-PORTVERSION=	0.6.4
+PORTVERSION=	0.6.5
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
