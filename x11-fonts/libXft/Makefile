@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	libXft
-PORTVERSION=	2.3.0
+PORTVERSION=	2.3.1
 CATEGORIES=	x11-fonts
 
 MAINTAINER=	gnome@FreeBSD.org
