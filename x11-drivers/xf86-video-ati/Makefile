@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	xf86-video-ati
-PORTVERSION=	6.14.4
+PORTVERSION=	6.14.6
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
