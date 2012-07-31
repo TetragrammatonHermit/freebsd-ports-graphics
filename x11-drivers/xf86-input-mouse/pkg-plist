@@ -1,5 +1,6 @@
 lib/xorg/modules/input/mouse_drv.la
 lib/xorg/modules/input/mouse_drv.so
+libdata/pkgconfig/xorg-mouse.pc
 @dirrmtry lib/xorg/modules/input
 @dirrmtry lib/xorg/modules
 @dirrmtry lib/xorg
