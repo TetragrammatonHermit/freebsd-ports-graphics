@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 301539 2012-07-26 05:40:22Z bapt $
+# $FreeBSD: head/Mk/bsd.port.mk 301805 2012-07-31 18:41:21Z erwin $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -5589,7 +5589,7 @@ _PRETTY_PRINT_DEPENDS_LIST=\
 
 .if !target(pretty-print-build-depends-list)
 pretty-print-build-depends-list:
-.if defined(PKG_PEPENDS) || defined(EXTRACT_DEPENDS) || defined(PATCH_DEPENDS) || \
+.if defined(PKG_DEPENDS) || defined(EXTRACT_DEPENDS) || defined(PATCH_DEPENDS) || \
 	defined(FETCH_DEPENDS) || defined(BUILD_DEPENDS) || defined(LIB_DEPENDS)
 	@${_PRETTY_PRINT_DEPENDS_LIST}
 .endif
