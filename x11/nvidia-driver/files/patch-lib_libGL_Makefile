@@ -1,0 +1,11 @@
+--- lib/libGL/Makefile.orig	2012-04-28 17:21:12.000000000 +0200
++++ lib/libGL/Makefile	2012-04-28 17:21:53.000000000 +0200
+@@ -5,6 +5,6 @@
+ .endif
+ LIB=		GL
+ SHLIB_MAJOR=	1
+-LIBDIR=		${X11BASE}/lib
++LIBDIR=		${X11BASE}/lib/nvidia
+ 
+ .include <${NVIDIA_ROOT}/mk/nvidia.lib.mk>
+ 

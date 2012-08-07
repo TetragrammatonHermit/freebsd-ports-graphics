@@ -22,15 +22,16 @@ RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 		xkbcomp:${PORTSDIR}/x11/xkbcomp
 
 XORG_CAT=	xserver
+SLAVE_PORT?=	no
 
 .if defined(WITH_NEW_XORG)
 XORG_VERSION=	1.12.3
-XORG_REVISION=	0
+XORG_REVISION=	1
 PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-clang
 .else
 XORG_VERSION=	1.7.7
-XORG_REVISION=	4
+XORG_REVISION=	6
 PLIST_SUB+=	OLD="" NEW="@comment "
 EXTRA_PATCHES+=	${FILESDIR}/extra-include_eventstr.h \
 		${FILESDIR}/extra-os-utils.c \
@@ -58,7 +59,8 @@ CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
 		--enable-record=yes
 
-.if !defined(SLAVE_PORT)
+.if ${SLAVE_PORT} == "no"
+SUB_FILES=	pkg-install pkg-deinstall
 MAN1=		Xorg.1 \
 		Xserver.1 \
 		cvt.1 \
@@ -153,10 +155,23 @@ pre-everything::
 post-patch:
 	@${REINPLACE_CMD} 's/test.*-traditional.*;/true;/' \
 		${WRKSRC}/configure
+# build libglx.so and manualy install it.
+	@${REINPLACE_CMD} -e 's|@GLX_TRUE@GLXMODS =|@GLX_BOGUS@GLXMODS =|g' \
+		-e 's|^LTLIBRARIES = |LTLIBRARIES = libglx.la |g' \
+		${WRKSRC}/hw/xfree86/dixmods/Makefile.in
 
-.if defined(WITH_NEW_XORG)
+.if ${SLAVE_PORT} == "no"
+pre-install:
+	${MKDIR} ${PREFIX}/lib/xorg/modules/extensions/xorg
+	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
+		${PREFIX}/lib/xorg/modules/extensions/xorg/
+	PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} PRE-INSTALL
+
 post-install:
+.if defined(WITH_NEW_XORG)
 	@${MKDIR} ${PREFIX}/share/X11/xorg.conf.d
+.endif
+	PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} POST-INSTALL
 .endif
 
 .include <bsd.port.post.mk>
