@@ -15,7 +15,7 @@ COMMENT=	OpenGL library that renders using GLX or DRI
 LIB_DEPENDS+=	drm:${PORTSDIR}/graphics/libdrm \
 		expat.6:${PORTSDIR}/textproc/expat2
 
-USE_XORG=	glproto:both x11 xext xxf86vm xdamage xfixes dri2proto:both
+USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
 SUB_FILES=    pkg-install pkg-deinstall
 
