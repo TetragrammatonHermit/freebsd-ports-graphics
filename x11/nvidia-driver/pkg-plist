@@ -16,9 +16,9 @@ lib/libXvMCNVIDIA_dynamic.so.1
 @dirrmtry lib/vdpau
 %%MODULESDIR%%/libnvidia-wfb.so.1
 %%MODULESDIR%%/drivers/nvidia_drv.so
-%%MODULESDIR%%/extensions/nvidia/libglx.so
-%%MODULESDIR%%/extensions/nvidia/libglx.so.1
-@dirrm %%MODULESDIR%%/extensions/nvidia
+%%MODULESDIR%%/extensions/.nvidia/libglx.so
+%%MODULESDIR%%/extensions/.nvidia/libglx.so.1
+@dirrm %%MODULESDIR%%/extensions/.nvidia
 @dirrmtry %%MODULESDIR%%/drivers
 @cwd /boot/modules
 nvidia.ko

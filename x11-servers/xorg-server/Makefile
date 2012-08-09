@@ -162,9 +162,10 @@ post-patch:
 
 .if ${SLAVE_PORT} == "no"
 pre-install:
-	${MKDIR} ${PREFIX}/lib/xorg/modules/extensions/xorg
+# The .xorg dir is so it loads the rigth libglx library.
+	${MKDIR} ${PREFIX}/lib/xorg/modules/extensions/.xorg
 	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
-		${PREFIX}/lib/xorg/modules/extensions/xorg/
+		${PREFIX}/lib/xorg/modules/extensions/.xorg/
 	PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} PRE-INSTALL
 
 post-install:

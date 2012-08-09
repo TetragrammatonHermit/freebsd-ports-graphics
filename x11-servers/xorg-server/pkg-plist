@@ -185,7 +185,7 @@ lib/xorg/modules/extensions/libextmod.la
 lib/xorg/modules/extensions/libextmod.so
 lib/xorg/modules/extensions/librecord.la
 lib/xorg/modules/extensions/librecord.so
-lib/xorg/modules/extensions/xorg/libglx.so
+lib/xorg/modules/extensions/.xorg/libglx.so
 lib/xorg/modules/libexa.la
 lib/xorg/modules/libexa.so
 lib/xorg/modules/libfb.la
@@ -230,6 +230,7 @@ share/aclocal/xorg-server.m4
 %%NEW%%@exec /bin/mkdir -p %D/share/X11/xorg.conf.d
 @comment %%NEW%%@dirrm share/doc/xorg-server
 @dirrm include/xorg
+@dirrm lib/xorg/modules/extensions/.xorg
 @dirrm lib/xorg/modules/extensions
 @dirrm lib/xorg/modules/multimedia
 %%OLD%%@dirrm lib/xorg/modules/linux
