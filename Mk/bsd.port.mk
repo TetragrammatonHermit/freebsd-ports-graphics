@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: ports/Mk/bsd.port.mk,v 1.738 2012/08/04 22:52:02 kwm Exp $
+# $FreeBSD: head/Mk/bsd.port.mk 302037 2012-08-04 22:52:02Z kwm $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
