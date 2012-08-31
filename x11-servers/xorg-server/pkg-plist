@@ -237,5 +237,4 @@ share/aclocal/xorg-server.m4
 @dirrm lib/xorg/modules
 @dirrm lib/xorg
 %%NEW%%@dirrmtry share/X11/xorg.conf.d
-@dirrmtry share/X11/app-defaults
 @dirrmtry share/X11

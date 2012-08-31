@@ -25,8 +25,8 @@ XORG_CAT=	xserver
 SLAVE_PORT?=	no
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.12.3
-XORG_REVISION=	1
+XORG_VERSION=	1.12.4
+XORG_REVISION=	0
 PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-clang
 .else
