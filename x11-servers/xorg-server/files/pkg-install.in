@@ -6,12 +6,7 @@
 PREFIX="${PKG_PREFIX-/usr/local}"
 
 case $2 in
-# Do we need this?
-  PRE-INSTALL)
-	/bin/rm -f ${PREFIX}/lib/xorg/modules/extensions/libglx.*
-	;;
-
-  POST-INSTALL)
+POST-INSTALL)
 	if [ -f ${PREFIX}/lib/xorg/modules/extensions/.nvidia/libglx.so.1 ]; then
 	  /bin/ln -f ${PREFIX}/lib/xorg/modules/extensions/.nvidia/libglx.so.1 \
 		${PREFIX}/lib/xorg/modules/extensions/libglx.so

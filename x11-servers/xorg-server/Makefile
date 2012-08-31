@@ -155,24 +155,23 @@ pre-everything::
 post-patch:
 	@${REINPLACE_CMD} 's/test.*-traditional.*;/true;/' \
 		${WRKSRC}/configure
-# build libglx.so and manualy install it.
+# build libglx.so but don't install it yet. which is done in pre-install.
 	@${REINPLACE_CMD} -e 's|@GLX_TRUE@GLXMODS =|@GLX_BOGUS@GLXMODS =|g' \
 		-e 's|^LTLIBRARIES = |LTLIBRARIES = libglx.la |g' \
 		${WRKSRC}/hw/xfree86/dixmods/Makefile.in
 
 .if ${SLAVE_PORT} == "no"
-pre-install:
+pre-su-install:
 # The .xorg dir is so it loads the rigth libglx library.
 	${MKDIR} ${PREFIX}/lib/xorg/modules/extensions/.xorg
 	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
 		${PREFIX}/lib/xorg/modules/extensions/.xorg/
-	PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} PRE-INSTALL
 
 post-install:
 .if defined(WITH_NEW_XORG)
 	@${MKDIR} ${PREFIX}/share/X11/xorg.conf.d
 .endif
-	PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} POST-INSTALL
+	@PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} POST-INSTALL
 .endif
 
 .include <bsd.port.post.mk>
