@@ -33,7 +33,8 @@ OPTIONS_DEFAULT=KMS
 
 .if ${PORT_OPTIONS:MKMS}
 CONFIGURE_ARGS+=--enable-libkms
-EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c
+EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c \
+		${FILESDIR}/extra-intel__intel__bufmgr__gem.c
 PLIST_SUB+=	KMS=""
 .else
 PLIST_SUB+=	KMS="@comment "
