@@ -20,92 +20,80 @@ INPUTDIR=	${PREFIX}/lib/xorg/modules/input
 
 NO_BUILD=	yes
 
-NO_OPTIONS_SORT=yes
+INPUT_DRIVERS=		mouse \
+			keyboard \
+			acecad \
+			elographics \
+			hyperpen \
+			joystick \
+			magictouch \
+			mutouch \
+			penmount \
+			synaptics \
+			vmmouse \
+			void
 
-.if !defined(ARCH)
-ARCH!=  /usr/bin/uname -p
-.endif
+VIDEO_DRIVERS=		ati \
+			mach64 \
+			nv \
+			r128 \
+			radeonhd \
+			vesa \
+			apm \
+			ark \
+			chips \
+			cyrix \
+			dummy \
+			fbdev \
+			glint \
+			i128 \
+			i740 \
+			imstt \
+			mga \
+			neomagic \
+			newport \
+			rendition \
+			s3 \
+			s3virge \
+			savage \
+			siliconmotion \
+			sis \
+			tdfx \
+			tga \
+			trident \
+			tseng
 
-VIDEO_ON=	ati \
-		mach64 \
-		nv \
-		r128 \
-		radeonhd \
-		vesa
+OPTIONS_DEFAULT=	MOUSE \
+			KEYBOARD \
+			ATI \
+			MACH64 \
+			NV \
+			R128 \
+			RADEONHD \
+			VESA \
+			INTEL \
+			OPENCHROME \
+			SUNFFB
 
-.if ${ARCH} == "sparc64"
-VIDEO_ON+=	sunffb
-.elif ${ARCH} == "amd64" || ${ARCH} == "i386" || ${ARCH} == "ia64"
-VIDEO_ON+=	openchrome
-.endif
+NO_OPTIONS_SORT=	yes
 
-.if (${ARCH} == "amd64" || ${ARCH} == "i386")
-VIDEO_ON+=	intel
-.endif
-
-VIDEO_OFF=	apm ark \
-		chips cirrus cyrix \
-		dummy \
-		fbdev \
-		glint \
-		i128 i740 imstt \
-		mga \
-		neomagic newport \
-		rendition \
-		s3 s3virge savage siliconmotion	sis \
-		tdfx tga trident tseng \
-		via vmware voodoo
-
-VIDEO_EXCL=	via:openchrome
-
-INPUT_ON=	mouse \
-		keyboard
-INPUT_OFF=	acecad \
-		elographics \
-		hyperpen \
-		joystick \
-		magictouch mutouch \
-		penmount \
-		synaptics \
-				vmmouse void
-
-QUIRKS=		keyboard:kbd jamstudio:js_x
-
-.if defined(XORG_COMPLETE)
-. for type in input video
-${type:U}_ON:=	${${type:U}_ON} ${${type:U}_OFF}
-${type:U}_OFF=	# nil
-.  for i in ${${type:U}_EXCL}
-B=	${i:C/.*://}
-${type:U}_ON:=	${${type:U}_ON:C/${B}//}
-${type:U}_OFF:=	${${type:U}_OFF} ${B}
-.  endfor
-. endfor
-.endif
-
-.for default in on off
-. for type in input video
-.  for i in ${${type:U}_${default:U}}
-OPTIONS_DEFINE+=${i:U}
-${i:U}_DESC+=	Install ${i} ${type} driver
-OPTIONS_DEFAULT+=${all:U}
-.  endfor
-. endfor
+.for type in input video
+.for a in ${${type:U}_DRIVERS}
+OPTIONS_DEFINE+=	${a:U}
+${a:U}_DESC=	Install ${a} ${type} driver
 .endfor
+.endfor
+
+OPTIONS_DEFINE_i386=	INTEL OPENCHROME
+OPTIONS_DEFINE_amd64:=	${OPTIONS_DEFINE_i386}
+OPTIONS_DEFINE_sparc64=	SUNFFB
+OPTIONS_DEFINE_ia64=	OPENCHROME
+
+INTEL_DESC=		Install intel video driver
+OPENCHROME_DESC=	Install openchrome video driver
+SUNFFB_DESC=		Install sunffb video driver
 
 .include <bsd.port.pre.mk>
-
-.for i in ${VIDEO_EXCL}
-A=	${i:C/:.*//}
-B=	${i:C/.*://}
-. if defined(WITH_${B:U}) && !defined(WITHOUT_${A:U})
-DRV_CONFLICTS+=	${i}
-. endif
-.endfor
-
-.if defined(DRV_CONFLICTS)
-IGNORE=		can't be installed because of conflicting drivers (${DRV_CONFLICTS}). Re-run make config.
-.endif
 
 .for default in on off
 . for type in input video
