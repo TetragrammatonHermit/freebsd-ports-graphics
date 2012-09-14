@@ -13,6 +13,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org dummy display driver
 
 XORG_CAT=	driver
-USE_XORG=	videoproto xf86dgaproto
+USE_XORG=	xf86dgaproto
 
 .include <bsd.port.mk>

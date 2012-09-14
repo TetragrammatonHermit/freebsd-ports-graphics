@@ -15,7 +15,6 @@ COMMENT=	X.Org vmmouse input driver
 LIB_DEPENDS+=	hal.1:${PORTSDIR}/sysutils/hal
 
 XORG_CAT=	driver
-USE_XORG=	xextproto videoproto
 CONFIGURE_ARGS=	--with-hal-callouts-dir=${PREFIX}/libexec/hal/scripts
 USE_GMAKE=	yes
 

@@ -14,7 +14,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org nv display driver
 
 XORG_CAT=	driver
-USE_XORG=	videoproto xextproto
 MAN4=		nv.4x
 
 .include <bsd.port.mk>

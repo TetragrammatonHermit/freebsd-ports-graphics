@@ -14,7 +14,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org void input driver
 
 XORG_CAT=	driver
-USE_XORG=	xextproto videoproto
 MAN4=		void.4x
 
 .if defined(WITH_NEW_XORG)

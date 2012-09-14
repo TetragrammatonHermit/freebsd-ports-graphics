@@ -16,7 +16,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Free nouveau display driver for nvidia-based cards
 
 XORG_CAT=	driver
-USE_XORG=	videoproto xextproto xf86driproto glproto
+USE_XORG=	xf86driproto glproto
 MAN4=		nouveau.4x
 
 MAKE_JOBS_SAFE=	yes

@@ -18,7 +18,7 @@ USE_GL=		gl
 
 USE_LDCONFIG=	yes
 XORG_CAT=	driver
-USE_XORG=	xvmc xineramaproto xextproto x11 xf86driproto glproto
+USE_XORG=	xvmc xineramaproto x11 xf86driproto glproto
 MAN4=		intel.4x
 
 .if defined(WITH_NEW_XORG)

@@ -20,7 +20,7 @@ ONLY_FOR_ARCHS=	amd64 i386
 USE_GL=		gl
 
 XORG_CAT=	driver
-USE_XORG=	xvmc xineramaproto xextproto x11 xf86driproto glproto
+USE_XORG=	xvmc xineramaproto x11 xf86driproto glproto
 MAN4=		intel.4x
 
 .include <bsd.port.mk>

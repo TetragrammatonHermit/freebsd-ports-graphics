@@ -16,7 +16,7 @@ COMMENT=	X.Org mga display driver
 USE_GL=		gl
 
 XORG_CAT=	driver
-USE_XORG=	xf86driproto videoproto xextproto glproto
+USE_XORG=	xf86driproto glproto
 MAN4=		mga.4x
 
 pre-patch:

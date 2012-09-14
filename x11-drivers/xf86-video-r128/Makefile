@@ -15,7 +15,7 @@ COMMENT=	X.Org r128 display driver
 
 USE_GL=		gl
 XORG_CAT=	driver
-USE_XORG=	glproto videoproto xextproto xf86driproto xf86miscproto xineramaproto
+USE_XORG=	glproto xf86driproto xf86miscproto xineramaproto
 MAN4=		r128.4x
 
 .include <bsd.port.mk>

@@ -12,10 +12,7 @@ CATEGORIES=	x11-drivers
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org mouse input driver
 
-CONFIGURE_ARGS+=--disable-silent-rules
-
 XORG_CAT=	driver
-USE_XORG=	xextproto videoproto
 USE_GNOME=	gnomehack
 MAN4=		mousedrv.4x
 

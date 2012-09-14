@@ -16,7 +16,7 @@ COMMENT=	X.Org ati display driver
 USE_GL=		gl
 
 XORG_CAT=	driver
-USE_XORG=	xf86driproto xineramaproto videoproto xf86miscproto xextproto glproto
+USE_XORG=	xf86driproto xineramaproto xf86miscproto glproto
 MAN4=		ati.4x radeon.4x
 
 .if defined(WITH_NEW_XORG)

@@ -13,7 +13,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org i128 display driver
 
 XORG_CAT=	driver
-USE_XORG=	videoproto xextproto
 MAN4=		i128.4x
 
 .include <bsd.port.mk>

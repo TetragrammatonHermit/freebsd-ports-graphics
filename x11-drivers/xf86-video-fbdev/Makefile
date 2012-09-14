@@ -14,7 +14,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org fbdev display driver
 
 XORG_CAT=	driver
-USE_XORG=	videoproto
 MAN4=		fbdev.4x
 
 .include <bsd.port.mk>

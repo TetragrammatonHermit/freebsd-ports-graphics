@@ -13,6 +13,5 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org ark display driver
 
 XORG_CAT=	driver
-USE_XORG=	xextproto videoproto
 
 .include <bsd.port.mk>

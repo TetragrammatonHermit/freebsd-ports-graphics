@@ -13,7 +13,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org vesa display driver
 
 XORG_CAT=	driver
-USE_XORG=	xextproto videoproto
 MAN4=		vesa.4x
 
 .include <bsd.port.mk>

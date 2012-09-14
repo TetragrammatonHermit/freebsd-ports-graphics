@@ -13,7 +13,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org mutouch input driver
 
 XORG_CAT=	driver
-USE_XORG=	xextproto videoproto
 MAN4=		mutouch.4x
 
 .if !defined(WITH_NEW_XORG)

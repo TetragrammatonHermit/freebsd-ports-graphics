@@ -15,6 +15,6 @@ COMMENT=	X.Org mach64 display driver
 USE_GL=		gl
 
 XORG_CAT=	driver
-USE_XORG=	glproto videoproto xextproto xf86driproto xf86miscproto
+USE_XORG=	glproto xf86driproto xf86miscproto
 
 .include <bsd.port.mk>

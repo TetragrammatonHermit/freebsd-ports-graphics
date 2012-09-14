@@ -14,7 +14,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org hyperpen input driver
 
 XORG_CAT=	driver
-USE_XORG=	xextproto videoproto
 
 .if defined(WITH_NEW_XORG)
 HYPERVER=	1.4.1

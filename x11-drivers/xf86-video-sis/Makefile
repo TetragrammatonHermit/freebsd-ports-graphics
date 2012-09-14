@@ -17,7 +17,7 @@ CONFLICTS=	xf86-video-sis-intel-[0-9]*
 USE_GL=		gl
 
 XORG_CAT=	driver
-USE_XORG=	xf86dgaproto xf86driproto xineramaproto videoproto xf86miscproto xextproto glproto
+USE_XORG=	xf86dgaproto xf86driproto xineramaproto xf86miscproto glproto
 MAN4=		sis.4x
 
 .include <bsd.port.mk>
