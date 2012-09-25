@@ -54,6 +54,7 @@ CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
 EXTRA_PATCHES+=	${PATCHDIR}/extra-configure \
 		${PATCHDIR}/extra-src-glsl_ir_constant_expression.cpp \
 		${PATCHDIR}/extra-src__gallium__include__pipe__p_config.h \
+		${PATCHDIR}/extra-src__mesa__drivers__dri__i965__brw_context.c \
 		${PATCHDIR}/extra-src__mesa__drivers__dri__nouveau__nouveau_array.c \
 		${PATCHDIR}/extra-src__mesa__drivers__dri__nouveau__nouveau_render_t.c
 .else
