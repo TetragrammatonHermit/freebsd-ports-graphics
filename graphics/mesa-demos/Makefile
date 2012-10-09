@@ -50,14 +50,10 @@ post-install:
 			${INSTALL_DATA} $$i ${DATADIR}/data; \
 		done
 
-.include <bsd.port.pre.mk>
+.include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MNVIDIA}
 CFLAGS+=	-DWITH_NVIDIA_GL=1
 .endif
 
-.if !defined(ARCH)
-ARCH!=		uname -p
-.endif
-
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
