@@ -75,13 +75,11 @@ OPTIONS_DEFAULT=	MOUSE \
 			OPENCHROME \
 			SUNFFB
 
-NO_OPTIONS_SORT=	yes
-
 .for type in input video
-.for a in ${${type:U}_DRIVERS}
+. for a in ${${type:U}_DRIVERS}
 OPTIONS_DEFINE+=	${a:U}
 ${a:U}_DESC=	Install ${a} ${type} driver
-.endfor
+. endfor
 .endfor
 
 OPTIONS_DEFINE_i386=	INTEL OPENCHROME
@@ -93,20 +91,20 @@ INTEL_DESC=		Install intel video driver
 OPENCHROME_DESC=	Install openchrome video driver
 SUNFFB_DESC=		Install sunffb video driver
 
-.include <bsd.port.pre.mk>
+# these drivers module name is different then the installed plugin
+QUIRKS=		keyboard:kbd jamstudio:js_x
 
-.for default in on off
-. for type in input video
-.  for i in ${${type:U}_${default:U}}
-DEFAULT=${default}
-.   if (${DEFAULT} == "on" && !defined(WITHOUT_${i:U})) || (${DEFAULT} == "off" && defined(WITH_${i:U}))
-.    if ${QUIRKS:M${i}\:*:C/.*://} != ""
+.include <bsd.port.options.mk>
+
+.for type in input video
+. for i in ${${type:U}_DRIVERS}
+.  if ${PORT_OPTIONS:M${i:U}} != ""
+.   if ${QUIRKS:M${i}\:*:C/.*://} != ""
 RUN_DEPENDS+=	${${type:U}DIR}/${QUIRKS:M${i}\:*:C/.*://}_drv.so:${PORTSDIR}/x11-drivers/xf86-${type}-${i}
-.    else
+.   else
 RUN_DEPENDS+=	${${type:U}DIR}/${i}_drv.so:${PORTSDIR}/x11-drivers/xf86-${type}-${i}
-.    endif
 .   endif
-.  endfor
+.  endif
 . endfor
 .endfor
 
@@ -114,4 +112,4 @@ do-install:
 		${MKDIR} ${PREFIX}/libdata/xorg
 		${TOUCH} ${PREFIX}/libdata/xorg/drivers
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
