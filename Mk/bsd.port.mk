@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 302037 2012-08-04 22:52:02Z kwm $
+# $FreeBSD: head/Mk/bsd.port.mk 305677 2012-10-10 18:20:21Z beat $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -38,9 +38,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # different actions for different values.
 #
 # ARCH			- The architecture of the target machine, such as would be
-#				  returned by "uname -p".  (Note: Ports should test against
-#				  ARCH, and not the host machine's architecture which is
-#				  MACHINE_ARCH, to enable ports to be cross-built.)
+#				  returned by "uname -p".
 # OPSYS			- Portability clause.  This is the operating system the
 #				  makefile is being used on.  Automatically set to
 #				  "FreeBSD," "NetBSD," or "OpenBSD" as appropriate.
@@ -359,8 +357,6 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # USE_IMAKE		- If set, this port uses imake.
 # XMKMF			- Set to path of `xmkmf' if not in $PATH
 #				  Default: xmkmf -a
-# USE_XLIB		- If set, this port uses the X libraries. In the USE_LINUX
-#				  case the linux X libraries are referenced.
 # USE_DISPLAY	- If set, this ports requires a (virtual) X11 environment
 #				  setup. If the environment variable DISPLAY Is not set,
 #				  then an extra build dependency on Xvfb is added. Further,
@@ -382,6 +378,12 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 ##
 # USE_SDL		- If set, this port uses the sdl libraries.
 #				  See bsd.sdl.mk for more information.
+##
+# USE_READLINE	- If set, this port uses libreadline.
+# 				  Legal values are: yes, base, port
+#				  yes, base: use base system libreadline on FreeBSD 9 or earlier,
+#				  	use ports/devel/readline on FreeBSD 10.0+
+#				  port: always use ports/devel/readline
 ##
 # USE_OPENAL	- If set, this port relies on the OpenAL package.
 #				  Legal values are: al, soft, si, alut.
@@ -833,6 +835,9 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  Default: none
 # FETCH_REGET	- Times to retry fetching of files on checksum errors.
 #				  Default: 1
+# CLEAN_FETCH_ENV		
+#				- Disable package dependency in fetch target for mass
+#				  fetching.  User settable.
 #
 # For extract:
 #
@@ -934,6 +939,13 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  that are explicitly marked MAKE_JOBS_UNSAFE.  User settable.
 # MAKE_JOBS_NUMBER
 #				- Override the number of make jobs to be used.  User settable.
+## cacche
+#
+# WITH_CCACHE_BUILD
+# 				- Enable CCACHE support (devel/ccache).  User settable.
+# NO_CCACHE
+#				- Disable CCACHE support for example for certain ports if
+#				  CCACHE is enabled.  User settable.
 #
 # For install:
 #
@@ -1176,9 +1188,6 @@ MAINTAINER?=	ports@FreeBSD.org
 ARCH!=	${UNAME} -p
 .endif
 
-# Kludge for pre-3.0 systems
-MACHINE_ARCH?=	i386
-
 # Get the operating system type
 .if !defined(OPSYS)
 OPSYS!=	${UNAME} -s
@@ -1199,6 +1208,17 @@ OSVERSION!=	${AWK} '/^\#define[[:blank:]]__FreeBSD_version/ {print $$3}' < ${SRC
 OSVERSION!=	${SYSCTL} -n kern.osreldate
 .endif
 .endif
+
+.if ${OSVERSION} >= 1000017
+.if !defined(WITHOUT_PKGNG)
+WITH_PKGNG=	yes
+.else
+.undef	WITH_PKGNG
+.endif
+.endif
+
+# Only define tools here (for transition period with between pkg tools)
+.include "${PORTSDIR}/Mk/bsd.commands.mk"
 
 MASTERDIR?=	${.CURDIR}
 
@@ -1249,7 +1269,7 @@ GID_OFFSET?=	0
 
 # predefined accounts from src/etc/master.passwd
 # alpha numeric sort order
-USERS_BLACKLIST=	_dhcp _pflogd bin bind daemon games kmem mailnull man news nobody operator pop proxy root smmsp sshd toor tty uucp www
+USERS_BLACKLIST=	_dhcp _pflogd bin bind daemon games hast kmem mailnull man news nobody operator pop proxy root smmsp sshd toor tty uucp www
 
 LDCONFIG_DIR=	libdata/ldconfig
 LDCONFIG32_DIR=	libdata/ldconfig32
@@ -1480,6 +1500,8 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 .include "${PORTSDIR}/Mk/bsd.ncurses.mk"
 .endif
 
+.include "${PORTSDIR}/Mk/bsd.pbi.mk"
+
 # You can force skipping these test by defining IGNORE_PATH_CHECKS
 .if !defined(IGNORE_PATH_CHECKS)
 .if (${PREFIX:C,(^.).*,\1,} != "/")
@@ -1512,6 +1534,9 @@ check-makefile::
 _POSTMKINCLUDED=	yes
 
 WRKDIR?=		${WRKDIRPREFIX}${.CURDIR}/work
+.if !defined(IGNORE_MASTER_SITE_GITHUB) && defined(USE_GITHUB)
+WRKSRC?=		${WRKDIR}/${GH_ACCOUNT}-${GH_PROJECT}-${GH_COMMIT}
+.endif
 .if defined(NO_WRKSUBDIR)
 WRKSRC?=		${WRKDIR}
 .else
@@ -1626,7 +1651,9 @@ PLIST_SUB+=	LIB32DIR=${LIB32DIR}
 
 .if defined(WITH_PKGNG)
 .if !defined(PKG_DEPENDS)
+.if !defined(CLEAN_FETCH_ENV)
 PKG_DEPENDS+=		${LOCALBASE}/sbin/pkg:${PORTSDIR}/ports-mgmt/pkg
+.endif
 .endif
 .endif
 
@@ -1644,20 +1671,15 @@ BUILD_DEPENDS+=		gmake:${PORTSDIR}/devel/gmake
 CONFIGURE_ENV+=	MAKE=${GMAKE}
 .endif
 .if defined(USE_PKGCONFIG)
-.if ${USE_PKGCONFIG:L} == yes
-USE_PKGCONFIG=	build
-.endif
-.if ${USE_PKGCONFIG:L} == run
-RUN_DEPENDS+=	pkgconf:${PORTSDIR}/devel/pkgconf
-.endif
-.if ${USE_PKGCONFIG:L} == build
+.if ${USE_PKGCONFIG:L} == yes || ${USE_PKGCONFIG:L} == build
 BUILD_DEPENDS+=	pkgconf:${PORTSDIR}/devel/pkgconf
 CONFIGURE_ENV+=	PKG_CONFIG=pkgconf
-.endif
-.if ${USE_PKGCONFIG:L} == both
+.elif ${USE_PKGCONFIG:L} == both
 RUN_DEPENDS+=	pkgconf:${PORTSDIR}/devel/pkgconf
 BUILD_DEPENDS+=	pkgconf:${PORTSDIR}/devel/pkgconf
 CONFIGURE_ENV+=	PKG_CONFIG=pkgconf
+.elif ${USE_PKGCONFIG:L} == run
+RUN_DEPENDS+=	pkgconf:${PORTSDIR}/devel/pkgconf
 .endif
 .endif
 
@@ -1683,6 +1705,15 @@ MAKE_ENV+=	${b}="${${b}}"
 
 .if defined(USE_OPENLDAP) || defined(WANT_OPENLDAP_VER)
 .include "${PORTSDIR}/Mk/bsd.ldap.mk"
+.endif
+
+.if defined(USE_READLINE)
+.if ${USE_READLINE} == "port" || ${OSVERSION} > 1000000
+LIB_DEPENDS+=	readline.6:${PORTSDIR}/devel/readline
+CPPFLAGS+=		-I${LOCALBASE}/include
+LDFLAGS+=		-L${LOCALBASE}/lib -lreadline
+CONFIGURE_ENV+=	CPPFLAGS="${CPPFLAGS}" LDFLAGS="${LDFLAGS}"
+.endif
 .endif
 
 .if defined(USE_OPENAL)
@@ -2079,21 +2110,12 @@ IGNORE=	uses unknown USE_BISON construct
 .include "${PORTSDIR}/Mk/bsd.cmake.mk"
 .endif
 
-.if exists(${PORTSDIR}/../Makefile.inc)
-.include "${PORTSDIR}/../Makefile.inc"
+.if exists(${PORTSDIR}/Makefile.inc)
+.include "${PORTSDIR}/Makefile.inc"
 USE_SUBMAKE=	yes
 .endif
 
-.if defined(USE_XLIB)
-.	if defined(USE_LINUX)
-RUN_DEPENDS+=	${LINUXBASE}/usr/X11R6/lib/libXrender.so.1:${PORTSDIR}/x11/linux-xorg-libs
-.	else
-BUILD_DEPENDS+=	${LOCALBASE}/libdata/xorg/libraries:${X_LIBRARIES_PORT}
-RUN_DEPENDS+=	${LOCALBASE}/libdata/xorg/libraries:${X_LIBRARIES_PORT}
-.	endif
-.endif
-
-.if defined(USE_XLIB) || defined(USE_XORG)
+.if defined(USE_XORG)
 # Add explicit X options to avoid problems with false positives in configure
 .if defined(GNU_CONFIGURE)
 CONFIGURE_ARGS+=--x-libraries=${LOCALBASE}/lib --x-includes=${LOCALBASE}/include
@@ -2220,20 +2242,27 @@ BUILD_FAIL_MESSAGE+=	"You have chosen to use multiple make jobs (parallelization
 .endif
 .endif
 
+# ccache support
+# Support NO_CCACHE for common setups, require WITH_CCACHE_BUILD, and
+# don't use if ccache already set in CC
+.if !defined(NO_CCACHE) && defined(WITH_CCACHE_BUILD) && !${CC:M*ccache*}
+# Avoid depends loops between pkg and ccache
+.	if !${.CURDIR:M*/devel/ccache} && !${.CURDIR:M*/ports-mgmt/pkg}
+BUILD_DEPENDS+=		${LOCALBASE}/bin/ccache:${PORTSDIR}/devel/ccache
+.	endif
+
+# Prepend the ccache dir into the PATH and setup ccache env
+MAKE_ENV+=	PATH=${LOCALBASE}/libexec/ccache:${PATH}
+.endif
+
 PTHREAD_CFLAGS?=
 PTHREAD_LIBS?=		-pthread
 
-.if exists(/usr/bin/fetch)
 FETCH_BINARY?=	/usr/bin/fetch
 FETCH_ARGS?=	-AFpr
 FETCH_REGET?=	1
 .if !defined(DISABLE_SIZE)
 FETCH_BEFORE_ARGS+=	$${CKSIZE:+-S $$CKSIZE}
-.endif
-.else
-FETCH_BINARY?=	/usr/bin/ftp
-FETCH_ARGS?=	-R
-FETCH_REGET?=	0
 .endif
 FETCH_CMD?=		${FETCH_BINARY} ${FETCH_ARGS}
 
@@ -2911,7 +2940,7 @@ CONFIGURE_TARGET:=	${CONFIGURE_TARGET:S/--build=//}
 CONFIGURE_LOG?=		config.log
 
 # A default message to print if do-configure fails.
-CONFIGURE_FAIL_MESSAGE?=	"Please report the problem to ${MAINTAINER} [maintainer] and attach the \"${CONFIGURE_WRKSRC}/${CONFIGURE_LOG}\" including the output of the failure of your make command. Also, it might be a good idea to provide an overview of all packages installed on your system (e.g. an \`ls ${PKG_DBDIR}\`)."
+CONFIGURE_FAIL_MESSAGE?=	"Please report the problem to ${MAINTAINER} [maintainer] and attach the \"${CONFIGURE_WRKSRC}/${CONFIGURE_LOG}\" including the output of the failure of your make command. Also, it might be a good idea to provide an overview of all packages installed on your system (e.g. a ${PKG_INFO} -Ea)."
 
 .if defined(GNU_CONFIGURE)
 # Maximum command line length
@@ -4294,10 +4323,10 @@ _INSTALL_SEQ=	install-message check-install-conflicts run-depends lib-depends ap
 _INSTALL_SUSEQ= check-umask install-mtree pre-su-install \
 				pre-su-install-script create-users-groups do-install \
 				install-desktop-entries install-license install-rc-script \
-				post-install post-install-script add-plist-info \
-				add-plist-docs add-plist-examples add-plist-data \
-				add-plist-post fix-plist-sequence compress-man \
-				install-ldconfig-file fake-pkg security-check
+				post-install post-install-script add-plist-buildinfo \
+				add-plist-info add-plist-docs add-plist-examples \
+				add-plist-data add-plist-post fix-plist-sequence \
+				compress-man install-ldconfig-file fake-pkg security-check
 _PACKAGE_DEP=	install
 _PACKAGE_SEQ=	package-message pre-package pre-package-script \
 				do-package post-package-script
@@ -4432,7 +4461,7 @@ pretty-print-www-site:
 	if [ -n "$${www_site}" ]; then \
 		${ECHO_MSG} -n " and/or visit the "; \
 		${ECHO_MSG} -n "<a href=\"$${www_site}\">web site</a>"; \
-		${ECHO_MSG} " for futher informations"; \
+		${ECHO_MSG} " for further information"; \
 	fi
 .endif
 
@@ -4797,7 +4826,7 @@ makesum: check-checksum-algorithms
 					$$alg_executable $$file >> ${DISTINFO_FILE}; \
 				fi; \
 			done; \
-			${ECHO_CMD} "SIZE ($$file) = "`${LS} -ALln $$file | ${AWK} '{print $$5}'` >> ${DISTINFO_FILE}; \
+			${ECHO_CMD} "SIZE ($$file) = `${STAT} -f \"%z\" $$file`" >> ${DISTINFO_FILE}; \
 		done \
 	)
 	@for file in ${_IGNOREFILES}; do \
@@ -5695,6 +5724,7 @@ generate-plist:
 .endif
 .endif
 .endif
+	@cd ${.CURDIR} && { ${MAKE} pretty-print-config | fold -sw 120 | ${SED} -e 's/^/@comment OPTIONS:/'; } >> ${TMPPLIST}
 .endif
 
 ${TMPPLIST}:
@@ -5771,6 +5801,13 @@ add-plist-data:
 	@${ECHO_CMD} "@dirrm ${DATADIR:S,^${PREFIX}/,,}" >> ${TMPPLIST}
 .else
 	@${DO_NADA}
+.endif
+.endif
+
+.if !target(add-plist-buildinfo)
+add-plist-buildinfo:
+.if defined(PACKAGE_BUILDING)
+	@${ECHO_CMD} "@comment Build details:  ${BUILDHOST}|${JAIL}|${BUILD}|${PORTSTREE}|${BUILDDATE}" >> ${TMPPLIST}
 .endif
 .endif
 
@@ -6058,8 +6095,8 @@ DEFOPTIONS+=	${opt} "S(${single}): "${${opt}_DESC:Q} on
 .undef opt
 .endif # pre-config
 
-.if !target(config)
-config: pre-config
+.if !target(do-config)
+do-config:
 .if empty(ALL_OPTIONS) && empty(OPTIONS_SINGLE) && empty(OPTIONS_MULTI)
 	@${ECHO_MSG} "===> No options to configure"
 .else
@@ -6110,6 +6147,10 @@ config: pre-config
 	${RM} -f $${TMPOPTIONSFILE}
 	@cd ${.CURDIR} && ${MAKE} sanity-config
 .endif
+.endif # do-config
+
+.if !target(config)
+config: pre-config do-config
 .endif # config
 
 .if !target(config-recursive)
@@ -6124,7 +6165,7 @@ config-recursive:
 config-conditional: pre-config
 .if defined(COMPLETE_OPTIONS_LIST) && !defined(NO_DIALOG)
 .  if !defined(_FILE_COMPLETE_OPTIONS_LIST) || ${COMPLETE_OPTIONS_LIST:O} != ${_FILE_COMPLETE_OPTIONS_LIST:O}
-	@cd ${.CURDIR} && ${MAKE} config;
+	@cd ${.CURDIR} && ${MAKE} do-config;
 .  endif
 .endif
 .endif # config-conditional
