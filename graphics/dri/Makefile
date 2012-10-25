@@ -1,9 +1,5 @@
-# New ports collection makefile for:    dri
-# Date created:		8 Nov 2003
-# Whom:			anholt@FreeBSD.org
-#
+# Created by: anholt@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	dri
 PORTVERSION=	${MESAVERSION}

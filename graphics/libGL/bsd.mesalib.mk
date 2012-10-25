@@ -14,13 +14,12 @@
 #    - graphics/dri
 #
 # $FreeBSD$
-#
 
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_XORG)
-MESABASEVERSION=	8.0.4
+MESABASEVERSION=	8.0.5
 # if there is a subversion, include the '-' between 7.11-rc2 for example.
 MESASUBVERSION=		
 PLIST_SUB+=	OLD="@comment " NEW=""
@@ -54,7 +53,6 @@ CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
 EXTRA_PATCHES+=	${PATCHDIR}/extra-configure \
 		${PATCHDIR}/extra-src-glsl_ir_constant_expression.cpp \
 		${PATCHDIR}/extra-src__gallium__include__pipe__p_config.h \
-		${PATCHDIR}/extra-src__mesa__drivers__dri__i965__brw_context.c \
 		${PATCHDIR}/extra-src__mesa__drivers__dri__nouveau__nouveau_array.c \
 		${PATCHDIR}/extra-src__mesa__drivers__dri__nouveau__nouveau_render_t.c
 .else
