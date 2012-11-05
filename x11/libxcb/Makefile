@@ -6,7 +6,7 @@
 #
 
 PORTNAME=	libxcb
-PORTVERSION=	1.8.1
+PORTVERSION=	1.9
 CATEGORIES=	x11 python
 MASTER_SITES=	http://xcb.freedesktop.org/dist/
 
@@ -45,6 +45,8 @@ XDMCP_LIBS=	-L${LOCALBASE}/lib -lXdmcp
 
 XPROTO_CFLAGS=	-I${LOCALBASE}/include
 XPROTO_LIBS=	-L${LOCALBASE}/lib
+
+.include "${.CURDIR}/manpages"
 
 post-install:
 .if !defined(NOPORTDOCS)
