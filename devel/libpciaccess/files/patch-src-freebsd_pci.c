@@ -1,5 +1,5 @@
 --- src/freebsd_pci.c.orig	2012-04-09 19:02:57.000000000 +0200
-+++ src/freebsd_pci.c	2012-09-03 18:55:20.000000000 +0200
++++ src/freebsd_pci.c	2012-11-16 17:58:08.000000000 +0100
 @@ -1,6 +1,8 @@
  /*
   * (C) Copyright Eric Anholt 2006
@@ -9,12 +9,20 @@
   * All Rights Reserved.
   *
   * Permission is hereby granted, free of charge, to any person obtaining a
-@@ -561,6 +563,138 @@
+@@ -561,6 +563,146 @@
      freebsd_pci_sys = NULL;
  }
  
 +#if defined(__i386__) || defined(__amd64__)
 +#include <machine/bus.h>
++/* check this OSVERSION */
++# if __FreeBSD_version < 900000
++#  if defined(__i386__)
++#define X86_BUS_SPACE_IO I386_BUS_SPACE_IO
++#  else
++#define X86_BUS_SPACE_IO AMD64_BUS_SPACE_IO
++#  endif
++# endif
 +#endif
 +
 +static struct pci_io_handle *
@@ -148,7 +156,7 @@
  static const struct pci_system_methods freebsd_pci_methods = {
      .destroy = pci_system_freebsd_destroy,
      .destroy_device = NULL, /* nothing to do for this */
-@@ -571,6 +705,18 @@
+@@ -571,6 +713,18 @@
      .read = pci_device_freebsd_read,
      .write = pci_device_freebsd_write,
      .fill_capabilities = pci_fill_capabilities_generic,
