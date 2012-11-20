@@ -22,11 +22,13 @@ USE_XORG=	xvmc xineramaproto x11 xf86driproto glproto
 MAN4=		intel.4x
 
 .if defined(WITH_NEW_XORG)
-INTEL_VERSION=	2.20.4
+INTEL_VERSION=	2.20.13
 INTEL_REVISION=	0
+CONFIGURE_ARGS+=	--enable-sna
 MAKE_JOBS_UNSAFE=yes
 PLIST_SUB+=	OLD="@comment "
-EXTRA_PATCHES+=	${PATCHDIR}/extra-i915kms
+EXTRA_PATCHES+=	${PATCHDIR}/extra-i915kms \
+		${PATCHDIR}/extra-configure-sna
 LIB_DEPENDS+=	xcb-util:${PORTSDIR}/x11/xcb-util
 .else
 INTEL_VERSION=	2.7.1
@@ -52,8 +54,6 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-src_ch7017_ch7017.c \
 		${PATCHDIR}/extra-src_i830_i2c.c \
 		${PATCHDIR}/extra-uxa_uxa-priv.h
 .endif
-
-CONFIGURE_ARGS+=--disable-sna
 
 .include <bsd.port.pre.mk>
 
