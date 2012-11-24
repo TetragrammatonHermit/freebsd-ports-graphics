@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xorg-macros
-# Date Created:				24 Mar 2007
-# Whom:					Eric Anholt <anholt@FreeBSD.org>
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xorg-macros
 PORTVERSION=	1.17

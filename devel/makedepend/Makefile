@@ -1,9 +1,5 @@
-# New ports collection makefile for:	makedepend
-# Date created:				August 15th 1997
-# Whom:					Ian Vaudrey <i.vaudrey@bigfoot.com>
-#
+# Created by: Ian Vaudrey <i.vaudrey@bigfoot.com>
 # $FreeBSD$
-#
 
 PORTNAME=	makedepend
 PORTVERSION=	1.0.4

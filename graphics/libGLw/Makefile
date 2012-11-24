@@ -1,9 +1,5 @@
-# New ports collection makefile for:    libGLw
-# Date created:		7 May 2004
-# Whom:			anholt@FreeBSD.org
-#
+# Created by: anholt@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	libGLw
 PORTVERSION=	8.0.0

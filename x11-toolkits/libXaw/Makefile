@@ -1,9 +1,5 @@
-# New ports collection makefile for:   libXaw
-# Date Created:			25 Jan, 2003
-# Whom:				Eric Anholt <anholt@FreeBSD.org>
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	libXaw
 PORTVERSION=	1.0.11

@@ -1,9 +1,5 @@
-# New ports collection makefile for:	libpciaccess
-# Date Created:				May 11 2008
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	libpciaccess
 PORTVERSION=	0.13.1

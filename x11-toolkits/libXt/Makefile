@@ -1,9 +1,5 @@
-# New ports collection makefile for:   libXt
-# Date Created:			25 Jan, 2003
-# Whom:				Eric Anholt <anholt@FreeBSD.org>
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	libXt
 PORTVERSION=	1.1.3

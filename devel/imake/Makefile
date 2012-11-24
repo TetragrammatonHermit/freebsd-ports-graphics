@@ -1,9 +1,5 @@
-# New ports collection makefile for:    imake-6
-# Date created:         18 Jun 2004
-# Whom:                 anholt
-#
+# Created by: anholt
 # $FreeBSD$
-#
 
 PORTNAME=	imake
 PORTVERSION=	1.0.5

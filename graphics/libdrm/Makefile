@@ -1,9 +1,5 @@
-# New ports collection makefile for:	libdrm
-# Date created:				29 Dec 2005
-# Whom:					lesi@FreeBSD.org
-#
+# Created by: lesi@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	libdrm
 PORTVERSION=	${LIBDRM_VERSION}
@@ -26,8 +22,8 @@ MAKE_JOBS_SAFE=	yes
 .if defined(WITH_NEW_XORG)
 
 OPTIONS_DEFINE=	KMS
-KMS_DESC=	Enable KMS support
 OPTIONS_DEFAULT=KMS
+KMS_DESC=	Enable KMS support
 
 .include <bsd.port.options.mk>
 
