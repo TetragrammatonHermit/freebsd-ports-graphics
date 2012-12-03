@@ -29,8 +29,7 @@ KMS_DESC=	Enable KMS support
 
 .if ${PORT_OPTIONS:MKMS}
 CONFIGURE_ARGS+=--enable-libkms
-EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c \
-		${FILESDIR}/extra-intel__intel__bufmgr__gem.c
+EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c
 PLIST_SUB+=	KMS=""
 .else
 PLIST_SUB+=	KMS="@comment "
@@ -39,6 +38,7 @@ PLIST_SUB+=	KMS="@comment "
 LIBDRM_VERSION=	2.4.37
 LIBDRM_REVISION=1
 PLIST_SUB+=	OLD="@comment " NEW=""
+EXTRA_PATCHES+=	${FILESDIR}/extra-intel__intel__bufmgr__gem.c
 .else
 LIBDRM_VERSION=	2.4.17
 LIBDRM_REVISION=0
