@@ -1,12 +1,7 @@
-# New ports collection makefile for:	pixman
-# Date Created:				Aug 9 2003
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
 # $FreeBSD$
-#
 
 PORTNAME=	pixman
-PORTVERSION=	0.26.2
+PORTVERSION=	0.28.2
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
