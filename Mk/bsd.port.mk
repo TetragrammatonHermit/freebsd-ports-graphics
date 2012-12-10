@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 305677 2012-10-10 18:20:21Z beat $
+# $FreeBSD: head/Mk/bsd.port.mk 308603 2012-12-10 12:46:43Z kwm $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -1476,7 +1476,7 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 .include "${PORTSDIR}/Mk/bsd.wx.mk"
 .endif
 
-.if defined(WANT_GSTREAMER) || defined(USE_GSTREAMER) || defined(USE_GSTREAMER80)
+.if defined(WANT_GSTREAMER) || defined(USE_GSTREAMER) || defined(USE_GSTREAMER1)
 .include "${PORTSDIR}/Mk/bsd.gstreamer.mk"
 .endif
 
@@ -2024,7 +2024,7 @@ IGNORE=	uses unknown USE_BISON construct
 .include "${PORTSDIR}/Mk/bsd.database.mk"
 .endif
 
-.if defined(WANT_GSTREAMER) || defined(USE_GSTREAMER) || defined(USE_GSTREAMER80)
+.if defined(WANT_GSTREAMER) || defined(USE_GSTREAMER) || defined(USE_GSTREAMER1)
 .include "${PORTSDIR}/Mk/bsd.gstreamer.mk"
 .endif
 
@@ -3312,6 +3312,7 @@ DEPENDS_ARGS+=	NOCLEANDEPENDS=yes
 #
 ################################################################
 .if ((!defined(OPTIONS_DEFINE) && !defined(OPTIONS_SINGLE) && !defined(OPTIONS_MULTI)) \
+	&& !defined(OPTIONS_GROUP) && !defined(OPTIONS_RADIO) \
 	|| defined(CONFIG_DONE_${UNIQUENAME:U}) || \
 	defined(PACKAGE_BUILDING) || defined(BATCH))
 _OPTIONS_OK=yes
@@ -6007,6 +6008,19 @@ OPTIONS_WRONG_SINGLE+=	${single}
 .endfor
 .undef single
 
+.for radio in ${OPTIONS_RADIO}
+.  for opt in ${OPTIONS_RADIO_${radio}}
+.    if !empty(PORT_OPTIONS:M${opt})
+.      if defined(OPTFOUND)
+OPTIONS_WRONG_RADIO+=	${radio}
+.      else
+OPTFOUND=	true
+.      endif
+.    endif
+.  endfor
+.  undef OPTFOUND
+.endfor
+
 .for multi in ${OPTIONS_MULTI}
 .  for opt in ${OPTIONS_MULTI_${multi}}
 .    if empty(ALL_OPTIONS:M${multi}) || !empty(PORT_OPTIONS:M${multi})
@@ -6038,7 +6052,10 @@ _check-config: pre-check-config
 .for single in ${OPTIONS_WRONG_SINGLE}
 	@${ECHO_MSG} "====> You must select one and only one option from the ${single} single"
 .endfor
-.if !empty(OPTIONS_WRONG_MULTI) || !empty(OPTIONS_WRONG_SINGLE)
+.for radio in ${OPTIONS_WRONG_RADIO}
+	@${ECHO_MSG} "====> You cannot select multiple options from the ${radio} radio"
+.endfor
+.if !empty(OPTIONS_WRONG_MULTI) || !empty(OPTIONS_WRONG_SINGLE) || !empty(OPTIONS_WRONG_RADIO)
 _CHECK_CONFIG_ERROR=	true
 .endif
 .endif # _check-config
@@ -6090,14 +6107,33 @@ DEFOPTIONS+=	${opt} "S(${single}): "${${opt}_DESC:Q} on
 .    endif
 .  endfor
 .endfor
+.for radio in ${OPTIONS_RADIO}
+.  for opt in ${OPTIONS_RADIO_${radio}}
+.    if empty(PORT_OPTIONS:M${opt})
+DEFOPTIONS+=	${opt} "R(${radio}): "${${opt}_DESC:Q} off
+.    else
+DEFOPTIONS+=	${opt} "R(${radio}): "${${opt}_DESC:Q} on
+.    endif
+.  endfor
+.endfor
+.for group in ${OPTIONS_GROUP}
+.  for opt in ${OPTIONS_GROUP_${group}}
+.    if empty(PORT_OPTIONS:M${opt})
+DEFOPTIONS+=	${opt} "G(${group}): "${${opt}_DESC:Q} off
+.    else
+DEFOPTIONS+=	${opt} "G(${group}): "${${opt}_DESC:Q} on
+.    endif
+.  endfor
+.endfor
 .undef multi
 .undef single
+.undef group
 .undef opt
 .endif # pre-config
 
 .if !target(do-config)
 do-config:
-.if empty(ALL_OPTIONS) && empty(OPTIONS_SINGLE) && empty(OPTIONS_MULTI)
+.if empty(ALL_OPTIONS) && empty(OPTIONS_SINGLE) && empty(OPTIONS_MULTI) && empty(OPTIONS_RADIO) && empty(OPTIONS_GROUP)
 	@${ECHO_MSG} "===> No options to configure"
 .else
 .if ${UID} != 0 && !defined(INSTALL_AS_USER)
@@ -6173,7 +6209,7 @@ config-conditional: pre-config
 .if !target(showconfig)
 .include "${PORTSDIR}/Mk/bsd.options.desc.mk"
 showconfig:
-.if !empty(ALL_OPTIONS) || !empty(OPTIONS_SINGLE) || !empty(OPTIONS_MULTI)
+.if !empty(ALL_OPTIONS) || !empty(OPTIONS_SINGLE) || !empty(OPTIONS_MULTI) || !empty(OPTIONS_RADIO) || !empty(OPTIONS_GROUP)
 	@${ECHO_MSG} "===> The following configuration options are available for ${PKGNAME}":
 .for opt in ${ALL_OPTIONS}
 .  if empty(PORT_OPTIONS:M${opt})
@@ -6218,8 +6254,40 @@ showconfig:
 .  endfor
 .endfor
 
+.for radio in ${OPTIONS_RADIO}
+	@${ECHO_MSG} "====> Options available for the radio ${radio}: you can only select none or one of them"
+.  for opt in ${OPTIONS_RADIO_${radio}}
+.    if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "     ${opt}=off"
+.    else
+	@${ECHO_MSG} -n "     ${opt}=on"
+.    endif
+.    if !empty(${opt}_DESC)
+	@${ECHO_MSG} -n ": "${${opt}_DESC:Q}
+.    endif
+	@${ECHO_MSG} ""
+.  endfor
+.endfor
+
+.for group in ${OPTIONS_GROUP}
+	@${ECHO_MSG} "====> Options available for the group ${group}"
+.  for opt in ${OPTIONS_GROUP_${group}}
+.    if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "     ${opt}=off"
+.    else
+	@${ECHO_MSG} -n "     ${opt}=on"
+.    endif
+.    if !empty(${opt}_DESC)
+	@${ECHO_MSG} -n ": "${${opt}_DESC:Q}
+.    endif
+	@${ECHO_MSG} ""
+.  endfor
+.endfor
+
 .undef multi
 .undef single
+.undef radio
+.undef group
 .undef opt
 	@${ECHO_MSG} "===> Use 'make config' to modify these settings"
 .endif
@@ -6291,8 +6359,32 @@ pretty-print-config:
 .  endfor
 	@${ECHO_MSG} -n ") "
 .endfor
+.for radio in ${OPTIONS_RADIO}
+	@${ECHO_MSG} -n "${radio}( "
+.  for opt in ${OPTIONS_RADIO_${radio}}
+.    if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "-${opt} "
+.    else
+	@${ECHO_MSG} -n "+${opt} "
+.    endif
+.  endfor
+	@${ECHO_MSG} -n ") "
+.endfor
+.for group in ${OPTIONS_GROUP}
+	@${ECHO_MSG} -n "${group}[ "
+.  for opt in ${OPTIONS_GROUP_${group}}
+.    if empty(PORT_OPTIONS:M${opt})
+	@${ECHO_MSG} -n "-${opt} "
+.    else
+	@${ECHO_MSG} -n "+${opt} "
+.    endif
+.  endfor
+	@${ECHO_MSG} -n "] "
+.endfor
 .undef multi
 .undef single
+.undef radio
+.undef group
 .undef opt
 	@${ECHO_MSG} ""
 .endif # pretty-print-config
