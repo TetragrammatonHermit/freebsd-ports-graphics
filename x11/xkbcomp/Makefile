@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xkbcomp
-# Date Created:				17 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xkbcomp
 PORTVERSION=	1.2.4

@@ -1,9 +1,5 @@
-# New ports collection makefile for:   libXi
-# Date Created:			22 Nov, 2003
-# Whom:				Eric Anholt <anholt@FreeBSD.org>
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	libXi
 PORTVERSION=	1.6.1

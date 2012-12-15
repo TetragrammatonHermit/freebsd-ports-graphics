@@ -1,9 +1,5 @@
-# New ports collection makefile for:    xorg-drivers
-# Date created:				Jun 22 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xorg-drivers
 PORTVERSION=	7.7

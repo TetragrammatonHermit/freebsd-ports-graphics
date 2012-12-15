@@ -1,9 +1,5 @@
-# New ports collection makefile for:	font-util
-# Date Created:				28 Aug 2005
-# Whom:					Pawel Worach
-#
+# Created by: Pawel Worach
 # $FreeBSD$
-#
 
 PORTNAME=	font-util
 PORTVERSION=	1.3.0

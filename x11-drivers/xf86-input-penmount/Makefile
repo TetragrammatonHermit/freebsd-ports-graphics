@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-input-penmount
-# Date Created:				17 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xf86-input-penmount
 PORTVERSION=	${PEN_VERSION}

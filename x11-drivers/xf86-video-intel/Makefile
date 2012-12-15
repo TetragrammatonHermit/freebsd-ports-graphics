@@ -1,5 +1,5 @@
 # Created by: lesi@FreeBSD.org
-# $FreeBSD: svn://svn.freebsd.org/ports/head/x11-drivers/xf86-video-intel/Makefile 300897 2012-07-14 14:29:18Z beat $
+# $FreeBSD$
 
 PORTNAME=	xf86-video-intel
 PORTVERSION=	${INTEL_VERSION}

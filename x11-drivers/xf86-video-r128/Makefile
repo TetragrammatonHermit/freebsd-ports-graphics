@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-video-r128
-# Date Created:				17 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
-# $FreeBSD: ports/x11-drivers/xf86-video-r128/Makefile,v 1.11 2012/04/21 17:03:27 miwi Exp $
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
+# $FreeBSD$
 
 PORTNAME=	xf86-video-r128
 PORTVERSION=	6.8.4

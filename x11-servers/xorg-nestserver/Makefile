@@ -1,9 +1,5 @@
-# New ports collection makefile for:    xorg-nestserver
-# Date created:		21 July 2004
-# Whom:			anholt@FreeBSD.org
-#
+# Created by: anholt@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	xorg-nestserver
 

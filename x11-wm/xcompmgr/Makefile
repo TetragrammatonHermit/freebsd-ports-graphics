@@ -1,9 +1,5 @@
-# New ports collection makefile for:   xcompmgr
-# Date Created:			16 Oct, 2004
-# Whom:				Eric Anholt <anholt@FreeBSD.org>
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xcompmgr
 PORTVERSION=	1.1.6

@@ -1,9 +1,5 @@
-# New ports collection makefile for:   libXv
-# Date Created:			13 Nov, 2003
-# Whom:				Eric Anholt <anholt@FreeBSD.org>
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	libXv
 PORTVERSION=	1.0.7

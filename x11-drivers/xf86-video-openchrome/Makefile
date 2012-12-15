@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-video-openchrome
-# Date Created:				17 Sep 2007
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xf86-video-openchrome
 PORTVERSION=	0.3.0

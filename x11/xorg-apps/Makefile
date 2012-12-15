@@ -1,9 +1,5 @@
-# New ports collection makefile for:    xorg-apps
-# Date created:				Jun 22 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
-# $FreeBSD: ports/x11/xorg-apps/Makefile,v 1.12 2012/04/21 17:03:20 miwi Exp $
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
+# $FreeBSD$
 
 PORTNAME=	xorg-apps
 PORTVERSION=	7.7

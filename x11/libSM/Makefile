@@ -1,9 +1,5 @@
-# New ports collection makefile for:   libSM
-# Date Created:			09 Nov, 2003
-# Whom:				Eric Anholt <anholt@FreeBSD.org>
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	libSM
 PORTVERSION=	1.2.1

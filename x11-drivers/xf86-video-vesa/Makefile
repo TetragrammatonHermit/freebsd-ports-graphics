@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-video-vesa
-# Date Created:				17 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xf86-video-vesa
 PORTVERSION=	2.3.2

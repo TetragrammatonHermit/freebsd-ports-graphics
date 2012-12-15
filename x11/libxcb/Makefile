@@ -1,9 +1,5 @@
-# New ports collection makefile for:	libxcb
-# Date Created:				2006-08-23
-# Whom:					Ashish Shukla <wahjava@gmail.com>
-#
+# Created by: Ashish Shukla <wahjava@gmail.com>
 # $FreeBSD$
-#
 
 PORTNAME=	libxcb
 PORTVERSION=	1.9

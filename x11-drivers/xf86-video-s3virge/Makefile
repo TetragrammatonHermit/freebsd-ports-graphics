@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-video-s3virge
-# Date Created:				17 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xf86-video-s3virge
 PORTVERSION=	1.10.6

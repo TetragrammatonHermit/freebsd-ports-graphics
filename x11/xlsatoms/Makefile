@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xlsatoms
-# Date Created:				17 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xlsatoms
 PORTVERSION=	1.1.1

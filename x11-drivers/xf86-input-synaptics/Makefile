@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-input-synaptics
-# Date Created:				25 Sep 2008
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xf86-input-synaptics
 PORTVERSION=	1.6.2

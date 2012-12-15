@@ -1,9 +1,5 @@
-# New ports collection makefile for:	mkfontscale
-# Date Created:				28 Aug 2005
-# Whom:					Pawel Worach
-#
+# Created by: Pawel Worach
 # $FreeBSD$
-#
 
 PORTNAME=	mkfontscale
 PORTVERSION=	1.1.0

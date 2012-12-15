@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-video-intel
-# Date Created:				28 May 2007
-# Whom:					lesi@FreeBSD.org
-#
+# Created by: lesi@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	xf86-video-intel29
 PORTVERSION=	2.9.1

@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xinput
-# Date created:			05 July 2003
-# Whom:				Martin Ranne <gasp@ridcully.dnsalias.org>
-#
+# Created by: Martin Ranne <gasp@ridcully.dnsalias.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xinput
 PORTVERSION=	1.6.0

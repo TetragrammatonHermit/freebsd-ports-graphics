@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-video-nv
-# Date Created:				17 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
-# $FreeBSD: ports/x11-drivers/xf86-video-nv/Makefile,v 1.26 2012/04/21 17:03:27 miwi Exp $
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
+# $FreeBSD$
 
 PORTNAME=	xf86-video-nv
 PORTVERSION=	2.1.20

@@ -1,9 +1,5 @@
-# New ports collection makefile for:    xorg-dmx
-# Date created:		13 Mar 2005
-# Whom:			lesi@FreeBSD.org
-#
+# Created by: lesi@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	xorg-dmx
 PORTREVISION=	0

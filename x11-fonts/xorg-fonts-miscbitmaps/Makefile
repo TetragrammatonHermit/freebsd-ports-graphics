@@ -1,9 +1,5 @@
-# New ports collection makefile for:    xorg-fonts-miscbitmaps
-# Date created:		30 May 2004
-# Whom:			anholt@FreeBSD.org
-#
+# Created by: anholt@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	xorg-fonts-miscbitmaps
 PORTVERSION=	7.7

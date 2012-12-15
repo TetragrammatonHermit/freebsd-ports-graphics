@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-video-nouveau
-# Date Created:				29 Jan 2009
-# Whom:					Anonymous <swell.k@gmail.com>
-#
+# Created by: Anonymous <swell.k@gmail.com>
 # $FreeBSD$
-#
 
 PORTNAME=	xf86-video-nouveau
 PORTVERSION=	0.0.10.${SNAPDATE}

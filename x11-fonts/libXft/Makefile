@@ -1,9 +1,5 @@
-# New ports collection makefile for:	Xft
-# Date created:		06 October 2002
-# Whom:			Joe Marcus Clarke <marcus@FreeBSD.org>
-#
+# Created by: Joe Marcus Clarke <marcus@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	libXft
 PORTVERSION=	2.3.1

@@ -1,9 +1,5 @@
-# New ports collection makefile for:	listres
-# Date Created:				17 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	listres
 PORTVERSION=	1.0.3

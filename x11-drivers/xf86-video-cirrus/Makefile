@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-video-cirrus
-# Date Created:				17 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xf86-video-cirrus
 PORTVERSION=	1.5.1

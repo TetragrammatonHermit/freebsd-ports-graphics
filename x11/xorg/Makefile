@@ -1,9 +1,5 @@
-# New ports collection makefile for:    xorg
-# Date created:		18 Jun 2004
-# Whom:			anholt
-#
+# Created by: anholt
 # $FreeBSD$
-#
 
 PORTNAME=	xorg
 PORTVERSION=	7.7

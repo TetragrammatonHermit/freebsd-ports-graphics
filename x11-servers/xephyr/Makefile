@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xephyr
-# Date created:				2008-05-18
-# Whom:					Max Brazhnikov <makc@issp.ac.ru>
-#
+# Created by: Max Brazhnikov <makc@issp.ac.ru>
 # $FreeBSD$
-#
 
 PORTNAME=	xephyr
 PORTREVISION=	0

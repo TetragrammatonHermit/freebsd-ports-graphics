@@ -1,9 +1,5 @@
-# New ports collection makefile for:    mesa-demos
-# Date created:         7 Nov 2003
-# Whom:                 anholt@FreeBSD.org
-#
+# Created by: anholt@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	mesa-demos
 PORTVERSION=	8.0.1

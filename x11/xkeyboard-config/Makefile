@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xkeyboard-config
-# Date Created:				Dec 20 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xkeyboard-config
 PORTVERSION=	2.5.1

@@ -1,9 +1,5 @@
-# New ports collection makefile for:   libXdmcp
-# Date Created:			28 Oct, 2003
-# Whom:				Eric Anholt <anholt@FreeBSD.org>
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	libXdmcp
 PORTVERSION=	1.1.1

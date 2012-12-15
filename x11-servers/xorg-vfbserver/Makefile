@@ -1,9 +1,5 @@
-# New ports collection makefile for:    xorg-vfbserver
-# Date created:		17 June 2004
-# Whom:			anholt@FreeBSD.org
-#
+# Created by: anholt@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	xorg-vfbserver
 

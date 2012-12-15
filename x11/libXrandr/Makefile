@@ -1,9 +1,5 @@
-# New ports collection makefile for:   libXrandr
-# Date Created:			9 Nov, 2003
-# Whom:				Eric Anholt <anholt@FreeBSD.org>
-#
-# $FreeBSD: ports/x11/libXrandr/Makefile,v 1.19 2011/11/09 15:25:49 miwi Exp $
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
+# $FreeBSD$
 
 PORTNAME=	libXrandr
 PORTVERSION=	1.4.0

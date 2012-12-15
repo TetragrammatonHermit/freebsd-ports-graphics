@@ -1,9 +1,5 @@
-# New ports collection makefile for:	libFS
-# Date Created:				21 Feb 2006
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	libFS
 PORTVERSION=	1.0.4

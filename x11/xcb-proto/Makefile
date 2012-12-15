@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xcb-proto
-# Date Created:				2006-08-23
-# Whom:					Ashish Shukla <wahjava@gmail.com>
-#
+# Created by: Ashish Shukla <wahjava@gmail.com>
 # $FreeBSD$
-#
 
 PORTNAME=	xcb-proto
 PORTVERSION=	1.8

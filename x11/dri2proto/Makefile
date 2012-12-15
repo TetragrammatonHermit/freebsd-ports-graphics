@@ -1,9 +1,5 @@
-# New ports collection makefile for:	dri2proto
-# Date Created:				Jul 28 2008
-# Whom:					Florent Thoumie <flz@FreeBSD.org>
-#
+# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	dri2proto
 PORTVERSION=	2.8

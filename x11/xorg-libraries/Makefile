@@ -1,9 +1,5 @@
-# New ports collection makefile for:    xorg-libraries
-# Date created:		29 May 2004
-# Whom:			anholt@FreeBSD.org
-#
-# $FreeBSD: ports/x11/xorg-libraries/Makefile,v 1.30 2012/02/27 17:45:44 eadler Exp $
-#
+# Created by: anholt@FreeBSD.org
+# $FreeBSD$
 
 PORTNAME=	xorg-libraries
 PORTVERSION=	7.7

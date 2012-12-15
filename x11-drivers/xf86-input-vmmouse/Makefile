@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xf86-input-vmmouse
-# Date Created:				17 Feb 2006
-# Whom:					NIIMI Satoshi <sa2c@sa2c.net>
-#
+# Created by: NIIMI Satoshi <sa2c@sa2c.net>
 # $FreeBSD$
-#
 
 PORTNAME=	xf86-input-vmmouse
 PORTVERSION=	12.7.0

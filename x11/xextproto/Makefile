@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xextproto
-# Date Created:				07 Aug 2005
-# Whom:					Dejan Lesjak <lesi@FreeBSD.org>
-#
-# $FreeBSD:$
-#
+# Created by: Dejan Lesjak <lesi@FreeBSD.org>
+# $FreeBSD$
 
 PORTNAME=	xextproto
 PORTVERSION=	7.2.1

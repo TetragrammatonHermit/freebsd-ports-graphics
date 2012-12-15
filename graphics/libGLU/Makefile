@@ -1,9 +1,5 @@
-# New ports collection makefile for:    libGLU
-# Date created:		7 May 2004
-# Whom:			anholt@FreeBSD.org
-#
+# Created by: anholt@FreeBSD.org
 # $FreeBSD$
-#
 
 PORTNAME=	libGLU
 PORTVERSION=	${MESAVERSION}

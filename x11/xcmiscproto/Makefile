@@ -1,9 +1,5 @@
-# New ports collection makefile for:	xcmiscproto
-# Date Created:				08 Aug 2005
-# Whom:					Dejan Lesjak <lesi@FreeBSD.org>
-#
+# Created by: Dejan Lesjak <lesi@FreeBSD.org>
 # $FreeBSD$
-#
 
 PORTNAME=	xcmiscproto
 PORTVERSION=	1.2.2
