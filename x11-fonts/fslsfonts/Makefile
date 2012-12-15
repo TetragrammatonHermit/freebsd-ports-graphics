@@ -1,4 +1,3 @@
-# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
 
 PORTNAME=	fslsfonts

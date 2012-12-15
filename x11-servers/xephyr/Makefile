@@ -1,4 +1,3 @@
-# Created by: Max Brazhnikov <makc@issp.ac.ru>
 # $FreeBSD$
 
 PORTNAME=	xephyr

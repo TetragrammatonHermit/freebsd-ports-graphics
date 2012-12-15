@@ -1,4 +1,3 @@
-# Created by: Florent Thoumie <flz@FreeBSD.org>
 # $FreeBSD$
 
 PORTNAME=	xf86-video-s3virge
