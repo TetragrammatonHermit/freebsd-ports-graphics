@@ -91,6 +91,9 @@ QUIRKS=		keyboard:kbd jamstudio:js_x
 
 .include <bsd.port.options.mk>
 
+# these drivers are only used depending on arch.
+VIDEO_DRIVERS+=	intel openchrome sunffb
+
 .for type in input video
 . for i in ${${type:U}_DRIVERS}
 .  if ${PORT_OPTIONS:M${i:U}} != ""
