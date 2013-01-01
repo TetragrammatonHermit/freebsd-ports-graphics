@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 308603 2012-12-10 12:46:43Z kwm $
+# $FreeBSD: head/Mk/bsd.port.mk 308910 2012-12-14 15:47:00Z flo $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -407,6 +407,9 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # WANT_FAM_SYSTEM
 #				- Legal values are: gamin (default),fam
 #				  If set to an unknown value, the port is marked IGNORE.
+##
+# USE_FUSE		- If set, make sure necessary components unavailable in base
+#				  are installed from ports.
 ##
 # USE_AUTOTOOLS	- If set, this port uses various GNU autotools
 #				  (libtool, autoconf, autoheader, automake et al.)
@@ -1832,6 +1835,13 @@ LIB_DEPENDS+=	${FAM_SYSTEM_${FAM_SYSTEM:U}}
 IGNORE=		cannot be built with unknown FAM system: ${FAM_SYSTEM}
 .endif
 .endif # USE_FAM
+
+.if defined(USE_FUSE)
+LIB_DEPENDS+=	fuse:${PORTSDIR}/sysutils/fusefs-libs
+.if !exists(/sbin/mount_fusefs)
+RUN_DEPENDS+=	mount_fusefs:${PORTSDIR}/sysutils/fusefs-kmod
+.endif
+.endif
 
 .if defined(USE_RC_SUBR) && ${USE_RC_SUBR:U} != "YES"
 SUB_FILES+=	${USE_RC_SUBR}
