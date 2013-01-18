@@ -33,7 +33,8 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-include_eventstr.h \
 		${FILESDIR}/extra-os-utils.c \
 		${FILESDIR}/extra-Xserver-hw-xfree86-os-support-bsd-sparc64_video.c \
 		${FILESDIR}/extra-Xserver-os-xprintf.c \
-		${FILESDIR}/extra-servermd.h
+		${FILESDIR}/extra-servermd.h \
+		${FILESDIR}/extra-arch-i386
 .endif
 
 USE_BZIP2=	yes
