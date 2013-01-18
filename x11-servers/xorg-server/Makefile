@@ -33,8 +33,7 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-include_eventstr.h \
 		${FILESDIR}/extra-os-utils.c \
 		${FILESDIR}/extra-Xserver-hw-xfree86-os-support-bsd-sparc64_video.c \
 		${FILESDIR}/extra-Xserver-os-xprintf.c \
-		${FILESDIR}/extra-servermd.h \
-		${FILESDIR}/extra-arch-i386
+		${FILESDIR}/extra-servermd.h
 .endif
 
 USE_BZIP2=	yes
@@ -109,6 +108,14 @@ CONFIGURE_ARGS+=	--enable-aiglx=no
 CONFIGURE_ARGS+=--enable-install-setuid=yes
 .else
 CONFIGURE_ARGS+=--enable-install-setuid=no
+.endif
+
+.if ${ARCH} == i386
+.if defined(WITH_NEW_XORG)
+EXTRA_PATCHES+=	${FILESDIR}/extra-new-arch-i386
+.else
+EXTRA_PATCHES+=	${FILESDIR}/extra-old-arch-i386
+.endif
 .endif
 
 .if ${ARCH} == ia64
