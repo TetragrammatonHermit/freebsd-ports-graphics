@@ -40,6 +40,7 @@ LIBDRM_REVISION=1
 PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-intel__intel__bufmgr__gem.c
 .else
+CONFIGURE_ARGS=	--enable-nouveau-experimental-api
 LIBDRM_VERSION=	2.4.17
 LIBDRM_REVISION=0
 PLIST_SUB+=	OLD="" NEW="@comment "
