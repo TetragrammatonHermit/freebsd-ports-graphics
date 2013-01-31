@@ -57,6 +57,7 @@ MAN3=		XAllowDeviceEvents.3 \
 		XIGrabEnter.3\
 		XIGrabFocusIn.3\
 		XIGrabKeycode.3\
+		XIGrabTouchBegin.3 \
 		XIListProperties.3\
 		XIQueryDevice.3\
 		XIQueryPointer.3\
@@ -70,6 +71,7 @@ MAN3=		XAllowDeviceEvents.3 \
 		XIUngrabEnter.3 \
 		XIUngrabFocusIn.3 \
 		XIUngrabKeycode.3 \
+		XIUngrabTouchBegin.3 \
 		XIWarpPointer.3 \
 		XListDeviceProperties.3 \
 		XListInputDevices.3 \
