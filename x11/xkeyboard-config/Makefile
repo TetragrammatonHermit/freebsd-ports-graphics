@@ -1,11 +1,12 @@
 # $FreeBSD$
 
 PORTNAME=	xkeyboard-config
-PORTVERSION=	2.5.1
+PORTVERSION=	2.8
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X Keyboard Configuration Database
+MASTER_SITE_SUBDIR=	individual/${XORG_CAT}/${PORTNAME}
 
 LICENSE=	MIT
 
