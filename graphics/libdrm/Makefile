@@ -35,10 +35,12 @@ PLIST_SUB+=	KMS=""
 PLIST_SUB+=	KMS="@comment "
 .endif
 
-LIBDRM_VERSION=	2.4.37
+LIBDRM_VERSION=	2.4.41
 LIBDRM_REVISION=1
 PLIST_SUB+=	OLD="@comment " NEW=""
-EXTRA_PATCHES+=	${FILESDIR}/extra-intel__intel__bufmgr__gem.c
+EXTRA_PATCHES+=	${FILESDIR}/extra-configure \
+		${FILESDIR}/extra-tests_modetest_modetest.c
+CONFIGURE_ARGS+=--disable-manpages --disable-vmwgfx
 .else
 CONFIGURE_ARGS=	--enable-nouveau-experimental-api
 LIBDRM_VERSION=	2.4.17
