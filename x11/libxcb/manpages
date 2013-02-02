@@ -183,6 +183,9 @@ xcb_dri2_get_buffers_with_format_unchecked.3 \
 xcb_dri2_get_msc.3 \
 xcb_dri2_get_msc_reply.3 \
 xcb_dri2_get_msc_unchecked.3 \
+xcb_dri2_get_param.3 \
+xcb_dri2_get_param_reply.3 \
+xcb_dri2_get_param_unchecked.3 \
 xcb_dri2_invalidate_buffers_event_t.3 \
 xcb_dri2_query_version.3 \
 xcb_dri2_query_version_reply.3 \
