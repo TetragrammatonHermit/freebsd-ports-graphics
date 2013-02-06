@@ -21,9 +21,15 @@ MAKE_JOBS_SAFE=	yes
 
 .if defined(WITH_NEW_XORG)
 
-OPTIONS_DEFINE=	KMS
+USE_GMAKE=	yes
+
+OPTIONS_DEFINE=	KMS MANPAGES
 OPTIONS_DEFAULT=KMS
 KMS_DESC=	Enable KMS support
+
+.if defined(PACKAGE_BUILDING)
+OPTIONS_DEFAULT+=	MANPAGES
+.endif
 
 .include <bsd.port.options.mk>
 
@@ -35,12 +41,27 @@ PLIST_SUB+=	KMS=""
 PLIST_SUB+=	KMS="@comment "
 .endif
 
-LIBDRM_VERSION=	2.4.41
+.if ${PORT_OPTIONS:MMANPAGES}
+BUILD_DEPENDS+=	${LOCALBASE}/share/xsl/docbook/manpages/docbook.xsl:${PORTSDIR}/textproc/docbook-xsl \
+		xsltproc:${PORTSDIR}/textproc/libxslt
+MAN3=		drmAvailable.3 \
+		drmHandleEvent.3 \
+		drmModeGetResources.3
+MAN7=		drm-gem.7 \
+		drm-kms.7 \
+		drm-memory.7 \
+		drm-mm.7 \
+		drm-ttm.7 \
+		drm.7
+.else
+CONFIGURE_ARGS+=--disable-manpages
+.endif
+
+LIBDRM_VERSION=	2.4.42
 LIBDRM_REVISION=1
 PLIST_SUB+=	OLD="@comment " NEW=""
-EXTRA_PATCHES+=	${FILESDIR}/extra-configure \
-		${FILESDIR}/extra-tests_modetest_modetest.c
-CONFIGURE_ARGS+=--disable-manpages --disable-vmwgfx
+EXTRA_PATCHES+= ${FILESDIR}/extra-tests_modetest_modetest.c
+CONFIGURE_ARGS+=--disable-vmwgfx
 .else
 CONFIGURE_ARGS=	--enable-nouveau-experimental-api
 LIBDRM_VERSION=	2.4.17
