@@ -12,7 +12,7 @@
 + * Copyright (c) 2012-2013 Niclas Zeising
 + * All rights reserved
 + */
-+static char *
++char *
 +strchrnul(const char *p, int ch)
 +{
 +	char c;
