@@ -14,6 +14,8 @@ MAN4=		ati.4x radeon.4x
 
 CONFIGURE_ARGS+=--disable-udev
 
+EXTRA_PATCHES+=	${FILESDIR}/extra-src__radeon_kms.c
+
 pre-everything::
 	@${ECHO_CMD}
 	@${ECHO_CMD} "This port is KMS/TTM only, and only for testing the upcoming"
