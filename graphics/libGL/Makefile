@@ -3,7 +3,7 @@
 
 PORTNAME=	libGL
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	1
+PORTREVISION=	3
 CATEGORIES=	graphics
 
 COMMENT=	OpenGL library that renders using GLX or DRI
@@ -11,7 +11,8 @@ COMMENT=	OpenGL library that renders using GLX or DRI
 LIB_DEPENDS+=	drm:${PORTSDIR}/graphics/libdrm \
 		expat.6:${PORTSDIR}/textproc/expat2
 
-USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
+USE_PKGCONFIG=	build
+USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both
 
 SUB_FILES=	pkg-install pkg-deinstall
 
@@ -26,7 +27,7 @@ post-install:
 
 .include <bsd.port.pre.mk>
 
-.if ${ARCH} != "amd64" || ${ARCH} != "i386"
+.if !(${ARCH} == "amd64" || ${ARCH} == "i386")
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 
