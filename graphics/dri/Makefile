@@ -3,7 +3,7 @@
 
 PORTNAME=	dri
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	2
+PORTREVISION=	3
 PORTEPOCH=	2
 CATEGORIES=	graphics
 
@@ -26,7 +26,7 @@ do-install:
 BROKEN=		Does not install on ia64
 .endif
 
-.if ${ARCH} != "amd64" || ${ARCH} != "i386"
+.if !(${ARCH} == "amd64" || ${ARCH} == "i386")
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 
