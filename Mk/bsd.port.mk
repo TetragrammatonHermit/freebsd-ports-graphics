@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 313329 2013-03-03 06:53:34Z miwi $
+# $FreeBSD: head/Mk/bsd.port.mk 313517 2013-03-06 14:28:57Z bapt $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -1153,6 +1153,7 @@ DISTDIR?=		${PORTSDIR}/distfiles
 _DISTDIR?=		${DISTDIR}/${DIST_SUBDIR}
 INDEXDIR?=		${PORTSDIR}
 SRC_BASE?=		/usr/src
+USESDIR?=		${PORTSDIR}/Mk/Uses
 
 .include "${PORTSDIR}/Mk/bsd.commands.mk"
 
@@ -1543,6 +1544,15 @@ check-makefile::
 .endif
 
 _POSTMKINCLUDED=	yes
+
+# Loading features
+.for f in ${USES}
+_f=${f:C/\:.*//g}
+.if ${_f} != ${f}
+${_f}_ARGS:=	${f:C/^[^\:]*\://g}
+.endif
+.include "${USESDIR}/${_f}.mk"
+.endfor
 
 WRKDIR?=		${WRKDIRPREFIX}${.CURDIR}/work
 .if !defined(IGNORE_MASTER_SITE_GITHUB) && defined(USE_GITHUB)
@@ -5743,7 +5753,9 @@ generate-plist:
 .endif
 .endif
 .endif
+.if !defined(WITH_PKGNG)
 	@cd ${.CURDIR} && { ${MAKE} pretty-print-config | fold -sw 120 | ${SED} -e 's/^/@comment OPTIONS:/'; } >> ${TMPPLIST}
+.endif
 .endif
 
 ${TMPPLIST}:
