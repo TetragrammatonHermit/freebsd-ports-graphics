@@ -1,15 +1,15 @@
---- src/glsl/Makefile.in.orig	2010-07-13 20:53:25.000000000 +0200
-+++ src/glsl/Makefile.in	2012-06-27 15:19:03.000000000 +0200
-@@ -59,7 +59,7 @@
+--- src/glsl/Makefile.in.orig	2013-02-24 12:12:04.000000000 +0100
++++ src/glsl/Makefile.in	2013-03-08 14:06:19.689158671 +0100
+@@ -75,7 +75,7 @@
  build_triplet = @build@
  host_triplet = @host@
  @HAVE_GLUT_TRUE@bin_PROGRAMS = array$(EXEEXT) bezier$(EXEEXT) \
 -@HAVE_GLUT_TRUE@	bitmap$(EXEEXT) brick$(EXEEXT) bump$(EXEEXT) \
 +@HAVE_GLUT_TRUE@	bitmap_demo$(EXEEXT) brick$(EXEEXT) bump$(EXEEXT) \
- @HAVE_GLUT_TRUE@	convolutions$(EXEEXT) deriv$(EXEEXT) \
- @HAVE_GLUT_TRUE@	fragcoord$(EXEEXT) fsraytrace$(EXEEXT) \
- @HAVE_GLUT_TRUE@	identity$(EXEEXT) linktest$(EXEEXT) \
-@@ -94,9 +94,9 @@
+ @HAVE_GLUT_TRUE@	blinking-teapot$(EXEEXT) convolutions$(EXEEXT) \
+ @HAVE_GLUT_TRUE@	deriv$(EXEEXT) fragcoord$(EXEEXT) \
+ @HAVE_GLUT_TRUE@	fsraytrace$(EXEEXT) \
+@@ -120,9 +120,9 @@
  bezier_SOURCES = bezier.c
  bezier_OBJECTS = bezier.$(OBJEXT)
  bezier_DEPENDENCIES = ../util/libutil.la
@@ -19,10 +19,10 @@
 +bitmap_demo_SOURCES = bitmap.c
 +bitmap_demo_OBJECTS = bitmap.$(OBJEXT)
 +bitmap_demo_DEPENDENCIES = ../util/libutil.la
- brick_SOURCES = brick.c
- brick_OBJECTS = brick.$(OBJEXT)
- brick_DEPENDENCIES = ../util/libutil.la
-@@ -383,7 +383,7 @@
+ blinking_teapot_SOURCES = blinking-teapot.c
+ blinking_teapot_OBJECTS = blinking-teapot.$(OBJEXT)
+ blinking_teapot_DEPENDENCIES = ../util/libutil.la
+@@ -460,7 +460,7 @@
  samplers_array_SOURCES = samplers.c
  samplers_array_CFLAGS = $(AM_CFLAGS) -DSAMPLERS_ARRAY
  array_LDADD = ../util/libutil.la
@@ -31,16 +31,16 @@
  bezier_LDADD = ../util/libutil.la
  brick_LDADD = ../util/libutil.la
  bump_LDADD = ../util/libutil.la
-@@ -515,9 +515,9 @@
- bezier$(EXEEXT): $(bezier_OBJECTS) $(bezier_DEPENDENCIES) 
+@@ -602,9 +602,9 @@
+ bezier$(EXEEXT): $(bezier_OBJECTS) $(bezier_DEPENDENCIES) $(EXTRA_bezier_DEPENDENCIES) 
  	@rm -f bezier$(EXEEXT)
  	$(AM_V_CCLD)$(LINK) $(bezier_OBJECTS) $(bezier_LDADD) $(LIBS)
--bitmap$(EXEEXT): $(bitmap_OBJECTS) $(bitmap_DEPENDENCIES) 
+-bitmap$(EXEEXT): $(bitmap_OBJECTS) $(bitmap_DEPENDENCIES) $(EXTRA_bitmap_DEPENDENCIES) 
 -	@rm -f bitmap$(EXEEXT)
 -	$(AM_V_CCLD)$(LINK) $(bitmap_OBJECTS) $(bitmap_LDADD) $(LIBS)
-+bitmap_demo$(EXEEXT): $(bitmap_demo_OBJECTS) $(bitmap_demo_DEPENDENCIES) 
++bitmap_demo$(EXEEXT): $(bitmap_demo_OBJECTS) $(bitmap_demo_DEPENDENCIES) $(EXTRA_bitmap_demo_DEPENDENCIES) 
 +	@rm -f bitmap_demo$(EXEEXT)
 +	$(AM_V_CCLD)$(LINK) $(bitmap_demo_OBJECTS) $(bitmap_demo_LDADD) $(LIBS)
- brick$(EXEEXT): $(brick_OBJECTS) $(brick_DEPENDENCIES) 
- 	@rm -f brick$(EXEEXT)
- 	$(AM_V_CCLD)$(LINK) $(brick_OBJECTS) $(brick_LDADD) $(LIBS)
+ blinking-teapot$(EXEEXT): $(blinking_teapot_OBJECTS) $(blinking_teapot_DEPENDENCIES) $(EXTRA_blinking_teapot_DEPENDENCIES) 
+ 	@rm -f blinking-teapot$(EXEEXT)
+ 	$(AM_V_CCLD)$(LINK) $(blinking_teapot_OBJECTS) $(blinking_teapot_LDADD) $(LIBS)

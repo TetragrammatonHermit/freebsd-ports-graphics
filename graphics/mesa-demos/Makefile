@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	mesa-demos
-PORTVERSION=	8.0.1
+PORTVERSION=	8.1.0
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/demos/${PORTVERSION}/
 DISTFILES=	mesa-demos-${PORTVERSION}${EXTRACT_SUFX}
@@ -27,19 +27,9 @@ NVIDIA_DESC=	Use NVIDIA's libraries
 post-patch:
 	@${REINPLACE_CMD} -e 's|-ffast-math|${FAST_MATH}|' -e 's|x86_64|amd64|' \
 		${WRKSRC}/configure
-	@${REINPLACE_CMD} -e 's|../images/|${DATADIR}/images/|g' \
-		-e 's|geartrain.dat|${DATADIR}/data/geartrain.dat|g' \
-		-e 's|terrain.dat|${DATADIR}/data/terrain.dat|g' \
-		-e 's|isosurf.dat|${DATADIR}/data/isosurf.dat|g' \
-			${WRKSRC}/src/demos/*.c ${WRKSRC}/src/xdemos/*.c
 
 post-install:
-	${MKDIR} ${DATADIR}/images ${DATADIR}/data
-	@cd ${WRKSRC}/src/images; \
-		for i in `ls *.rgb*`; do \
-			${ECHO_CMD} ${INSTALL_DATA} $$i ${DATADIR}/images; \
-			${INSTALL_DATA} $$i ${DATADIR}/images; \
-		done
+	${MKDIR} ${DATADIR}/data
 	@cd ${WRKSRC}/src/demos; \
 		for i in `ls *.dat`; do \
 			${ECHO_CMD} ${INSTALL_DATA} $$i ${DATADIR}/data; \
