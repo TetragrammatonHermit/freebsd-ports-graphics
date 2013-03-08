@@ -28,14 +28,6 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|-ffast-math|${FAST_MATH}|' -e 's|x86_64|amd64|' \
 		${WRKSRC}/configure
 
-post-install:
-	${MKDIR} ${DATADIR}/data
-	@cd ${WRKSRC}/src/demos; \
-		for i in `ls *.dat`; do \
-			${ECHO_CMD} ${INSTALL_DATA} $$i ${DATADIR}/data; \
-			${INSTALL_DATA} $$i ${DATADIR}/data; \
-		done
-
 .include <bsd.port.options.mk>
 
 .if ${PORT_OPTIONS:MNVIDIA}
