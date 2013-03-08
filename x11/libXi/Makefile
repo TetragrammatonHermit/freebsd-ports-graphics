@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libXi
-PORTVERSION=	1.6.2
+PORTVERSION=	1.7
 PORTEPOCH=	1
 CATEGORIES=	x11
 
@@ -14,7 +14,14 @@ LICENSE=	MIT
 XORG_CAT=	lib
 USE_XORG=	xproto x11 xext xextproto inputproto:both
 
-CONFIGURE_ARGS+=--disable-specs --without-xmlto
+BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/xorg-macros.pc:${PORTSDIR}/devel/xorg-macros
+
+CONFIGURE_ARGS+=--disable-docs \
+		--disable-specs \
+	       	--without-xmlto \
+		--without-fop \
+		--without-asciidoc \
+		--without-xsltproc
 
 MAN3=		XAllowDeviceEvents.3 \
 		XChangeDeviceControl.3 \
@@ -43,6 +50,8 @@ MAN3=		XAllowDeviceEvents.3 \
 		XGrabDevice.3\
 		XGrabDeviceButton.3\
 		XGrabDeviceKey.3\
+		XIBarrierReleasePointer.3\
+		XIBarrierReleasePointers.3\
 		XIChangeHierarchy.3\
 		XIChangeProperty.3\
 		XIDefineCursor.3\
