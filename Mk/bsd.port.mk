@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 313600 2013-03-07 17:08:13Z miwi $
+# $FreeBSD: head/Mk/bsd.port.mk 313636 2013-03-08 11:34:33Z bapt $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -350,10 +350,6 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  used.  The valid value is "7", "8", or "9".  Note that
 #				  this is for users, not for port maintainers.  This
 #				  should not be used in Makefile.
-##
-# USE_BISON		- Implies that the port uses bison in one way or another:
-#				  'build', 'run', 'both', implying build,
-#				  runtime, and both build/run dependencies
 ##
 # USE_IMAKE		- If set, this port uses imake.
 # XMKMF			- Set to path of `xmkmf' if not in $PATH
@@ -2012,22 +2008,6 @@ LIB_DEPENDS+=	${_GL_${_component}_LIB_DEPENDS}
 RUN_DEPENDS+=	${_GL_${_component}_RUN_DEPENDS}
 .  endif
 . endfor
-.endif
-
-.if defined(USE_BISON)
-_BISON_DEPENDS=	bison:${PORTSDIR}/devel/bison
-
-. if ${USE_BISON:L} == "build"
-BUILD_DEPENDS+= ${_BISON_DEPENDS}
-. elif ${USE_BISON:L} == "run"
-RUN_DEPENDS+=	${_BISON_DEPENDS}
-. elif ${USE_BISON:L} == "both"
-BUILD_DEPENDS+= ${_BISON_DEPENDS}
-RUN_DEPENDS+=	${_BISON_DEPENDS}
-. else
-IGNORE=	uses unknown USE_BISON construct
-. endif
-
 .endif
 
 .if defined(WITH_PKGNG)
