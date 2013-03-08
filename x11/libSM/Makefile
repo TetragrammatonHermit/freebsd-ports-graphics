@@ -11,10 +11,8 @@ COMMENT=	Session Management library for X11
 
 LICENSE=	MIT
 
-BUILD_DEPENDS=	${LOCALBASE}/share/aclocal/xorg-macros.m4:${PORTSDIR}/devel/xorg-macros
-
 XORG_CAT=	lib
-USE_XORG=	ice xproto:both xtrans
+USE_XORG=	ice xproto:both xtrans xorg-macros
 
 CONFIGURE_ARGS+=--disable-docs --without-xmlto
 
