@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 313636 2013-03-08 11:34:33Z bapt $
+# $FreeBSD: head/Mk/bsd.port.mk 313760 2013-03-09 21:43:02Z bapt $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -1945,11 +1945,7 @@ LIB_DEPENDS+=			ttf.4:${PORTSDIR}/print/freetype
 .endif
 
 X_IMAKE_PORT=		${PORTSDIR}/devel/imake
-X_LIBRARIES_PORT=	${PORTSDIR}/x11/xorg-libraries
-X_CLIENTS_PORT=		${PORTSDIR}/x11/xorg-apps
-X_SERVER_PORT=		${PORTSDIR}/x11-servers/xorg-server
 X_FONTSERVER_PORT=	${PORTSDIR}/x11-fonts/xfs
-X_PRINTSERVER_PORT=	${PORTSDIR}/x11-servers/xorg-printserver
 X_VFBSERVER_PORT=	${PORTSDIR}/x11-servers/xorg-vfbserver
 X_NESTSERVER_PORT=	${PORTSDIR}/x11-servers/xorg-nestserver
 X_FONTS_ENCODINGS_PORT=	${PORTSDIR}/x11-fonts/encodings
@@ -1980,10 +1976,7 @@ MAKE_ENV+=		DISPLAY="localhost:1001"
 .endif
 .endif
 
-XAWVER=				8
 PKG_IGNORE_DEPENDS?=		'this_port_does_not_exist'
-
-PLIST_SUB+=			XAWVER=${XAWVER}
 
 _GL_gl_USE_XORG=		glproto dri2proto
 _GL_gl_LIB_DEPENDS=		GL.1:${PORTSDIR}/graphics/libGL
