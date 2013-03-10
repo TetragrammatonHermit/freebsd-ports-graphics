@@ -56,7 +56,9 @@ VIDEO_DRIVERS=		ati \
 			tdfx \
 			tga \
 			trident \
-			tseng
+			tseng \
+			vmware \
+			voodoo
 
 OPTIONS_DEFAULT=	MOUSE \
 			KEYBOARD \
@@ -65,10 +67,7 @@ OPTIONS_DEFAULT=	MOUSE \
 			NV \
 			R128 \
 			RADEONHD \
-			VESA \
-			INTEL \
-			OPENCHROME \
-			SUNFFB
+			VESA
 
 .for type in input video
 . for a in ${${type:U}_DRIVERS}
@@ -78,21 +77,34 @@ ${a:U}_DESC=	Install ${a} ${type} driver
 .endfor
 
 OPTIONS_DEFINE_i386=	INTEL OPENCHROME
+OPTIONS_DEFAULT_i386=	INTEL OPENCHROME
+
 OPTIONS_DEFINE_amd64:=	${OPTIONS_DEFINE_i386}
+OPTIONS_DEFAULT_amd64:=	${OPTIONS_DEFAULT_i386}
+
 OPTIONS_DEFINE_sparc64=	SUNFFB
+OPTIONS_DEFAULT_sparc64=SUNFFB
+
 OPTIONS_DEFINE_ia64=	OPENCHROME
+OPTIONS_DEFAULT_ia64=	OPENCHROME
 
 INTEL_DESC=		Install intel video driver
 OPENCHROME_DESC=	Install openchrome video driver
 SUNFFB_DESC=		Install sunffb video driver
 
-# these drivers module name is different then the installed plugin
+# these drivers have a diffrent module name compared to the plugin they install
 QUIRKS=		keyboard:kbd jamstudio:js_x
 
 .include <bsd.port.options.mk>
 
-# these drivers are only used depending on arch.
-VIDEO_DRIVERS+=	intel openchrome sunffb
+# Manual add arch specific drivers so they be added to depend lines.
+.if ${ARCH}==i386 || ${ARCH}==amd64
+VIDEO_DRIVERS+=	intel openchrome
+.endif
+
+.if ${ARCH}==sparc64
+VIDEO_DRIVERS+=	sunffb
+.endif
 
 .for type in input video
 . for i in ${${type:U}_DRIVERS}
