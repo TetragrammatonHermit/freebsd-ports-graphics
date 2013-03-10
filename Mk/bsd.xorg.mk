@@ -39,7 +39,7 @@ MASTER_SITES?=	${MASTER_SITE_XORG}
 MASTER_SITE_SUBDIR?=	individual/${XORG_CAT}
 
 . if ${XORG_CAT} == "app"
-USE_GNOME+=	pkgconfig
+USE_PKGCONFIG=	build
 . endif
 
 . if ${XORG_CAT} == "data"
@@ -47,7 +47,7 @@ USE_GNOME+=	pkgconfig
 . endif
 
 . if ${XORG_CAT} == "driver"
-USE_GNOME+=	pkgconfig
+USE_PKGCONFIG=	build
 USE_XORG+=	xorg-server xproto randrproto xi
 # work around a llvm bug on i386, llvm bug #15806 
 # reproduced with clang 3.2 (current release) and 3.1
@@ -85,10 +85,10 @@ INSTALLS_TTF?=	no
 .  endif
 
 .  if ${PORTNAME:M*font-util*}x != x
-USE_GNOME+=	gnomehack
+USES=	pathfix
 NEED_MKFONTFOO=	no
 .  elif ${INSTALLS_TTF} == "yes"
-USE_GNOME+=	pkgconfig
+USE_PKGCONFIG=	build
 BUILD_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/fontconfig.pc:${PORTSDIR}/x11-fonts/fontconfig
 RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/fontconfig.pc:${PORTSDIR}/x11-fonts/fontconfig
 .  else
@@ -124,19 +124,20 @@ post-install:
 . endif
 
 . if ${XORG_CAT} == "lib"
-USE_GNOME+=	gnomehack pkgconfig
+USE_PKGCONFIG=	build
+USES=	pathfix
 USE_LDCONFIG=	yes
 CONFIGURE_ARGS+=--enable-malloc0returnsnull
 . endif
 
 . if ${XORG_CAT} == "proto"
-USE_GNOME+=	gnomehack
+USES=	pathfix
 . endif
 
 . if ${XORG_CAT} == "xserver"
 DISTFILES?=	xorg-server-${PORTVERSION}.tar.bz2
 WRKSRC=		${WRKDIR}/xorg-server-${PORTVERSION}
-USE_GNOME+=	gnomehack
+USES=	pathfix
 CONFIGURE_ARGS+=	--with-xkb-path=${LOCALBASE}/share/X11/xkb
 
 LIB_PC_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/dri.pc:${PORTSDIR}/graphics/dri
