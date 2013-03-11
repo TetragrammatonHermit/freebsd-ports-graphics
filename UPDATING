@@ -49,4 +49,3 @@
   problems. Ati should work, but acceleration might be botched.
   The nouveau driver is sadly a casualty, it needs to be updated and kernel
   support needs to be written. Other rarer drivers aren't tested.
-
