@@ -17,7 +17,7 @@ OPTIONS_DEFINE=	SIMD
 
 .include <bsd.port.pre.mk>
 
-.if empty(${PORT_OPTIONS:MSIMD})
+.if empty(PORT_OPTIONS:MSIMD)
 CONFIGURE_ARGS=	--disable-vmx --disable-arm-simd
 . if ! ${MACHINE_CPU:Mmmx}
 CONFIGURE_ARGS+=	--disable-mmx
