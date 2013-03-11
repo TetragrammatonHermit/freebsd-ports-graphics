@@ -85,7 +85,7 @@ INSTALLS_TTF?=	no
 .  endif
 
 .  if ${PORTNAME:M*font-util*}x != x
-USES=	pathfix
+USES+=	pathfix
 NEED_MKFONTFOO=	no
 .  elif ${INSTALLS_TTF} == "yes"
 USE_PKGCONFIG=	build
@@ -125,19 +125,19 @@ post-install:
 
 . if ${XORG_CAT} == "lib"
 USE_PKGCONFIG=	build
-USES=	pathfix
+USES+=	pathfix
 USE_LDCONFIG=	yes
 CONFIGURE_ARGS+=--enable-malloc0returnsnull
 . endif
 
 . if ${XORG_CAT} == "proto"
-USES=	pathfix
+USES+=	pathfix
 . endif
 
 . if ${XORG_CAT} == "xserver"
 DISTFILES?=	xorg-server-${PORTVERSION}.tar.bz2
 WRKSRC=		${WRKDIR}/xorg-server-${PORTVERSION}
-USES=	pathfix
+USES+=	pathfix
 CONFIGURE_ARGS+=	--with-xkb-path=${LOCALBASE}/share/X11/xkb
 
 LIB_PC_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/dri.pc:${PORTSDIR}/graphics/dri
