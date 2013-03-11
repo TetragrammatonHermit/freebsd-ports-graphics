@@ -29,7 +29,7 @@
 
   i810, mach64, mga, r128, r300, r600, savage, sis, tdfx and unichrome.  
 
-** This needs at least a review **
+** This needs a review **
 
 20120105:
   AFFECTS: users of mesa based ports (libGL etc) and xorg-server.
