@@ -8,7 +8,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org mouse input driver
 
 XORG_CAT=	driver
-USE_GNOME=	gnomehack
+USES=		pathfix
 MAN4=		mousedrv.4x
 
 .include <bsd.port.mk>

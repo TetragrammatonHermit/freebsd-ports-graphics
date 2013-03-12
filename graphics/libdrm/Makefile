@@ -60,7 +60,7 @@ CONFIGURE_ARGS+=--disable-manpages
 LIBDRM_VERSION=	2.4.42
 LIBDRM_REVISION=1
 PLIST_SUB+=	OLD="@comment " NEW=""
-EXTRA_PATCHES+= ${FILESDIR}/extra-configure \
+EXTRA_PATCHES+=	${FILESDIR}/extra-configure \
 		${FILESDIR}/extra-tests_modetest_Makefile.in \
 		${FILESDIR}/extra-tests_modetest_modetest.c \
 		${FILESDIR}/extra-tests_modetest_strchrnul.c

@@ -12,7 +12,8 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	OpenGL widgets library
 
 USE_BZIP2=	yes
-USE_GNOME=	gnomehack pkgconfig
+USES=		pathfix
+USE_PKGCONFIG=	yes
 USE_LDCONFIG=	yes
 USE_GL=		gl
 USE_MOTIF=	yes

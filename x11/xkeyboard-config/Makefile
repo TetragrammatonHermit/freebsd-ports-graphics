@@ -16,7 +16,8 @@ XORG_CAT=	data
 
 USE_BZIP2=	yes
 USE_GMAKE=	yes
-USE_GNOME=	intlhack gnomehack
+USE_GNOME=	intlhack
+USES=		pathfix
 USE_PERL5_BUILD=yes
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--with-xkb-base=${PREFIX}/share/X11/xkb \
