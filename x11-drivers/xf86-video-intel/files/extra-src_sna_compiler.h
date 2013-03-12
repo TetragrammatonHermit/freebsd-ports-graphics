@@ -1,18 +1,18 @@
---- src/sna/compiler.h.orig	2013-02-02 00:01:23.000000000 +0000
-+++ src/sna/compiler.h	2013-02-02 00:01:33.000000000 +0000
-@@ -36,7 +36,6 @@
- #define fastcall __attribute__((regparm(3)))
+--- src/sna/compiler.h.orig	2013-03-12 12:48:29.745101779 +0100
++++ src/sna/compiler.h	2013-03-12 12:48:52.857102997 +0100
+@@ -37,7 +37,6 @@
  #define must_check __attribute__((warn_unused_result))
  #define constant __attribute__((const))
+ #define pure __attribute__((pure))
 -#define __packed__ __attribute__((__packed__))
+ #define flatten __attribute__((flatten))
  #else
  #define likely(expr) (expr)
- #define unlikely(expr) (expr)
-@@ -45,7 +44,6 @@
- #define fastcall
+@@ -48,7 +47,6 @@
  #define must_check
  #define constant
+ #define pure
 -#define __packed__
+ #define flatten
  #endif
  
- #ifdef HAVE_VALGRIND

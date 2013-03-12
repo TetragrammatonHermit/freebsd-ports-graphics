@@ -14,11 +14,20 @@ USE_GL=		gl
 
 USE_LDCONFIG=	yes
 XORG_CAT=	driver
-USE_XORG=	xvmc xineramaproto x11 xf86driproto glproto
+USE_XORG=	glproto \
+		pixman \
+		x11 \
+		xext \
+		xf86driproto \
+		xineramaproto \
+		xorg-macros \
+		xrender \
+		xvmc
+
 MAN4=		intel.4x
 
 .if defined(WITH_NEW_XORG)
-INTEL_VERSION=	2.21.2
+INTEL_VERSION=	2.21.4
 INTEL_REVISION=	0
 CONFIGURE_ARGS+=	--enable-sna
 MAKE_JOBS_UNSAFE=yes

@@ -1,6 +1,6 @@
---- src/sna/kgem.c.orig	2012-12-03 11:37:46.000000000 +0100
-+++ src/sna/kgem.c	2012-12-11 20:48:26.000000000 +0100
-@@ -624,7 +624,11 @@
+--- src/sna/kgem.c.orig	2013-03-11 11:19:02.000000000 +0100
++++ src/sna/kgem.c	2013-03-12 12:56:49.452065668 +0100
+@@ -658,7 +658,11 @@
  	if (file) {
  		size_t len = 0;
  		char *line = NULL;
@@ -12,7 +12,7 @@
  			int mb;
  			if (sscanf(line, "cache size : %d KB", &mb) == 1) {
  				/* Paranoid check against gargantuan caches */
-@@ -1474,7 +1478,8 @@
+@@ -1666,7 +1670,8 @@
  static struct kgem_bo *
  search_snoop_cache(struct kgem *kgem, unsigned int num_pages, unsigned flags)
  {
@@ -22,7 +22,7 @@
  
  	DBG(("%s: num_pages=%d, flags=%x\n", __FUNCTION__, num_pages, flags));
  
-@@ -1699,7 +1704,8 @@
+@@ -1868,7 +1873,8 @@
  
  static bool kgem_retire__flushing(struct kgem *kgem)
  {
@@ -32,7 +32,7 @@
  	bool retired = false;
  
  	list_for_each_entry_safe(bo, next, &kgem->flushing, request) {
-@@ -1916,7 +1922,8 @@
+@@ -2073,7 +2079,8 @@
  static void kgem_commit(struct kgem *kgem)
  {
  	struct kgem_request *rq = kgem->next_request;
@@ -42,7 +42,7 @@
  
  	list_for_each_entry_safe(bo, next, &rq->buffers, request) {
  		assert(next->request.prev == &bo->request);
-@@ -1995,7 +2002,8 @@
+@@ -2154,7 +2161,8 @@
  
  static void kgem_finish_buffers(struct kgem *kgem)
  {
@@ -52,7 +52,7 @@
  
  	list_for_each_entry_safe(bo, next, &kgem->batch_buffers, base.list) {
  		DBG(("%s: buffer handle=%d, used=%d, exec?=%d, write=%d, mmapped=%d\n",
-@@ -2678,7 +2686,8 @@
+@@ -2963,7 +2971,8 @@
  static struct kgem_bo *
  search_linear_cache(struct kgem *kgem, unsigned int num_pages, unsigned flags)
  {
@@ -62,16 +62,16 @@
  	bool use_active = (flags & CREATE_INACTIVE) == 0;
  	struct list *cache;
  
-@@ -3167,7 +3176,7 @@
+@@ -3521,7 +3530,7 @@
  			       uint32_t flags)
  {
  	struct list *cache;
 -	struct kgem_bo *bo;
 +	struct kgem_bo *bo = NULL;
- 	uint32_t pitch, untiled_pitch, tiled_height, size;
+ 	uint32_t pitch, tiled_height, size;
  	uint32_t handle;
  	int i, bucket, retry;
-@@ -4360,7 +4369,7 @@
+@@ -4834,7 +4843,7 @@
  void kgem_clear_dirty(struct kgem *kgem)
  {
  	struct list * const buffers = &kgem->next_request->buffers;
@@ -80,7 +80,7 @@
  
  	list_for_each_entry(bo, buffers, request) {
  		if (!bo->dirty)
-@@ -4599,7 +4608,7 @@
+@@ -5072,7 +5081,7 @@
  				   uint32_t size, uint32_t flags,
  				   void **ret)
  {
