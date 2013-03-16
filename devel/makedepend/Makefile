@@ -7,7 +7,7 @@ PORTEPOCH=	1
 CATEGORIES=	devel
 
 MAINTAINER=	x11@FreeBSD.org
-COMMENT=	A dependency generator for makefiles
+COMMENT=	Dependency generator for makefiles
 
 XORG_CAT=	util
 USE_GNOME=	pkgconfig

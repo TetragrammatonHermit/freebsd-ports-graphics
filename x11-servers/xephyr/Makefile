@@ -3,7 +3,7 @@
 PORTNAME=	xephyr
 PORTREVISION=	0
 
-COMMENT=	A kdrive based X server from X.Org
+COMMENT=	X server from X.Org based on kdrive
 
 MASTERDIR=	${.CURDIR}/../xorg-server
 DESCR=		${.CURDIR}/pkg-descr

@@ -6,7 +6,7 @@ PORTVERSION=	2.3.1
 CATEGORIES=	x11-fonts
 
 MAINTAINER=	gnome@FreeBSD.org
-COMMENT=	A client-sided font API for X applications
+COMMENT=	Client-sided font API for X applications
 
 BUILD_DEPENDS=	fc-cache:${PORTSDIR}/x11-fonts/fontconfig
 LIB_DEPENDS=	freetype.9:${PORTSDIR}/print/freetype2
