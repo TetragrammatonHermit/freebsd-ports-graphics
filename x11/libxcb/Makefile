@@ -44,8 +44,10 @@ XPROTO_LIBS=	-L${LOCALBASE}/lib
 
 .include "${.CURDIR}/manpages"
 
+.include <bsd.port.options.mk>
+
 post-install:
-.if !defined(NOPORTDOCS)
+.if ${PORT_OPTIONS:MDOCS}
 	${MAKE} -C ${WRKSRC}/doc ${INSTALL_TARGET}
 .endif
 

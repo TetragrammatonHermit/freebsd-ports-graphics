@@ -20,7 +20,7 @@ RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/xbitmaps.pc:${PORTSDIR}/x11/xbitmap
 		${LOCALBASE}/lib/X11/icons/handhelds/cursors/X_cursor:${PORTSDIR}/x11-themes/xcursor-themes
 
 # doc
-.if !defined(NOPORTDOCS)
+.if ${PORT_OPTIONS:MDOCS}
 RUN_DEPENDS+=	${LOCALBASE}/share/doc/xorg-docs/README.xml:${PORTSDIR}/x11/xorg-docs
 .endif
 
@@ -51,10 +51,6 @@ pre-everything::
 .if !defined(DEPENDS_TARGET:Mpackage) || empty(DEPENDS_TARGET:Mpackage)
 DEPENDS_TARGET="package"
 .endif
-.endif
-
-.if ${ARCH} != "alpha"
-RUN_DEPENDS+=	${LOCALBASE}/bin/Xorg:${PORTSDIR}/x11-servers/xorg-server
 .endif
 
 .include <bsd.port.post.mk>
