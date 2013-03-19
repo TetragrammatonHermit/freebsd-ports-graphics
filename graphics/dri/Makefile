@@ -1,5 +1,5 @@
 # Created by: anholt@FreeBSD.org
-# $FreeBSD: head/graphics/dri/Makefile 313610 2013-03-08 01:01:11Z jkim $
+# $FreeBSD$
 
 PORTNAME=	dri
 PORTVERSION=	${MESAVERSION}
