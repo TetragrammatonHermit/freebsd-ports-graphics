@@ -1,9 +1,5 @@
-# New ports collection makefile for:   libXext
-# Date Created:			29 Oct, 2003
-# Whom:				Eric Anholt <anholt@FreeBSD.org>
-#
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD: head/x11/libXfixes/Makefile 300897 2012-07-14 14:29:18Z beat $
-#
 
 PORTNAME=	libXfixes
 PORTVERSION=	5.0
