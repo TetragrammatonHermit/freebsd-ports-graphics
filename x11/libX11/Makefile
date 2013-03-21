@@ -11,12 +11,10 @@ COMMENT=	X11 library
 
 LICENSE=	MIT
 
-LIB_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/xcb.pc:${PORTSDIR}/x11/libxcb
-
 XORG_CAT=	lib
 USE_XORG=	bigreqsproto xau xcmiscproto xdmcp xextproto xtrans \
 		kbproto:both inputproto xf86bigfontproto xproto:both \
-		xorg-macros
+		xorg-macros xcb
 USE_PERL5_BUILD=yes
 
 CONFIGURE_ARGS+=	--datadir=${PREFIX}/lib \
