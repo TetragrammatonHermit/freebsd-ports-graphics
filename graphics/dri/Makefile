@@ -10,13 +10,16 @@ CATEGORIES=	graphics
 COMMENT=	OpenGL hardware acceleration drivers for the DRI
 
 LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm \
-		expat.6:${PORTSDIR}/textproc/expat2
+		expat:${PORTSDIR}/textproc/expat2
 
 USE_PKGCONFIG=	build
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
-ALL_DRI_DRIVERS=I810 I915 I965 MACH64 MGA R128 R200 R300 R600 RADEON \
-		SAVAGE SIS SWRAST TDFX UNICHROME
+ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST
+
+.if ! defined(WITH_NEW_XORG)
+ALL_DRI_DRIVERS+=I810 MACH64 MGA R128 R300 R600 SAVAGE SIS TDFX UNICHROME
+.endif
 
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 
@@ -27,9 +30,17 @@ BROKEN=		does not install on ia64
 .if ${ARCH} == "amd64" || ${ARCH} == "i386"
 OPTIONS_DEFINE=	${ALL_DRI_DRIVERS}
 .elif ${ARCH} == "powerpc"
+. if defined(WITH_NEW_XORG)
+OPTIONS_DEFINE=	RADEON SWRAST
+. else
 OPTIONS_DEFINE=	MACH64 RADEON SWRAST TDFX
+. endif
 .elif ${ARCH} == "sparc64"
+. if defined(WITH_NEW_XORG)
+OPTIONS_DEIFNE=	RADEON SWRAST
+. else
 OPTIONS_DEFINE=	MACH64 RADEON SWRAST
+. endif
 .endif
 OPTIONS_DEFAULT=${OPTIONS_DEFINE}
 
