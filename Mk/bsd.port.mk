@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 314820 2013-03-21 07:34:50Z miwi $
+# $FreeBSD: head/Mk/bsd.port.mk 314836 2013-03-21 11:13:49Z bdrewery $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -6102,6 +6102,8 @@ D4P_ENV=	PKGNAME="${PKGNAME}" \
 		OPTIONS_RADIO="${OPTIONS_RADIO}" \
 		OPTIONS_GROUP="${OPTIONS_GROUP}" \
 		DIALOG4PORTS="${DIALOG4PORTS}" \
+		PREFIX="${PREFIX}" \
+		LOCALBASE="${LOCALBASE}" \
 		PORTSDIR="${PORTSDIR}" \
 		MAKE="${MAKE}" \
 		D4PHEIGHT="${D4PHEIGHT}" \
