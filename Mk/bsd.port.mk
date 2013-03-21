@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 314628 2013-03-19 09:27:52Z bapt $
+# $FreeBSD: head/Mk/bsd.port.mk 314820 2013-03-21 07:34:50Z miwi $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -1506,6 +1506,14 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 
 .include "${PORTSDIR}/Mk/bsd.pbi.mk"
 
+.if defined(USE_CMAKE)
+. if defined(CMAKE_OUTSOURCE)
+USES+=	cmake:outsource
+. else
+USES+=	cmake
+. endif
+.endif
+
 # Loading features
 .for f in ${USES}
 _f=${f:C/\:.*//g}
@@ -2096,10 +2104,6 @@ RUN_DEPENDS+=	${_GL_${_component}_RUN_DEPENDS}
 
 .if defined(USE_KDE4)
 .include "${PORTSDIR}/Mk/bsd.kde4.mk"
-.endif
-
-.if defined(USE_CMAKE)
-.include "${PORTSDIR}/Mk/bsd.cmake.mk"
 .endif
 
 .if exists(${PORTSDIR}/Makefile.inc)
@@ -4300,7 +4304,7 @@ _PKG_DEP=		check-sanity
 _PKG_SEQ=		pkg-depends
 _FETCH_DEP=		pkg
 _FETCH_SEQ=		fetch-depends pre-fetch pre-fetch-script \
-				do-fetch post-fetch post-fetch-script
+				do-fetch fetch-specials post-fetch post-fetch-script
 _EXTRACT_DEP=	fetch
 _EXTRACT_SEQ=	check-build-conflicts extract-message checksum extract-depends \
 				pre-extract pre-extract-script do-extract \
@@ -5166,6 +5170,7 @@ lib-depends:
 
 _UNIFIED_DEPENDS=${PKG_DEPENDS} ${EXTRACT_DEPENDS} ${PATCH_DEPENDS} ${FETCH_DEPENDS} ${BUILD_DEPENDS} ${LIB_DEPENDS} ${RUN_DEPENDS}
 _DEPEND_DIRS=	${_UNIFIED_DEPENDS:C,^[^:]*:([^:]*).*$,\1,}
+_DEPEND_SPECIALS=	${_UNIFIED_DEPENDS:M*\:*\:*:C,^[^:]*:([^:]*):.*$,\1,}
 
 all-depends-list:
 	@${ALL-DEPENDS-LIST}
@@ -5298,6 +5303,14 @@ limited-clean-depends:
 deinstall-depends:
 	@for dir in $$(${ALL-DEPENDS-LIST}); do \
 		(cd $$dir; ${MAKE} deinstall); \
+	done
+.endif
+
+.if !target(fetch-specials)
+fetch-specials:
+	@${ECHO_MSG} "===> Fetching all distfiles required by ${PKGNAME} for building"
+	@for dir in ${_DEPEND_SPECIALS}; do \
+		(cd $$dir; ${MAKE} fetch); \
 	done
 .endif
 
@@ -6087,7 +6100,13 @@ D4P_ENV=	PKGNAME="${PKGNAME}" \
 		OPTIONS_MULTI="${OPTIONS_MULTI}" \
 		OPTIONS_SINGLE="${OPTIONS_SINGLE}" \
 		OPTIONS_RADIO="${OPTIONS_RADIO}" \
-		OPTIONS_GROUP="${OPTIONS_GROUP}"
+		OPTIONS_GROUP="${OPTIONS_GROUP}" \
+		DIALOG4PORTS="${DIALOG4PORTS}" \
+		PORTSDIR="${PORTSDIR}" \
+		MAKE="${MAKE}" \
+		D4PHEIGHT="${D4PHEIGHT}" \
+		D4PWIDTH="${D4PWIDTH}" \
+		D4PFULLSCREEN="${D4PFULLSCREEN}"
 .if exists(${PKGHELP})
 D4P_ENV+=	PKGHELP="${PKGHELP}"
 .endif
@@ -6146,11 +6165,12 @@ do-config:
 .endif
 	@TMPOPTIONSFILE=$$(mktemp -t portoptions); \
 	trap "${RM} -f $${TMPOPTIONSFILE}; exit 1" 1 2 3 5 10 13 15; \
-	${SETENV} ${D4P_ENV} ${DIALOG4PORTS} > $${TMPOPTIONSFILE} || { \
+	${SETENV} ${D4P_ENV} ${SH} ${PORTSDIR}/Tools/scripts/dialog4ports.sh $${TMPOPTIONSFILE} || { \
 		${RM} -f $${TMPOPTIONSFILE}; \
 		${ECHO_MSG} "===> Options unchanged"; \
 		exit 0; \
 	}; \
+	${ECHO_CMD}; \
 	if [ ! -e $${TMPOPTIONSFILE} ]; then \
 		${ECHO_MSG} "===> No user-specified options to save for ${PKGNAME}"; \
 		exit 0; \
@@ -6182,21 +6202,13 @@ do-config:
 .endif
 .endif # do-config
 
-.if !target(config-depend)
-config-depend:
-.if !exists(${DIALOG4PORTS})
-	@echo -n "dialog4ports isn't installed, do you want to install it now? [Y/n] "; \
-	read answer; \
-	case $$answer in \
-	[Nn]|[Nn][Oo]) \
-		exit 0; \
-	esac; \
-	cd ${PORTSDIR}/ports-mgmt/dialog4ports; ${MAKE} install
-.endif
-.endif
-
 .if !target(config)
-config: pre-config config-depend do-config
+.if !defined(NO_DIALOG)
+config: pre-config do-config
+.else
+config:
+	@${ECHO_MSG} "===> Skipping 'config' as NO_DIALOG is defined"
+.endif
 .endif # config
 
 .if !target(config-recursive)
