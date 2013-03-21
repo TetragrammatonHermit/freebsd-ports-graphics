@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 314836 2013-03-21 11:13:49Z bdrewery $
+# $FreeBSD: head/Mk/bsd.port.mk 314848 2013-03-21 15:43:29Z bapt $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -6117,7 +6117,7 @@ D4P_ENV+=	 ${opt}_DESC=""${${opt}_DESC:Q}""
 .endfor
 .for multi in ${OPTIONS_MULTI}
 D4P_ENV+=	OPTIONS_MULTI_${multi}="${OPTIONS_MULTI_${multi}}" \
-		${multi}_DESC=""${${opt}_DESC:Q}""
+		${multi}_DESC=""${${multi}_DESC:Q}""
 .  for opt in ${OPTIONS_MULTI_${multi}}
 D4P_ENV+=	 ${opt}_DESC=""${${opt}_DESC:Q}""
 .  endfor
