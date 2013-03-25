@@ -20,6 +20,8 @@ USE_GNOME=	intlhack
 USES=		pathfix
 USE_PERL5_BUILD=yes
 GNU_CONFIGURE=	yes
+MAKE_JOBS_UNSAFE=yes
+
 CONFIGURE_ARGS=	--with-xkb-base=${PREFIX}/share/X11/xkb \
 		--with-xkb-rules-symlink=xorg
 CPPFLAGS+=	-I${LOCALBASE}/include
