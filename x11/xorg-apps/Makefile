@@ -39,7 +39,7 @@ ${comp:C/:.*//:C/.*\///:U}_DESC=	Install ${comp:C/:.*//:C/.*\///} application
 
 .for comp in ${COMPONENTS}
 . if !defined(${OPTIONS_UNSET:M${comp:C/:.*//:C/.*\///:U}})
-.  if ${comp:M:}==""
+.  if ${comp:M*\:*}==""
 port=${comp}
 check=${comp:C/.*\///} # doesn't work
 .  else
