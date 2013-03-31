@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 315309 2013-03-26 15:55:59Z bapt $
+# $FreeBSD: head/Mk/bsd.port.mk 315599 2013-03-30 05:31:29Z bdrewery $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -3427,7 +3427,14 @@ check-vulnerable:
 .if !defined(DISABLE_VULNERABILITIES) && !defined(PACKAGE_BUILDING)
 	@if [ -f "${AUDITFILE}" ]; then \
 		if [ -n "${WITH_PKGNG}" ]; then \
-			vlist=`${PKG_BIN} audit "${PKGNAME}"`; \
+			if [ -x "${PKG_BIN}" ]; then \
+				vlist=`${PKG_BIN} audit "${PKGNAME}"`; \
+			elif [ "${PORTNAME}" = "pkg" ]; then \
+				vlist=""; \
+			else \
+				${ECHO_MSG} "===> Unable to check vuln database as pkg(8) is missing"; \
+				exit 1; \
+			fi; \
 		elif [ -x "${LOCALBASE}/sbin/portaudit" ]; then \
 			vlist=`${LOCALBASE}/sbin/portaudit -X 14 "${PKGNAME}" \
 				2>&1 | grep -vE '^[0-9]+ problem\(s\) found.' \
