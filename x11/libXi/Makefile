@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libXi
-PORTVERSION=	1.7
+PORTVERSION=	1.7.1
 PORTEPOCH=	1
 CATEGORIES=	x11
 
@@ -12,7 +12,7 @@ COMMENT=	X Input extension library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-USE_XORG=	xorg-macros xproto x11 xext xextproto inputproto:both
+USE_XORG=	xorg-macros xproto x11 xext xextproto xfixes inputproto:both
 
 CONFIGURE_ARGS+=--disable-docs \
 		--disable-specs \
