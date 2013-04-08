@@ -36,8 +36,7 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-clang \
 		${PATCHDIR}/extra-src_sna_compiler.h \
 		${PATCHDIR}/extra-src_sna_kgem.c \
 		${PATCHDIR}/extra-src__sna__sna_threads.c \
-		${PATCHDIR}/extra-i915kms \
-		${PATCHDIR}/extra-configure-sna
+		${PATCHDIR}/extra-i915kms
 LIB_DEPENDS+=	xcb-util:${PORTSDIR}/x11/xcb-util
 .else
 INTEL_VERSION=	2.7.1
