@@ -64,8 +64,6 @@ PLIST_SUB+=	${_d}_DRIVER="@comment "
 .endif
 .endfor
 
-.include <bsd.port.pre.mk>
-
 .if ${ARCH} == "ia64"
 BROKEN=		does not install on ia64
 .endif
@@ -78,4 +76,4 @@ CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
 do-install:
 	cd ${WRKSRC}/src/mesa; ${GMAKE} install-dri
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
