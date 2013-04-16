@@ -1,9 +1,9 @@
 Since FreeBSD has new USB stack, freeglut normally doesn't build on FreeBSD 8
-(yet). To workaround this I created small, ugly patch. this patch adds one
-include file and comments out content of one function (only leaves return NULL).
+(yet). To workaround this a small patch adds one include file and comments out
+content of one function (only leaves return NULL).
 
-I have no idea what kind of side effects this can cause. Joystick wont work.
-There might be ports that won't compile, or apps that may crash because of
-this. I don't know.
+This might cause side effects.  Joysticks do not work, and there might be ports
+that do not compile or applications that crash because of this.
 
-If you face any problems delete this port and install graphics/libglut.
+Do not hesitate to contact x11@FreeBSD.org if there are any issues and side
+effects because of this.
