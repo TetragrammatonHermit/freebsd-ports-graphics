@@ -1,5 +1,5 @@
---- src/freebsd_pci.c.orig	2012-04-09 19:02:57.000000000 +0200
-+++ src/freebsd_pci.c	2012-11-16 17:58:08.000000000 +0100
+--- src/freebsd_pci.c.orig	2012-04-09 13:02:57.000000000 -0400
++++ src/freebsd_pci.c	2013-04-16 02:19:10.000000000 -0400
 @@ -1,6 +1,8 @@
  /*
   * (C) Copyright Eric Anholt 2006
@@ -9,20 +9,12 @@
   * All Rights Reserved.
   *
   * Permission is hereby granted, free of charge, to any person obtaining a
-@@ -561,6 +563,146 @@
+@@ -561,6 +563,138 @@
      freebsd_pci_sys = NULL;
  }
  
 +#if defined(__i386__) || defined(__amd64__)
-+#include <machine/bus.h>
-+/* check this OSVERSION */
-+# if __FreeBSD_version < 900000
-+#  if defined(__i386__)
-+#define X86_BUS_SPACE_IO I386_BUS_SPACE_IO
-+#  else
-+#define X86_BUS_SPACE_IO AMD64_BUS_SPACE_IO
-+#  endif
-+# endif
++#include <machine/cpufunc.h>
 +#endif
 +
 +static struct pci_io_handle *
@@ -65,7 +57,7 @@
 +pci_device_freebsd_read32(struct pci_io_handle *handle, uint32_t reg)
 +{
 +#if defined(__i386__) || defined(__amd64__)
-+	return bus_space_read_4(X86_BUS_SPACE_IO, handle->base, reg);
++	return inl(handle->base + reg);
 +#else
 +	return *(uint32_t *)((uintptr_t)handle->memory + reg);
 +#endif
@@ -75,7 +67,7 @@
 +pci_device_freebsd_read16(struct pci_io_handle *handle, uint32_t reg)
 +{
 +#if defined(__i386__) || defined(__amd64__)
-+	return bus_space_read_2(X86_BUS_SPACE_IO, handle->base, reg);
++	return inw(andle->base + reg);
 +#else
 +	return *(uint16_t *)((uintptr_t)handle->memory + reg);
 +#endif
@@ -85,7 +77,7 @@
 +pci_device_freebsd_read8(struct pci_io_handle *handle, uint32_t reg)
 +{
 +#if defined(__i386__) || defined(__amd64__)
-+	return bus_space_read_1(X86_BUS_SPACE_IO, handle->base, reg);
++	return inb(handle->base + reg);
 +#else
 +	return *(uint8_t *)((uintptr_t)handle->memory + reg);
 +#endif
@@ -96,7 +88,7 @@
 +    uint32_t data)
 +{
 +#if defined(__i386__) || defined(__amd64__)
-+	bus_space_write_4(X86_BUS_SPACE_IO, handle->base, reg, data);
++	outl(handle->base + reg, data);
 +#else
 +	*(uint16_t *)((uintptr_t)handle->memory + reg) = data;
 +#endif
@@ -107,7 +99,7 @@
 +    uint16_t data)
 +{
 +#if defined(__i386__) || defined(__amd64__)
-+	bus_space_write_2(X86_BUS_SPACE_IO, handle->base, reg, data);
++	outw(handle->base + reg, data);
 +#else
 +	*(uint8_t *)((uintptr_t)handle->memory + reg) = data;
 +#endif
@@ -118,7 +110,7 @@
 +    uint8_t data)
 +{
 +#if defined(__i386__) || defined(__amd64__)
-+	bus_space_write_1(X86_BUS_SPACE_IO, handle->base, reg, data);
++	outb(handle->base + reg, data);
 +#else
 +	*(uint32_t *)((uintptr_t)handle->memory + reg) = data;
 +#endif
@@ -156,7 +148,7 @@
  static const struct pci_system_methods freebsd_pci_methods = {
      .destroy = pci_system_freebsd_destroy,
      .destroy_device = NULL, /* nothing to do for this */
-@@ -571,6 +713,18 @@
+@@ -571,6 +705,18 @@
      .read = pci_device_freebsd_read,
      .write = pci_device_freebsd_write,
      .fill_capabilities = pci_fill_capabilities_generic,
