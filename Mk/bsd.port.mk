@@ -1962,8 +1962,14 @@ X_FONTS_TYPE1_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-type1
 X_FONTS_ALIAS_PORT=	${PORTSDIR}/x11-fonts/font-alias
 
 .if defined(USE_IMAKE)
+.if (${OSVERSION} >= 900506 && ${OSVERSION} < 1000000) || \
+	${OSVERSION} >= 1000010
+CONFIGURE_ENV+=		IMAKECPP="gcpp"
+MAKE_ENV+=		IMAKECPP="gcpp"
+.else
 CONFIGURE_ENV+=		IMAKECPP="${CPP}"
 MAKE_ENV+=		IMAKECPP="${CPP}"
+.endif
 MAKE_FLAGS?=		CC="${CC}" CXX="${CXX}"
 BUILD_DEPENDS+=		imake:${X_IMAKE_PORT}
 .endif
