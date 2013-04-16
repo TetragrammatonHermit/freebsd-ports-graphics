@@ -16,7 +16,8 @@ RUN_DEPENDS=	gccmakedep:${PORTSDIR}/devel/gccmakedep \
 USE_PERL5=	yes
 
 XORG_CAT=	util
-USE_XORG=	xproto
+USE_XORG=	xproto xorg-macros
+USE_PKGCONFIG=	build
 
 .ifdef USE_IMAKE
 .error You have `USE_IMAKE' variable defined either in environment or in make(1) arguments. Please undefine and try again.
