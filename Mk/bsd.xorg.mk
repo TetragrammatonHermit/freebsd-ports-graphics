@@ -43,8 +43,9 @@ MASTER_SITE_SUBDIR?=	individual/${XORG_CAT}
 # then continues the build.
 USE_PKGCONFIG=	build
 
-. if ${XORG_CAT} != "macros"
-USE_XORG+=	xorg-macros
+# All xorg ports needs xorg-macros.
+. if ${PORTNAME} != xorg-macros
+USE_XORG+=      xorg-macros
 . endif
 
 . if ${XORG_CAT} == "app"
