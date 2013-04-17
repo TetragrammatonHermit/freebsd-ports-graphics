@@ -17,14 +17,14 @@ Xorg_Pre_Include=		bsd.xorg.mk
 
 # Some notes:
 #
-# app - requires pkgconfig, don't install shared libraries (I guess)
+# app - Installs applications, no shared libraries.
 # data - nothing I could factorize
 # doc - no particular notes
 # driver - input depends on inputproto/randrproto at least
 #          video depends on randrproto/renderproto at least
 # font - don't install .pc file
-# lib - various dependencies, install .pc file
-# proto - install .pc file, no dependencies, needed only at build time for most of them
+# lib - various dependencies, install .pc file, needs pathfix
+# proto - install .pc file, needs pathfix, most only needed at build time.
 # xserver - there's only one atm, I guess everything can fit into the port itself
 
 .if defined(XORG_CAT)
@@ -38,8 +38,12 @@ DIST_SUBDIR=	xorg/${XORG_CAT}
 MASTER_SITES?=	${MASTER_SITE_XORG}
 MASTER_SITE_SUBDIR?=	individual/${XORG_CAT}
 
-. if ${XORG_CAT} == "app"
+# All xorg ports needs pkgconfig to build, but some ports look for pkgconfig and
+# then continues the build.
 USE_PKGCONFIG=	build
+
+. if ${XORG_CAT} == "app"
+# Nothing at the moment
 . endif
 
 . if ${XORG_CAT} == "data"
@@ -47,7 +51,6 @@ USE_PKGCONFIG=	build
 . endif
 
 . if ${XORG_CAT} == "driver"
-USE_PKGCONFIG=	build
 USE_XORG+=	xorg-server xproto randrproto xi
 # work around a llvm bug on i386, llvm bug #15806 
 # reproduced with clang 3.2 (current release) and 3.1
@@ -88,7 +91,6 @@ INSTALLS_TTF?=	no
 USES+=	pathfix
 NEED_MKFONTFOO=	no
 .  elif ${INSTALLS_TTF} == "yes"
-USE_PKGCONFIG=	build
 BUILD_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/fontconfig.pc:${PORTSDIR}/x11-fonts/fontconfig
 RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/fontconfig.pc:${PORTSDIR}/x11-fonts/fontconfig
 .  else
@@ -124,7 +126,6 @@ post-install:
 . endif
 
 . if ${XORG_CAT} == "lib"
-USE_PKGCONFIG=	build
 USES+=	pathfix
 USE_LDCONFIG=	yes
 CONFIGURE_ARGS+=--enable-malloc0returnsnull
