@@ -8,7 +8,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org chips display driver
 
 XORG_CAT=	driver
-USE_XORG=	xorg-macros
 MAN4=		chips.4x
 
 .include <bsd.port.mk>

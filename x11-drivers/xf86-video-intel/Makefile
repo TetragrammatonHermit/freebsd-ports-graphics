@@ -20,7 +20,6 @@ USE_XORG=	glproto \
 		xext \
 		xf86driproto \
 		xineramaproto \
-		xorg-macros \
 		xrender \
 		xvmc
 

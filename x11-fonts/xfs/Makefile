@@ -10,7 +10,7 @@ COMMENT=	X.Org font server
 
 XORG_CAT=	app
 USE_GMAKE=	yes
-USE_XORG=	libfs xfont xtrans xorg-macros
+USE_XORG=	libfs xfont xtrans
 USE_RC_SUBR=	xfs
 CONFIGURE_ARGS=	--without-xmlto --without-fop
 

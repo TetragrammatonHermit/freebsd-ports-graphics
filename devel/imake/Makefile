@@ -16,7 +16,7 @@ RUN_DEPENDS=	gccmakedep:${PORTSDIR}/devel/gccmakedep \
 USE_PERL5=	yes
 
 XORG_CAT=	util
-USE_XORG=	xproto xorg-macros
+USE_XORG=	xproto
 USE_PKGCONFIG=	build
 
 # clang's cpp destroys whitespace, particularly hard tabs in makefiles,

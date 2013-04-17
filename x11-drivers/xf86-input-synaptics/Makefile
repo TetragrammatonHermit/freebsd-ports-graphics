@@ -16,7 +16,7 @@ OPTIONS_DEFAULT=HAL
 .include <bsd.port.options.mk>
 
 USES=		pathfix
-USE_XORG=	x11 xorg-macros
+USE_XORG=	x11
 XORG_CAT=	driver
 
 .if ${PORT_OPTIONS:MHAL}

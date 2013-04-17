@@ -12,7 +12,7 @@ COMMENT=	X Input extension library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-USE_XORG=	xorg-macros xproto x11 xext xextproto xfixes inputproto:both
+USE_XORG=	xproto x11 xext xextproto xfixes inputproto:both
 
 CONFIGURE_ARGS+=--disable-docs \
 		--disable-specs \

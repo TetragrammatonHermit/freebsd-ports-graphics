@@ -8,7 +8,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org mouse input driver
 
 XORG_CAT=	driver
-USE_XORG=	xorg-macros
 USES=		pathfix
 MAN4=		mousedrv.4x
 

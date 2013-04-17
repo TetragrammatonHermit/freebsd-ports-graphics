@@ -14,7 +14,7 @@ LICENSE=	MIT
 XORG_CAT=	lib
 USE_XORG=	bigreqsproto xau xcmiscproto xdmcp xextproto xtrans \
 		kbproto:both inputproto xf86bigfontproto xproto:both \
-		xorg-macros xcb
+		xcb
 USE_PERL5_BUILD=yes
 
 CONFIGURE_ARGS+=	--datadir=${PREFIX}/lib \

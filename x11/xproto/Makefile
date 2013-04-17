@@ -9,8 +9,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X11 protocol headers
 
 XORG_CAT=	proto
-USE_XORG=	xorg-macros
-USE_PKGCONFIG=	build
 
 CONFIGURE_ARGS+=--disable-specs --without-fop --without-xmlto --without-xsltproc
 
