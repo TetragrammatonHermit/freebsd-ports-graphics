@@ -9,7 +9,7 @@ DISTNAME=	util-macros-$(PORTVERSION)
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org development aclocal macros
 
-XORG_CAT=	macros
+XORG_CAT=	util
 
 MAKE_ARGS=	pkgconfigdir="${PREFIX}/libdata/pkgconfig"
 
