@@ -18,7 +18,6 @@ Xorg_Pre_Include=		bsd.xorg.mk
 # Some notes:
 #
 # app - Installs applications, no shared libraries.
-# macros - special category for xorg-macros.
 # data - Installs only data.
 # doc - no particular notes
 # driver - input depends on inputproto/randrproto at least
