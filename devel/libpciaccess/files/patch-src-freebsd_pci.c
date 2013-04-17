@@ -67,7 +67,7 @@
 +pci_device_freebsd_read16(struct pci_io_handle *handle, uint32_t reg)
 +{
 +#if defined(__i386__) || defined(__amd64__)
-+	return inw(andle->base + reg);
++	return inw(handle->base + reg);
 +#else
 +	return *(uint16_t *)((uintptr_t)handle->memory + reg);
 +#endif
