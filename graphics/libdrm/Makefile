@@ -57,8 +57,8 @@ MAN7=		drm-gem.7 \
 CONFIGURE_ARGS+=--disable-manpages
 .endif
 
-LIBDRM_VERSION=	2.4.43
-LIBDRM_REVISION=1
+LIBDRM_VERSION=	2.4.44
+LIBDRM_REVISION=0
 PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-configure \
 		${FILESDIR}/extra-tests_modetest_Makefile.in \
