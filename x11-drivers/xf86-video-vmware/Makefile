@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-vmware
-PORTVERSION=	13.0.0
+PORTVERSION=	13.0.1
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
