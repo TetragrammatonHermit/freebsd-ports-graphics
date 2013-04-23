@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 316246 2013-04-22 16:16:46Z bapt $
+# $FreeBSD: head/Mk/bsd.port.mk 316289 2013-04-23 00:26:55Z bdrewery $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -940,6 +940,8 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #
 # WITH_CCACHE_BUILD
 # 				- Enable CCACHE support (devel/ccache).  User settable.
+# CCACHE_DIR
+# 				- Which directory to use for ccache (default: $HOME/.ccache)
 # NO_CCACHE
 #				- Disable CCACHE support for example for certain ports if
 #				  CCACHE is enabled.  User settable.
@@ -1525,7 +1527,7 @@ ${_f}_ARGS:=	${f:C/^[^\:]*\://g}
 
 # You can force skipping these test by defining IGNORE_PATH_CHECKS
 .if !defined(IGNORE_PATH_CHECKS)
-.if (${PREFIX:C,(^.).*,\1,} != "/")
+.if ! ${PREFIX:M/*}
 .BEGIN:
 	@${ECHO_MSG} "PREFIX must be defined as an absolute path so that when 'make'"
 	@${ECHO_MSG} "is invoked in the work area PREFIX points to the right place."
@@ -2254,7 +2256,12 @@ BUILD_DEPENDS+=		${LOCALBASE}/bin/ccache:${PORTSDIR}/devel/ccache
 .	endif
 
 # Prepend the ccache dir into the PATH and setup ccache env
-MAKE_ENV+=	PATH=${LOCALBASE}/libexec/ccache:${PATH}
+MAKE_ENV+=		PATH=${LOCALBASE}/libexec/ccache:${PATH}
+CONFIGURE_ENV+=	PATH=${LOCALBASE}/libexec/ccache:${PATH}
+.	if defined(CCACHE_DIR)
+MAKE_ENV+=		CCACHE_DIR="${CCACHE_DIR}"
+CONFIGURE_ENV+=	CCACHE_DIR="${CCACHE_DIR}"
+.	endif
 .endif
 
 PTHREAD_CFLAGS?=
