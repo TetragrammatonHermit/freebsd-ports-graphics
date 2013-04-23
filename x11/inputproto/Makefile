@@ -9,7 +9,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Input extension headers
 
 USE_XORG=	xorg-macros
-USE_PKGCONFIG=	build
 XORG_CAT=	proto
 
 CONFIGURE_ARGS=	--without-asciidoc

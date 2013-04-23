@@ -40,7 +40,7 @@ MASTER_SITE_SUBDIR?=	individual/${XORG_CAT}
 
 # All xorg ports needs pkgconfig to build, but some ports look for pkgconfig and
 # then continues the build.
-USE_PKGCONFIG=	build
+USES+=		pkgconfig
 
 # All xorg ports needs xorg-macros.
 . if ${PORTNAME} != xorg-macros

@@ -12,7 +12,7 @@ COMMENT=	OpenGL hardware acceleration drivers for the DRI
 LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm \
 		expat:${PORTSDIR}/textproc/expat2
 
-USE_PKGCONFIG=	build
+USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
 ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST

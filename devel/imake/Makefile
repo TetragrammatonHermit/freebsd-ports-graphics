@@ -17,7 +17,6 @@ USE_PERL5=	yes
 
 XORG_CAT=	util
 USE_XORG=	xproto
-USE_PKGCONFIG=	build
 
 # clang's cpp destroys whitespace, particularly hard tabs in makefiles,
 # which is fatal for imake.
