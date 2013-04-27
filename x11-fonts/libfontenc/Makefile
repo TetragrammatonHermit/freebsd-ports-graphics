@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libfontenc
-PORTVERSION=	1.1.1
+PORTVERSION=	1.1.2
 CATEGORIES=	x11-fonts
 
 MAINTAINER=	x11@FreeBSD.org
