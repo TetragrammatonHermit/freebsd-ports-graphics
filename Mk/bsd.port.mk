@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 316289 2013-04-23 00:26:55Z bdrewery $
+# $FreeBSD: head/Mk/bsd.port.mk 316600 2013-04-26 12:35:50Z bapt $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -360,7 +360,6 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  if PACKAGE_BUILDING is not set, then CONFIGURE_ENV and
 #				  MAKE_ENV are extended with a DISPLAY variable.
 #
-# USE_FREETYPE	- If set, this port uses the freetype print libraries.
 # USE_GL		- A list of Mesa or GL related dependencies needed by the port.
 #				  Supported components are: glut, glu, glw, gl and linux.
 #				  If set to "yes", this is equivalent to "glu". Note that
@@ -525,13 +524,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 ##
 # USE_APACHE	- If set, this port relies on an apache webserver.
 #
-# USE_CDRTOOLS	- If set, this port depends on sysutils/cdrtools.
-#
 # USE_NCURSES	- If set, this port relies on the ncurses package.
-#
-# USE_PKGCONFIG	- Implies that the port uses pkg-config in one way or another:
-#		  'build', 'run', 'both', implying build,
-#		  runtime, and both build/run dependencies
 #
 # Conflict checking.  Use if your port cannot be installed at the same time as
 # another package.
@@ -1508,14 +1501,6 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 
 .include "${PORTSDIR}/Mk/bsd.pbi.mk"
 
-.if defined(USE_CMAKE)
-. if defined(CMAKE_OUTSOURCE)
-USES+=	cmake:outsource
-. else
-USES+=	cmake
-. endif
-.endif
-
 # Loading features
 .for f in ${USES}
 _f=${f:C/\:.*//g}
@@ -1695,18 +1680,6 @@ EXTRACT_DEPENDS+=	unmakeself:${PORTSDIR}/archivers/unmakeself
 .if defined(USE_GMAKE)
 BUILD_DEPENDS+=		gmake:${PORTSDIR}/devel/gmake
 CONFIGURE_ENV+=	MAKE=${GMAKE}
-.endif
-.if defined(USE_PKGCONFIG)
-.if ${USE_PKGCONFIG:L} == yes || ${USE_PKGCONFIG:L} == build
-BUILD_DEPENDS+=	pkgconf:${PORTSDIR}/devel/pkgconf
-CONFIGURE_ENV+=	PKG_CONFIG=pkgconf
-.elif ${USE_PKGCONFIG:L} == both
-RUN_DEPENDS+=	pkgconf:${PORTSDIR}/devel/pkgconf
-BUILD_DEPENDS+=	pkgconf:${PORTSDIR}/devel/pkgconf
-CONFIGURE_ENV+=	PKG_CONFIG=pkgconf
-.elif ${USE_PKGCONFIG:L} == run
-RUN_DEPENDS+=	pkgconf:${PORTSDIR}/devel/pkgconf
-.endif
 .endif
 
 .if defined(USE_GCC) || defined(USE_FORTRAN)
@@ -1946,10 +1919,6 @@ LIB_DEPENDS+=		Xm.4:${PORTSDIR}/x11-toolkits/open-motif
 .endif
 .endif
 
-.if defined(USE_FREETYPE)
-LIB_DEPENDS+=			ttf.4:${PORTSDIR}/print/freetype
-.endif
-
 X_IMAKE_PORT=		${PORTSDIR}/devel/imake
 X_FONTSERVER_PORT=	${PORTSDIR}/x11-fonts/xfs
 X_VFBSERVER_PORT=	${PORTSDIR}/x11-servers/xorg-vfbserver
@@ -2176,12 +2145,6 @@ BUILD_DEPENDS+=	gs:${PORTSDIR}/${GHOSTSCRIPT_PORT}
 .endif
 .if defined(USE_GHOSTSCRIPT) || defined(USE_GHOSTSCRIPT_RUN)
 RUN_DEPENDS+=	gs:${PORTSDIR}/${GHOSTSCRIPT_PORT}
-.endif
-
-# Set up the cdrtools.
-.if defined(USE_CDRTOOLS)
-BUILD_DEPENDS+=	cdrecord:${PORTSDIR}/sysutils/cdrtools
-RUN_DEPENDS+=	cdrecord:${PORTSDIR}/sysutils/cdrtools
 .endif
 
 # Macro for doing in-place file editing using regexps
