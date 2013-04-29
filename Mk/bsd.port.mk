@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 316600 2013-04-26 12:35:50Z bapt $
+# $FreeBSD: head/Mk/bsd.port.mk 316786 2013-04-29 08:57:12Z bapt $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -324,7 +324,6 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # GMAKE			- Set to path of GNU make if not in $PATH.
 #				  Default: gmake
 ##
-# USE_ICONV		- If set, this port uses libiconv.
 # USE_GETTEXT	- The port uses GNU gettext (libintl).
 #					'build'		as a build-time dependency
 #					'yes'		as a library dependency
@@ -1846,10 +1845,6 @@ USE_LDCONFIG=	${PREFIX}/lib
 IGNORE=			has USE_LDCONFIG32 set to yes, which is not correct
 .endif
 
-.if defined(USE_ICONV)
-LIB_DEPENDS+=	iconv.3:${PORTSDIR}/converters/libiconv
-.endif
-
 .if defined(USE_GETTEXT)
 .	if ${USE_GETTEXT:L} == "build"
 BUILD_DEPENDS+=	xgettext:${PORTSDIR}/devel/gettext
@@ -2296,18 +2291,12 @@ EXTRACT_CMD?=		${UNMAKESELF_CMD}
 EXTRACT_BEFORE_ARGS?=
 EXTRACT_AFTER_ARGS?=
 .else
-EXTRACT_BEFORE_ARGS?=	-dc
+EXTRACT_CMD?=	${TAR}
+EXTRACT_BEFORE_ARGS?=	-xf
 .if defined(EXTRACT_PRESERVE_OWNERSHIP)
-EXTRACT_AFTER_ARGS?=	| ${TAR} -xf -
+EXTRACT_AFTER_ARGS?=
 .else
-EXTRACT_AFTER_ARGS?=	| ${TAR} -xf - --no-same-owner --no-same-permissions
-.endif
-.if defined(USE_BZIP2)
-EXTRACT_CMD?=			${BZIP2_CMD}
-.elif defined(USE_XZ)
-EXTRACT_CMD?=			${XZ_CMD}
-.else
-EXTRACT_CMD?=			${GZIP_CMD}
+EXTRACT_AFTER_ARGS?=	--no-same-owner --no-same-permissions
 .endif
 .endif
 
