@@ -1216,7 +1216,7 @@ OSVERSION!=	${SYSCTL} -n kern.osreldate
 
 .if ${OSVERSION} >= 1000017
 .if !defined(WITHOUT_PKGNG)
-WITH_PKGNG?=	yes
+WITH_PKGNG=	yes
 .else
 .undef	WITH_PKGNG
 .endif
