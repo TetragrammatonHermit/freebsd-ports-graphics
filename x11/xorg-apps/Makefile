@@ -1,4 +1,4 @@
-# $FreeBSD$
+# $FreeBSD: head/x11/xorg-apps/Makefile 317162 2013-05-02 22:10:11Z bapt $
 
 PORTNAME=	xorg-apps
 PORTVERSION=	7.7
@@ -9,6 +9,8 @@ EXTRACT_ONLY=	# none
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.org apps meta-port
+
+.MAKE.FreeBSD_UL=	yes
 
 COMPONENTS=	appres bitmap xf86dga:dga iceauth luit \
 		x11-fonts/mkfontdir:mkfontdir \
@@ -38,7 +40,7 @@ ${comp:C/:.*//:C/.*\///:U}_DESC=	Install ${comp:C/:.*//:C/.*\///} application
 .include <bsd.port.options.mk>
 
 .for comp in ${COMPONENTS}
-. if !defined(${OPTIONS_UNSET:M${comp:C/:.*//:C/.*\///:U}})
+. if ${PORT_OPTIONS:M${comp:C/:.*//:C/.*\///:U}}
 .  if ${comp:M*\:*}==""
 port=${comp}
 check=${comp:C/.*\///} # doesn't work
