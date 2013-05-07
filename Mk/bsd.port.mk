@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 317115 2013-05-02 14:07:31Z bapt $
+# $FreeBSD: head/Mk/bsd.port.mk 317452 2013-05-06 00:44:22Z hrs $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -508,6 +508,9 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 ##
 # USE_XORG			- Set to a list of X.org module dependencies.
 #				  Implies inclusion of bsd.xorg.mk.
+##
+# USE_TEX			- A list of the TeX dependencies the port has.
+#
 ##
 # USE_RC_SUBR	- If set, the ports startup/shutdown script uses the common
 #				  routines found in /etc/rc.subr.
@@ -1463,6 +1466,10 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 .include "${PORTSDIR}/Mk/bsd.qt.mk"
 .endif
 
+.if defined(USE_TEX)
+.include "${PORTSDIR}/Mk/bsd.tex.mk"
+.endif
+
 .if defined(USE_DRUPAL)
 .include "${PORTSDIR}/Mk/bsd.drupal.mk"
 .endif
@@ -2107,7 +2114,7 @@ _USE_GHOSTSCRIPT=	${USE_GHOSTSCRIPT_RUN}
 _USE_GHOSTSCRIPT=	${USE_GHOSTSCRIPT}
 .endif
 
-.if defined(WITH_GHOSTSCRIPT_VER) && !empty(WITH_GHOSTSCRIPT_VER:M[89])
+.if defined(WITH_GHOSTSCRIPT_VER) && !empty(WITH_GHOSTSCRIPT_VER:M[789])
 _USE_GHOSTSCRIPT_DEFAULT_VER=	${WITH_GHOSTSCRIPT_VER}
 .else
 _USE_GHOSTSCRIPT_DEFAULT_VER=	9
@@ -2119,8 +2126,8 @@ _USE_GHOSTSCRIPT_PKGNAME_SUFFIX=
 .	else
 _USE_GHOSTSCRIPT_PKGNAME_SUFFIX=-nox11
 .	endif
-.	if !empty(_USE_GHOSTSCRIPT:M[89])
-_USE_GHOSTSCRIPT_VER=${_USE_GHOSTSCRIPT:M[89]}
+.	if !empty(_USE_GHOSTSCRIPT:M[789])
+_USE_GHOSTSCRIPT_VER=${_USE_GHOSTSCRIPT:M[789]}
 .	else
 _USE_GHOSTSCRIPT_VER=${_USE_GHOSTSCRIPT_DEFAULT_VER}
 .	endif
@@ -2130,7 +2137,7 @@ _USE_GHOSTSCRIPT_VER=${_USE_GHOSTSCRIPT_DEFAULT_VER}
 
 # Sanity check
 .if defined(_USE_GHOSTSCRIPT) && defined(WITH_GHOSTSCRIPT_VER)
-.	if empty(WITH_GHOSTSCRIPT_VER:M[89])
+.	if empty(WITH_GHOSTSCRIPT_VER:M[789])
 .		error You set an invalid value "${WITH_GHOSTSCRIPT_VER}" in WITH_GHOSTSCRIPT_VER.  Abort.
 .	elif ${_USE_GHOSTSCRIPT_VER} != ${WITH_GHOSTSCRIPT_VER}
 .		error You set WITH_GHOSTSCRIPT_VER as ${WITH_GHOSTSCRIPT_VER} but ${PKGNAME} requires print/ghostscript${_USE_GHOSTSCRIPT_VER}.  Abort.
@@ -2198,6 +2205,7 @@ CFLAGS:=	${CFLAGS:N-std=*} -std=${USE_CSTD}
 
 # Multiple make jobs support
 .if defined(DISABLE_MAKE_JOBS) || defined(MAKE_JOBS_UNSAFE)
+MAKE_JOBS_NUMBER=	1
 _MAKE_JOBS=		#
 .else
 .if defined(MAKE_JOBS_SAFE) || defined(FORCE_MAKE_JOBS)
