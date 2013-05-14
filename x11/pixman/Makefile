@@ -15,9 +15,9 @@ CONFIGURE_ARGS=	--disable-gtk
 
 OPTIONS_DEFINE=	SIMD
 
-.include <bsd.port.pre.mk>
+.include <bsd.port.options.mk>
 
-.if empty(PORT_OPTIONS:MSIMD)
+.if !{PORT_OPTIONS:MSIMD}
 CONFIGURE_ARGS=	--disable-vmx --disable-arm-simd
 . if ! ${MACHINE_CPU:Mmmx}
 CONFIGURE_ARGS+=	--disable-mmx
@@ -27,4 +27,4 @@ CONFIGURE_ARGS+=	--disable-sse2
 . endif
 .endif
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
