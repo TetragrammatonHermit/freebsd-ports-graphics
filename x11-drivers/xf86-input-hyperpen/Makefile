@@ -15,7 +15,8 @@ HYPERVER=	1.4.1
 HYPERREVISION=	0
 .else
 HYPERVER=	1.3.0
-HYPERREVISION=	5
+HYPERREVISION=	6
+EXTRA_PATCHES+=	${FILESDIR}/extra-patch-src_xf86HyperPen.c
 .endif
 
 .include <bsd.port.mk>
