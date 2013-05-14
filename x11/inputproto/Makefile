@@ -8,7 +8,6 @@ CATEGORIES=	x11
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Input extension headers
 
-USE_XORG=	xorg-macros
 XORG_CAT=	proto
 
 CONFIGURE_ARGS=	--without-asciidoc
