@@ -93,7 +93,7 @@ OPENCHROME_DESC=	Install openchrome video driver
 SUNFFB_DESC=		Install sunffb video driver
 
 # these drivers have a different module name compared to the plugin they install
-QUIRKS=		keyboard:kbd jamstudio:js_x
+QUIRKS=		keyboard:kbd
 
 .include <bsd.port.options.mk>
 
