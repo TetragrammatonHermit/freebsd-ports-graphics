@@ -9,7 +9,6 @@ COMMENT=	X.Org savage display driver
 
 USE_GL=		gl
 
-WITH_FBSD10_FIX=yes
 XORG_CAT=	driver
 USE_XORG=	xf86driproto glproto
 MAN4=		savage.4x
