@@ -166,7 +166,8 @@ post-patch:
 
 .if ${SLAVE_PORT} == "no"
 pre-su-install:
-# The .xorg dir is so it loads the rigth libglx library.
+# The .xorg dir because else the xorg-server might not load the correct 
+# libglx module.
 	${MKDIR} ${PREFIX}/lib/xorg/modules/extensions/.xorg
 	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
 		${PREFIX}/lib/xorg/modules/extensions/.xorg/
