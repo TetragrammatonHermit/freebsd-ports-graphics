@@ -6,7 +6,7 @@ PORTVERSION=	1.8
 CATEGORIES=	x11 python
 MASTER_SITES=	http://xcb.freedesktop.org/dist/
 
-MAINTAINER=	ashish@FreeBSD.org
+MAINTAINER=	x11@FreeBSD.org
 COMMENT=	The X protocol C-language Binding (XCB) protocol
 
 BUILD_DEPENDS=	xmllint:${PORTSDIR}/textproc/libxml2
