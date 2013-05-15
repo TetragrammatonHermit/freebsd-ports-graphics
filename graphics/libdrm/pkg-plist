@@ -24,6 +24,7 @@
 %%NEW%%include/libdrm/mga_drm.h
 %%NEW%%include/libdrm/nouveau.h
 %%NEW%%include/libdrm/nouveau_drm.h
+%%NEW%%include/libdrm/qxl_drm.h
 %%NEW%%include/libdrm/r128_drm.h
 %%NEW%%%%RADEON_DRIVERS%%include/libdrm/r600_pci_ids.h
 %%NEW%%%%RADEON_DRIVERS%%include/libdrm/radeon_bo.h
