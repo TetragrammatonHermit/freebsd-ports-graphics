@@ -1929,10 +1929,11 @@ MAKE_ENV+=		DISPLAY="localhost:1001"
 
 PKG_IGNORE_DEPENDS?=		'this_port_does_not_exist'
 
-_GL_gl_USE_XORG=		glproto dri2proto
 _GL_gl_LIB_DEPENDS=		GL.1:${PORTSDIR}/graphics/libGL
+_GL_gl_USE_XORG=		glproto dri2proto
 _GL_glew_LIB_DEPENDS=		GLEW.1:${PORTSDIR}/graphics/glew
 _GL_glu_LIB_DEPENDS=		GLU.1:${PORTSDIR}/graphics/libGLU
+_GL_glu_USE_XORG=		glproto dri2proto
 _GL_glw_LIB_DEPENDS=		GLw.1:${PORTSDIR}/graphics/libGLw
 _GL_glut_LIB_DEPENDS=		glut.12:${PORTSDIR}/graphics/freeglut
 _GL_linux_RUN_DEPENDS=		${LINUXBASE}/usr/X11R6/lib/libGL.so.1:${PORTSDIR}/graphics/linux_dri
