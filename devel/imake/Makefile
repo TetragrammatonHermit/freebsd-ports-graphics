@@ -1,4 +1,4 @@
-# Created by: anholt
+# Created by: Eric Anholt <anholt@FreeBSD.org>
 # $FreeBSD$
 
 PORTNAME=	imake
