@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-openchrome
-PORTVERSION=	0.3.2
+PORTVERSION=	0.3.3
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
