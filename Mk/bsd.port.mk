@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 317639 2013-05-08 00:12:08Z bdrewery $
+# $FreeBSD: head/Mk/bsd.port.mk 318954 2013-05-24 10:36:04Z bapt $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -2939,7 +2939,7 @@ MANEXT=	.gz
 
 .if defined(.PARSEDIR)
 _MLINKS=	 ${_MLINKS_PREPEND} \
-		 ${MANLANG:S,^,man/,:S,/"",,:@m@${MLINKS:@p@${MAN${p:E}PREFIX}/$m/man${p:E}/$p${MANEXT}@}@}
+		 ${MANLANG:S,^,man/,:S,/"",,:@m@${MLINKS:@p@${MAN${p:E:C/(.).*/\1/g}PREFIX}/$m/man${p:E:C/(.).*/\1/g}/$p${MANEXT}@}@}
 .else
 __pmlinks!=	${ECHO_CMD} '${MLINKS:S/	/ /}' | ${AWK} \
  '{ if (NF % 2 != 0) { print "broken"; exit; } \
