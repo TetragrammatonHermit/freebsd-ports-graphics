@@ -17,7 +17,7 @@ Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
 (limited to 'src/XGetProp.c')
 
 --- src/XGetProp.c.orig	2011-12-20 00:28:44.000000000 +0000
-+++ src/XGetProp.c	2013-05-29 09:01:49.000000000 +0000
++++ src/XGetProp.c	2013-05-29 16:49:01.000000000 +0000
 @@ -60,6 +60,7 @@ SOFTWARE.
  #include <X11/extensions/XInput.h>
  #include <X11/extensions/extutil.h>
@@ -47,7 +47,7 @@ Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
  	    }
  	} else
 -	    _XEatData(dpy, (unsigned long)rlen);
-+	    _XEatDataWords(dpy, rep.lenght);
++	    _XEatDataWords(dpy, rep.length);
      }
  
      UnlockDisplay(dpy);

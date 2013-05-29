@@ -11,7 +11,7 @@ Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
 Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
 ---
 --- src/XGetDProp.c.orig	2010-09-07 05:21:05.000000000 +0000
-+++ src/XGetDProp.c	2013-05-29 08:56:54.000000000 +0000
++++ src/XGetDProp.c	2013-05-29 16:46:04.000000000 +0000
 @@ -38,6 +38,7 @@ in this Software without prior written a
  #include <X11/extensions/XInput.h>
  #include <X11/extensions/extutil.h>
@@ -105,7 +105,7 @@ Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
 -	    UnlockDisplay(dpy);
 -	    SyncHandle();
 -	    return(BadAlloc);
-+	    _XEatDataWords(dpy, rep.lenght);
++	    _XEatDataWords(dpy, rep.length);
 +	    if (ret == Success)
 +		ret = BadAlloc;
 +	    goto out;
