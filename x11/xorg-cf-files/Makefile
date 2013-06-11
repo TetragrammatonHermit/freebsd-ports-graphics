@@ -3,6 +3,7 @@
 
 PORTNAME=	xorg-cf-files
 PORTVERSION=	1.0.4
+PORTREVISION=	1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
@@ -12,14 +13,10 @@ LICENSE=	MIT
 
 XORG_CAT=	util
 
-.include <bsd.port.pre.mk>
-
 post-patch:
 		@${REINPLACE_CMD} 's|\(define ExtraXaw[^ ]*\) [$$].*|\1 /**/|' \
 			${WRKSRC}/X11.tmpl
-.if defined(CC) && ${CC:T:M*clang*} == "clang"
-		${REINPLACE_CMD} -e 's|/usr/bin/cpp|${LOCALBASE}/bin/ucpp|' \
-			-e 's|-traditional|-s|' ${WRKSRC}/FreeBSD.cf
-.endif
+		@${REINPLACE_CMD} -e 's|/usr/bin/cpp|${LOCALBASE}/bin/tradcpp|' \
+			-e 's|-traditional||' ${WRKSRC}/FreeBSD.cf
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
