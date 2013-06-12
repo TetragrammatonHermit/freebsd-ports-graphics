@@ -20,7 +20,7 @@ USES=		shebangfix
 USE_PERL5=	yes
 
 SHEBANG_FILES=	mkhtmlindex.pl
-CONFIGURE_ENV+=       ac_cv_path_RAWCPP="tradcpp"
+CONFIGURE_ENV+=       ac_cv_path_RAWCPP=tradcpp CPP=tradcpp
 
 XORG_CAT=	util
 USE_XORG=	xproto
