@@ -1214,6 +1214,15 @@ WITH_PKGNG?=	yes
 .endif
 .endif
 
+# Enable new xorg for FreeBSD 9.1 and later unless WITHOUT_NEW_XORG is set.
+.if ${OSVERSION} >= 901000
+.if !defined(WITHOUT_NEW_XORG)
+WITH_NEW_XORG?=	yes
+.else
+undef WITH_NEW_XORG
+.endif
+.endif
+
 # Only define tools here (for transition period with between pkg tools)
 .include "${PORTSDIR}/Mk/bsd.commands.mk"
 
