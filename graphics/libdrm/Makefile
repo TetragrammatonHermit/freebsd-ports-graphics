@@ -19,29 +19,20 @@ USE_LDCONFIG=	yes
 
 MAKE_JOBS_SAFE=	yes
 
+OPTIONS_DEFINE=	MANPAGES
+
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
 
 USE_GMAKE=	yes
 
-OPTIONS_DEFINE=	KMS MANPAGES
-OPTIONS_DEFAULT=KMS
-KMS_DESC=	Enable KMS support
-
 .if defined(PACKAGE_BUILDING)
 OPTIONS_DEFAULT+=	MANPAGES
 .endif
 
-.include <bsd.port.options.mk>
-
-.if ${PORT_OPTIONS:MKMS}
 CONFIGURE_ARGS+=--enable-libkms
 EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c
-PLIST_SUB+=	KMS=""
-.else
-PLIST_SUB+=	KMS="@comment "
-.endif
 
 .if ${PORT_OPTIONS:MMANPAGES}
 BUILD_DEPENDS+=	${LOCALBASE}/share/xsl/docbook/manpages/docbook.xsl:${PORTSDIR}/textproc/docbook-xsl \
