@@ -54,8 +54,6 @@ SWRAST_DESC=	Include generic software DRI support
 TDFX_DESC=	Include DRI support for 3dfx Voodoo
 UNICHROME_DESC=	Include DRI support for S3/Via Unichrome
 
-.include <bsd.port.options.mk>
-
 DRI_DRIVERS=
 .for _d in ${ALL_DRI_DRIVERS}
 .if ${PORT_OPTIONS:M${_d}}
