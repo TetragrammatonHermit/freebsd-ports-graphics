@@ -20,6 +20,14 @@ RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 XORG_CAT=	xserver
 SLAVE_PORT?=	no
 
+OPTIONS_DEFINE=	AIGLX SUID HAL
+AIGLX_DESC=	Compile with Accelerated Indirect GLX support
+SUID_DESC=	Install the Xorg server with setuid bit set
+HAL_DESC=	Compile with HAL config support
+OPTIONS_DEFAULT=AIGLX SUID HAL
+
+OPTIONS_EXCLUDE_sparc64=	HAL
+
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
@@ -76,14 +84,6 @@ MAN5+=		xorg.conf.d.5
 # PLIST_FILES, with the masterport plist.
 PLIST=		${.CURDIR}/pkg-plist
 .endif
-
-OPTIONS_DEFINE=	AIGLX SUID HAL
-AIGLX_DESC=	Compile with Accelerated Indirect GLX support
-SUID_DESC=	Install the Xorg server with setuid bit set
-HAL_DESC=	Compile with HAL config support
-OPTIONS_DEFAULT=	AIGLX SUID HAL
-
-OPTIONS_EXCLUDE_sparc64=	HAL
 
 .if defined(WITH_OPENSSL_BASE)
 # The reason why I use this is cause openssl from base doesn't install a .pc file
