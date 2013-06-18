@@ -85,6 +85,8 @@ MAN5+=		xorg.conf.d.5
 PLIST=		${.CURDIR}/pkg-plist
 .endif
 
+.include <bsd.port.pre.mk>
+
 .if defined(WITH_OPENSSL_BASE)
 # The reason why I use this is cause openssl from base doesn't install a .pc file
 # and configure will fail trying to find it. Setting both of those variables to
@@ -184,4 +186,4 @@ post-install:
 	@PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} POST-INSTALL
 .endif
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
