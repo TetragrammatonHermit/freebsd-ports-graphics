@@ -1219,7 +1219,7 @@ WITH_PKGNG?=	yes
 .if !defined(WITHOUT_NEW_XORG)
 WITH_NEW_XORG?=	yes
 .else
-undef WITH_NEW_XORG
+.undef	WITH_NEW_XORG
 .endif
 .endif
 
