@@ -40,7 +40,7 @@ ALL_DRI_DRIVERS+=I915 I965 R200
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 
 DRI_DRIVERS=
-.if ${PORT_OPTIONS:M${_d}}
+.for _d in ${ALL_DRI_DRIVERS}
 DRI_DRIVERS+=	${_d}
 PLIST_SUB+=	${_d}_DRIVER=""
 .else
