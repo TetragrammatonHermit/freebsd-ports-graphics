@@ -11,6 +11,8 @@ COMMENT=	X.Org joystick input driver
 XORG_CAT=	driver
 MAN4=		joystick.4x
 
+.include <bsd.port.options.mk>
+
 .if defined(WITH_NEW_XORG)
 JOYVER=		1.6.2
 JOYREVISION=	0

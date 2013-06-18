@@ -10,6 +10,8 @@ COMMENT=	X.Org mutouch input driver
 XORG_CAT=	driver
 MAN4=		mutouch.4x
 
+.include <bsd.port.options.mk>
+
 .if !defined(WITH_NEW_XORG)
 IGNORE=		does not build with xorg-server 1.7.7
 .else

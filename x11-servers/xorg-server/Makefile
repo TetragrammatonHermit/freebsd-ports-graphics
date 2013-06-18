@@ -20,6 +20,8 @@ RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 XORG_CAT=	xserver
 SLAVE_PORT?=	no
 
+.include <bsd.port.options.mk>
+
 .if defined(WITH_NEW_XORG)
 XORG_VERSION=	1.12.4
 XORG_REVISION=	0
@@ -82,8 +84,6 @@ HAL_DESC=	Compile with HAL config support
 OPTIONS_DEFAULT=	AIGLX SUID HAL
 
 OPTIONS_EXCLUDE_sparc64=	HAL
-
-.include <bsd.port.pre.mk>
 
 .if defined(WITH_OPENSSL_BASE)
 # The reason why I use this is cause openssl from base doesn't install a .pc file
@@ -184,4 +184,4 @@ post-install:
 	@PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} POST-INSTALL
 .endif
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

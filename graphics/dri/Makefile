@@ -17,6 +17,8 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
 ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST
 
+.include <bsd.port.options.mk>
+
 .if ! defined(WITH_NEW_XORG)
 ALL_DRI_DRIVERS+=I810 MACH64 MGA R128 R300 R600 SAVAGE SIS TDFX UNICHROME
 .endif

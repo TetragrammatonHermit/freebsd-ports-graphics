@@ -19,6 +19,8 @@ USE_LDCONFIG=	yes
 
 MAKE_JOBS_SAFE=	yes
 
+.include <bsd.port.options.mk>
+
 .if defined(WITH_NEW_XORG)
 
 USE_GMAKE=	yes
@@ -72,8 +74,6 @@ LIBDRM_REVISION=0
 PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
-.include <bsd.port.pre.mk>
-
 .if ${ARCH} == "amd64" || ${ARCH} == "i386" || ${ARCH} == "ia64" || ${ARCH} == "powerpc"
 PLIST_SUB+=	INTEL_DRIVER=""
 PLIST_SUB+=	RADEON_DRIVERS=""
@@ -87,4 +87,4 @@ pre-patch:
 			   s,i?86|x86_64),i?86|amd64|x86_64),g' \
 		${WRKSRC}/configure
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>

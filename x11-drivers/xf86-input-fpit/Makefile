@@ -12,6 +12,8 @@ USE_XORG=	xrandr
 
 MAN4=		fpit.4x
 
+.include <bsd.port.options.mk>
+
 .if !defined(WITH_NEW_XORG)
 IGNORE=		does not build with X server 1.7.7
 .endif

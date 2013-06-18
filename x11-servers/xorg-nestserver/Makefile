@@ -23,6 +23,8 @@ SLAVE_PORT=	yes
 PLIST_FILES=	bin/Xnest
 MAN1=		Xnest.1
 
+.include <bsd.port.options.mk>
+
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/hw/xnest/Xnest ${PREFIX}/bin/
 .if defined(WITH_NEW_XORG)

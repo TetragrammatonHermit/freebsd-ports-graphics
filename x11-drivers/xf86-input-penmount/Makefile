@@ -11,6 +11,8 @@ COMMENT=	X.Org penmount input driver
 XORG_CAT=	driver
 MAN4=		penmount.4x
 
+.include <bsd.port.options.mk>
+
 .if defined(WITH_NEW_XORG)
 PEN_VERSION=	1.5.0
 PEN_REVISION=	0
