@@ -21,15 +21,15 @@ MAKE_JOBS_SAFE=	yes
 
 OPTIONS_DEFINE=	MANPAGES
 
+.if defined(PACKAGE_BUILDING)
+OPTIONS_DEFAULT+=	MANPAGES
+.endif
+
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
 
 USE_GMAKE=	yes
-
-.if defined(PACKAGE_BUILDING)
-OPTIONS_DEFAULT+=	MANPAGES
-.endif
 
 CONFIGURE_ARGS+=--enable-libkms
 EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c
