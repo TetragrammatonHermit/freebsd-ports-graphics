@@ -23,7 +23,7 @@ do-install:
 post-install:
 	@PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} POST-INSTALL
 
-.include <bsd.port.pre.mk>
+.include <bsd.port.options.mk>
 
 .include "${.CURDIR}/bsd.mesalib.mk"
 
@@ -31,4 +31,4 @@ post-install:
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
