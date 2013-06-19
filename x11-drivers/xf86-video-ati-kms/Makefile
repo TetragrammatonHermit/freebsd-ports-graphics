@@ -20,7 +20,7 @@ pre-everything::
 	@${ECHO_CMD}
 	@${ECHO_CMD} "This port is KMS/TTM only, and only for testing the upcoming"
 	@${ECHO_CMD} "radeon KMS/TTM kernel support. When that kernel supports lands"
-	@${ECHO_CMD} "this port will be merged into the regular ati driver port.
+	@${ECHO_CMD} "this port will be merged into the regular ati driver port."
 	@${ECHO_CMD}
 	@/bin/sleep 7
 
