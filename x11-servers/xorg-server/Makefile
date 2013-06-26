@@ -31,10 +31,10 @@ OPTIONS_EXCLUDE_sparc64=	HAL
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.12.4
+XORG_VERSION=	1.14.2
 XORG_REVISION=	0
+EXTRA_PATCHES+=	${FILESDIR}/extra-hw_xfree86_loader_loadmod.c
 PLIST_SUB+=	OLD="@comment " NEW=""
-EXTRA_PATCHES+=	${FILESDIR}/extra-clang
 .else
 XORG_VERSION=	1.7.7
 XORG_REVISION=	7

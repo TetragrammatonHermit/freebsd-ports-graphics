@@ -1,0 +1,20 @@
+# $FreeBSD$
+
+PORTNAME=	xf86-video-nv
+PORTVERSION=	2.1.20
+PORTREVISION=	1
+CATEGORIES=	x11-drivers
+
+MAINTAINER=	x11@FreeBSD.org
+COMMENT=	X.Org nv display driver
+
+.include <bsd.port.options.mk>
+
+.if defined(WITH_NEW_XORG)
+EXTRA_PATCHES+=	${PATCHDIR}/extra-mibstore
+.endif
+
+XORG_CAT=	driver
+MAN4=		nv.4x
+
+.include <bsd.port.mk>
