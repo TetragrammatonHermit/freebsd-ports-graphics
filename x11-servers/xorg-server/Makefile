@@ -32,7 +32,7 @@ OPTIONS_EXCLUDE_sparc64=	HAL
 
 .if defined(WITH_NEW_XORG)
 XORG_VERSION=	1.12.4
-XORG_REVISION=	0
+XORG_REVISION=	1
 PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-clang
 .else
@@ -45,7 +45,8 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-Xext-xace.c \
 		${FILESDIR}/extra-include_eventstr.h \
 		${FILESDIR}/extra-os-utils.c \
 		${FILESDIR}/extra-servermd.h \
-		${FILESDIR}/extra-dix_events.c
+		${FILESDIR}/extra-dix_events.c \
+		${FILESDIR}/extra-Xserver-hw-xfree86-common-xf86Config.c
 .endif
 
 USE_BZIP2=	yes
