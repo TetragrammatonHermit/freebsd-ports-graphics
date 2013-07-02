@@ -1,5 +1,5 @@
 # Created by: Dave Grochowski
-# $FreeBSD: head/x11/xorg-cf-files/Makefile 319055 2013-05-25 14:37:02Z zeising $
+# $FreeBSD: head/x11/xorg-cf-files/Makefile 321957 2013-06-28 11:51:05Z bapt $
 
 PORTNAME=	xorg-cf-files
 PORTVERSION=	1.0.4
@@ -16,7 +16,5 @@ XORG_CAT=	util
 post-patch:
 		@${REINPLACE_CMD} 's|\(define ExtraXaw[^ ]*\) [$$].*|\1 /**/|' \
 			${WRKSRC}/X11.tmpl
-		@${REINPLACE_CMD} -e 's|/usr/bin/cpp|${LOCALBASE}/bin/tradcpp|' \
-			-e 's|-traditional||' ${WRKSRC}/FreeBSD.cf
 
 .include <bsd.port.mk>
