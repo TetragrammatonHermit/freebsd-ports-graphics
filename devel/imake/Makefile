@@ -17,7 +17,7 @@ RUN_DEPENDS=	gccmakedep:${PORTSDIR}/devel/gccmakedep \
 		tradcpp:${PORTDIR}/devel/tradcpp
 
 USES=		shebangfix
-USE_PERL5=	yes
+USE_PERL5_RUN=	yes
 
 SHEBANG_FILES=	mkhtmlindex.pl
 CONFIGURE_ENV+=       ac_cv_path_RAWCPP=tradcpp CPP=tradcpp
