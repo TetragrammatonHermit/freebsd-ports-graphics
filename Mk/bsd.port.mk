@@ -320,9 +320,6 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  the system or installed from a port.
 # USE_CSTD		- Override the default C language standard (gnu89, gnu99)
 # USE_BINUTILS	- Use binutils suite from port instead of the version in base.
-# USE_GMAKE		- If set, this port uses gmake.
-# GMAKE			- Set to path of GNU make if not in $PATH.
-#				  Default: gmake
 ##
 # USE_GHOSTSCRIPT
 #				- If set, this port needs ghostscript to both
@@ -1131,6 +1128,7 @@ _DISTDIR?=		${DISTDIR}/${DIST_SUBDIR}
 INDEXDIR?=		${PORTSDIR}
 SRC_BASE?=		/usr/src
 USESDIR?=		${PORTSDIR}/Mk/Uses
+LIB_DIRS?=		/lib /usr/lib ${LOCALBASE}/lib
 
 # make sure bmake treats -V as expected 
 .MAKE.EXPAND_VARIABLES= yes
@@ -1227,13 +1225,6 @@ WITH_NEW_XORG?=	yes
 # Only define tools here (for transition period with between pkg tools)
 .include "${PORTSDIR}/Mk/bsd.commands.mk"
 
-.for _CATEGORY in ${CATEGORIES}
-PKGCATEGORY?=	${_CATEGORY}
-.endfor
-_PORTDIRNAME=	${.CURDIR:T}
-PORTDIRNAME?=	${_PORTDIRNAME}
-PKGORIGIN?=		${PKGCATEGORY}/${PORTDIRNAME}
-
 MASTERDIR?=	${.CURDIR}
 
 .if ${MASTERDIR} != ${.CURDIR}
@@ -1272,6 +1263,13 @@ USE_SUBMAKE=	yes
 .include "${MASTERDIR}/Makefile.local"
 USE_SUBMAKE=	yes
 .endif
+
+.for _CATEGORY in ${CATEGORIES}
+PKGCATEGORY?=	${_CATEGORY}
+.endfor
+_PORTDIRNAME=	${.CURDIR:T}
+PORTDIRNAME?=	${_PORTDIRNAME}
+PKGORIGIN?=		${PKGCATEGORY}/${PORTDIRNAME}
 
 # where 'make config' records user configuration options
 PORT_DBDIR?=	/var/db/ports
@@ -1514,6 +1512,10 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 
 .include "${PORTSDIR}/Mk/bsd.pbi.mk"
 
+.if defined(USE_GMAKE)
+USES+=	gmake
+.endif
+
 # Loading features
 .for f in ${USES}
 _f=${f:C/\:.*//g}
@@ -1553,6 +1555,15 @@ check-makefile::
 .endif
 
 _POSTMKINCLUDED=	yes
+
+# Loading features
+.for f in ${_USES_POST}
+_f=${f:C/\:.*//g}
+.if ${_f} != ${f}
+${_f}_ARGS:=	${f:C/^[^\:]*\://g}
+.endif
+.include "${USESDIR}/${_f}.mk"
+.endfor
 
 WRKDIR?=		${WRKDIRPREFIX}${.CURDIR}/work
 .if !defined(IGNORE_MASTER_SITE_GITHUB) && defined(USE_GITHUB)
@@ -1699,10 +1710,6 @@ EXTRACT_DEPENDS+=	${LOCALBASE}/bin/xz:${PORTSDIR}/archivers/xz
 .endif
 .if defined(USE_MAKESELF)
 EXTRACT_DEPENDS+=	unmakeself:${PORTSDIR}/archivers/unmakeself
-.endif
-.if defined(USE_GMAKE)
-BUILD_DEPENDS+=		gmake:${PORTSDIR}/devel/gmake
-CONFIGURE_ENV+=	MAKE=${GMAKE}
 .endif
 
 .if defined(USE_GCC) || defined(USE_FORTRAN)
@@ -2184,7 +2191,7 @@ _MAKE_JOBS=		#
 MAKE_JOBS_NUMBER?=	`${SYSCTL} -n kern.smp.cpus`
 _MAKE_JOBS?=		-j${MAKE_JOBS_NUMBER}
 .if defined(FORCE_MAKE_JOBS) && !defined(MAKE_JOBS_SAFE)
-BUILD_FAIL_MESSAGE+=	"You have chosen to use multiple make jobs (parallelization) for all ports.  This port was not tested for this setting.  Please remove FORCE_MAKE_JOBS and retry the build before reporting the failure to the maintainer."
+BUILD_FAIL_MESSAGE+=	You have chosen to use multiple make jobs (parallelization) for all ports.  This port was not tested for this setting.  Please remove FORCE_MAKE_JOBS and retry the build before reporting the failure to the maintainer.
 .endif
 .endif
 .endif
@@ -3714,23 +3721,13 @@ do-configure:
 
 .if !target(do-build)
 do-build:
-.if defined(USE_GMAKE)
-	@(cd ${BUILD_WRKSRC}; if ! ${SETENV} ${MAKE_ENV} ${GMAKE} ${MAKE_FLAGS} ${MAKEFILE} ${_MAKE_JOBS} ${MAKE_ARGS} ${ALL_TARGET}; then \
-		if [ x != x${BUILD_FAIL_MESSAGE} ] ; then \
-			${ECHO_MSG} "===> Compilation failed unexpectedly."; \
-			(${ECHO_CMD} ${BUILD_FAIL_MESSAGE}) | ${FMT} 75 79 ; \
-			fi; \
-		${FALSE}; \
-		fi)
-.else
 	@(cd ${BUILD_WRKSRC}; if ! ${SETENV} ${MAKE_ENV} ${MAKE} ${MAKE_FLAGS} ${MAKEFILE} ${_MAKE_JOBS} ${MAKE_ARGS} ${ALL_TARGET}; then \
-		if [ x != x${BUILD_FAIL_MESSAGE} ] ; then \
+		if [ -n "${BUILD_FAIL_MESSAGE}" ] ; then \
 			${ECHO_MSG} "===> Compilation failed unexpectedly."; \
-			(${ECHO_CMD} ${BUILD_FAIL_MESSAGE}) | ${FMT} 75 79 ; \
+			(${ECHO_CMD} "${BUILD_FAIL_MESSAGE}") | ${FMT} 75 79 ; \
 			fi; \
 		${FALSE}; \
 		fi)
-.endif
 .endif
 
 # Check conflicts
@@ -3851,11 +3848,7 @@ check-install-conflicts:
 
 .if !target(do-install)
 do-install:
-.if defined(USE_GMAKE)
-	@(cd ${INSTALL_WRKSRC} && ${SETENV} ${MAKE_ENV} ${GMAKE} ${MAKE_FLAGS} ${MAKEFILE} ${MAKE_ARGS} ${INSTALL_TARGET})
-.else # !defined(USE_GMAKE)
 	@(cd ${INSTALL_WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE} ${MAKE_FLAGS} ${MAKEFILE} ${MAKE_ARGS} ${INSTALL_TARGET})
-.endif
 .endif
 
 # Package
@@ -5077,7 +5070,34 @@ ${deptype:L}-depends:
 
 lib-depends:
 .if defined(LIB_DEPENDS) && !defined(NO_DEPENDS)
-	@set -e ; for i in ${LIB_DEPENDS}; do \
+	@set -e ; \
+	for i in ${LIB_DEPENDS:M*.so*\:*}; do \
+		lib=$${i%%:*} ; \
+		dir=$${i#*:}  ; \
+		target="${DEPENDS_TARGET}"; \
+		depends_args="${DEPENDS_ARGS}"; \
+		${ECHO_MSG}  -n "====> ${PKGNAME} depends on shared library: $${lib}:" ; \
+		found=0 ; \
+		dirs="${LIB_DIRS} `${CAT} ${LOCALBASE}/libdata/ldconfig/* 2>/dev/null || : `" ; \
+		for libdir in $$dirs; do \
+			test -f $${libdir}/$${lib} || continue; \
+			if [ -x /usr/bin/file ]; then \
+				[ `file -b -L --mime-type $${libdir}/$${lib}` = "application/x-sharedlib" ] || continue ; \
+			fi ; \
+			found=1 ; \
+			${ECHO_MSG} " - found"; \
+		done ; \
+		if [ $${found} -eq 0 ]; then \
+			${ECHO_MSG} " - not found"; \
+			${ECHO_MSG} "===>    Verifying for $$lib in $$dir"; \
+			if [ ! -d "$$dir" ] ; then \
+				${ECHO_MSG} "    => No directory for $$lib.  Skipping.."; \
+			else \
+				${_INSTALL_DEPENDS} \
+			fi ; \
+		fi ; \
+	done
+	@set -e ; for i in ${LIB_DEPENDS:N*.so*\:*}; do \
 		lib=$${i%%:*}; \
 		pattern="`${ECHO_CMD} $$lib | ${SED} -E -e 's/\./\\\\./g' -e 's/(\\\\)?\+/\\\\+/g'`"\
 		dir=$${i#*:}; \
