@@ -1921,21 +1921,17 @@ LIB_DEPENDS+=		Xm.4:${PORTSDIR}/x11-toolkits/open-motif
 .endif
 .endif
 
-X_FONTSERVER_PORT=	${PORTSDIR}/x11-fonts/xfs
-X_VFBSERVER_PORT=	${PORTSDIR}/x11-servers/xorg-vfbserver
 X_FONTS_ENCODINGS_PORT=	${PORTSDIR}/x11-fonts/encodings
-X_FONTS_MISC_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-miscbitmaps
 X_FONTS_100DPI_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-100dpi
 X_FONTS_75DPI_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-75dpi
 X_FONTS_CYRILLIC_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-cyrillic
 X_FONTS_TTF_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-truetype
 X_FONTS_TYPE1_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-type1
-X_FONTS_ALIAS_PORT=	${PORTSDIR}/x11-fonts/font-alias
 
 .if defined(USE_DISPLAY) && !defined(DISPLAY)
-BUILD_DEPENDS+=	Xvfb:${X_VFBSERVER_PORT} \
-	${LOCALBASE}/lib/X11/fonts/misc/8x13O.pcf.gz:${X_FONTS_MISC_PORT} \
-	${LOCALBASE}/lib/X11/fonts/misc/fonts.alias:${X_FONTS_ALIAS_PORT} \
+BUILD_DEPENDS+=	Xvfb:${PORTSDIR}/x11-servers/xorg-vfbserver \
+	${LOCALBASE}/lib/X11/fonts/misc/8x13O.pcf.gz:${PORTSDIR}/x11-fonts/xorg-fonts-miscbitmaps \
+	${LOCALBASE}/lib/X11/fonts/misc/fonts.alias:${PORTSDIR}/x11-fonts/font-alias \
 	${LOCALBASE}/share/X11/xkb/rules/base:${PORTSDIR}/x11/xkeyboard-config \
 	xkbcomp:${PORTSDIR}/x11/xkbcomp
 .if !defined(PACKAGE_BUILDING)
