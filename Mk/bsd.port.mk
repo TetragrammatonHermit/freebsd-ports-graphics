@@ -1556,15 +1556,6 @@ check-makefile::
 
 _POSTMKINCLUDED=	yes
 
-# Loading features
-.for f in ${_USES_POST}
-_f=${f:C/\:.*//g}
-.if ${_f} != ${f}
-${_f}_ARGS:=	${f:C/^[^\:]*\://g}
-.endif
-.include "${USESDIR}/${_f}.mk"
-.endfor
-
 WRKDIR?=		${WRKDIRPREFIX}${.CURDIR}/work
 .if !defined(IGNORE_MASTER_SITE_GITHUB) && defined(USE_GITHUB)
 WRKSRC?=		${WRKDIR}/${GH_ACCOUNT}-${GH_PROJECT}-${GH_COMMIT}
@@ -1921,13 +1912,6 @@ LIB_DEPENDS+=		Xm.4:${PORTSDIR}/x11-toolkits/open-motif
 .endif
 .endif
 
-X_FONTS_ENCODINGS_PORT=	${PORTSDIR}/x11-fonts/encodings
-X_FONTS_100DPI_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-100dpi
-X_FONTS_75DPI_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-75dpi
-X_FONTS_CYRILLIC_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-cyrillic
-X_FONTS_TTF_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-truetype
-X_FONTS_TYPE1_PORT=	${PORTSDIR}/x11-fonts/xorg-fonts-type1
-
 .if defined(USE_DISPLAY) && !defined(DISPLAY)
 BUILD_DEPENDS+=	Xvfb:${PORTSDIR}/x11-servers/xorg-vfbserver \
 	${LOCALBASE}/lib/X11/fonts/misc/8x13O.pcf.gz:${PORTSDIR}/x11-fonts/xorg-fonts-miscbitmaps \
@@ -2070,6 +2054,15 @@ RUN_DEPENDS+=	${_GL_${_component}_RUN_DEPENDS}
 .include "${PORTSDIR}/Makefile.inc"
 USE_SUBMAKE=	yes
 .endif
+
+# Loading features
+.for f in ${_USES_POST}
+_f=${f:C/\:.*//g}
+.if ${_f} != ${f}
+${_f}_ARGS:=	${f:C/^[^\:]*\://g}
+.endif
+.include "${USESDIR}/${_f}.mk"
+.endfor
 
 .if defined(USE_XORG)
 # Add explicit X options to avoid problems with false positives in configure
