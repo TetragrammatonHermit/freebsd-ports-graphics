@@ -1,5 +1,5 @@
 --- src/bsd_mouse.c.orig	2012-10-08 03:40:07.000000000 +0200
-+++ src/bsd_mouse.c	2013-07-02 20:54:54.625379970 +0200
++++ src/bsd_mouse.c	2013-07-03 01:00:50.897361950 +0200
 @@ -26,6 +26,24 @@
   * authorization from the copyright holder(s) and author(s).
   */
@@ -93,7 +93,7 @@
 +#ifdef XPS2_SUPPORT
 +static struct {
 +        int dmodel;
-+        char *name;
++        const char *name;
 +} ps2proto[] = {
 +        { MOUSE_MODEL_NETSCROLL,        "NetScrollPS/2" },
 +        { MOUSE_MODEL_NET,              "NetMousePS/2" },
@@ -854,7 +854,7 @@
      /* Allocate buffer */
      if (pUsbMse->packetSize <= 8) {
          pUsbMse->buffer = pMse->protoBuf;
-@@ -674,56 +1078,131 @@
+@@ -674,56 +1078,129 @@
      if (pUsbMse->buffer == NULL) {
          xf86Msg(X_ERROR, "%s: cannot allocate buffer\n", pInfo->name);
          free(pUsbMse);
@@ -913,7 +913,6 @@
 +{
 +    InputInfoPtr pMatch;
 +    MouseDevPtr pMse = pInfo->private;
-+    MouseDevPtr pMseMatch;
 +    UsbMsePtr pUsbMse;
 +    struct UsbMseAcol *acol;
 +    char *str;
@@ -928,7 +927,6 @@
 +
 +    /* Check if this HID device is already opened. */
 +    for (pMatch = xf86FirstLocalDevice(); pMatch != NULL; pMatch = pMatch->next) {
-+	pMseMatch = (MouseDevPtr)pMatch->private;
 +	if ((pInfo != pMatch) && strstr(pMatch->drv->driverName, "mouse")) {
 +	    char *dev1, *dev2;
 +
@@ -1023,7 +1021,7 @@
      /* Setup the local procs. */
      pInfo->device_control = usbMouseProc;
      pInfo->read_input = usbReadInput;
-@@ -766,7 +1245,9 @@
+@@ -766,7 +1243,9 @@
      p->CheckProtocol = CheckProtocol;
  #if (defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__DragonFly__)) && defined(MOUSE_PROTO_SYSMOUSE)
      p->SetupAuto = SetupAuto;
