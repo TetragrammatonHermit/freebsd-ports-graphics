@@ -28,7 +28,7 @@ MAN4=		intel.4x
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
-INTEL_VERSION=	2.21.11
+INTEL_VERSION=	2.21.12
 INTEL_REVISION=	0
 CONFIGURE_ARGS+=	--enable-sna
 MAKE_JOBS_UNSAFE=yes
