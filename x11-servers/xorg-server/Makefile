@@ -50,7 +50,7 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-Xext-xace.c \
 .endif
 
 USE_BZIP2=	yes
-USE_GMAKE=	yes
+USES=		gmake
 USE_GL=		gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		xmu xt xpm xext randrproto renderproto fixesproto damageproto \
