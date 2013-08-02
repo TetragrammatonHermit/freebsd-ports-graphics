@@ -20,13 +20,10 @@ RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 XORG_CAT=	xserver
 SLAVE_PORT?=	no
 
-OPTIONS_DEFINE=	AIGLX SUID HAL
+OPTIONS_DEFINE=	AIGLX SUID
 AIGLX_DESC=	Compile with Accelerated Indirect GLX support
 SUID_DESC=	Install the Xorg server with setuid bit set
-HAL_DESC=	Compile with HAL config support
-OPTIONS_DEFAULT=AIGLX SUID HAL
-
-OPTIONS_EXCLUDE_sparc64=	HAL
+OPTIONS_DEFAULT=AIGLX SUID
 
 .include <bsd.port.options.mk>
 
@@ -66,7 +63,7 @@ USE_PERL5_BUILD=yes
 CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
-		--enable-record=yes
+		--enable-record=yes --enable-config-hal=no
 
 .if ${SLAVE_PORT} == "no"
 SUB_FILES=	pkg-install pkg-deinstall
@@ -94,13 +91,6 @@ PLIST=		${.CURDIR}/pkg-plist
 # and configure will fail trying to find it. Setting both of those variables to
 # a *non-empty* value by-passes the pkg-config check.
 CONFIGURE_ENV=	SHA1_LIB="-L/usr/lib -lcrypto" SHA1_CFLAGS="-I/usr/include"
-.endif
-
-.if ${PORT_OPTIONS:MHAL}
-LIB_DEPENDS+=	hal:${PORTSDIR}/sysutils/hal
-CONFIGURE_ARGS+=	--enable-config-hal=yes
-.else
-CONFIGURE_ARGS+=	--enable-config-hal=no
 .endif
 
 .if ${PORT_OPTIONS:MAIGLX}
@@ -172,6 +162,13 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|@GLX_TRUE@GLXMODS =|@GLX_BOGUS@GLXMODS =|g' \
 		-e 's|^LTLIBRARIES = |LTLIBRARIES = libglx.la |g' \
 		${WRKSRC}/hw/xfree86/dixmods/Makefile.in
+	@${ECHO_CMD} -e "\nint config_devd_init(void);\nvoid config_devd_fini(void);" \
+		>> ${WRKSRC}/config/config-backends.h
+
+post-configure:
+	@${REINPLACE_CMD} -e 's|config\.c|config.c devd.c|g' \
+		-e 's|config\.lo|config.lo devd.lo|g' \
+		${WRKSRC}/config/Makefile
 
 .if ${SLAVE_PORT} == "no"
 pre-su-install:
