@@ -427,19 +427,10 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # USE_WX		- If set, this port uses the WxWidgets library and related
 #				  components. See bsd.wx.mk for more details.
 ##
-# USE_KDEBASE_VER		- Set to 3 to use the KDE windowing system.
-#				  Implies inclusion of bsd.kde.mk.
-#
-# USE_KDELIBS_VER		- Set to 3 to use the KDE libraries.
-#				  Implies inclusion of bsd.kde.mk.
-#
 # USE_KDE4		- A list of the KDE4 dependencies the port has (e.g.,
 #				  kdelibs, kdebase).  Implies that the port needs KDE.
 #				  Implies inclusion of bsd.kde4.mk.  See bsd.kde4.mk
 #				  for more details.
-#
-# USE_QT_VER	- Set to 3 to use the Qt 3 libraries.
-#				  Implies inclusion of bsd.kde.mk.
 #
 # USE_QT4		- A list of the QT4 dependencies the port has (e.g,
 #				  corelib, webkit).  Implies that the port needs Qt.
@@ -1451,10 +1442,6 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 .include "${PORTSDIR}/Mk/bsd.apache.mk"
 .endif
 
-.if (defined(USE_QT_VER) && ${USE_QT_VER:L} == 3) || defined(USE_KDELIBS_VER) || defined(USE_KDEBASE_VER)
-.include "${PORTSDIR}/Mk/bsd.kde.mk"
-.endif
-
 .if defined(USE_QT4)
 .include "${PORTSDIR}/Mk/bsd.qt.mk"
 .endif
@@ -2126,6 +2113,7 @@ DISTINFO_FILE?=		${MASTERDIR}/distinfo
 
 MAKE_FLAGS?=	-f
 MAKEFILE?=		Makefile
+MAKE_CMD?=		/usr/bin/make
 MAKE_ENV+=		PREFIX=${PREFIX} \
 			LOCALBASE=${LOCALBASE} \
 			LIBDIR="${LIBDIR}" \
@@ -2196,6 +2184,7 @@ CONFIGURE_ENV+=	CCACHE_DIR="${CCACHE_DIR}"
 PTHREAD_CFLAGS?=
 PTHREAD_LIBS?=		-pthread
 
+FETCH_ENV?=		SSL_NO_VERIFY_PEER=1 SSL_NO_VERIFY_HOSTNAME=1
 FETCH_BINARY?=	/usr/bin/fetch
 FETCH_ARGS?=	-AFpr
 FETCH_REGET?=	1
@@ -3688,7 +3677,7 @@ do-configure:
 
 .if !target(do-build)
 do-build:
-	@(cd ${BUILD_WRKSRC}; if ! ${SETENV} ${MAKE_ENV} ${MAKE} ${MAKE_FLAGS} ${MAKEFILE} ${_MAKE_JOBS} ${MAKE_ARGS} ${ALL_TARGET}; then \
+	@(cd ${BUILD_WRKSRC}; if ! ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_FLAGS} ${MAKEFILE} ${_MAKE_JOBS} ${MAKE_ARGS} ${ALL_TARGET}; then \
 		if [ -n "${BUILD_FAIL_MESSAGE}" ] ; then \
 			${ECHO_MSG} "===> Compilation failed unexpectedly."; \
 			(${ECHO_CMD} "${BUILD_FAIL_MESSAGE}") | ${FMT} 75 79 ; \
@@ -3815,7 +3804,7 @@ check-install-conflicts:
 
 .if !target(do-install)
 do-install:
-	@(cd ${INSTALL_WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE} ${MAKE_FLAGS} ${MAKEFILE} ${MAKE_ARGS} ${INSTALL_TARGET})
+	@(cd ${INSTALL_WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} ${MAKE_FLAGS} ${MAKEFILE} ${MAKE_ARGS} ${INSTALL_TARGET})
 .endif
 
 # Package
@@ -5043,7 +5032,7 @@ lib-depends:
 		dir=$${i#*:}  ; \
 		target="${DEPENDS_TARGET}"; \
 		depends_args="${DEPENDS_ARGS}"; \
-		${ECHO_MSG}  -n "====> ${PKGNAME} depends on shared library: $${lib}:" ; \
+		${ECHO_MSG}  -n "===>   ${PKGNAME} depends on shared library: $${lib}" ; \
 		found=0 ; \
 		dirs="${LIB_DIRS} `${CAT} ${LOCALBASE}/libdata/ldconfig/* 2>/dev/null || : `" ; \
 		for libdir in $$dirs; do \
