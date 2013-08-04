@@ -11,7 +11,6 @@ USES=		perl5
 USE_PERL5=	build
 XORG_CAT=	lib
 USE_AUTOTOOLS=	libtool
-USE_GNOME=	ltverhack:9
 CONFIGURE_ARGS=	--disable-gtk
 
 OPTIONS_DEFINE=	SIMD
