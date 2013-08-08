@@ -29,7 +29,7 @@ OPTIONS_DEFAULT+=	MANPAGES
 
 .if defined(WITH_NEW_XORG)
 
-USE_GMAKE=	yes
+USES+=		gmake
 
 CONFIGURE_ARGS+=--enable-libkms
 EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c

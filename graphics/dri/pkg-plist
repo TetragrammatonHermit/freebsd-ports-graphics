@@ -1,4 +1,4 @@
-include/GL/internal/dri_interface.h
+%%OLD%%include/GL/internal/dri_interface.h
 %%OLD%%%%I810_DRIVER%%lib/dri/i810_dri.so
 %%I915_DRIVER%%lib/dri/i915_dri.so
 %%I965_DRIVER%%lib/dri/i965_dri.so
