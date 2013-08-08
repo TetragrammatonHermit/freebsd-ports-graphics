@@ -17,8 +17,6 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
 CONFLICTS=	dri-[7-8].*
 
-BROKEN=		install is still borked
-
 .include <bsd.port.options.mk>
 
 .if ${ARCH} == "ia64"
@@ -63,8 +61,7 @@ CONFIGURE_ARGS+=--disable-gallium-intel
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
 
 do-install:
+	cd ${WRKSRC}/src/mesa/libdricore; ${GMAKE} install
 	cd ${WRKSRC}/src/mesa/drivers/dri; ${GMAKE} install
-
-#install-driincludeHEADERS
 
 .include <bsd.port.mk>
