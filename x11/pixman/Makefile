@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	pixman
-PORTVERSION=	0.30.0
+PORTVERSION=	0.30.2
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
@@ -11,6 +11,7 @@ USES=		perl5
 USE_PERL5=	build
 XORG_CAT=	lib
 USE_AUTOTOOLS=	libtool
+# XXX - Remove this before the next major release! - XXX
 USE_GNOME=	ltverhack:9
 CONFIGURE_ARGS=	--disable-gtk
 
