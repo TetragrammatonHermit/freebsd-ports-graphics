@@ -7,9 +7,10 @@ CATEGORIES=	x11
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Low-level pixel manipulation library
 
+USES=		perl5
+USE_PERL5=	build
 XORG_CAT=	lib
 USE_AUTOTOOLS=	libtool
-USE_PERL5_BUILD=yes
 USE_GNOME=	ltverhack:9
 CONFIGURE_ARGS=	--disable-gtk
 
