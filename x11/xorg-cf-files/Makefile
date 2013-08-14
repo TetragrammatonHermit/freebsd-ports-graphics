@@ -2,7 +2,7 @@
 # $FreeBSD: head/x11/xorg-cf-files/Makefile 321957 2013-06-28 11:51:05Z bapt $
 
 PORTNAME=	xorg-cf-files
-PORTVERSION=	1.0.4
+PORTVERSION=	1.0.5
 PORTREVISION=	1
 CATEGORIES=	x11
 
