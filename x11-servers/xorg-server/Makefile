@@ -31,7 +31,7 @@ OPTIONS_EXCLUDE_sparc64=	HAL
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.14.2
+XORG_VERSION=	1.14.2.901
 XORG_REVISION=	0
 EXTRA_PATCHES+=	${FILESDIR}/extra-hw_xfree86_loader_loadmod.c
 PLIST_SUB+=	OLD="@comment " NEW=""
@@ -48,7 +48,7 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-Xext-xace.c \
 .endif
 
 USE_BZIP2=	yes
-USE_GMAKE=	yes
+USES=		gmake
 USE_GL=		gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		xmu xt xpm xext randrproto renderproto fixesproto damageproto \
