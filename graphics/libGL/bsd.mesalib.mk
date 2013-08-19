@@ -42,50 +42,35 @@ MAKE_JOBS_UNSAFE=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
-CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
-#CONFIGURE_ARGS+=--disable-silent-rules
+
+
+CONFIGURE_ARGS+=--disable-silent-rules
 CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 
 .if defined(WITH_NEW_XORG)
 # probably be shared lib, and in it own port.
 CONFIGURE_ARGS+=        --enable-shared-glapi=no
-EXTRA_PATCHES+=	${PATCHDIR}/extra-configure \
-		${PATCHDIR}/extra-m4_libtool \
-		${PATCHDIR}/extra-src__gallium__include__pipe__p_config.h \
-		${PATCHDIR}/extra-src_gallium_drivers_r300_r300-chipset.c \
-		${PATCHDIR}/extra-src_gallium_drivers_r600_r600-asm.c \
-		${PATCHDIR}/extra-src_gallium_drivers_r600_r600-shader.c \
-		${PATCHDIR}/extra-src_gallium_drivers_r600_r600_state_common.c \
-		${PATCHDIR}/extra-src_gallium_drivers_radeonsi_r600-buffer.c \
-		${PATCHDIR}/extra-src_gallium_winsys_svga_drm_vmw-screen-ioctl.c \
-		${PATCHDIR}/extra-src-glsl_ir_constant_expression.cpp \
-		${PATCHDIR}/extra_src_mapi_glapi_gen_gl-gentable.py \
-		${PATCHDIR}/extra-src_mesa_main_compiler.h \
-		${PATCHDIR}/extra-src_mesa_drivers_dri_common_Makefile.in
 # we need to reapply these patches because we doing wierd stuff with autogen
 REAPPLY_PATCHES= \
-		${PATCHDIR}/extra-src_egl_main_Makefile.in \
-		${PATCHDIR}/extra-src_glx_Makefile.in \
-		${PATCHDIR}/extra-src_mapi_shared-glapi_Makefile.in \
-		${PATCHDIR}/extra-src_mesa_drivers_dri_common_xmlpool_Makefile.in \
-		${PATCHDIR}/extra-src_mesa_libdricore_Makefile.in
-
-#               ${PATCHDIR}/extra-src_mesa_drivers_x11_Makefile.in
+		${PATCHDIR}/patch-configure \
+		${PATCHDIR}/patch-src_egl_main_Makefile.in \
+		${PATCHDIR}/patch-src_glx_Makefile.in \
+		${PATCHDIR}/patch-src_mapi_shared-glapi_Makefile.in \
+		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
+		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in \
+		${PATCHDIR}/patch-src_mesa_libdricore_Makefile.in
 .else
-EXTRA_PATCHES+=	${PATCHDIR}/extra-configure-old \
-		${PATCHDIR}/extra-mach64_context.h-old \
-		${PATCHDIR}/extra-src__mesa__x86-64__glapi_x86-64.S \
-		${PATCHDIR}/extra-src__mesa__x86-64__xform4.S \
-		${PATCHDIR}/extra-src__mesa__x86__glapi_x86.S \
-		${PATCHDIR}/extra-src__mesa__x86__read_rgba_span_x86.S \
-		${PATCHDIR}/extra-src_glx_x11_XF86dri.c
 CONFIGURE_ARGS+=--disable-glut --disable-glw --disable-glu
 
 ALL_TARGET=		default
 .endif
 
 MASTERDIR=		${.CURDIR}/../../graphics/libGL
+.if defined(WITH_NEW_XORG)
 PATCHDIR=		${MASTERDIR}/files
+.else
+PATCHDIR=		${MASTERDIR}/files-old
+.endif
 DESCR=			${.CURDIR}/pkg-descr
 PLIST=			${.CURDIR}/pkg-plist
 WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
@@ -99,7 +84,8 @@ CONFIGURE_ARGS+=	--enable-egl
 .endif
 
 .if ${COMPONENT:Mdri} == ""
-CONFIGURE_ARGS+=	--with-dri-drivers=no
+CONFIGURE_ARGS+=--with-dri-drivers=no
+CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
 .else
 # done in the dri port
 .endif

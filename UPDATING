@@ -1,0 +1,14 @@
+** This also needs a review, as well as a correct date **
+
+20xxxxxx:
+  AFFECTS: graphics/libGL graphics/dri
+  AUTHOR: x11@FreeBSD.org
+
+  If libGL is version 7.6.x or dri is version 7.6.x or 8.0 are install and
+  the user is updating to 9.x.x, then the user needs to remove libGL and dri
+  prior to updating. Updating libGL from 8.x to 9.x should be without a problem.
+
+  # pkg_delete -f libGL-\* dri-\*
+  or
+  # pkg delete -f libGL dri
+

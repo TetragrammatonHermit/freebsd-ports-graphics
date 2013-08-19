@@ -8,8 +8,8 @@ CATEGORIES=	graphics
 
 COMMENT=	OpenGL library that renders using GLX or DRI
 
-LIB_DEPENDS+=	drm:${PORTSDIR}/graphics/libdrm \
-		expat:${PORTSDIR}/textproc/expat2
+LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
+		libexpat.so:${PORTSDIR}/textproc/expat2
 
 USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both
@@ -27,6 +27,7 @@ LIBGLREVISION=	4
 do-install:
 .if ! defined(WITH_NEW_XORG)
 	${RM} -f ${WRKSRC}/include/GL/glu*.h
+	@${MKDIR} ${PREFIX}/lib/.libGL
 	cd ${WRKSRC}/src/mesa; ${GMAKE} install-libgl
 .else
 	cd ${WRKSRC}/src/mesa; ${GMAKE} install-pkgconfigDATA
