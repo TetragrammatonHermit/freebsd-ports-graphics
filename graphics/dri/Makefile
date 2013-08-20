@@ -9,11 +9,14 @@ CATEGORIES=	graphics
 
 COMMENT=	OpenGL hardware acceleration drivers for the DRI
 
+BUILD_DEPENDS=	python2:${PORTSDIR}/lang/python2
 LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm \
 		expat:${PORTSDIR}/textproc/expat2
 
 USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
+
+CONFLICTS=	dri-[7-8].*
 
 .include <bsd.port.options.mk>
 
@@ -34,15 +37,32 @@ DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 .endif
 
 .if defined(WITH_NEW_XORG)
-.if ${ARCH} == "powerpc" || ${ARCH} == "sparc64"
+. if defined(WITH_GALLIUM)
+BUILD_DEPENDS+=	llvm-config33:${PORTSDIR}/devel/llvm33
+RUN_DEPENDS+=	llvm-config33:${PORTSDIR}/devel/llvm33
+CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config33
+
+CONFIGURE_ARGS+=--enable-gallium-llvm --disable-gallium-egl
+#		--disable-opengl
+
+#CONFIGURE_ARGS+=--enable-r600-llvm-compiler
+CONFIGURE_ARGS+=--with-gallium-drivers=r300,r600,radeonsi,svga,swrast
+#                          comma delimited Gallium drivers list, e.g.
+#                          "i915,nouveau,r300,r600,radeonsi,svga,swrast"
+#                          [default=r300,r600,svga,swrast
+PLIST_SUB+=	GALLIUM=""
+. else
+PLIST_SUB+=	GALLIUM="@comment "
+. endif
+. if ${ARCH} == "powerpc" || ${ARCH} == "sparc64"
 DRI_DRIVERS=	RADEON SWRAST
-.endif
+. endif
 .else # !defined(WITH_NEW_XORG)
-.if ${ARCH} == "powerpc"
+. if ${ARCH} == "powerpc"
 DRI_DRIVERS=	MACH64 RADEON SWRAST TDFX
-.elif ${ARCH} == "sparc64"
+. elif ${ARCH} == "sparc64"
 DRI_DRIVERS=	MACH64 RADEON SWRAST
-.endif
+. endif
 .endif # defined(WITH_NEW_XORG)
 
 .for _d in ${ALL_DRI_DRIVERS}
@@ -58,7 +78,24 @@ CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
 
+.if defined(WITH_NEW_XORG) && !defined(WITH_GALLIUM)
+pre-everything::
+	@${ECHO_MSG} ""
+	@${ECHO_MSG} "For r300, r600, radeonsi and swrast gallium based drivers."
+	@${ECHO_MSG} "Please define WITH_GALLIUM in /etc/make.conf"
+	@${ECHO_MSG} ""
+.endif
+
 do-install:
+.if !defined(WITH_NEW_XORG)
 	cd ${WRKSRC}/src/mesa; ${GMAKE} install-dri
+.else
+	cd ${WRKSRC}/src/mesa/libdricore; ${GMAKE} install
+	cd ${WRKSRC}/src/mesa/drivers/dri; ${GMAKE} install
+. if defined(WITH_GALLIUM)
+	cd ${WRKSRC}/src/gallium/drivers/radeon; ${GMAKE} install
+	cd ${WRKSRC}/src/gallium/targets; ${GMAKE} install
+. endif
+.endif
 
 .include <bsd.port.mk>

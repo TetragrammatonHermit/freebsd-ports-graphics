@@ -1,16 +1,11 @@
-#-*- mode: Fundamental; tab-width: 4; -*-
-# ex:ts=4
-#
-# bsd.mesa.mk - an attempt to refactor MesaLib ports.
-#
-# Created by: Florent Thoumie <flz@FreeBSD.org>
+# bsd.mesalib.mk - shared code between MesaLib ports.
 #
 # !!! Here be dragons !!! (they seem to be everywhere these days)
 #
 # Remember to upgrade the following ports everytime you bump MESAVERSION:
 #
+#    - graphics/libEGL
 #    - graphics/libGL
-#    - graphics/libGLU
 #    - graphics/dri
 #
 # $FreeBSD$
@@ -21,7 +16,7 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_XORG)
-MESABASEVERSION=	8.0.5
+MESABASEVERSION=	9.1.6
 # if there is a subversion, include the '-' between 7.11-rc2 for example.
 MESASUBVERSION=		
 PLIST_SUB+=	OLD="@comment " NEW=""
@@ -38,57 +33,60 @@ MAINTAINER?=	x11@FreeBSD.org
 BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
 
-USES=	bison gmake
-USE_PYTHON_BUILD=yes
+USES=	bison gmake pathfix pkgconfig
+USE_PYTHON_BUILD=-2.7
 USE_BZIP2=	yes
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
-CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
-		--disable-egl
+
+
+CONFIGURE_ARGS+=--disable-silent-rules
+CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 
 .if defined(WITH_NEW_XORG)
-EXTRA_PATCHES+=	${PATCHDIR}/extra-configure \
-		${PATCHDIR}/extra-src-glsl_ir_constant_expression.cpp \
-		${PATCHDIR}/extra-src__gallium__include__pipe__p_config.h \
-		${PATCHDIR}/extra-src__mesa__drivers__dri__nouveau__nouveau_array.c \
-		${PATCHDIR}/extra-src__mesa__drivers__dri__nouveau__nouveau_render_t.c \
-		${PATCHDIR}/extra-src_glx_XF86dri.c
+# probably be shared lib, and in it own port.
+CONFIGURE_ARGS+=        --enable-shared-glapi=no
+# we need to reapply these patches because we doing wierd stuff with autogen
+REAPPLY_PATCHES= \
+		${PATCHDIR}/patch-configure \
+		${PATCHDIR}/patch-src_egl_main_Makefile.in \
+		${PATCHDIR}/patch-src_glx_Makefile.in \
+		${PATCHDIR}/patch-src_mapi_shared-glapi_Makefile.in \
+		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
+		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in \
+		${PATCHDIR}/patch-src_mesa_libdricore_Makefile.in
 .else
-EXTRA_PATCHES+=	${PATCHDIR}/extra-configure-old \
-		${PATCHDIR}/extra-mach64_context.h-old \
-		${PATCHDIR}/extra-src__mesa__x86-64__glapi_x86-64.S \
-		${PATCHDIR}/extra-src__mesa__x86-64__xform4.S \
-		${PATCHDIR}/extra-src__mesa__x86__glapi_x86.S \
-		${PATCHDIR}/extra-src__mesa__x86__read_rgba_span_x86.S \
-		${PATCHDIR}/extra-src_glx_x11_XF86dri.c
-CONFIGURE_ARGS+=--disable-glut --disable-glw
-.endif
+CONFIGURE_ARGS+=--disable-glut --disable-glw --disable-glu
 
 ALL_TARGET=		default
+.endif
 
 MASTERDIR=		${.CURDIR}/../../graphics/libGL
+.if defined(WITH_NEW_XORG)
 PATCHDIR=		${MASTERDIR}/files
+.else
+PATCHDIR=		${MASTERDIR}/files-old
+.endif
 DESCR=			${.CURDIR}/pkg-descr
 PLIST=			${.CURDIR}/pkg-plist
 WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
 
-.if !defined(ARCH)
-ARCH!=			uname -p
-.endif
-
 COMPONENT=		${PORTNAME:L:C/^lib//:C/mesa-//}
 
-.if ${COMPONENT:Mglu} == ""
-CONFIGURE_ARGS+=	--disable-glu
+.if ${COMPONENT:Megl} == ""
+CONFIGURE_ARGS+=	--disable-egl
+.else
+CONFIGURE_ARGS+=	--enable-egl
 .endif
 
 .if ${COMPONENT:Mdri} == ""
-CONFIGURE_ARGS+=	--with-dri-drivers=no
+CONFIGURE_ARGS+=--with-dri-drivers=no
+CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
 .else
-CONFIGURE_ARGS+=	--with-dri-drivers="i915,i965,r200,radeon,swrast"
+# done in the dri port
 .endif
 
 .if !defined(WITH_NEW_XORG)
@@ -102,8 +100,21 @@ CONFIGURE_ARGS+=	--enable-xcb
 post-patch:
 	@${REINPLACE_CMD} -e 's|-ffast-math|${FAST_MATH}|' -e 's|x86_64|amd64|' \
 		${WRKSRC}/configure
+# workaround for stupid rerunning configure in do-build step
+# xxx
+.if defined(WITH_NEW_XORG)
+	cd ${WRKSRC} && env NOCONFIGURE=1 sh autogen.sh
+. for file in ${REAPPLY_PATCHES}
+	@cd ${WRKSRC} && ${PATCH} --quiet  < ${file}
+. endfor
+# make sure the pkg-config files are installed in the correct place.
+# this was reverted by running autogen.sh
+	@${FIND} ${WRKSRC} -name Makefile.in -type f | ${XARGS} ${REINPLACE_CMD} -e \
+		's|[(]libdir[)]/pkgconfig|(prefix)/libdata/pkgconfig|g' ;
+.else
 	@${REINPLACE_CMD} -e 's|[$$](INSTALL_LIB_DIR)/pkgconfig|${PREFIX}/libdata/pkgconfig|' \
 		${WRKSRC}/src/glu/Makefile \
 		${WRKSRC}/src/mesa/Makefile \
 		${WRKSRC}/src/mesa/drivers/dri/Makefile
+.endif
 
