@@ -32,6 +32,8 @@ ALL_DRI_DRIVERS+=I810 MACH64 MGA R128 R300 R600 SAVAGE SIS TDFX UNICHROME
 
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 
+PLIST_SUB+=	VERSION=${MESADISTVERSION}
+
 .if ${ARCH} == "amd64" || ${ARCH} == "i386"
 DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 .endif
@@ -52,6 +54,7 @@ CONFIGURE_ARGS+=--with-gallium-drivers=r300,r600,radeonsi,svga,swrast
 #                          [default=r300,r600,svga,swrast
 PLIST_SUB+=	GALLIUM=""
 . else
+CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
 PLIST_SUB+=	GALLIUM="@comment "
 . endif
 . if ${ARCH} == "powerpc" || ${ARCH} == "sparc64"
