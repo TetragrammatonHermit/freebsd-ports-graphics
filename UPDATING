@@ -8,7 +8,6 @@
   the user is updating to 9.x.x, then the user needs to remove libGL and dri
   prior to updating. Updating libGL from 8.x to 9.x should be without a problem.
 
-  # pkg_delete -f libGL-\* dri-\*
-  or
-  # pkg delete -f libGL dri
+  # pkg_delete -f libGL-\* dri-\* (or pkg delete -f libGL dri)
+  # portmaster -a
 
