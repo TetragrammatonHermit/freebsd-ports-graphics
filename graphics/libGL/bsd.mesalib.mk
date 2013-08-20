@@ -38,7 +38,6 @@ USE_PYTHON_BUILD=-2.7
 USE_BZIP2=	yes
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
-MAKE_JOBS_UNSAFE=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
@@ -59,7 +58,8 @@ REAPPLY_PATCHES= \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_libdricore_Makefile.in
-.else
+.else /* ! NEW_XORG */
+MAKE_JOBS_UNSAFE=	yes
 CONFIGURE_ARGS+=--disable-glut --disable-glw --disable-glu
 
 ALL_TARGET=		default
