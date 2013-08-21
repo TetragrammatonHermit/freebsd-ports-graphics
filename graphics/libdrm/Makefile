@@ -10,8 +10,8 @@ MASTER_SITES=	http://dri.freedesktop.org/libdrm/
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Userspace interface to kernel Direct Rendering Module services
 
-LIB_DEPENDS=	pciaccess:${PORTSDIR}/devel/libpciaccess \
-		pthread-stubs:${PORTSDIR}/devel/libpthread-stubs
+LIB_DEPENDS=	libpciaccess.so:${PORTSDIR}/devel/libpciaccess \
+		libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs
 
 USE_BZIP2=	yes
 GNU_CONFIGURE=	yes
@@ -29,8 +29,15 @@ OPTIONS_DEFAULT+=	MANPAGES
 
 USES+=		gmake
 
+# KMS support in the kernel is only build on these archs, disable others
+.if ${ARCH} == "amd64" || ${ARCH} == "i386"
 CONFIGURE_ARGS+=--enable-libkms
 EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c
+PLIST_SUB+=	KMS=""
+.else
+CONFIGURE_ARGS+=--disable-libkms
+PLIST_SUB+=	KMS="@comment "
+.endif
 
 .if ${PORT_OPTIONS:MMANPAGES}
 BUILD_DEPENDS+=	${LOCALBASE}/share/xsl/docbook/manpages/docbook.xsl:${PORTSDIR}/textproc/docbook-xsl \
