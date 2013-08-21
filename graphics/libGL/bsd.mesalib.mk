@@ -44,7 +44,11 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 
 
 CONFIGURE_ARGS+=--disable-silent-rules
+
+.if ${OSVERSION} < 1000033
+BUILD_DEPENDS+=	${LOCALBASE}/bin/flex:${PORTSDIR}/textproc/flex
 CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
+.endif
 
 .if defined(WITH_NEW_XORG)
 # probably be shared lib, and in it own port.
