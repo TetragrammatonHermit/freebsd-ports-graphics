@@ -42,7 +42,6 @@ GNU_CONFIGURE=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 
-
 CONFIGURE_ARGS+=--disable-silent-rules
 
 .if ${OSVERSION} < 1000033
@@ -51,6 +50,7 @@ CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 .endif
 
 .if defined(WITH_NEW_XORG)
+USE_AUTOTOOLS=	autoconf:env automake:env libtool
 # probably be shared lib, and in it own port.
 CONFIGURE_ARGS+=        --enable-shared-glapi=no
 # we need to reapply these patches because we doing wierd stuff with autogen
@@ -104,21 +104,24 @@ CONFIGURE_ARGS+=	--enable-xcb
 post-patch:
 	@${REINPLACE_CMD} -e 's|-ffast-math|${FAST_MATH}|' -e 's|x86_64|amd64|' \
 		${WRKSRC}/configure
+.if !defined(WITH_NEW_XORG)
+	@${REINPLACE_CMD} -e 's|[$$](INSTALL_LIB_DIR)/pkgconfig|${PREFIX}/libdata/pkgconfig|' \
+		${WRKSRC}/src/glu/Makefile \
+		${WRKSRC}/src/mesa/Makefile \
+		${WRKSRC}/src/mesa/drivers/dri/Makefile
+.endif
+
+pre-configure:
 # workaround for stupid rerunning configure in do-build step
 # xxx
 .if defined(WITH_NEW_XORG)
 	cd ${WRKSRC} && env NOCONFIGURE=1 sh autogen.sh
 . for file in ${REAPPLY_PATCHES}
-	@cd ${WRKSRC} && ${PATCH} --quiet  < ${file}
+	@cd ${WRKSRC} && ${PATCH} -p0 --quiet  < ${file}
 . endfor
 # make sure the pkg-config files are installed in the correct place.
 # this was reverted by running autogen.sh
 	@${FIND} ${WRKSRC} -name Makefile.in -type f | ${XARGS} ${REINPLACE_CMD} -e \
 		's|[(]libdir[)]/pkgconfig|(prefix)/libdata/pkgconfig|g' ;
-.else
-	@${REINPLACE_CMD} -e 's|[$$](INSTALL_LIB_DIR)/pkgconfig|${PREFIX}/libdata/pkgconfig|' \
-		${WRKSRC}/src/glu/Makefile \
-		${WRKSRC}/src/mesa/Makefile \
-		${WRKSRC}/src/mesa/drivers/dri/Makefile
 .endif
 
