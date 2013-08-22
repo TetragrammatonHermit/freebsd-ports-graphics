@@ -50,7 +50,7 @@ CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 .endif
 
 .if defined(WITH_NEW_XORG)
-USE_AUTOTOOLS=	autoconf:env automake:env libtool
+USE_AUTOTOOLS=	autoconf:env automake:env libtool:env
 # probably be shared lib, and in it own port.
 CONFIGURE_ARGS+=        --enable-shared-glapi=no
 # we need to reapply these patches because we doing wierd stuff with autogen
