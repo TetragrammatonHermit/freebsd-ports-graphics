@@ -5,6 +5,8 @@
 # Remember to upgrade the following ports everytime you bump MESAVERSION:
 #
 #    - graphics/libEGL
+#    - OpenCL
+#    - graphics/libglesv2
 #    - graphics/libGL
 #    - graphics/dri
 #
@@ -42,8 +44,6 @@ GNU_CONFIGURE=	yes
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 
-
-CONFIGURE_ARGS+=--disable-silent-rules
 CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 
 .if defined(WITH_NEW_XORG)
@@ -54,6 +54,7 @@ REAPPLY_PATCHES= \
 		${PATCHDIR}/patch-configure \
 		${PATCHDIR}/patch-src_egl_main_Makefile.in \
 		${PATCHDIR}/patch-src_glx_Makefile.in \
+		${PATCHDIR}/patch-src_mapi_es2api_Makefile.in \
 		${PATCHDIR}/patch-src_mapi_shared-glapi_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in \
@@ -76,6 +77,12 @@ PLIST=			${.CURDIR}/pkg-plist
 WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
 
 COMPONENT=		${PORTNAME:L:C/^lib//:C/mesa-//}
+
+.if ${COMPONENT:Mglesv2} == ""
+CONFIGURE_ARGS+=	--disable-gles2
+.else
+CONFIGURE_ARGS+=	--enable-gles2
+.endif
 
 .if ${COMPONENT:Megl} == ""
 CONFIGURE_ARGS+=	--disable-egl

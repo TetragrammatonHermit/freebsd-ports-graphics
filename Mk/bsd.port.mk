@@ -349,7 +349,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  MAKE_ENV are extended with a DISPLAY variable.
 #
 # USE_GL		- A list of Mesa or GL related dependencies needed by the port.
-#				  Supported components are: egl, glut, glu, glw, and gl.
+#				  Supported components are: egl, glesv2, glut, glu, glw, and gl.
 #				  If set to "yes", this is equivalent to "glu". Note that
 #				  glew and glut depend on glu, glw and glu depend on gl.
 ##
@@ -1891,6 +1891,7 @@ MAKE_ENV+=		DISPLAY="localhost:1001"
 
 PKG_IGNORE_DEPENDS?=		'this_port_does_not_exist'
 
+_GL_glesv2_LIB_DEPENDS=		libGLESv2.so:${PORTSDIR}/grahpics/libglesv2
 _GL_egl_LIB_DEPENDS=		libEGL.so:${PORTSDIR}/graphics/libEGL
 _GL_gl_LIB_DEPENDS=		libGL.so:${PORTSDIR}/graphics/libGL
 _GL_gl_USE_XORG=		glproto dri2proto
