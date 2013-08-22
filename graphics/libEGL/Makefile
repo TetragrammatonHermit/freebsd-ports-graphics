@@ -7,15 +7,14 @@ CATEGORIES=	graphics
 
 COMMENT=	OpenEGL library
 
-USE_GL=		gl
-USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
+LIB_DEPENDS+=	libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs
+
+USE_XORG=	x11 xau xcb xdmcp
+
 BUILD_WKRSRC=	${WRKSRC}/src/egl
 INSTALL_WRKSRC=	${WRKSRC}/src/egl
 
-
-.if ! defined(WITH_NEW_XORG)
-IGNORE=	Needs WITH_NEW_XORG
-.endif
+WITH_NEW_XORG=	yes
 
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 .include <bsd.port.mk>
