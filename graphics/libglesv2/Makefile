@@ -5,20 +5,16 @@ PORTNAME=	libglesv2
 PORTVERSION=	${MESAVERSION}
 CATEGORIES=	graphics
 
-COMMENT=	OpenGL ES 2.x library
+COMMENT=	OpenGL ES v2 library
 
 LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
-#USE_GL=		gl
-#USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 BUILD_WKRSRC=	${WRKSRC}/src/mapi/es2api
 INSTALL_WRKSRC=	${WRKSRC}/src/mapi/es2api
 
-
-.if ! defined(WITH_NEW_XORG)
-IGNORE=	Needs WITH_NEW_XORG
-.endif
+# this library doesn't exist in Mesa 7.6 so use newer
+WITH_NEW_XORG=yes
 
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 .include <bsd.port.mk>
