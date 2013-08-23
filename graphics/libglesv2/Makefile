@@ -16,5 +16,6 @@ INSTALL_WRKSRC=	${WRKSRC}/src/mapi/es2api
 # this library doesn't exist in Mesa 7.6 so use newer
 WITH_NEW_XORG=yes
 
+.include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 .include <bsd.port.mk>
