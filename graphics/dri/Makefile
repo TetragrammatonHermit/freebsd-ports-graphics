@@ -10,8 +10,8 @@ CATEGORIES=	graphics
 COMMENT=	OpenGL hardware acceleration drivers for the DRI
 
 BUILD_DEPENDS=	python2:${PORTSDIR}/lang/python2
-LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm \
-		expat:${PORTSDIR}/textproc/expat2
+LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
+		libexpat.so:${PORTSDIR}/textproc/expat2
 
 USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
@@ -20,8 +20,8 @@ CONFLICTS=	dri-[7-8].*
 
 .include <bsd.port.options.mk>
 
-.if ${ARCH} == "ia64"
-BROKEN=		does not install on ia64
+.if ${ARCH} == ia64
+#BROKEN=		does not install on ia64
 .endif
 
 ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST
@@ -32,7 +32,9 @@ ALL_DRI_DRIVERS+=I810 MACH64 MGA R128 R300 R600 SAVAGE SIS TDFX UNICHROME
 
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 
-.if ${ARCH} == "amd64" || ${ARCH} == "i386"
+PLIST_SUB+=	VERSION=${MESADISTVERSION}
+
+.if ${ARCH} == amd64 || ${ARCH} == i386
 DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 .endif
 
@@ -52,15 +54,19 @@ CONFIGURE_ARGS+=--with-gallium-drivers=r300,r600,radeonsi,svga,swrast
 #                          [default=r300,r600,svga,swrast
 PLIST_SUB+=	GALLIUM=""
 . else
+CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
 PLIST_SUB+=	GALLIUM="@comment "
 . endif
-. if ${ARCH} == "powerpc" || ${ARCH} == "sparc64"
+. if ${ARCH} == powerpc || ${ARCH} == ia64
 DRI_DRIVERS=	RADEON SWRAST
 . endif
+. if ${ARCH} == sparc64
+DRI_DRIVERS=	SWRAST
+. endif
 .else # !defined(WITH_NEW_XORG)
-. if ${ARCH} == "powerpc"
+. if ${ARCH} == powerpc
 DRI_DRIVERS=	MACH64 RADEON SWRAST TDFX
-. elif ${ARCH} == "sparc64"
+. elif ${ARCH} == sparc64
 DRI_DRIVERS=	MACH64 RADEON SWRAST
 . endif
 .endif # defined(WITH_NEW_XORG)
@@ -73,7 +79,7 @@ PLIST_SUB+=	${_d}_DRIVER="@comment "
 .endif
 .endfor
 
-.if !(${ARCH} == "amd64" || ${ARCH} == "i386")
+.if !(${ARCH} == amd64 || ${ARCH} == i386)
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
