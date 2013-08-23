@@ -1,0 +1,11 @@
+--- tests/Makefile.am.orig	2013-08-20 11:09:45.000000000 +0200
++++ tests/Makefile.am	2013-08-20 11:10:03.000000000 +0200
+@@ -45,7 +45,7 @@
+ LDADD = $(top_builddir)/src/libwayland-util.la \
+ 	$(top_builddir)/src/libwayland-client.la \
+ 	$(top_builddir)/src/libwayland-server.la \
+-	-lrt -ldl $(FFI_LIBS)
++	-lrt $(DL_LIBS) $(FFI_LIBS)
+ 
+ exec_fd_leak_checker_SOURCES =			\
+ 	exec-fd-leak-checker.c			\

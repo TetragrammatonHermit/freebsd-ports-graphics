@@ -1,0 +1,168 @@
+--- configure.orig	2013-07-13 07:31:18.000000000 +0200
++++ configure	2013-08-20 12:31:06.000000000 +0200
+@@ -652,6 +652,7 @@
+ ICONDIR
+ ENABLE_SCANNER_FALSE
+ ENABLE_SCANNER_TRUE
++DL_LIBS
+ GCC_CFLAGS
+ FFI_LIBS
+ FFI_CFLAGS
+@@ -11712,21 +11713,25 @@
+ done
+ 
+ 
+-ac_fn_c_check_decl "$LINENO" "SFD_CLOEXEC" "ac_cv_have_decl_SFD_CLOEXEC" "#include <sys/signalfd.h>
+-"
+-if test "x$ac_cv_have_decl_SFD_CLOEXEC" = xyes; then :
++#AC_CHECK_DECL(SFD_CLOEXEC,[],
++#	      [AC_MSG_ERROR("SFD_CLOEXEC is needed to compile wayland")],
++#	      [[#include <sys/signalfd.h>]])
++#AC_CHECK_DECL(TFD_CLOEXEC,[],
++#	      [AC_MSG_ERROR("TFD_CLOEXEC is needed to compile wayland")],
++#	      [[#include <sys/timerfd.h>]])
++for ac_header in sys/signalfd.h sys/timerfd.h
++do :
++  as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
++ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
++if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
++  cat >>confdefs.h <<_ACEOF
++#define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
++_ACEOF
+ 
+-else
+-  as_fn_error $? "\"SFD_CLOEXEC is needed to compile wayland\"" "$LINENO" 5
+ fi
+ 
+-ac_fn_c_check_decl "$LINENO" "TFD_CLOEXEC" "ac_cv_have_decl_TFD_CLOEXEC" "#include <sys/timerfd.h>
+-"
+-if test "x$ac_cv_have_decl_TFD_CLOEXEC" = xyes; then :
++done
+ 
+-else
+-  as_fn_error $? "\"TFD_CLOEXEC is needed to compile wayland\"" "$LINENO" 5
+-fi
+ 
+ ac_fn_c_check_decl "$LINENO" "CLOCK_MONOTONIC" "ac_cv_have_decl_CLOCK_MONOTONIC" "#include <time.h>
+ "
+@@ -11749,6 +11754,120 @@
+ done
+ 
+ 
++# Use epoll on Linux or kqueue on BSD
++for ac_header in sys/epoll.h sys/event.h
++do :
++  as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
++ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
++if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
++  cat >>confdefs.h <<_ACEOF
++#define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
++_ACEOF
++
++fi
++
++done
++
++if test "x$ac_cv_header_sys_epoll_h" != "xyes" && test "x$ac_cv_header_sys_event_h" != "xyes"; then
++	as_fn_error $? "Can't find sys/epoll.h or sys/event.h. Please ensure either epoll or kqueue is available." "$LINENO" 5
++fi
++
++# Credential support on FreeBSD.
++for ac_header in sys/ucred.h
++do :
++  ac_fn_c_check_header_mongrel "$LINENO" "sys/ucred.h" "ac_cv_header_sys_ucred_h" "$ac_includes_default"
++if test "x$ac_cv_header_sys_ucred_h" = xyes; then :
++  cat >>confdefs.h <<_ACEOF
++#define HAVE_SYS_UCRED_H 1
++_ACEOF
++
++fi
++
++done
++
++
++# dlopen()
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for dlsym in -ldl" >&5
++$as_echo_n "checking for dlsym in -ldl... " >&6; }
++if ${ac_cv_lib_dl_dlsym+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++  ac_check_lib_save_LIBS=$LIBS
++LIBS="-ldl  $LIBS"
++cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
++/* Override any GCC internal prototype to avoid an error.
++   Use char because int might match the return type of a GCC
++   builtin and then its argument prototype would still apply.  */
++#ifdef __cplusplus
++extern "C"
++#endif
++char dlsym ();
++int
++main ()
++{
++return dlsym ();
++  ;
++  return 0;
++}
++_ACEOF
++if ac_fn_c_try_link "$LINENO"; then :
++  ac_cv_lib_dl_dlsym=yes
++else
++  ac_cv_lib_dl_dlsym=no
++fi
++rm -f core conftest.err conftest.$ac_objext \
++    conftest$ac_exeext conftest.$ac_ext
++LIBS=$ac_check_lib_save_LIBS
++fi
++{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_dl_dlsym" >&5
++$as_echo "$ac_cv_lib_dl_dlsym" >&6; }
++if test "x$ac_cv_lib_dl_dlsym" = xyes; then :
++  DL_LIBS=-ldl
++fi
++
++
++
++# Defines __FreeBSD__ if we're on FreeBSD.
++for ac_header in sys/param.h
++do :
++  ac_fn_c_check_header_mongrel "$LINENO" "sys/param.h" "ac_cv_header_sys_param_h" "$ac_includes_default"
++if test "x$ac_cv_header_sys_param_h" = xyes; then :
++  cat >>confdefs.h <<_ACEOF
++#define HAVE_SYS_PARAM_H 1
++_ACEOF
++
++fi
++
++done
++
++
++# waitid() and signal.h are needed for the test suite.
++for ac_func in waitid
++do :
++  ac_fn_c_check_func "$LINENO" "waitid" "ac_cv_func_waitid"
++if test "x$ac_cv_func_waitid" = xyes; then :
++  cat >>confdefs.h <<_ACEOF
++#define HAVE_WAITID 1
++_ACEOF
++
++fi
++done
++
++for ac_header in signal.h
++do :
++  ac_fn_c_check_header_mongrel "$LINENO" "signal.h" "ac_cv_header_signal_h" "$ac_includes_default"
++if test "x$ac_cv_header_signal_h" = xyes; then :
++  cat >>confdefs.h <<_ACEOF
++#define HAVE_SIGNAL_H 1
++_ACEOF
++
++fi
++
++done
++
++
+ # Check whether --enable-scanner was given.
+ if test "${enable_scanner+set}" = set; then :
+   enableval=$enable_scanner;
