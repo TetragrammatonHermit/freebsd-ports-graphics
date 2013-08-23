@@ -10,6 +10,10 @@ COMMENT=	OpenGL ES v2 library
 LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
+# stuff not needed by libEGL but configure wants it
+USE_XORG+=	glproto dri2proto xext xdamage xfixes
+
+
 BUILD_WKRSRC=	${WRKSRC}/src/mapi/es2api
 INSTALL_WRKSRC=	${WRKSRC}/src/mapi/es2api
 
