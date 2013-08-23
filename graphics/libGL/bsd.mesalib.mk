@@ -6,6 +6,7 @@
 #
 #    - graphics/libEGL
 #    - graphics/libGL
+#    - grahpics/libglesv2
 #    - graphics/dri
 #
 # $FreeBSD$
@@ -33,7 +34,7 @@ MAINTAINER?=	x11@FreeBSD.org
 BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
 
-USES=	bison gmake pathfix pkgconfig
+USES=		bison gmake pathfix pkgconfig
 USE_PYTHON_BUILD=-2.7
 USE_BZIP2=	yes
 USE_LDCONFIG=	yes
@@ -41,8 +42,6 @@ GNU_CONFIGURE=	yes
 
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
-
-CONFIGURE_ARGS+=--disable-silent-rules
 
 .if ${OSVERSION} < 1000033
 BUILD_DEPENDS+=	${LOCALBASE}/bin/flex:${PORTSDIR}/textproc/flex
@@ -58,6 +57,7 @@ REAPPLY_PATCHES= \
 		${PATCHDIR}/patch-configure \
 		${PATCHDIR}/patch-src_egl_main_Makefile.in \
 		${PATCHDIR}/patch-src_glx_Makefile.in \
+		${PATCHDIR}/patch-src_mapi_es2api_Makefile.in \
 		${PATCHDIR}/patch-src_mapi_shared-glapi_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in \
@@ -79,6 +79,12 @@ PLIST=			${.CURDIR}/pkg-plist
 WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
 
 COMPONENT=		${PORTNAME:L:C/^lib//:C/mesa-//}
+
+.if ${COMPONENT:Mglesv2} == ""
+CONFIGURE_ARGS+=	--disable-gles2
+.else
+CONFIGURE_ARGS+=	--enable-gles2
+.endif
 
 .if ${COMPONENT:Megl} == ""
 CONFIGURE_ARGS+=	--disable-egl

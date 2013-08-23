@@ -79,7 +79,7 @@ PLIST_SUB+=	${_d}_DRIVER="@comment "
 .endif
 .endfor
 
-.if !(${ARCH} == "amd64" || ${ARCH} == "i386")
+.if !(${ARCH} == amd64 || ${ARCH} == i386)
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
