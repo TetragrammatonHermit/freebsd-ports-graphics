@@ -1,7 +1,0 @@
-lib/xorg/modules/drivers/ati_drv.la
-lib/xorg/modules/drivers/ati_drv.so
-lib/xorg/modules/drivers/radeon_drv.la
-lib/xorg/modules/drivers/radeon_drv.so
-@dirrmtry lib/xorg/modules/drivers
-@dirrmtry lib/xorg/modules
-@dirrmtry lib/xorg
