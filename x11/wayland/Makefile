@@ -12,10 +12,6 @@ COMMENT=	Wayland composite "server"
 LIB_DEPENDS=	libexpat.so:${PORTSDIR}/textproc/expat2 \
 		libffi.so:${PORTSDIR}/devel/libffi
 
-.if ! defined(WITH_NEW_XORG)
-BROKEN=	needs mesa 8.0+
-.endif
-
 USE_XZ=		yes
 USES=		pathfix pkgconfig
 USE_GNOME=	libxslt:build
