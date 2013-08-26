@@ -47,11 +47,7 @@ CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config33
 CONFIGURE_ARGS+=--enable-gallium-llvm --disable-gallium-egl
 #		--disable-opengl
 
-#CONFIGURE_ARGS+=--enable-r600-llvm-compiler
 CONFIGURE_ARGS+=--with-gallium-drivers=r300,r600,radeonsi,svga,swrast
-#                          comma delimited Gallium drivers list, e.g.
-#                          "i915,nouveau,r300,r600,radeonsi,svga,swrast"
-#                          [default=r300,r600,svga,swrast
 PLIST_SUB+=	GALLIUM=""
 . else
 CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers

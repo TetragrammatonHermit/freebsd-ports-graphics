@@ -14,12 +14,4 @@
  
  /*
   * Endian detection.
-@@ -133,7 +140,7 @@
- 
- #if defined(PIPE_ARCH_X86) || defined(PIPE_ARCH_X86_64)
- #define PIPE_ARCH_LITTLE_ENDIAN
--#elif defined(PIPE_ARCH_PPC) || defined(PIPE_ARCH_PPC_64)
-+#elif defined(PIPE_ARCH_PPC) || defined(PIPE_ARCH_PPC_64) || defined(PIPE_ARCH_SPARC) || defined(PIPE_ARCH_SPARC_64)
- #define PIPE_ARCH_BIG_ENDIAN
- #endif
- 
+

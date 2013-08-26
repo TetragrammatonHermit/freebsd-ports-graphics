@@ -17,9 +17,9 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_XORG)
-MESABASEVERSION=	9.1.6
+MESABASEVERSION=	9.2.0
 # if there is a subversion, include the '-' between 7.11-rc2 for example.
-MESASUBVERSION=		
+MESASUBVERSION=		rc2
 PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 MESABASEVERSION=	7.6.1
@@ -27,7 +27,7 @@ MESASUBVERSION=
 PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:S/9.2.0/9.2/}/
 DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
 MAINTAINER?=	x11@FreeBSD.org
 
