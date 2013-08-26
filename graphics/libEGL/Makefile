@@ -21,5 +21,6 @@ INSTALL_WRKSRC=	${WRKSRC}/src/egl
 
 WITH_NEW_XORG=	yes
 
+.include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 .include <bsd.port.mk>
