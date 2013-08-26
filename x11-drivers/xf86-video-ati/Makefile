@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-ati
-PORTVERSION=	6.14.6
+PORTVERSION=	${ATI_VERSION}
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -12,6 +12,15 @@ XORG_CAT=	driver
 USE_XORG=	xf86driproto xineramaproto xf86miscproto glproto
 MAN4=		ati.4x radeon.4x
 
-CONFIGURE_ARGS+=--disable-kms
+.include <bsd.port.pre.mk>
 
-.include <bsd.port.mk>
+.if ${OSVERSION} < 1000051
+ATI_VERSION=	6.14.6
+CONFIGURE_ARGS+=--disable-kms
+.else
+ATI_VERSION=	7.2.0
+CONFIGURE_ARGS+=--disable-udev
+EXTRA_PATCHES+=	${FILESDIR}/extra-src__radeon_kms.c
+.endif
+
+.include <bsd.port.post.mk>
