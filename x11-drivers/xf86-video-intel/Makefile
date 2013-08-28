@@ -28,14 +28,13 @@ MAN4=		intel.4x
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
-INTEL_VERSION=	2.21.14
+INTEL_VERSION=	2.21.15
 INTEL_REVISION=	0
 CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
 CONFIGURE_ARGS+=	--enable-sna
 MAKE_JOBS_UNSAFE=yes
 PLIST_SUB+=	OLD="@comment "
-EXTRA_PATCHES+=	${PATCHDIR}/extra-src_sna_compiler.h \
-		${PATCHDIR}/extra-src__sna__sna_threads.c \
+EXTRA_PATCHES+=	${PATCHDIR}/extra-src__sna__sna_threads.c \
 		${PATCHDIR}/extra-src_sna_kgem.c \
 		${PATCHDIR}/extra-clang \
 		${PATCHDIR}/extra-i915kms
