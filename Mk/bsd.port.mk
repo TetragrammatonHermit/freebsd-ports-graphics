@@ -1189,11 +1189,12 @@ WITH_PKGNG?=	yes
 .endif
 .endif
 
-# Enable new xorg for FreeBSD 9.1 and later unless WITHOUT_NEW_XORG is set on
-# all arches but sparc64.  There has been reports of new xorg not working
-# properly on sparc64.
+# Enable new xorg for FreeBSD versions after Radeon KMS was imported unless
+# WITHOUT_NEW_XORG is set.  There has been reports of new xorg not working
+# properly on sparc64, so exclude sparc64 for now.
+# XXX - This version should switch to whatever version newcons gets.
 .if ${ARCH} != "sparc64"
-.if ${OSVERSION} >= 901000
+.if ${OSVERSION} >= 1000051
 .if !defined(WITHOUT_NEW_XORG)
 WITH_NEW_XORG?=	yes
 .else
@@ -2172,7 +2173,7 @@ _CCACHE_PATH=	${LOCALBASE}/libexec/ccache
 
 # Prepend the ccache dir into the PATH and setup ccache env
 PATH:=	${_CCACHE_PATH}:${PATH}
-.if !${MAKE_ENV:M*PATH=*} && !${CONFIGURE_ENV:M*PATH=*}
+.if !${MAKE_ENV:MPATH=*} && !${CONFIGURE_ENV:MPATH=*}
 MAKE_ENV+=			PATH=${PATH}
 CONFIGURE_ENV+=		PATH=${PATH}
 .endif
@@ -2858,8 +2859,9 @@ CONFIGURE_FAIL_MESSAGE?=	"Please report the problem to ${MAINTAINER} [maintainer
 CONFIGURE_MAX_CMD_LEN!=	${SYSCTL} -n kern.argmax
 .endif
 GNU_CONFIGURE_PREFIX?=	${PREFIX}
+CONFIG_SITE?=		${PORTSDIR}/Templates/config.site
 CONFIGURE_ARGS+=	--prefix=${GNU_CONFIGURE_PREFIX} $${_LATE_CONFIGURE_ARGS}
-CONFIGURE_ENV+=		CONFIG_SITE=${PORTSDIR}/Templates/config.site lt_cv_sys_max_cmd_len=${CONFIGURE_MAX_CMD_LEN}
+CONFIGURE_ENV+=		CONFIG_SITE=${CONFIG_SITE} lt_cv_sys_max_cmd_len=${CONFIGURE_MAX_CMD_LEN}
 HAS_CONFIGURE=		yes
 
 SET_LATE_CONFIGURE_ARGS= \
