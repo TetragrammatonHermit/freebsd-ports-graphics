@@ -1189,11 +1189,12 @@ WITH_PKGNG?=	yes
 .endif
 .endif
 
-# Enable new xorg for FreeBSD 9.1 and later unless WITHOUT_NEW_XORG is set on
-# all arches but sparc64.  There has been reports of new xorg not working
-# properly on sparc64.
+# Enable new xorg for FreeBSD versions after Radeon KMS was imported unless
+# WITHOUT_NEW_XORG is set.  There has been reports of new xorg not working
+# properly on sparc64, so exclude sparc64 for now.
+# XXX - This version should switch to whatever version newcons gets.
 .if ${ARCH} != "sparc64"
-.if ${OSVERSION} >= 901000
+.if ${OSVERSION} >= 1000051
 .if !defined(WITHOUT_NEW_XORG)
 WITH_NEW_XORG?=	yes
 .else
