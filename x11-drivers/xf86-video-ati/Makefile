@@ -9,8 +9,8 @@ COMMENT=	X.Org ati display driver
 
 .include <bsd.port.options.mk>
 
-.if defined(WITH_NEW_XORG)
-BROKEN=		does not build, use xf86-video-ati-kms for now
+.if defined(WITH_NEW_XORG) && ${OSVERSION} < 1000051
+BROKEN=		Needs Radeon KMS kernel module
 .endif
 
 USE_GL=		gl
