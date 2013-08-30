@@ -55,6 +55,7 @@ include/xorg/geext.h
 include/xorg/geint.h
 include/xorg/globals.h
 include/xorg/glyphstr.h
+%%NEW%%include/xorg/glx_extinit.h
 include/xorg/hotplug.h
 include/xorg/i2c_def.h
 include/xorg/input.h
@@ -159,6 +160,7 @@ include/xorg/xf86cmap.h
 include/xorg/xf86fbman.h
 include/xorg/xf86i2c.h
 include/xorg/xf86int10.h
+%%NEW%%include/xorg/xf86platformBus.h
 include/xorg/xf86sbusBus.h
 include/xorg/xf86str.h
 include/xorg/xf86xv.h
