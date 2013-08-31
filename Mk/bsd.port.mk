@@ -1084,8 +1084,11 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  a different checksum and you intend to verify if
 #				  the port still works with it.
 # USE_PACKAGE_DEPENDS
-#				- Install dependencies from existing packages instead
-#				  of building the port from scratch.
+#				- Try to install dependencies from existing packages instead
+#				  of building the port from scratch. Fallback on source
+#				  if an existing package is not present.
+# USE_PACKAGE_DEPENDS_ONLY
+#				- Like USE_PACKAGE_DEPENDS, but do not fallback on source.
 # INSTALL_AS_USER
 #				- Define this to install as the current user, intended
 #				  for systems where you have no root access.
@@ -3429,7 +3432,13 @@ do-fetch:
 			else \
 				SORTED_MASTER_SITES_CMD_TMP="${SORTED_MASTER_SITES_DEFAULT_CMD}" ; \
 			fi; \
-			for site in `eval $$SORTED_MASTER_SITES_CMD_TMP ${_RANDOMIZE_SITES}`; do \
+			sites_remaining=0; \
+			sites="`eval $$SORTED_MASTER_SITES_CMD_TMP ${_RANDOMIZE_SITES}`"; \
+			for site in $${sites}; do \
+				sites_remaining=$$(($${sites_remaining} + 1)); \
+			done; \
+			for site in $${sites}; do \
+				sites_remaining=$$(($${sites_remaining} - 1)); \
 			    ${ECHO_MSG} "=> Attempting to fetch $${site}$${file}"; \
 				CKSIZE=`alg=SIZE; ${DISTINFO_DATA}`; \
 				case $${file} in \
@@ -3438,7 +3447,16 @@ do-fetch:
 				*)		args=$${site}$${file};; \
 				esac; \
 				if ${SETENV} ${FETCH_ENV} ${FETCH_CMD} ${FETCH_BEFORE_ARGS} $${args} ${FETCH_AFTER_ARGS}; then \
-					continue 2; \
+					actual_size=`stat -f %z "$${file}"`; \
+					if [ $${actual_size} -eq $${CKSIZE} ]; then \
+						continue 2; \
+					else \
+						${ECHO_MSG} "=> Fetched file size mismatch (expected $${CKSIZE}, actual $${actual_size})"; \
+						if [ $${sites_remaining} -gt 1 ]; then \
+							${ECHO_MSG} "=> Trying next site"; \
+							${RM} -f $${file}; \
+						fi; \
+					fi; \
 				fi; \
 			done; \
 			${ECHO_MSG} "=> Couldn't fetch it - please try to retrieve this";\
@@ -4907,7 +4925,7 @@ _DEPEND_ALWAYS=	0
 .endif
 
 _INSTALL_DEPENDS=	\
-		if [ X${USE_PACKAGE_DEPENDS} != "X" ]; then \
+		if [ -n "${USE_PACKAGE_DEPENDS}" -o -n "${USE_PACKAGE_DEPENDS_ONLY}" ]; then \
 			subpkgfile=`(cd $$dir; ${MAKE} $$depends_args -V PKGFILE)`; \
 			subpkgname=$${subpkgfile%-*} ; \
 			subpkgname=$${subpkgname\#\#*/} ; \
@@ -4921,6 +4939,10 @@ _INSTALL_DEPENDS=	\
 				else \
 					${PKG_ADD} $${subpkgfile}; \
 				fi; \
+			elif [ -n "${USE_PACKAGE_DEPENDS_ONLY}" ]; then \
+				${ECHO_MSG} "===>   ${PKGNAME} depends on package: $${subpkgfile} - not found"; \
+				${ECHO_MSG} "===>   USE_PACKAGE_DEPENDS_ONLY set - will not build from source"; \
+				exit 1; \
 			else \
 			  (cd $$dir; ${MAKE} -DINSTALLS_DEPENDS $$target $$depends_args) ; \
 			fi; \
