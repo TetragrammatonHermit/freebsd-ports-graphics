@@ -123,6 +123,7 @@ post-patch:
 		${WRKSRC}/src/glu/Makefile \
 		${WRKSRC}/src/mesa/Makefile \
 		${WRKSRC}/src/mesa/drivers/dri/Makefile
+.else
 	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${LOCALBASE}/bin/python2|g' \
 		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py \
 		${WRKSRC}/src/glsl/builtins/tools/*.py
