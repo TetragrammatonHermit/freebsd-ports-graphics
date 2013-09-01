@@ -1,6 +1,6 @@
---- src/egl/main/Makefile.in.orig	2013-06-27 00:21:41.000000000 +0200
-+++ src/egl/main/Makefile.in	2013-06-27 00:22:04.000000000 +0200
-@@ -990,8 +982,14 @@
+--- src/egl/main/Makefile.in.orig	2013-08-01 23:22:16.000000000 +0200
++++ src/egl/main/Makefile.in	2013-09-01 11:33:47.000000000 +0200
+@@ -990,8 +990,14 @@
  # a while by putting a link to the driver into /lib of the build tree.
  all-local: libEGL.la
  	$(MKDIR_P) $(top_builddir)/$(LIB_DIR);

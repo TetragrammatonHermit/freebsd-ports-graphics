@@ -32,9 +32,10 @@ DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
 MAINTAINER?=	x11@FreeBSD.org
 
 BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
+		python2:${PORTSDIR}/lang/python2 \
 		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
 
-USES=		bison gmake pathfix pkgconfig
+USES=		bison gmake pathfix pkgconfig shebangfix
 USE_PYTHON_BUILD=-2.7
 USE_BZIP2=	yes
 USE_LDCONFIG=	yes
@@ -62,6 +63,13 @@ REAPPLY_PATCHES= \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_libdricore_Makefile.in
+
+python_OLD_CMD=	"/usr/bin/env[[:space:]]python"
+python_CMD=	${LOCALBASE}/bin/python2
+SHEBANG_FILES=	src/gallium/*/*/*.py src/gallium/tools/trace/*.py \
+		src/gallium/drivers/svga/svgadump/svga_dump.py \
+		src/glsl/tests/compare_ir src/mapi/glapi/gen/*.py \
+		src/mapi/mapi/mapi_abi.py
 .else
 CONFIGURE_ARGS+=--disable-glut --disable-glw --disable-glu
 
@@ -115,6 +123,14 @@ post-patch:
 		${WRKSRC}/src/glu/Makefile \
 		${WRKSRC}/src/mesa/Makefile \
 		${WRKSRC}/src/mesa/drivers/dri/Makefile
+	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${LOCALBASE}/bin/python2|g' \
+		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py \
+		${WRKSRC}/src/glsl/builtins/tools/*.py
+	@${REINPLACE_CMD} -e 's|!/use/bin/python2|!${LOCALBASE}/bin/python2|g' \
+		${WRKSRC}/src/mesa/main/get_hash_generator.py \
+		${WRKSRC}/src/mapi/glapi/gen/gl_enums.py \
+		${WRKSRC}/src/mapi/glapi/gen/gl_table.py \
+
 .endif
 
 pre-configure:

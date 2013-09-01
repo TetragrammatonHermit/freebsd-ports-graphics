@@ -9,7 +9,6 @@ CATEGORIES=	graphics
 
 COMMENT=	OpenGL hardware acceleration drivers for the DRI
 
-BUILD_DEPENDS=	python2:${PORTSDIR}/lang/python2
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
@@ -19,6 +18,18 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 CONFLICTS=	dri-[7-8].*
 
 .include <bsd.port.options.mk>
+
+# gcc from base can't handle some code in mesa 9.1+
+# We only care for 9.x and 8.x, not for old pre-clang default current.
+.if defined(WITH_NEW_XORG)
+. if ${OSVERSION} >= 901000 && ${OSVERSION} < 902502
+CC=clang
+CXX=clang++
+CPP=clang-cpp
+. elif ${OSVERSION} < 901500
+USE_GCC=yes
+. endif
+.endif
 
 .if ${ARCH} == ia64
 #BROKEN=		does not install on ia64
@@ -89,6 +100,7 @@ pre-everything::
 	@${ECHO_MSG} ""
 	@${ECHO_MSG} "For r300, r600, radeonsi and swrast gallium based drivers."
 	@${ECHO_MSG} "Please define WITH_GALLIUM in /etc/make.conf"
+	@${ECHO_MSG} "Note that gallium support is highly experimental."
 	@${ECHO_MSG} ""
 .endif
 
