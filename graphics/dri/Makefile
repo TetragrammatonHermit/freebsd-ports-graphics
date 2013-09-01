@@ -15,8 +15,6 @@ LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
-CONFLICTS=	dri-[7-8].*
-
 .include <bsd.port.options.mk>
 
 # gcc from base can't handle some code in mesa 9.1+
