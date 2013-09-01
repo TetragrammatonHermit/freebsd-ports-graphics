@@ -31,6 +31,11 @@ USES+=		gmake
 
 CONFIGURE_ARGS+=--enable-libkms
 EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c
+PLIST_SUB+=	KMS="" NOUVEAU=""
+.else
+CONFIGURE_ARGS+=--disable-libkms
+PLIST_SUB+=	KMS="@comment " NOUVEAU="@comment "
+.endif
 
 .if ${PORT_OPTIONS:MMANPAGES}
 BUILD_DEPENDS+=	${LOCALBASE}/share/xsl/docbook/manpages/docbook.xsl:${PORTSDIR}/textproc/docbook-xsl \
@@ -60,7 +65,7 @@ CONFIGURE_ARGS+=--disable-vmwgfx
 CONFIGURE_ARGS=	--enable-nouveau-experimental-api
 LIBDRM_VERSION=	2.4.17
 LIBDRM_REVISION=1
-PLIST_SUB+=	OLD="" NEW="@comment "
+PLIST_SUB+=	OLD="" NEW="@comment " NOUVEAU=""
 .endif
 
 .if ${ARCH} == "amd64" || ${ARCH} == "i386" || ${ARCH} == "ia64" || ${ARCH} == "powerpc"
