@@ -20,11 +20,16 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 # gcc from base can't handle some code in mesa 9.1+
 # We only care for 9.x and 8.x, not for old pre-clang default current.
 .if defined(WITH_NEW_XORG)
-. if ${OSVERSION} >= 901000 && ${OSVERSION} < 902502
+. if ${OSVERSION} >= 901000 && ${OSVERSION} < 902502 \
+		&& (${ARCH} == i386 || ${ARCH} == amd64)
 CC=clang
 CXX=clang++
 CPP=clang-cpp
 . elif ${OSVERSION} < 901500
+USE_GCC=yes
+. endif
+# for archs that don't have clang at all or isn't mature enough/untested.
+. if ${ARCH} != i386 && ${ARCH} != amd64
 USE_GCC=yes
 . endif
 .endif
@@ -48,19 +53,14 @@ DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 .endif
 
 .if defined(WITH_NEW_XORG)
-. if defined(WITH_GALLIUM)
+. if defined(WITH_GALLIUM) && (${ARCH} == i386 || ${ARCH} == amd64)
 BUILD_DEPENDS+=	llvm-config33:${PORTSDIR}/devel/llvm33
 RUN_DEPENDS+=	llvm-config33:${PORTSDIR}/devel/llvm33
 CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config33
 
 CONFIGURE_ARGS+=--enable-gallium-llvm --disable-gallium-egl
-#		--disable-opengl
 
-#CONFIGURE_ARGS+=--enable-r600-llvm-compiler
 CONFIGURE_ARGS+=--with-gallium-drivers=r300,r600,radeonsi,svga,swrast
-#                          comma delimited Gallium drivers list, e.g.
-#                          "i915,nouveau,r300,r600,radeonsi,svga,swrast"
-#                          [default=r300,r600,svga,swrast
 PLIST_SUB+=	GALLIUM=""
 . else
 CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
@@ -93,7 +93,8 @@ CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
 
-.if defined(WITH_NEW_XORG) && !defined(WITH_GALLIUM)
+.if defined(WITH_NEW_XORG) && !defined(WITH_GALLIUM) \
+	&& (${ARCH} == i386 || ${ARCH} == amd64)
 pre-everything::
 	@${ECHO_MSG} ""
 	@${ECHO_MSG} "For r300, r600, radeonsi and swrast gallium based drivers."
