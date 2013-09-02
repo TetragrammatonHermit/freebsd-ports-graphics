@@ -19,6 +19,7 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
 # gcc from base can't handle some code in mesa 9.1+
 # We only care for 9.x and 8.x, not for old pre-clang default current.
+# This is for 0b0000 binary which gcc 4.3+ understands and is in the i965 driver.
 .if defined(WITH_NEW_XORG)
 . if ${OSVERSION} >= 901000 && ${OSVERSION} < 902502 \
 		&& (${ARCH} == i386 || ${ARCH} == amd64)
@@ -26,10 +27,6 @@ CC=clang
 CXX=clang++
 CPP=clang-cpp
 . elif ${OSVERSION} < 901500
-USE_GCC=yes
-. endif
-# for archs that don't have clang at all or isn't mature enough/untested.
-. if ${ARCH} != i386 && ${ARCH} != amd64
 USE_GCC=yes
 . endif
 .endif
@@ -109,7 +106,7 @@ do-install:
 .else
 	cd ${WRKSRC}/src/mesa/libdricore; ${GMAKE} install
 	cd ${WRKSRC}/src/mesa/drivers/dri; ${GMAKE} install
-. if defined(WITH_GALLIUM)
+. if defined(WITH_GALLIUM) && (${ARCH} == i386 || ${ARCH} == amd64)
 	cd ${WRKSRC}/src/gallium/drivers/radeon; ${GMAKE} install
 	cd ${WRKSRC}/src/gallium/targets; ${GMAKE} install
 . endif
