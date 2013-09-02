@@ -11,7 +11,7 @@ COMMENT=	X.Org synaptics input driver
 CONFLICTS=	synaptics-[0-9]*
 
 USES=		pathfix
-USE_XORG=	x11
+USE_XORG=	x11 xtst
 XORG_CAT=	driver
 
 MAN1=		syndaemon.1 \
