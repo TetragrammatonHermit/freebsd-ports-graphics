@@ -13,6 +13,7 @@ COMMENT=	Userspace interface to kernel Direct Rendering Module services
 LIB_DEPENDS=	libpciaccess.so:${PORTSDIR}/devel/libpciaccess \
 		libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs
 
+USES=		pkgconfig
 USE_BZIP2=	yes
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
