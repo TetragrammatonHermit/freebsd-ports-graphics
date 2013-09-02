@@ -118,6 +118,8 @@ CONFIGURE_ARGS+=	--enable-xcb
 post-patch:
 	@${REINPLACE_CMD} -e 's|-ffast-math|${FAST_MATH}|' -e 's|x86_64|amd64|' \
 		${WRKSRC}/configure
+	@${REINPLACE_CMD} -e 's|/etc/|${PREFIX}/etc/|g' \
+		${WRKSRC}/src/mesa/drivers/dri/common/xmlconfig.c
 .if !defined(WITH_NEW_XORG)
 	@${REINPLACE_CMD} -e 's|[$$](INSTALL_LIB_DIR)/pkgconfig|${PREFIX}/libdata/pkgconfig|' \
 		${WRKSRC}/src/glu/Makefile \
