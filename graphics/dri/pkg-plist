@@ -1,4 +1,4 @@
-%%NEW%%etc/drirc
+%%NEW%%%%I965_DRIVER%%etc/drirc
 include/GL/internal/dri_interface.h
 %%OLD%%%%I810_DRIVER%%lib/dri/i810_dri.so
 %%NEW%%%%I915_DRIVER%%lib/dri/i915_dri.la
