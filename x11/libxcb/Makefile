@@ -20,7 +20,7 @@ RUN_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/pthread-stubs.pc:${PORTSDIR}/devel/l
 CONFIGURE_ARGS+=	--disable-build-docs --without-doxygen --enable-xinput
 
 USE_BZIP2=	yes
-USES=		gmake pathfix
+USES=		gmake pathfix pkgconfig
 USE_GNOME=	libxslt:build
 USE_LDCONFIG=	yes
 USE_XORG=	xau xdmcp
