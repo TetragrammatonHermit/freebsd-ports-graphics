@@ -319,6 +319,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # USE_GCC		- If set, this port requires this version of gcc, either in
 #				  the system or installed from a port.
 # USE_CSTD		- Override the default C language standard (gnu89, gnu99)
+# USE_CXXSTD	  Override the default C++ language standard
 # USE_BINUTILS	- Use binutils suite from port instead of the version in base.
 ##
 # USE_GHOSTSCRIPT
@@ -2141,6 +2142,10 @@ CFLAGS+=       -fno-strict-aliasing
 CFLAGS:=	${CFLAGS:N-std=*} -std=${USE_CSTD}
 .endif
 
+.if defined(USE_CXXSTD)
+CXXFLAGS:=	${CXXFLAGS:N-std=*} -std=${USE_CXXSTD}
+.endif
+
 # Multiple make jobs support
 .if defined(DISABLE_MAKE_JOBS) || defined(MAKE_JOBS_UNSAFE)
 _MAKE_JOBS=		#
@@ -3445,7 +3450,7 @@ do-fetch:
 				esac; \
 				if ${SETENV} ${FETCH_ENV} ${FETCH_CMD} ${FETCH_BEFORE_ARGS} $${args} ${FETCH_AFTER_ARGS}; then \
 					actual_size=`stat -f %z "$${file}"`; \
-					if [ -n "${DISABLE_SIZE}" ] || [ $${actual_size} -eq $${CKSIZE} ]; then \
+					if [ -n "${DISABLE_SIZE}" ] || [ -z "$${CKSIZE}" ] || [ $${actual_size} -eq $${CKSIZE} ]; then \
 						continue 2; \
 					else \
 						${ECHO_MSG} "=> Fetched file size mismatch (expected $${CKSIZE}, actual $${actual_size})"; \
@@ -4936,7 +4941,7 @@ _INSTALL_DEPENDS=	\
 				else \
 					${PKG_ADD} $${subpkgfile}; \
 				fi; \
-			elif [ -n "${USE_PACKAGE_DEPENDS_ONLY}" ]; then \
+			elif [ -n "${USE_PACKAGE_DEPENDS_ONLY}" -a "$${target}" = "${DEPENDS_TARGET}" ]; then \
 				${ECHO_MSG} "===>   ${PKGNAME} depends on package: $${subpkgfile} - not found"; \
 				${ECHO_MSG} "===>   USE_PACKAGE_DEPENDS_ONLY set - will not build from source"; \
 				exit 1; \
@@ -5062,7 +5067,8 @@ lib-depends:
 		for libdir in $$dirs; do \
 			test -f $${libdir}/$${lib} || continue; \
 			if [ -x /usr/bin/file ]; then \
-				[ `file -b -L --mime-type $${libdir}/$${lib}` = "application/x-sharedlib" ] || continue ; \
+				_LIB_FILE=`realpath $${libdir}/$${lib}`; \
+				[ `file -b -L --mime-type $${_LIB_FILE}` = "application/x-sharedlib" ] || continue ; \
 			fi ; \
 			found=1 ; \
 			${ECHO_MSG} " - found"; \
