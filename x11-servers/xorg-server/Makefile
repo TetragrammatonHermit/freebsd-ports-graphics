@@ -108,7 +108,7 @@ CONFIGURE_ARGS+=	--enable-config-hal=no
 .endif
 
 .if ${PORT_OPTIONS:MDEVD}
-EXTRA_PATCHES+=		extra-config_devd.c
+EXTRA_PATCHES+=		${FILESDIR}/extra-config_devd.c
 .endif
 
 .if ${PORT_OPTIONS:MAIGLX}
