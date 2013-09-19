@@ -69,7 +69,7 @@ python_CMD=	${LOCALBASE}/bin/python2
 SHEBANG_FILES=	src/gallium/*/*/*.py src/gallium/tools/trace/*.py \
 		src/gallium/drivers/svga/svgadump/svga_dump.py \
 		src/glsl/tests/compare_ir src/mapi/glapi/gen/*.py \
-		src/mapi/mapi/mapi_abi.py
+		src/mapi/mapi_abi.py
 .else
 CONFIGURE_ARGS+=--disable-glut --disable-glw --disable-glu
 
