@@ -1301,11 +1301,7 @@ STRIP=	#none
 # Start of pre-makefile section.
 .if !defined(AFTERPORTMK) && !defined(INOPTIONSMK)
 
-.if defined(_PREMKINCLUDED)
-check-makefile::
-	@${ECHO_MSG} "${PKGNAME}: Makefile error: you cannot include bsd.port[.pre].mk twice"
-	@${FALSE}
-.endif
+.include "${PORTSDIR}/Mk/bsd.sanity.mk"
 
 _PREMKINCLUDED=	yes
 
@@ -1401,8 +1397,6 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 .if defined(USE_GNUSTEP)
 .include "${PORTSDIR}/Mk/bsd.gnustep.mk"
 .endif
-
-.include "${PORTSDIR}/Mk/bsd.perl.mk"
 
 .if defined(USE_PHP)
 .include "${PORTSDIR}/Mk/bsd.php.mk"
@@ -1968,8 +1962,6 @@ RUN_DEPENDS+=	${_GL_${_component}_RUN_DEPENDS}
 .if defined(USE_SDL) || defined(WANT_SDL)
 .include "${PORTSDIR}/Mk/bsd.sdl.mk"
 .endif
-
-.include "${PORTSDIR}/Mk/bsd.perl.mk"
 
 .if defined(USE_PHP)
 .include "${PORTSDIR}/Mk/bsd.php.mk"
@@ -6512,6 +6504,43 @@ install-license:
 	@${DO_NADA}
 .endif
 
+.if defined(WARNING)
+show-warnings:
+	@${ECHO_MSG} "/!\\ WARNING /!\\"
+.for m in ${WARNING}
+	@${ECHO_MSG} "${m}"
+.endfor
+	@${ECHO_MSG}
+	@sleep 10
+
+check-makefile:: show-warnings
+.endif
+
+.if defined(DEVELOPER)
+.if defined(DEV_WARNING)
+show-dev-warnings:
+	@${ECHO_MSG} "/!\\ ${PKGNAME}: Makefile warnings, please consider fixing /!\\"
+	@${ECHO_MSG}
+.for m in ${DEV_WARNING}
+	@${ECHO_MSG} "${m}"
+.endfor
+	@${ECHO_MSG}
+	@sleep 10
+check-makefile:: show-dev-warnings
+.endif
+
+.if defined(DEV_ERROR)
+show-dev-errors:
+	@${ECHO_MSG} "/!\\ ${PKGNAME}: Makefile errors /!\\"
+	@${ECHO_MSG}
+.for m in ${DEV_ERROR}
+	@${ECHO_MSG} "${m}"
+.endfor
+	@${ECHO_MSG}
+	@${FALSE}
+check-makefile:: show-dev-errors
+.endif
+.endif #DVELOPER
 .endif
 # End of post-makefile section.
 
