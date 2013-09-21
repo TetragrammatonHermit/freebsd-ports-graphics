@@ -24,6 +24,8 @@ USE_XORG=	glproto \
 		xvmc
 
 MAN4=		intel.4x
+NO_STAGE=	yes
+
 
 .include <bsd.port.options.mk>
 

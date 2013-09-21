@@ -13,5 +13,6 @@ MAN7=	X.7 Standards.7 XProjectTeam.7 Consortium.7 Xsecurity.7 XOrgFoundation.7
 CONFIGURE_ARGS+=	--without-xmlto --without-fop --disable-specs
 
 XORG_CAT=	doc
+NO_STAGE=	yes
 
 .include <bsd.port.mk>

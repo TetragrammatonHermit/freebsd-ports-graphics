@@ -13,6 +13,7 @@ LICENSE=	MIT
 
 CONFLICTS=	libglut-[0-9].*
 
+NO_STAGE=	yes
 USE_AUTOTOOLS=	libtool
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes

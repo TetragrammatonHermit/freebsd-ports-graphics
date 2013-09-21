@@ -10,5 +10,7 @@ COMMENT=	The FS library
 XORG_CAT=	lib
 USE_XORG=	fontsproto:both xproto:both xtrans
 USE_AUTOTOOLS=	libtool
+NO_STAGE=	yes
+
 
 .include <bsd.port.mk>

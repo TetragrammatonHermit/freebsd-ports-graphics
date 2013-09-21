@@ -9,6 +9,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	DMX extension library
 
 XORG_CAT=	lib
+NO_STAGE=	yes
 USE_XORG=	x11 xext xextproto dmxproto:both
 
 MAN3=		DMX.3 \

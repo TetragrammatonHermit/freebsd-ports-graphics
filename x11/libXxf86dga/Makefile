@@ -11,6 +11,7 @@ COMMENT=	X DGA Extension
 LICENSE=	MIT
 
 XORG_CAT=	lib
+NO_STAGE=	yes
 USE_XORG=	xproto x11 xextproto xext xf86dgaproto:both
 
 MAN3=		XDGA.3 \

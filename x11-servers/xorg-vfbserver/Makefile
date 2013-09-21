@@ -22,6 +22,7 @@ CONFIGURE_ARGS=	--disable-dmx --disable-xnest \
 SLAVE_PORT=	yes
 PLIST_FILES=	bin/Xvfb
 MAN1=		Xvfb.1
+NO_STAGE=	yes
 
 do-install:
 	cd ${WRKSRC}/hw/vfb; ${MAKE} install

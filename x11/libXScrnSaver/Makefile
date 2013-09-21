@@ -8,6 +8,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	The XScrnSaver library
 
 XORG_CAT=	lib
+NO_STAGE=	yes
 USE_XORG=	x11 xext xextproto scrnsaverproto:both
 
 MAN3=		Xss.3 \

@@ -13,6 +13,7 @@ LICENSE=	MIT
 
 USES=		perl5
 XORG_CAT=	lib
+NO_STAGE=	yes
 USE_XORG=	bigreqsproto xau xcmiscproto xdmcp xextproto xtrans \
 		kbproto:both inputproto xf86bigfontproto xproto:both \
 		xcb

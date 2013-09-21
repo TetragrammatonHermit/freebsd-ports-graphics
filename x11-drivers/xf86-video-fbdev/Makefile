@@ -10,5 +10,6 @@ COMMENT=	X.Org fbdev display driver
 
 XORG_CAT=	driver
 MAN4=		fbdev.4x
+NO_STAGE=	yes
 
 .include <bsd.port.mk>

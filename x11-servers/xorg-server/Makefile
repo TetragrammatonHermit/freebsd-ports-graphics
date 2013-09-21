@@ -30,6 +30,7 @@ DEVD_DESC=	Use devd for autoconfiguration of input devices
 OPTIONS_DEFAULT=AIGLX SUID DEVD
 
 OPTIONS_EXCLUDE_sparc64=	HAL
+NO_STAGE=	yes
 
 .include <bsd.port.options.mk>
 

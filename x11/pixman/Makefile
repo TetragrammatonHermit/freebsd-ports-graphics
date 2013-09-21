@@ -10,6 +10,7 @@ COMMENT=	Low-level pixel manipulation library
 USES=		perl5
 USE_PERL5=	build
 XORG_CAT=	lib
+NO_STAGE=	yes
 USE_AUTOTOOLS=	libtool
 # XXX - Remove this before the next major release! - XXX
 USE_GNOME=	ltverhack:9

@@ -12,6 +12,7 @@ COMMENT=	X Toolkit library
 XORG_CAT=	lib
 USE_XORG=	x11 sm xproto:both kbproto
 CONFIGURE_ARGS=	--disable-specs
+NO_STAGE=	yes
 
 MAN3=	MenuPopdown.3 \
 	MenuPopup.3 \

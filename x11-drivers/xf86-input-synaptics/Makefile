@@ -17,6 +17,7 @@ XORG_CAT=	driver
 MAN1=		syndaemon.1 \
 		synclient.1
 MAN4=		synaptics.4x
+NO_STAGE=	yes
 
 .if defined(WITH_NEW_XORG)
 SYNAPTICS_VERSION=	1.7.1
