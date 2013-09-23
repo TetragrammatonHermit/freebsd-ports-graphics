@@ -10,5 +10,7 @@ COMMENT=	The fontenc Library
 
 XORG_CAT=	lib
 USE_XORG=	xproto
+NO_STAGE=	yes
+
 
 .include <bsd.port.mk>

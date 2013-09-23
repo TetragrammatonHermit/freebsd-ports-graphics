@@ -8,6 +8,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Window information utility for X
 
 XORG_CAT=	app
+NO_STAGE=	yes
 USES=		iconv
 USE_XORG=	x11 xcb xproto xorg-macros
 

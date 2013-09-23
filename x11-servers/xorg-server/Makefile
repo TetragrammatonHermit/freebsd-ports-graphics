@@ -27,6 +27,7 @@ HAL_DESC=	Compile with HAL config support
 OPTIONS_DEFAULT=AIGLX SUID HAL
 
 OPTIONS_EXCLUDE_sparc64=	HAL
+NO_STAGE=	yes
 
 .include <bsd.port.options.mk>
 

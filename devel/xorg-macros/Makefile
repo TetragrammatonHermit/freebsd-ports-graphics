@@ -10,6 +10,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org development aclocal macros
 
 XORG_CAT=	util
+NO_STAGE=	yes
 
 MAKE_ARGS=	pkgconfigdir="${PREFIX}/libdata/pkgconfig"
 

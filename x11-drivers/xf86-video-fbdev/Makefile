@@ -16,5 +16,6 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-mibstore
 
 XORG_CAT=	driver
 MAN4=		fbdev.4x
+NO_STAGE=	yes
 
 .include <bsd.port.mk>

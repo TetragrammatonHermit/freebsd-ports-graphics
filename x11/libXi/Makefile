@@ -12,6 +12,7 @@ COMMENT=	X Input extension library
 LICENSE=	MIT
 
 XORG_CAT=	lib
+NO_STAGE=	yes
 USE_XORG=	xproto x11 xext xextproto xfixes inputproto:both
 
 CONFIGURE_ARGS+=--disable-docs \

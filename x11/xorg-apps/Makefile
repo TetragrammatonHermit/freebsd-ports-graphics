@@ -26,6 +26,7 @@ COMPONENTS=	appres bitmap xf86dga:dga iceauth luit \
 COMPONENTS+=	x11-wm/twm:twm x11-clocks/xclock:xclock xinit xterm
 
 NO_BUILD=	yes
+NO_STAGE=	yes
 
 do-install:
 		${MKDIR} ${PREFIX}/libdata/xorg

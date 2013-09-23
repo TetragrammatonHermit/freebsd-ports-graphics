@@ -9,6 +9,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Very useful utility for configuring and testing XInput devices
 
 XORG_CAT=	app
+NO_STAGE=	yes
 USE_XORG=	inputproto x11 xi xext xrandr xinerama
 
 PLIST_FILES=	bin/xinput

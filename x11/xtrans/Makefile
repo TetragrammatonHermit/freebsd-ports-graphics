@@ -11,6 +11,7 @@ COMMENT=	Abstract network code for X
 LICENSE=	MIT
 
 XORG_CAT=	lib
+NO_STAGE=	yes
 
 CONFIGURE_ARGS+=--disable-docs --without-xmlto
 

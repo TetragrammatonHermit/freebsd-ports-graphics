@@ -14,6 +14,7 @@ LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 
 USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
+NO_STAGE=	yes
 
 .include <bsd.port.options.mk>
 

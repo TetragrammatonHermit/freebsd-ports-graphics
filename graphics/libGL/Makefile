@@ -15,6 +15,7 @@ USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both
 
 SUB_FILES=	pkg-install pkg-deinstall
+NO_STAGE=	yes
 
 .include <bsd.port.options.mk>
 

@@ -16,6 +16,8 @@ VIDEODIR=	${PREFIX}/lib/xorg/modules/drivers
 INPUTDIR=	${PREFIX}/lib/xorg/modules/input
 
 NO_BUILD=	yes
+NO_STAGE=	yes
+
 
 INPUT_DRIVERS=		mouse \
 			keyboard \
