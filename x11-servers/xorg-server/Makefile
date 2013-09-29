@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/x11-servers/xorg-server/Makefile 321157 2013-06-17 21:51:48Z jkim $
+# $FreeBSD: head/x11-servers/xorg-server/Makefile 328762 2013-09-29 23:46:47Z zeising $
 
 PORTNAME?=	xorg-server
 PORTVERSION=	${XORG_VERSION}
@@ -30,19 +30,18 @@ DEVD_DESC=	Use devd for autoconfiguration of input devices
 OPTIONS_DEFAULT=AIGLX SUID DEVD
 
 OPTIONS_EXCLUDE_sparc64=	HAL
-NO_STAGE=	yes
 
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
 XORG_VERSION=	1.12.4
-XORG_REVISION=	2
+XORG_REVISION=	3
 PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-clang \
 		${FILESDIR}/extra-configure
 .else
 XORG_VERSION=	1.7.7
-XORG_REVISION=	9
+XORG_REVISION=	10
 PLIST_SUB+=	OLD="" NEW="@comment "
 EXTRA_PATCHES+=	${FILESDIR}/extra-Xext-xace.c \
 		${FILESDIR}/extra-Xserver-os-xprintf.c \
@@ -90,6 +89,7 @@ MAN5+=		xorg.conf.d.5
 PLIST=		${.CURDIR}/pkg-plist
 .endif
 
+NO_STAGE=	yes
 .include <bsd.port.pre.mk>
 
 .if defined(WITH_OPENSSL_BASE)
