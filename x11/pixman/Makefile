@@ -10,7 +10,6 @@ COMMENT=	Low-level pixel manipulation library
 USES=		perl5
 USE_PERL5=	build
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_AUTOTOOLS=	libtool
 CONFIGURE_ARGS=	--disable-gtk
 
