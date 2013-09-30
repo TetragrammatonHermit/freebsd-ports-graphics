@@ -11,7 +11,6 @@ COMMENT=	X Vidmode Extension
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	xproto x11 xextproto xext xf86vidmodeproto:both
 
 MAN3=		XF86VM.3 \
@@ -37,4 +36,5 @@ MAN3=		XF86VM.3 \
 		XF86VidModeGetViewPort.3 \
 		XF86VidModeValidateModeLine.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

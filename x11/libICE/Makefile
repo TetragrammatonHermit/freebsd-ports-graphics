@@ -10,7 +10,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Inter Client Exchange library for X11
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	xproto:both xtrans
 
 .include <bsd.port.mk>

@@ -28,8 +28,8 @@ CONFLICTS=	XFree86-fontDefaultBitmaps-*
 
 NO_BUILD=	# none
 FONTDIR=	${LOCALBASE}/lib/X11/fonts
-NO_STAGE=	yes
 
 do-install:	# empty
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

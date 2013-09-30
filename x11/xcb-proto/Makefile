@@ -15,8 +15,8 @@ USE_BZIP2=	yes
 USES=		pathfix
 USE_PYTHON=	2.5+
 GNU_CONFIGURE=	yes
-NO_STAGE=	yes
 
 DATADIR=	${PREFIX}/share/xcb
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

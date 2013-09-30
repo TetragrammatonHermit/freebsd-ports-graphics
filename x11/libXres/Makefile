@@ -11,7 +11,6 @@ COMMENT=	X Resource usage library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 xext xextproto resourceproto xproto:both
 
 MAN3=		XRes.3 \
@@ -21,4 +20,5 @@ MAN3=		XRes.3 \
 		XResQueryExtension.3 \
 		XResQueryVersion.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

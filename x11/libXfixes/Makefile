@@ -11,9 +11,9 @@ COMMENT=	X Fixes extension library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 fixesproto:both xproto:both xextproto
 
 MAN3=		Xfixes.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

@@ -9,7 +9,6 @@ COMMENT=	X.Org vesa display driver
 
 XORG_CAT=	driver
 MAN4=		vesa.4x
+
 NO_STAGE=	yes
-
-
 .include <bsd.port.mk>

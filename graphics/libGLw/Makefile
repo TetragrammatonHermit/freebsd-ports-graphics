@@ -12,15 +12,14 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	OpenGL widgets library
 
 USE_BZIP2=	yes
-USES=		pathfix pkgconfig
+USES=		motif pathfix pkgconfig
 USE_LDCONFIG=	yes
 USE_GL=		gl
-USE_MOTIF=	yes
 USE_XORG=	x11 xt xext
 GNU_CONFIGURE=	yes
 CONFIGURE_ARGS=	--disable-static --enable-motif
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
-NO_STAGE=	yes
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

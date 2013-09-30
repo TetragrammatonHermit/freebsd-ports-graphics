@@ -11,6 +11,6 @@ COMMENT=	X Miscellaneous Utilities libraries
 
 XORG_CAT=	lib
 USE_XORG=	xproto:both x11 xt xext
-NO_STAGE=	yes
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

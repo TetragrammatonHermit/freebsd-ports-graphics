@@ -11,7 +11,6 @@ COMMENT=	X Test extension
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 xext recordproto:both xextproto inputproto:both \
 		xi
 USE_AUTOTOOLS=	libtool
@@ -30,6 +29,7 @@ MAN3=	XTestCompareCurrentCursorWithWindow.3 \
 	XTestSetGContextOfGC.3 \
 	XTestSetVisualIDOfVisual.3
 
+NO_STAGE=	yes
 post-patch:
 	@${REINPLACE_CMD} '/^SUBDIRS/,/^$$/ \
 		s/specs//' ${WRKSRC}/Makefile.in

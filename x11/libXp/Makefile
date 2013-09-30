@@ -12,7 +12,6 @@ COMMENT=	X print library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 xext xextproto xau printproto:both
 USE_AUTOTOOLS=	libtool
 
@@ -51,4 +50,5 @@ MAN3=	XpCancelDoc.3 \
 	XpStartPage.3 \
 	libXp.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

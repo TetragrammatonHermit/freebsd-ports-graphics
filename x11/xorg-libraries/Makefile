@@ -12,7 +12,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.org libraries meta-port
 
 NO_BUILD=	yes
-NO_STAGE=	yes
 
 RUN_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/dmx.pc:${PORTSDIR}/x11/libdmx \
 		${LOCALBASE}/libdata/pkgconfig/fontenc.pc:${PORTSDIR}/x11-fonts/libfontenc \
@@ -55,6 +54,7 @@ RUN_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/dmx.pc:${PORTSDIR}/x11/libdmx \
 		${LOCALBASE}/libdata/pkgconfig/xxf86misc.pc:${PORTSDIR}/x11/libXxf86misc \
 		${LOCALBASE}/libdata/pkgconfig/xxf86vm.pc:${PORTSDIR}/x11/libXxf86vm
 
+NO_STAGE=	yes
 do-install:
 		${MKDIR} ${PREFIX}/libdata/xorg
 		${TOUCH} ${PREFIX}/libdata/xorg/libraries

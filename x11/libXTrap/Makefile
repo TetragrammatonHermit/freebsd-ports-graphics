@@ -8,8 +8,8 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	The XTrap library
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	trapproto:both x11 xext xextproto xt
 USE_AUTOTOOLS=	libtool
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

@@ -12,7 +12,6 @@ COMMENT=	Session Management library for X11
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	ice xproto:both xtrans
 
 CONFIGURE_ARGS+=--disable-docs --without-xmlto

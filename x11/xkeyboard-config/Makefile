@@ -12,7 +12,6 @@ LICENSE=	MIT
 
 BUILD_DEPENDS=	xkbcomp:${PORTSDIR}/x11/xkbcomp
 XORG_CAT=	data
-NO_STAGE=	yes
 
 USE_BZIP2=	yes
 USE_GNOME=	intlhack libxslt:build
@@ -28,6 +27,7 @@ LDFLAGS+=	-L${LOCALBASE}/lib
 
 MAN7=		xkeyboard-config.7
 
+NO_STAGE=	yes
 .include <bsd.port.options.mk>
 
 # !nls case doesn't work correctly, comment it out.

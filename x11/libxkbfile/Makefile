@@ -11,7 +11,7 @@ COMMENT=	XKB file library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 kbproto:both
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

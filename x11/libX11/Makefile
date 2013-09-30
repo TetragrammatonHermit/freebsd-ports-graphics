@@ -13,7 +13,6 @@ LICENSE=	MIT
 
 USES=		perl5
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	bigreqsproto xau xcmiscproto xdmcp xextproto xtrans \
 		kbproto:both inputproto xf86bigfontproto xproto:both \
 		xcb
@@ -24,6 +23,7 @@ CONFIGURE_ARGS+=	--datadir=${PREFIX}/lib \
 			--disable-specs
 CONFIGURE_ENV+=	ac_cv_path_PS2PDF=""
 
+NO_STAGE=	yes
 .include "${.CURDIR}/manpages"
 
 post-patch:

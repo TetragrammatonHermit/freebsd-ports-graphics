@@ -8,7 +8,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	ScrnSaver extension headers
 
 XORG_CAT=	proto
-NO_STAGE=	yes
 
 CONFIGURE_ARGS+=--disable-specs --without-xmlto
 

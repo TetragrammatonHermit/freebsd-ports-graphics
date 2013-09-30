@@ -11,7 +11,6 @@ COMMENT=	X client-side cursor loading library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	xrender x11 xfixes fixesproto xproto:both \
 		xextproto
 
@@ -50,4 +49,5 @@ MAN3=		Xcursor.3 \
 		XcursorSetTheme.3 \
 		XcursorGetTheme.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

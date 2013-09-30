@@ -16,8 +16,6 @@ VIDEODIR=	${PREFIX}/lib/xorg/modules/drivers
 INPUTDIR=	${PREFIX}/lib/xorg/modules/input
 
 NO_BUILD=	yes
-NO_STAGE=	yes
-
 
 INPUT_DRIVERS=		mouse \
 			keyboard \
@@ -99,6 +97,7 @@ SUNFFB_DESC=		Install sunffb video driver
 # these drivers have a different module name compared to the plugin they install
 QUIRKS=		keyboard:kbd
 
+NO_STAGE=	yes
 .include <bsd.port.options.mk>
 
 # Manual add arch specific drivers so they be added to depend lines.

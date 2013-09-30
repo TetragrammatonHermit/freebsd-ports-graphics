@@ -11,8 +11,8 @@ USE_GL=		gl
 XORG_CAT=	driver
 USE_XORG=	xf86driproto xineramaproto xf86miscproto glproto
 MAN4=		ati.4x radeon.4x
-NO_STAGE=	yes
 
+NO_STAGE=	yes
 .include <bsd.port.pre.mk>
 
 .if ${OSVERSION} < 1000051

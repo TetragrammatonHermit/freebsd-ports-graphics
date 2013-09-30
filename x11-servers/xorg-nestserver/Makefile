@@ -20,10 +20,10 @@ CONFIGURE_ARGS=	--disable-dmx --disable-xvfb \
 		--localstatedir=/var --without-dtrace
 
 SLAVE_PORT=	yes
-NO_STAGE=	yes
 PLIST_FILES=	bin/Xnest
 MAN1=		Xnest.1
 
+NO_STAGE=	yes
 .include <bsd.port.options.mk>
 
 do-install:

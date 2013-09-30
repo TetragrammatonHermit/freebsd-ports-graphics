@@ -11,7 +11,6 @@ COMMENT=	X DGA Extension
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	xproto x11 xextproto xext xf86dgaproto:both
 
 MAN3=		XDGA.3 \
@@ -36,4 +35,5 @@ MAN3=		XDGA.3 \
 		XF86DGA.3 \
 		XFree86-DGA.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

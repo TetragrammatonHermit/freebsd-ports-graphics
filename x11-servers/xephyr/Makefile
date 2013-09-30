@@ -1,7 +1,6 @@
 # $FreeBSD$
 
 PORTNAME=	xephyr
-PORTREVISION=	0
 
 COMMENT=	X server from X.Org based on kdrive
 
@@ -21,8 +20,8 @@ CONFIGURE_ARGS=	--enable-kdrive --enable-xephyr	--disable-dmx --disable-xvfb \
 
 SLAVE_PORT=	yes
 PLIST_FILES=	bin/Xephyr
-NO_STAGE=	yes
 
+NO_STAGE=	yes
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/hw/kdrive/ephyr/Xephyr ${PREFIX}/bin/
 

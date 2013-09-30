@@ -25,7 +25,6 @@ USE_GNOME=	libxslt:build
 USE_LDCONFIG=	yes
 USE_XORG=	xau xdmcp
 USE_PYTHON_BUILD=	2.5+
-NO_STAGE=	yes
 
 GNU_CONFIGURE=	yes
 .for f in XPROTO_CFLAGS XPROTO_LIBS XDMCP_CFLAGS XDMCP_LIBS NEEDED_CFLAGS NEEDED_LIBS
@@ -42,6 +41,7 @@ XDMCP_LIBS=	-L${LOCALBASE}/lib -lXdmcp
 XPROTO_CFLAGS=	-I${LOCALBASE}/include
 XPROTO_LIBS=	-L${LOCALBASE}/lib
 
+NO_STAGE=	yes
 .include "${.CURDIR}/manpages"
 
 .include <bsd.port.options.mk>

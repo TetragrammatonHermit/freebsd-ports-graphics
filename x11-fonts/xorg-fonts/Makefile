@@ -22,8 +22,8 @@ RUN_DEPENDS=	xorg-fonts-100dpi>=0:${PORTSDIR}/x11-fonts/xorg-fonts-100dpi \
 		${FONTSDIR}/misc/fonts.alias:${PORTSDIR}/x11-fonts/font-alias
 
 NO_BUILD=	yes
-NO_STAGE=	yes
 
+NO_STAGE=	yes
 do-install:
 		${MKDIR} ${PREFIX}/libdata/xorg
 		${TOUCH} ${PREFIX}/libdata/xorg/fonts

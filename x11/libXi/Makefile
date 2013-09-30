@@ -12,7 +12,6 @@ COMMENT=	X Input extension library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	xproto x11 xext xextproto xfixes inputproto:both
 
 CONFIGURE_ARGS+=--disable-docs \
@@ -96,4 +95,5 @@ MAN3=		XAllowDeviceEvents.3 \
 		XUngrabDeviceButton.3 \
 		XUngrabDeviceKey.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

@@ -9,7 +9,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Input extension headers
 
 XORG_CAT=	proto
-NO_STAGE=	yes
 
 CONFIGURE_ARGS=	--without-asciidoc
 

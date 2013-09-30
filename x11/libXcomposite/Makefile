@@ -10,7 +10,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X Composite extension library
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	compositeproto:both x11 xfixes xext fixesproto xproto:both
 MAN3=		Xcomposite.3 \
 		XCompositeQueryExtension.3 \
@@ -25,4 +24,5 @@ MAN3=		Xcomposite.3 \
 		XCompositeGetOverlayWindow.3 \
 		XCompositeReleaseOverlayWindow.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

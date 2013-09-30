@@ -15,6 +15,6 @@ USES=		gmake
 CONFIGURE_ARGS+=--without-xmlto
 
 MAN3=		Xaw.3
-NO_STAGE=	yes
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

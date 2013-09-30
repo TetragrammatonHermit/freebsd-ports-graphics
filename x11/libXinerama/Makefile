@@ -12,7 +12,6 @@ COMMENT=	X11 Xinerama library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 xext xextproto xineramaproto:both
 USE_AUTOTOOLS=	libtool
 
@@ -22,4 +21,5 @@ MAN3=		Xinerama.3 \
 		XineramaIsActive.3 \
 		XineramaQueryScreens.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

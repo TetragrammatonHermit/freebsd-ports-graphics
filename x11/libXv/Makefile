@@ -12,7 +12,6 @@ COMMENT=	X Video Extension library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 xext xextproto videoproto:both xproto:both
 
 MAN3=	Xv.3 \
@@ -42,4 +41,5 @@ MAN3=	Xv.3 \
 	XvUngrabPort.3 \
 	XvVideoNotify.3
 
+NO_STAGE=	yes
 .include <bsd.port.mk>

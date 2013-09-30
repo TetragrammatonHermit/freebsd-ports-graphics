@@ -14,7 +14,6 @@ LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 
 USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
-NO_STAGE=	yes
 
 .include <bsd.port.options.mk>
 
@@ -42,6 +41,7 @@ ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST
 ALL_DRI_DRIVERS+=I810 MACH64 MGA R128 R300 R600 SAVAGE SIS TDFX UNICHROME
 .endif
 
+NO_STAGE=	yes
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 
 PLIST_SUB+=	VERSION=${MESADISTVERSION}
