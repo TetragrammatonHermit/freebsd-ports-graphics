@@ -17,10 +17,8 @@ IGNORE=		Please enable WITH_NEW_XORG, libglesv2 needs libdrm higher then 2.4.24
 # stuff not needed by libEGL but configure wants it
 USE_XORG+=	glproto dri2proto xext xdamage xfixes
 
-
 BUILD_WKRSRC=	${WRKSRC}/src/mapi/es2api
 INSTALL_WRKSRC=	${WRKSRC}/src/mapi/es2api
-NO_STAGE=	yes
 
 # this library doesn't exist in Mesa 7.6 so use newer
 WITH_NEW_XORG=yes

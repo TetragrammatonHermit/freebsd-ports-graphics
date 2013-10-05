@@ -14,7 +14,6 @@ LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 
 USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
-NO_STAGE=	yes
 
 .include <bsd.port.options.mk>
 
@@ -99,18 +98,6 @@ pre-everything::
 	@${ECHO_MSG} "Please define WITH_GALLIUM in /etc/make.conf"
 	@${ECHO_MSG} "Note that gallium support is highly experimental."
 	@${ECHO_MSG} ""
-.endif
-
-do-install:
-.if !defined(WITH_NEW_XORG)
-	cd ${WRKSRC}/src/mesa; ${GMAKE} install-dri
-.else
-	cd ${WRKSRC}/src/mesa/libdricore; ${GMAKE} install
-	cd ${WRKSRC}/src/mesa/drivers/dri; ${GMAKE} install
-. if defined(WITH_GALLIUM) && (${ARCH} == i386 || ${ARCH} == amd64)
-	cd ${WRKSRC}/src/gallium/drivers/radeon; ${GMAKE} install
-	cd ${WRKSRC}/src/gallium/targets; ${GMAKE} install
-. endif
 .endif
 
 .include <bsd.port.mk>
