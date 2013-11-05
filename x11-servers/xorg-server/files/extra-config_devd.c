@@ -1,6 +1,5 @@
---- /dev/null	2013-08-03 00:44:23.000000000 +0200
-+++ config/devd.c	2013-08-03 00:45:15.162836806 +0200
-@@ -0,0 +1,478 @@
+Index: config/devd.c
+@@ -0,0 +1,476 @@
 +/*
 + * Copyright © 2012 Baptiste Daroussin
 + *
@@ -72,8 +71,8 @@
 +};
 +
 +static struct hw_type hw_types[] = {
-+	{ "ukbd", ATTR_KEYBOARD, "kdb" },
-+	{ "atkbd", ATTR_KEYBOARD, "kdb" },
++	{ "ukbd", ATTR_KEYBOARD, "kbd" },
++	{ "atkbd", ATTR_KEYBOARD, "kbd" },
 +	{ "ums", ATTR_POINTER, "mouse" },
 +	{ "psm", ATTR_POINTER, "mouse" },
 +	{ "uhid", ATTR_POINTER, "mouse" },
@@ -268,12 +267,10 @@
 +    attrs.usb_id = NULL;
 +    options = input_option_new(options, "path", path);
 +    options = input_option_new(options, "device", path);
++    options = input_option_new(options, "driver", hw_types[i].xdriver);
 +#else
 +    add_option(&options, "path", path);
 +    add_option(&options, "device", path);
-+#endif
-+
-+#if XORG_VERSION_CURRENT < 10800000
 +    add_option(&options, "driver", hw_types[i].xdriver);
 +#endif
 +
@@ -293,7 +290,7 @@
 +#else
 +    options = input_option_new(options, "config_info", config_info);
 +#endif
-+    LogMessage(X_INFO, "config/devd: Adding input device %s (%s)\n",
++    LogMessage(X_INFO, "config/devd: adding input device %s (%s)\n",
 +               product != NULL ? product : "(unnamed)", path);
 +
 +#if XORG_VERSION_CURRENT > 10800000
@@ -345,7 +342,7 @@
 +        return;
 +
 +#if XORG_VERSION_CURRENT > 10800000
-+    remove_devices("dev", value);
++    remove_devices("devd", value);
 +#else
 +    for (dev = inputInfo.devices; dev; dev = next) {
 +        next = dev->next;
@@ -415,10 +412,10 @@
 +
 +        switch(*line) {
 +		case DEVD_EVENT_ADD:
-+			device_added(line++);
++			device_added(++line);
 +			break;
 +		case DEVD_EVENT_REMOVE:
-+			device_removed(line++);
++			device_removed(++line);
 +			break;
 +		default:
 +			break;
@@ -479,3 +476,21 @@
 +    RemoveBlockAndWakeupHandlers(block_handler, wakeup_handler, NULL);
 +    close(sock_devd);
 +}
+Index: config/config.c
+@@ -56,6 +56,8 @@
+     if (!config_wscons_init())
+         ErrorF("[config] failed to initialise wscons\n");
+ #endif
++    if (!config_devd_init())
++        ErrorF("[config] failed to initialise devd\n");
+ }
+ 
+ void
+@@ -74,6 +76,7 @@
+ #elif defined(CONFIG_WSCONS)
+     config_wscons_fini();
+ #endif
++    config_devd_fini();
+ }
+ 
+ static void

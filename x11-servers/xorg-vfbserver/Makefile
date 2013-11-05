@@ -16,15 +16,14 @@ USE_XORG=	x11 xf86driproto glproto randrproto renderproto fixesproto \
 		xkbui xxf86misc xxf86vm xaw7 xmu xpm xext pixman xtrans
 
 CONFIGURE_ARGS=	--disable-dmx --disable-xnest \
-		--without-xmlto --disable-docs --disable-devel1-docs \
+		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace
 
 SLAVE_PORT=	yes
-PLIST_FILES=	bin/Xvfb
-MAN1=		Xvfb.1
+PLIST_FILES=	bin/Xvfb \
+		man/man1/Xvfb.1.gz
 
-NO_STAGE=	yes
 do-install:
-	cd ${WRKSRC}/hw/vfb; ${MAKE} install
+	cd ${WRKSRC}/hw/vfb; DESTDIR=${STAGEDIR} ${MAKE} install
 
 .include "${MASTERDIR}/Makefile"
