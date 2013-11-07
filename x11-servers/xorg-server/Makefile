@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/x11-servers/xorg-server/Makefile 328762 2013-09-29 23:46:47Z zeising $
+# $FreeBSD: head/x11-servers/xorg-server/Makefile 321157 2013-06-17 21:51:48Z jkim $
 
 PORTNAME?=	xorg-server
 PORTVERSION=	${XORG_VERSION}
@@ -34,12 +34,10 @@ OPTIONS_EXCLUDE_sparc64=	HAL
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.12.4
-XORG_REVISION=	4
+XORG_VERSION=	1.14.4
+XORG_REVISION=	0
 PLIST_SUB+=	OLD="@comment " NEW=""
-EXTRA_PATCHES+=	${FILESDIR}/extra-clang \
-		${FILESDIR}/extra-configure \
-		${FILESDIR}/extra-new-dix_dixfonts.c
+EXTRA_PATCHES+=	${FILESDIR}/extra-hw_xfree86_loader_loadmod.c
 .else
 XORG_VERSION=	1.7.7
 XORG_REVISION=	11
@@ -50,7 +48,7 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-Xext-xace.c \
 		${FILESDIR}/extra-os-utils.c \
 		${FILESDIR}/extra-dix_events.c \
 		${FILESDIR}/extra-Xserver-hw-xfree86-common-xf86Config.c \
-		${FILESDIR}/extra-old-dix_dixfonts.c
+		${FILESDIR}/extra-dix_dixfonts.c
 .endif
 
 USE_BZIP2=	yes
@@ -107,8 +105,7 @@ CONFIGURE_ARGS+=	--enable-aiglx=no
 .endif
 
 .if ${PORT_OPTIONS:MSUID}
-CONFIGURE_ARGS+=--enable-install-setuid=no
-#CONFIGURE_ARGS+=--enable-install-setuid=yes
+CONFIGURE_ARGS+=--enable-install-setuid=yes
 PLIST_SUB+=	SUID=""
 .else
 CONFIGURE_ARGS+=--enable-install-setuid=no
@@ -197,7 +194,9 @@ post-install:
 	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
 		${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg/
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/*.so
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}//lib/xorg/modules/extensions/*.so
+.if !defined(WITH_NEW_XORG)
+	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/*.so
+.endif
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/multimedia/*.so
 
 .if defined(WITH_NEW_XORG)
