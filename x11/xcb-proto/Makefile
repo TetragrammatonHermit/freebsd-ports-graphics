@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xcb-proto
-PORTVERSION=	1.8
+PORTVERSION=	1.9
 CATEGORIES=	x11 python
 MASTER_SITES=	http://xcb.freedesktop.org/dist/
 
@@ -18,5 +18,4 @@ GNU_CONFIGURE=	yes
 
 DATADIR=	${PREFIX}/share/xcb
 
-NO_STAGE=	yes
 .include <bsd.port.mk>
