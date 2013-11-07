@@ -13,47 +13,44 @@ DISTNAME=	xorg-server-${PORTVERSION}
 MAINTAINER=	x11@FreeBSD.org
 COMMENT?=	X.Org X server and related programs
 
-LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm
+LIB_DEPENDS=	drm:${PORTSDIR}/graphics/libdrm
 RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 		xkbcomp:${PORTSDIR}/x11/xkbcomp
 
 XORG_CAT=	xserver
 SLAVE_PORT?=	no
 
-OPTIONS_DEFINE=	AIGLX SUID
-OPTIONS_RADIO=	CONF
-OPTIONS_RADIO_CONF= HAL DEVD
+OPTIONS_DEFINE=	AIGLX SUID HAL
 AIGLX_DESC=	Compile with Accelerated Indirect GLX support
 SUID_DESC=	Install the Xorg server with setuid bit set
 HAL_DESC=	Compile with HAL config support
-DEVD_DESC=	Use devd for autoconfiguration of input devices (experimental)
-OPTIONS_DEFAULT=AIGLX SUID DEVD
+OPTIONS_DEFAULT=AIGLX SUID HAL
 
 OPTIONS_EXCLUDE_sparc64=	HAL
+NO_STAGE=	yes
 
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.14.4
+XORG_VERSION=	1.14.3
 XORG_REVISION=	0
-PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-hw_xfree86_loader_loadmod.c
+PLIST_SUB+=	OLD="@comment " NEW=""
 .else
 XORG_VERSION=	1.7.7
-XORG_REVISION=	11
+XORG_REVISION=	7
 PLIST_SUB+=	OLD="" NEW="@comment "
 EXTRA_PATCHES+=	${FILESDIR}/extra-Xext-xace.c \
 		${FILESDIR}/extra-Xserver-os-xprintf.c \
 		${FILESDIR}/extra-include_eventstr.h \
 		${FILESDIR}/extra-os-utils.c \
 		${FILESDIR}/extra-dix_events.c \
-		${FILESDIR}/extra-Xserver-hw-xfree86-common-xf86Config.c \
-		${FILESDIR}/extra-dix_dixfonts.c
+		${FILESDIR}/extra-Xserver-hw-xfree86-common-xf86Config.c
 .endif
 
-USE_BZIP2=	yes
 USES=		gmake perl5
 USE_PERL5=	build
+USE_BZIP2=	yes
 USE_GL=		gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		xmu xt xpm xext randrproto renderproto fixesproto damageproto \
@@ -72,6 +69,17 @@ CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 
 .if ${SLAVE_PORT} == "no"
 SUB_FILES=	pkg-install pkg-deinstall
+MAN1=		Xorg.1 \
+		Xserver.1 \
+		cvt.1 \
+		gtf.1
+MAN4=		exa.4 \
+		fbdevhw.4
+MAN5=		xorg.conf.5
+
+.if defined(WITH_NEW_XORG)
+MAN5+=		xorg.conf.d.5
+.endif
 .else
 # for slave ports we need to overwrite PLIST, so it doesn't overwrite
 # PLIST_FILES, with the masterport plist.
@@ -88,14 +96,10 @@ CONFIGURE_ENV=	SHA1_LIB="-L/usr/lib -lcrypto" SHA1_CFLAGS="-I/usr/include"
 .endif
 
 .if ${PORT_OPTIONS:MHAL}
-LIB_DEPENDS+=	libhal.so:${PORTSDIR}/sysutils/hal
+LIB_DEPENDS+=	hal:${PORTSDIR}/sysutils/hal
 CONFIGURE_ARGS+=	--enable-config-hal=yes
 .else
 CONFIGURE_ARGS+=	--enable-config-hal=no
-.endif
-
-.if ${PORT_OPTIONS:MDEVD}
-EXTRA_PATCHES+=		${FILESDIR}/extra-config_devd.c
 .endif
 
 .if ${PORT_OPTIONS:MAIGLX}
@@ -106,10 +110,8 @@ CONFIGURE_ARGS+=	--enable-aiglx=no
 
 .if ${PORT_OPTIONS:MSUID}
 CONFIGURE_ARGS+=--enable-install-setuid=yes
-PLIST_SUB+=	SUID=""
 .else
 CONFIGURE_ARGS+=--enable-install-setuid=no
-PLIST_SUB+=	SUID="@comment"
 .endif
 
 .if ${ARCH} == i386
@@ -174,32 +176,20 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|@GLX_TRUE@GLXMODS =|@GLX_BOGUS@GLXMODS =|g' \
 		-e 's|^LTLIBRARIES = |LTLIBRARIES = libglx.la |g' \
 		${WRKSRC}/hw/xfree86/dixmods/Makefile.in
-.if ${PORT_OPTIONS:MDEVD}
-	@${ECHO_CMD} -e "\nint config_devd_init(void);\nvoid config_devd_fini(void);" \
-		>> ${WRKSRC}/config/config-backends.h
-.endif
- 
-post-configure:
-.if ${PORT_OPTIONS:MDEVD}
-	@${REINPLACE_CMD} -e 's|config\.c|config.c devd.c|g' \
-		-e 's|config\.lo|config.lo devd.lo|g' \
-		${WRKSRC}/config/Makefile
-.endif
 
 .if ${SLAVE_PORT} == "no"
-post-install:
+pre-su-install:
 # The .xorg dir because else the xorg-server might not load the correct 
 # libglx module.
-	${MKDIR} ${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg
+	${MKDIR} ${PREFIX}/lib/xorg/modules/extensions/.xorg
 	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
-		${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg/
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/*.so
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}//lib/xorg/modules/extensions/*.so
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/multimedia/*.so
+		${PREFIX}/lib/xorg/modules/extensions/.xorg/
 
+post-install:
 .if defined(WITH_NEW_XORG)
-	@${MKDIR} ${STAGEDIR}${PREFIX}/share/X11/xorg.conf.d
+	@${MKDIR} ${PREFIX}/share/X11/xorg.conf.d
 .endif
+	@PKG_PREFIX=${PREFIX} ${SH} ${PKGINSTALL} ${PKGNAME} POST-INSTALL
 .endif
 
 .include <bsd.port.post.mk>
