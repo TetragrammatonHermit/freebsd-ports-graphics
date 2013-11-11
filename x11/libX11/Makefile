@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD$
+# $FreeBSD: head/x11/libX11/Makefile 330453 2013-10-15 20:03:47Z eadler $
 
 PORTNAME=	libX11
 PORTVERSION=	1.6.2
@@ -22,9 +22,6 @@ CONFIGURE_ARGS+=	--datadir=${PREFIX}/lib \
 			--without-xmlto \
 			--disable-specs
 CONFIGURE_ENV+=	ac_cv_path_PS2PDF=""
-
-NO_STAGE=	yes
-.include "${.CURDIR}/manpages"
 
 post-patch:
 	@${REINPLACE_CMD} 's/test.*-traditional.*;/true;/' \
