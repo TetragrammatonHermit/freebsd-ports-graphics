@@ -1,8 +1,7 @@
-# $FreeBSD$
+# $FreeBSD: head/x11/xkeyboard-config/Makefile 331937 2013-10-29 09:53:25Z danfe $
 
 PORTNAME=	xkeyboard-config
-PORTVERSION=	2.9
-PORTREVISION=	1
+PORTVERSION=	2.10.1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
@@ -19,16 +18,12 @@ USE_GNOME=	intlhack libxslt:build
 USES=		gmake pathfix perl5
 USE_PERL5=	build
 GNU_CONFIGURE=	yes
-MAKE_JOBS_UNSAFE=yes
 
 CONFIGURE_ARGS=	--with-xkb-base=${PREFIX}/share/X11/xkb \
 		--with-xkb-rules-symlink=xorg
 CPPFLAGS+=	-I${LOCALBASE}/include
 LDFLAGS+=	-L${LOCALBASE}/lib
 
-MAN7=		xkeyboard-config.7
-
-NO_STAGE=	yes
 .include <bsd.port.options.mk>
 
 # !nls case doesn't work correctly, comment it out.
@@ -45,7 +40,7 @@ post-patch:
 		${WRKSRC}/rules/merge.sh
 
 post-install:
-	${MKDIR} /var/lib/xkb
-	${LN} -sf /var/lib/xkb ${PREFIX}/share/X11/xkb/compiled
+	${MKDIR} ${STAGEDIR}/var/lib/xkb
+	${LN} -sf /var/lib/xkb ${STAGEDIR}${PREFIX}/share/X11/xkb/compiled
 
 .include <bsd.port.mk>
