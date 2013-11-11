@@ -11,9 +11,7 @@ COMMENT=	Very useful utility for configuring and testing XInput devices
 XORG_CAT=	app
 USE_XORG=	inputproto x11 xi xext xrandr xinerama
 
-PLIST_FILES=	bin/xinput
-
-MAN1=		xinput.1
+PLIST_FILES=	bin/xinput man/man1/xinput.1.gz
 
 NO_STAGE=	yes
 .include <bsd.port.mk>
