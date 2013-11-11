@@ -165,6 +165,7 @@ XORG_MODULES=	bigreqsproto \
 				dmx \
 				dmxproto \
 				dri2proto \
+				dri3proto \
 				evieproto \
 				fixesproto \
 				fontcacheproto \
@@ -179,6 +180,7 @@ XORG_MODULES=	bigreqsproto \
 				oldx \
 				pciaccess \
 				pixman \
+				presentproto \
 				printproto \
 				randrproto \
 				recordproto \
@@ -248,6 +250,7 @@ damageproto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/damageproto.pc:${PORTS
 dmx_LIB_PC_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/dmx.pc:${PORTSDIR}/x11/libdmx
 dmxproto_BUILD_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/dmxproto.pc:${PORTSDIR}/x11/dmxproto
 dri2proto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/dri2proto.pc:${PORTSDIR}/x11/dri2proto
+dri3proto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/dri3proto.pc:${PORTSDIR}/x11/dri3proto
 evieproto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/evieproto.pc:${PORTSDIR}/x11/evieext
 fixesproto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/fixesproto.pc:${PORTSDIR}/x11/fixesproto
 fontcacheproto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/fontcacheproto.pc:${PORTSDIR}/x11-fonts/fontcacheproto
@@ -262,6 +265,7 @@ libfs_LIB_PC_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/libfs.pc:${PORTSDIR}/x11-f
 oldx_LIB_PC_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/oldx.pc:${PORTSDIR}/x11/liboldX
 pciaccess_LIB_PC_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/pciaccess.pc:${PORTSDIR}/devel/libpciaccess
 pixman_LIB_PC_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/pixman-1.pc:${PORTSDIR}/x11/pixman
+presentproto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/presentproto.pc:${PORTSDIR}/x11/presentproto
 printproto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/printproto.pc:${PORTSDIR}/x11/printproto
 randrproto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/randrproto.pc:${PORTSDIR}/x11/randrproto
 recordproto_BUILD_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/recordproto.pc:${PORTSDIR}/x11/recordproto
