@@ -12,8 +12,6 @@ XORG_CAT=	app
 NO_STAGE=	yes
 USE_XORG=	inputproto x11 xi xext xrandr xinerama
 
-PLIST_FILES=	bin/xinput
-
-MAN1=		xinput.1
+PLIST_FILES=	bin/xinput man/man1/xinput.1.gz
 
 .include <bsd.port.mk>
