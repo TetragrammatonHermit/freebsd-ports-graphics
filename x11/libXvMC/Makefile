@@ -9,7 +9,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X Video Extension Motion Compensation library
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 xext xv xextproto videoproto:both xproto:both
 
 .include <bsd.port.mk>

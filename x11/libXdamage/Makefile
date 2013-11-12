@@ -9,7 +9,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X Damage extension library
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 damageproto:both xfixes fixesproto xextproto xproto:both
 
 .include <bsd.port.mk>

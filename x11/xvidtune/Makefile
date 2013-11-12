@@ -8,9 +8,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Video mode tuner for X
 
 XORG_CAT=	app
-NO_STAGE=	yes
 USE_XORG=	xxf86vm xt xaw
-
-MAN1=		xvidtune.1
 
 .include <bsd.port.mk>
