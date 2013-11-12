@@ -11,5 +11,4 @@ XORG_CAT=	lib
 USE_XORG=	trapproto:both x11 xext xextproto xt
 USE_AUTOTOOLS=	libtool
 
-NO_STAGE=	yes
 .include <bsd.port.mk>
