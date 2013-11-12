@@ -30,12 +30,16 @@ INTEL_VERSION=	2.99.905
 INTEL_REVISION=	0
 CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
 CONFIGURE_ARGS+=	--enable-sna
-MAKE_JOBS_UNSAFE=yes
+CPPFLAGS+=	-I${LOCALBASE}/include
+#MAKE_JOBS_UNSAFE=yes
 PLIST_SUB+=	OLD="@comment "
 EXTRA_PATCHES+=	${PATCHDIR}/extra-src__sna__sna_threads.c \
 		${PATCHDIR}/extra-src_sna_kgem.c \
 		${PATCHDIR}/extra-clang \
-		${PATCHDIR}/extra-i915kms
+		${PATCHDIR}/extra-i915kms \
+		${PATCHDIR}/extra-src__sna__sna_accel.c \
+		${PATCHDIR}/extra-src__uxa__intel_driver.c
+
 LIB_DEPENDS+=	libxcb-util.so:${PORTSDIR}/x11/xcb-util
 .else
 INTEL_VERSION=	2.7.1
