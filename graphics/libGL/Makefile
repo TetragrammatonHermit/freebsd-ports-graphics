@@ -30,4 +30,7 @@ LIBGLREVISION=	4
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 
+post-install:
+	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/.libGL/libGL.so.1
+
 .include <bsd.port.mk>

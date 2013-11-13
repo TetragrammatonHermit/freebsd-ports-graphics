@@ -27,4 +27,8 @@ WITH_NEW_XORG=	yes
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+
+post-install:
+	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libEGL.so.1
+
 .include <bsd.port.mk>

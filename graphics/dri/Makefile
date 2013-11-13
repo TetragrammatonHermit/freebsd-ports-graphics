@@ -100,4 +100,9 @@ pre-everything::
 	@${ECHO_MSG} ""
 .endif
 
+post-install:
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/dri/*_dri.so
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/.libGL/libGL.so.1
+	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/lib*.so.1
+
 .include <bsd.port.mk>
