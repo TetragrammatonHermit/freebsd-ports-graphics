@@ -44,8 +44,10 @@ PLIST_SUB+=	KMS="@comment " NOUVEAU="@comment "
 .if ${PORT_OPTIONS:MMANPAGES}
 BUILD_DEPENDS+=	${LOCALBASE}/share/xsl/docbook/manpages/docbook.xsl:${PORTSDIR}/textproc/docbook-xsl
 USE_GNOME+=	libxslt:build
+PLIST_SUB+=	MAN=""
 .else
 CONFIGURE_ARGS+=--disable-manpages
+PLIST_SUB+=	MAN="@comment "
 .endif
 
 LIBDRM_VERSION=	2.4.48
