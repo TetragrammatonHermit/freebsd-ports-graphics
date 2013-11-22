@@ -63,6 +63,11 @@ PLIST_SUB+=	GALLIUM=""
 CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
 PLIST_SUB+=	GALLIUM="@comment "
 . endif
+
+. if defined(WITH_TEXTUREFLOAT)
+CONFIGURE_ARGS+=--enable-texture-float
+. endif
+
 . if ${ARCH} == powerpc || ${ARCH} == ia64
 DRI_DRIVERS=	RADEON SWRAST
 . endif

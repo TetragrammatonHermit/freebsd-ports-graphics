@@ -17,17 +17,21 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_XORG)
-MESABASEVERSION=	9.2.3
-# if there is a subversion, include the '-' between 7.11-rc2 for example.
-MESASUBVERSION=	
+MESABASEVERSION=	10.0.0
+# if there is a subversion, don't include the '-' between 7.11-rc2.
+MESASUBVERSION=	rc1
 PLIST_SUB+=	OLD="@comment " NEW=""
+
+# work around libarchive bug?
+EXTRACT_CMD=${LOCALBASE}/bin/gtar
+BUILD_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
 .else
 MESABASEVERSION=	7.6.1
 MESASUBVERSION=		
 PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:S/9.2.0/9.2/}/
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:S/9.2.0/9.2/:S/10.0.0/10.0/}/
 DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
 MAINTAINER?=	x11@FreeBSD.org
 
@@ -61,8 +65,7 @@ REAPPLY_PATCHES= \
 		${PATCHDIR}/patch-src_mapi_es2api_Makefile.in \
 		${PATCHDIR}/patch-src_mapi_shared-glapi_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
-		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in \
-		${PATCHDIR}/patch-src_mesa_libdricore_Makefile.in
+		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in
 
 python_OLD_CMD=	"/usr/bin/env[[:space:]]python"
 python_CMD=	${LOCALBASE}/bin/python2
@@ -127,8 +130,7 @@ post-patch:
 		${WRKSRC}/src/mesa/drivers/dri/Makefile
 .else
 	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${LOCALBASE}/bin/python2|g' \
-		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py \
-		${WRKSRC}/src/glsl/builtins/tools/*.py
+		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py
 	@${REINPLACE_CMD} -e 's|!/use/bin/python2|!${LOCALBASE}/bin/python2|g' \
 		${WRKSRC}/src/mesa/main/get_hash_generator.py \
 		${WRKSRC}/src/mapi/glapi/gen/gl_enums.py \
