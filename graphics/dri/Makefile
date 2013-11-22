@@ -104,6 +104,11 @@ pre-everything::
 	@${ECHO_MSG} "Note that gallium support is highly experimental."
 	@${ECHO_MSG} ""
 .endif
+.if defined(WITH_TEXTUREFLOAT)
+	@${ECHO_MSG} ""
+	@${ECHO_MSG} "TEXTUREFLOAT enabled, potentially patent encumbered code was included."
+	@${ECHO_MSG} ""
+.enif
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/dri/*_dri.so
