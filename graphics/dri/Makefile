@@ -95,9 +95,9 @@ CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
 
+pre-everything::
 .if defined(WITH_NEW_XORG) && !defined(WITH_GALLIUM) \
 	&& (${ARCH} == i386 || ${ARCH} == amd64)
-pre-everything::
 	@${ECHO_MSG} ""
 	@${ECHO_MSG} "For r300, r600, radeonsi and swrast gallium based drivers."
 	@${ECHO_MSG} "Please define WITH_GALLIUM in /etc/make.conf"
@@ -108,7 +108,7 @@ pre-everything::
 	@${ECHO_MSG} ""
 	@${ECHO_MSG} "TEXTUREFLOAT enabled, potentially patent encumbered code was included."
 	@${ECHO_MSG} ""
-.enif
+.endif
 
 post-install:
 	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/dri/*_dri.so
