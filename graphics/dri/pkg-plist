@@ -18,7 +18,7 @@ include/GL/internal/dri_interface.h
 %%NEW%%%%GALLIUM%%lib/dri/radeonsi_dri.so
 %%OLD%%%%SAVAGE_DRIVER%%lib/dri/savage_dri.so
 %%OLD%%%%SIS_DRIVER%%lib/dri/sis_dri.so
-%%NEW%%%%SWRAST_DRIVER%%lib/dri/swrast_dri.la
+%%NEW%%%%GALLIUM%%%%SWRAST_DRIVER%%lib/dri/swrast_dri.la
 %%SWRAST_DRIVER%%lib/dri/swrast_dri.so
 %%OLD%%%%TDFX_DRIVER%%lib/dri/tdfx_dri.so
 %%OLD%%%%UNICHROME_DRIVER%%lib/dri/unichrome_dri.so
@@ -27,6 +27,12 @@ include/GL/internal/dri_interface.h
 %%NEW%%%%GALLIUM%%lib/libXvMCr600.la
 %%NEW%%%%GALLIUM%%lib/libXvMCr600.so
 %%NEW%%%%GALLIUM%%lib/libXvMCr600.so.1
+%%NEW%%%%GALLIUM%%lib/vdpau/libvdpau_r600.la
+%%NEW%%%%GALLIUM%%lib/vdpau/libvdpau_r600.so
+%%NEW%%%%GALLIUM%%lib/vdpau/libvdpau_r600.so.1
+%%NEW%%%%GALLIUM%%lib/vdpau/libvdpau_radeonsi.la
+%%NEW%%%%GALLIUM%%lib/vdpau/libvdpau_radeonsi.so
+%%NEW%%%%GALLIUM%%lib/vdpau/libvdpau_radeonsi.so.1
 libdata/pkgconfig/dri.pc
 @dirrm lib/dri
 @dirrmtry include/GL/internal

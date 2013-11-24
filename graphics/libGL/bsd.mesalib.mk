@@ -19,7 +19,7 @@ MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 .if defined(WITH_NEW_XORG)
 MESABASEVERSION=	10.0.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=	rc1
+MESASUBVERSION=	rc2
 PLIST_SUB+=	OLD="@comment " NEW=""
 
 # work around libarchive bug?

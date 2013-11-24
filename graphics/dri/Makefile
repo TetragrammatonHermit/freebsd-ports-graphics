@@ -110,9 +110,10 @@ pre-everything::
 	@${ECHO_MSG} ""
 .endif
 
+.if defined(WITH_NEW_XORG)
 post-install:
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/dri/*_dri.so
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/.libGL/libGL.so.1
-	${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/lib*.so.1
+	-@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/dri/*_dri.so
+	-@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/lib*.so.1
+.endif
 
 .include <bsd.port.mk>
