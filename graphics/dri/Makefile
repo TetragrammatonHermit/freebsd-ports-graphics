@@ -74,7 +74,7 @@ LIB_DEPENDS+=	libvdpau.so:${PORTSDIR}/multimedia/libvdpau
 PLIST_SUB+=	VDPAU=""
 .else
 CONFIGURE_ARGS+=--disable-vdpau
-PLIST_SUB+=	VDPAU=""
+PLIST_SUB+=	VDPAU="@comment "
 .endif
 
 . if ${ARCH} == powerpc || ${ARCH} == ia64
