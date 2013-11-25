@@ -68,6 +68,15 @@ PLIST_SUB+=	GALLIUM="@comment "
 CONFIGURE_ARGS+=--enable-texture-float
 . endif
 
+.if defined(WITH_VDPAU)
+CONFIGURE_ARGS+=--enable-vdpau
+LIB_DEPENDS+=	libvdpau.so:${PORTSDIR}/multimedia/libvdpau
+PLIST_SUB+=	VDPAU=""
+.else
+CONFIGURE_ARGS+=--disable-vdpau
+PLIST_SUB+=	VDPAU=""
+.endif
+
 . if ${ARCH} == powerpc || ${ARCH} == ia64
 DRI_DRIVERS=	RADEON SWRAST
 . endif
@@ -114,6 +123,10 @@ pre-everything::
 post-install:
 	-@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/dri/*_dri.so
 	-@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/lib*.so.1
+. if defined(WITH_VDPAU)
+	-@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/vdpau/libvdpau_r600.so.1
+	-@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/vdpau/libvdpau_radeonsi.so.1
+. endif
 .endif
 
 .include <bsd.port.mk>
