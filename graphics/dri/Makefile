@@ -50,17 +50,16 @@ DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 .endif
 
 .if defined(WITH_NEW_XORG)
-. if defined(WITH_GALLIUM) && (${ARCH} == i386 || ${ARCH} == amd64)
-BUILD_DEPENDS+=	llvm-config33:${PORTSDIR}/devel/llvm33
-RUN_DEPENDS+=	llvm-config33:${PORTSDIR}/devel/llvm33
-CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config33
+. if !defined(WITHOUT_GALLIUM) && (${ARCH} == i386 || ${ARCH} == amd64)
+BUILD_DEPENDS+=	llvm34>=0:${PORTSDIR}/devel/llvm34
+CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config34
 
-CONFIGURE_ARGS+=--enable-gallium-llvm --disable-gallium-egl
-
-CONFIGURE_ARGS+=--with-gallium-drivers=r300,r600,radeonsi,svga,swrast
+CONFIGURE_ARGS+=--enable-gallium-llvm \
+		--with-gallium-drivers=r300,r600,radeonsi,svga,swrast
 PLIST_SUB+=	GALLIUM=""
 . else
-CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
+CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
+		--disable-gallium-egl
 PLIST_SUB+=	GALLIUM="@comment "
 . endif
 
