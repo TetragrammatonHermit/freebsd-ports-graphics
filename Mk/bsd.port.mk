@@ -68,9 +68,11 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  Do not define this in your Makefile.
 # PKGNAMEPREFIX	- Prefix to specify that port is language-specific, etc.
 #				  Optional.
-# PKGNAMESUFFIX	- Suffix to specify compilation options.  Optional.
-# PKGVERSION		- Always defined as
-#				  ${PORTVERSION}.
+# PKGNAMESUFFIX	- Suffix to specify compilation options or a version
+#				  designator (in case there are different versions of 
+#				  one port as is the case for Tcl).
+#				  Optional.
+# PKGVERSION	- Always defined as ${PORTVERSION}.
 #				  Do not define this in your Makefile.
 # UNIQUENAME	- A name for your port that is globally unique.  By default,
 #				  this is set to ${LATEST_LINK} when LATEST_LINK is set,
@@ -311,6 +313,8 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #                         passed to the compiler by setting DEBUG_FLAGS. It is
 #                         set to "-g" at default.
 #
+# WITH_DEBUG_PORTS		- A list of origins for which WITH_DEBUG will be set
+#
 # WITH_SSP_PORTS
 # 				- If set, SSP_FLAGS (defaults to -fstack-protector)
 #				  is added to CFLAGS and the necessary flags
@@ -439,6 +443,10 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  Implies inclusion of bsd.gnome.mk.  See bsd.gnome.mk
 #				  or http://www.FreeBSD.org/gnome/docs/porting.html
 #				  for more details.
+##
+# USE_MATE		- A list of the MATE dependencies the port has. Implies
+#				  that the port needs MATE. Implies inclusion of
+#				  bsd.mate.mk. See bsd.mate.mk for more details.
 ##
 # USE_LUA		- If set, this port uses the Lua library and related
 #				  components. See bsd.lua.mk for more details.
@@ -858,8 +866,8 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  Default: ${WRKSRC}
 # CONFIGURE_SCRIPT
 #				- Name of configure script, relative to ${CONFIGURE_WRKSRC}.
-#				  Default: "Makefile.PL" if PERL_CONFIGURE is set,
-#				  "configure" otherwise.
+#				  Default: "Makefile.PL" if USES=perl5 and USE_PERL5=configure
+#				  are set, "configure" otherwise.
 # CONFIGURE_TARGET
 #				- The name of target to call when GNU_CONFIGURE is
 #				  defined.
@@ -874,8 +882,8 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  --mandir=${MANPREFIX}/man --build=${CONFIGURE_TARGET}" if
 #				  GNU_CONFIGURE is set, "CC=${CC} CFLAGS=${CFLAGS}
 #				  PREFIX=${PREFIX} INSTALLPRIVLIB=${PREFIX}/lib
-#				  INSTALLARCHLIB=${PREFIX}/lib" if PERL_CONFIGURE is set,
-#				  empty otherwise.
+#				  INSTALLARCHLIB=${PREFIX}/lib" if USES=perl5 and
+#				  USE_PERL5=configure are set, empty otherwise.
 # CONFIGURE_ENV	- Pass these env (shell-like) to configure if
 #				  ${HAS_CONFIGURE} is set.
 # CONFIGURE_LOG	- The name of configure log file. It will be printed to
@@ -1314,6 +1322,12 @@ MAKE_ENV+=	TMPDIR="${TMPDIR}"
 CONFIGURE_ENV+=	TMPDIR="${TMPDIR}"
 .endif # defined(TMPDIR)
 
+.if defined(WITH_DEBUG_PORTS)
+.if ${WITH_DEBUG_PORTS:M${PKGORIGIN}}
+WITH_DEBUG=	yes
+.endif
+.endif
+
 # Reset value from bsd.own.mk.
 .if defined(WITH_DEBUG) && !defined(WITHOUT_DEBUG)
 STRIP=	#none
@@ -1466,6 +1480,10 @@ PKGCOMPATDIR?=		${LOCALBASE}/lib/compat/pkg
 
 .if defined(WANT_GNOME) || defined(USE_GNOME) || defined(INSTALLS_ICONS)
 .include "${PORTSDIR}/Mk/bsd.gnome.mk"
+.endif
+
+.if defined(USE_MATE)
+.include "${PORTSDIR}/Mk/bsd.mate.mk"
 .endif
 
 .if defined(WANT_LUA) || defined(USE_LUA) || defined(USE_LUA_NOT)
@@ -2034,6 +2052,10 @@ RUN_DEPENDS+=	${_GL_${_component}_RUN_DEPENDS}
 
 .if defined(WANT_GNOME) || defined(USE_GNOME)
 .include "${PORTSDIR}/Mk/bsd.gnome.mk"
+.endif
+
+.if defined(USE_MATE)
+.include "${PORTSDIR}/Mk/bsd.mate.mk"
 .endif
 
 .if defined(USE_XFCE)
@@ -2843,7 +2865,7 @@ VALID_CATEGORIES+= accessibility afterstep arabic archivers astro audio \
 	deskutils devel docs dns editors elisp emulators enlightenment finance french ftp \
 	games geography german gnome gnustep graphics hamradio haskell hebrew hungarian \
 	ipv6 irc japanese java kde kld korean lang linux lisp \
-	mail math mbone misc multimedia net net-im net-mgmt net-p2p news \
+	mail mate math mbone misc multimedia net net-im net-mgmt net-p2p news \
 	palm parallel pear perl5 plan9 polish portuguese ports-mgmt \
 	print python ruby rubygems russian \
 	scheme science security shells spanish sysutils \
@@ -3633,7 +3655,8 @@ patch-dos2unix:
 do-patch:
 .if defined(PATCHFILES)
 	@${ECHO_MSG} "===>  Applying distribution patches for ${PKGNAME}"
-	@(cd ${_DISTDIR}; \
+	@(set -e; \
+	cd ${_DISTDIR}; \
 	patch_dist_strip () { \
 		case "$$1" in \
 		${_PATCH_DIST_STRIP_CASES} \
@@ -6003,7 +6026,9 @@ add-plist-info:
 # Process GNU INFO files at package install/deinstall time
 .if defined(INFO)
 .for i in ${INFO}
+.if defined(NO_STAGE)
 	install-info --quiet ${PREFIX}/${INFO_PATH}/$i.info ${PREFIX}/${INFO_PATH}/dir
+.endif
 .if !defined(WITH_PKGNG)
 	@${ECHO_CMD} "@unexec install-info --quiet --delete %D/${INFO_PATH}/$i.info %D/${INFO_PATH}/dir" \
 		>> ${TMPPLIST}
@@ -6013,11 +6038,16 @@ add-plist-info:
 	@${ECHO_CMD} "@exec install-info --quiet %D/${INFO_PATH}/$i.info %D/${INFO_PATH}/dir" \
 		>> ${TMPPLIST}
 .else
-	@${LS} ${PREFIX}/${INFO_PATH}/$i.info* | ${SED} -e s:${PREFIX}/:@info\ :g >> ${TMPPLIST}
+	@${ECHO_CMD} "@info ${INFO_PATH}/$i.info" >> ${TMPPLIST}
+	@${LS} ${PREFIX}/${INFO_PATH}/$i.info-* 2>/dev/null | ${SED} -e s:${PREFIX}/:@info\ :g >> ${TMPPLIST}
 .endif
 .endfor
 .if defined(INFO_SUBDIR)
+.if !defined(WITH_PKGNG)
 	@${ECHO_CMD} "@unexec ${RMDIR} %D/${INFO_PATH}/${INFO_SUBDIR} 2> /dev/null || true" >> ${TMPPLIST}
+.else
+	@${ECHO_CMD} "@dirrmtry ${INFO_PATH}/${INFO_SUBDIR}" >> ${TMPPLIST}
+.endif
 .endif
 .if (${PREFIX} != "/usr")
 	@${ECHO_CMD} "@unexec if [ -f %D/${INFO_PATH}/dir ]; then if sed -e '1,/Menu:/d' %D/${INFO_PATH}/dir | grep -q '^[*] '; then true; else rm %D/${INFO_PATH}/dir; fi; fi" >> ${TMPPLIST}
@@ -6548,6 +6578,7 @@ desktop-categories:
 			lang)			c="Development"					;; \
 			lisp)			c="Development"					;; \
 			mail)			c="Office Email"				;; \
+			mate)			c="MATE GTK"		;; \
 			math)			c="Education Science Math"		;; \
 			mbone)			c="Network AudioVideo"			;; \
 			multimedia)		c="AudioVideo"					;; \
@@ -6608,7 +6639,7 @@ DESKTOP_CATEGORIES_ADDITIONAL=	Building Debugger IDE GUIDesigner Profiling \
 	ParallelComputing Amusement Archiving Compression Electronics Emulator \
 	Engineering FileTools FileManager TerminalEmulator Filesystem Monitor \
 	Security Accessibility Calculator Clock TextEditor Documentation Adult \
-	Core KDE GNOME XFCE GTK Qt Motif Java ConsoleOnly
+	Core KDE GNOME MATE XFCE GTK Qt Motif Java ConsoleOnly
 DESKTOP_CATEGORIES_RESERVED=	Screensaver TrayIcon Applet Shell
 
 VALID_DESKTOP_CATEGORIES+=	${DESKTOP_CATEGORIES_MAIN} \
@@ -6769,7 +6800,7 @@ show-dev-errors:
 	@${FALSE}
 check-makefile:: show-dev-errors
 .endif
-.endif #DVELOPER
+.endif #DEVELOPER
 .endif
 # End of post-makefile section.
 
