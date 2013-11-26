@@ -12,7 +12,7 @@ COMMENT=	OpenGL hardware acceleration drivers for the DRI
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
-USES=		pkgconfig
+USES+=		gettext:build
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 
 .include <bsd.port.options.mk>
@@ -52,7 +52,6 @@ DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 .if defined(WITH_NEW_XORG)
 . if defined(WITH_GALLIUM) && (${ARCH} == i386 || ${ARCH} == amd64)
 BUILD_DEPENDS+=	llvm-config33:${PORTSDIR}/devel/llvm33
-RUN_DEPENDS+=	llvm-config33:${PORTSDIR}/devel/llvm33
 CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config33
 
 CONFIGURE_ARGS+=--enable-gallium-llvm --disable-gallium-egl
