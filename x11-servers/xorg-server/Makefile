@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/x11-servers/xorg-server/Makefile 321157 2013-06-17 21:51:48Z jkim $
+# $FreeBSD$
 
 PORTNAME?=	xorg-server
 PORTVERSION=	${XORG_VERSION}
@@ -95,7 +95,7 @@ CONFIGURE_ARGS+=	--enable-config-hal=no
 .endif
 
 .if ${PORT_OPTIONS:MDEVD}
-EXTRA_PATCHES+=		${FILESDIR}/extra-config_devd.c
+EXTRA_PATCHES+=		${FILESDIR}/extra-devd
 .endif
 
 .if ${PORT_OPTIONS:MAIGLX}
@@ -104,11 +104,12 @@ CONFIGURE_ARGS+=	--enable-aiglx=yes
 CONFIGURE_ARGS+=	--enable-aiglx=no
 .endif
 
+# We handle Xorg setuid in the plist. This allows to build xorg-server as 
+# a user.
+CONFIGURE_ARGS+=--enable-install-setuid=no
 .if ${PORT_OPTIONS:MSUID}
-CONFIGURE_ARGS+=--enable-install-setuid=yes
 PLIST_SUB+=	SUID=""
 .else
-CONFIGURE_ARGS+=--enable-install-setuid=no
 PLIST_SUB+=	SUID="@comment"
 .endif
 
@@ -174,16 +175,14 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|@GLX_TRUE@GLXMODS =|@GLX_BOGUS@GLXMODS =|g' \
 		-e 's|^LTLIBRARIES = |LTLIBRARIES = libglx.la |g' \
 		${WRKSRC}/hw/xfree86/dixmods/Makefile.in
-.if ${PORT_OPTIONS:MDEVD}
-	@${ECHO_CMD} -e "\nint config_devd_init(void);\nvoid config_devd_fini(void);" \
-		>> ${WRKSRC}/config/config-backends.h
-.endif
  
 post-configure:
 .if ${PORT_OPTIONS:MDEVD}
 	@${REINPLACE_CMD} -e 's|config\.c|config.c devd.c|g' \
 		-e 's|config\.lo|config.lo devd.lo|g' \
 		${WRKSRC}/config/Makefile
+	@${REINPLACE_CMD} -e 's|^/\* #undef CONFIG_UDEV \*/|#define CONFIG_DEVD 1|' \
+		${WRKSRC}/include/dix-config.h
 .endif
 
 .if ${SLAVE_PORT} == "no"
