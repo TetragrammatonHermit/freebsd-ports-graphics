@@ -199,7 +199,7 @@ post-install:
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/multimedia/*.so
 
 .if defined(WITH_NEW_XORG)
-	@${MKDIR} ${STAGEDIR}${PREFIX}/share/X11/xorg.conf.d
+	@${MKDIR} ${STAGEDIR}${PREFIX}/etc/X11/xorg.conf.d
 .endif
 .endif
 
