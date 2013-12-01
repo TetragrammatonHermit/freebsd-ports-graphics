@@ -96,6 +96,11 @@ CONFIGURE_ARGS+=	--enable-config-hal=no
 
 .if ${PORT_OPTIONS:MDEVD}
 EXTRA_PATCHES+=		${FILESDIR}/extra-devd
+. if defined(WITH_NEW_XORG)
+EXTRA_PATCHES+=	${FILESDIR}/extra-new-config_devd
+. else
+EXTRA_PATCHES+=	${FILESDIR}/extra-old-config_devd
+. endif
 .endif
 
 .if ${PORT_OPTIONS:MAIGLX}
