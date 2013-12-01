@@ -116,6 +116,7 @@ pre-everything::
 	@${ECHO_MSG} ""
 	@${ECHO_MSG} "TEXTUREFLOAT enabled, potentially patent encumbered code was included."
 	@${ECHO_MSG} ""
+	@sleep 4
 .endif
 
 .if defined(WITH_NEW_XORG)
