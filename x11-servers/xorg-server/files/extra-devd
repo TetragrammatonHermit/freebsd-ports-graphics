@@ -1,5 +1,5 @@
 Index: config/devd.c
-@@ -0,0 +1,476 @@
+@@ -0,0 +1,487 @@
 +/*
 + * Copyright © 2012 Baptiste Daroussin
 + *
@@ -35,6 +35,7 @@ Index: config/devd.c
 +#include <sys/un.h>
 +
 +#include <ctype.h>
++#include <fcntl.h>
 +#include <stdlib.h>
 +#include <stdio.h>
 +#include <stdarg.h>
@@ -200,6 +201,7 @@ Index: config/devd.c
 +#endif
 +    DeviceIntPtr dev = NULL;
 +    int i, rc;
++    int fd;
 +
 +    walk = strchr(line, ' ');
 +    if (walk != NULL)
@@ -219,13 +221,10 @@ Index: config/devd.c
 +        LogMessageVerb(X_INFO, 10, "config/devd: ignoring device %s\n", line);
 +        return;
 +    }
-+
-+#if XORG_VERSION_CURRENT < 10800000
 +    if (hw_types[i].xdriver == NULL) {
 +        LogMessageVerb(X_INFO, 10, "config/devd: ignoring device %s\n", line);
 +        return;
 +    }
-+#endif
 +    if (asprintf(&path, "/dev/%s", line) == -1)
 +        return;
 +
@@ -258,16 +257,28 @@ Index: config/devd.c
 +            walk[0] = '\0';
 +#if XORG_VERSION_CURRENT > 10800000
 +        attrs.product = strdup(product != NULL ? product : "(unnamed)");
-+	options = input_option_new(options, "name", product != NULL ? product : "(unnamed)");
++        options = input_option_new(options, "name", product != NULL ? product : "(unnamed)");
 +#else
 +        add_option(&options, "name", product != NULL ? product : "(unnamed)");
 +#endif
 +    }
 +#if XORG_VERSION_CURRENT > 10800000
 +    attrs.usb_id = NULL;
-+    options = input_option_new(options, "path", path);
-+    options = input_option_new(options, "device", path);
++    attrs.device = strdup(path);
 +    options = input_option_new(options, "driver", hw_types[i].xdriver);
++    if (attrs.flags & ATTR_KEYBOARD) {
++      /*
++       * Don't pass device option if keyboard is attached to console (open fails),
++       * thus activating special logic in xf86-input-keyboard.
++       */
++       fd = open(path, O_RDONLY | O_NONBLOCK | O_EXCL);
++       if (fd > 0) {
++          close(fd);
++          options = input_option_new(options, "device", path);
++       }
++    } else {
++          options = input_option_new(options, "device", path);
++    }
 +#else
 +    add_option(&options, "path", path);
 +    add_option(&options, "device", path);
@@ -477,20 +488,62 @@ Index: config/devd.c
 +    close(sock_devd);
 +}
 Index: config/config.c
-@@ -56,6 +56,8 @@
+@@ -55,6 +55,9 @@
+ #elif defined(CONFIG_WSCONS)
      if (!config_wscons_init())
          ErrorF("[config] failed to initialise wscons\n");
++#elif defined(CONFIG_DEVD)
++     if (!config_devd_init())
++         ErrorF("[config] failed to initialise devd\n");
  #endif
-+    if (!config_devd_init())
-+        ErrorF("[config] failed to initialise devd\n");
  }
  
- void
-@@ -74,6 +76,7 @@
+@@ -73,6 +76,8 @@
+     config_dbus_core_fini();
  #elif defined(CONFIG_WSCONS)
      config_wscons_fini();
++#elif defined(CONFIG_DEVD)
++     config_devd_fini();
  #endif
-+    config_devd_fini();
  }
  
- static void
+Index: config/config-backends.h
+@@ -73,3 +73,8 @@
+ int config_wscons_init(void);
+ void config_wscons_fini(void);
+ #endif
++
++#ifdef CONFIG_DEVD
++int config_devd_init(void);
++void config_devd_fini(void);
++#endif
+Index: hw/xfree86/common/xf86Globals.c
+@@ -122,7 +122,8 @@
+     .log = LogNone,
+     .disableRandR = FALSE,
+     .randRFrom = X_DEFAULT,
+-#if defined(CONFIG_HAL) || defined(CONFIG_UDEV) || defined(CONFIG_WSCONS)
++#if defined(CONFIG_HAL) || defined(CONFIG_UDEV) || defined(CONFIG_WSCONS) || \
++	defined(CONFIG_DEVD)
+     .forceInputDevices = FALSE,
+     .autoAddDevices = TRUE,
+     .autoEnableDevices = TRUE
+Index: hw/xfree86/common/xf86Config.c
+@@ -1371,13 +1371,16 @@
+     }
+ 
+     if (!xf86Info.forceInputDevices && !(foundPointer && foundKeyboard)) {
+-#if defined(CONFIG_HAL) || defined(CONFIG_UDEV) || defined(CONFIG_WSCONS)
++#if defined(CONFIG_HAL) || defined(CONFIG_UDEV) || defined(CONFIG_WSCONS) || \
++		defined(CONFIG_DEVD)
+         const char *config_backend;
+ 
+ #if defined(CONFIG_HAL)
+         config_backend = "HAL";
+ #elif defined(CONFIG_UDEV)
+         config_backend = "udev";
++#elif defined(CONFIG_DEVD)
++        config_backend = "devd";
+ #else
+         config_backend = "wscons";
+ #endif
