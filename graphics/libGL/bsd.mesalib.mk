@@ -17,21 +17,22 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_XORG)
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
 MESABASEVERSION=	10.0.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=	rc2
+MESASUBVERSION=	
 PLIST_SUB+=	OLD="@comment " NEW=""
 
 # work around libarchive bug?
 EXTRACT_CMD=${LOCALBASE}/bin/gtar
 BUILD_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
 .else
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
 MESABASEVERSION=	7.6.1
 MESASUBVERSION=		
 PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:S/9.2.0/9.2/:S/10.0.0/10.0/}/
 DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
 MAINTAINER?=	x11@FreeBSD.org
 
