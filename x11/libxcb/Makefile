@@ -44,4 +44,7 @@ XPROTO_LIBS=	-L${LOCALBASE}/lib
 
 .include <bsd.port.options.mk>
 
+post-install:
+	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libxcb*.so.*
+
 .include <bsd.port.mk>
