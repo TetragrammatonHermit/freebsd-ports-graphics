@@ -186,8 +186,13 @@ post-configure:
 	@${REINPLACE_CMD} -e 's|config\.c|config.c devd.c|g' \
 		-e 's|config\.lo|config.lo devd.lo|g' \
 		${WRKSRC}/config/Makefile
+. if defined(WITH_NEW_XORG)
 	@${REINPLACE_CMD} -e 's|^/\* #undef CONFIG_UDEV \*/|#define CONFIG_DEVD 1|' \
 		${WRKSRC}/include/dix-config.h
+.else
+	@${REINPLACE_CMD} -e 's|^/\* #undef CONFIG_HAL \*/|#define CONFIG_DEVD 1|' \
+		${WRKSRC}/include/dix-config.h
+. endif
 .endif
 
 .if ${SLAVE_PORT} == "no"
