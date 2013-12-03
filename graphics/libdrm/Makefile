@@ -49,7 +49,7 @@ CONFIGURE_ARGS+=--disable-manpages
 PLIST_SUB+=	MAN="@comment "
 .endif
 
-LIBDRM_VERSION=	2.4.49
+LIBDRM_VERSION=	2.4.50
 LIBDRM_REVISION=0
 PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-configure \
