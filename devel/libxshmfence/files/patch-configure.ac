@@ -1,0 +1,16 @@
+--- configure.ac.orig	2013-11-27 00:54:13.000000000 -0500
++++ configure.ac	2013-12-04 14:08:06.000000000 -0500
+@@ -55,6 +55,13 @@
+ 
+ if test "x$FUTEX" = "xauto"; then
+ 	AC_CHECK_HEADER([linux/futex.h], [FUTEX=yes], [FUTEX=no])
++	if test "x$FUTEX" = "xno"; then
++		AC_CHECK_HEADER([sys/umtx.h], [FUTEX=yes], [FUTEX=no],
++			[[#include <errno.h>
++			  #ifdef HAVE_SYS_TYPES_H
++			  # include <sys/types.h>
++			  #endif]])
++	fi
+ fi
+ 
+ if test "x$FUTEX" = "xyes"; then
