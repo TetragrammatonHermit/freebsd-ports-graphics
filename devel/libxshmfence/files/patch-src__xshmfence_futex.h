@@ -1,5 +1,5 @@
 --- src/xshmfence_futex.h.orig	2013-11-20 17:13:08.000000000 -0500
-+++ src/xshmfence_futex.h	2013-12-04 14:06:21.000000000 -0500
++++ src/xshmfence_futex.h	2013-12-05 16:09:39.000000000 -0500
 @@ -1,5 +1,6 @@
  /*
   * Copyright © 2013 Keith Packard
@@ -12,18 +12,18 @@
  
  #include <errno.h>
 +
-+#ifdef __FreeBSD__
++#ifdef HAVE_UMTX
 +
 +#include <sys/types.h>
 +#include <sys/umtx.h>
 +
-+typedef u_long futex_t;
++typedef u_long futex_type;
 +
-+static inline int futex_wake(futex_t *addr) {
++static inline int futex_wake(futex_type *addr) {
 +	return umtx_wake(addr, INT_MAX);
 +}
 +
-+static inline int futex_wait(futex_t *addr, futex_t value) {
++static inline int futex_wait(futex_type *addr, futex_type value) {
 +	return umtx_wait(addr, value, NULL);
 +}
 +
@@ -35,7 +35,7 @@
  #include <sys/time.h>
  #include <sys/syscall.h>
  
-+typedef int32_t futex_t;
++typedef int32_t futex_type;
 +
  static inline long sys_futex(void *addr1, int op, int val1, struct timespec *timeout, void *addr2, int val3)
  {
@@ -43,12 +43,12 @@
  }
  
 -static inline int futex_wake(int32_t *addr) {
-+static inline int futex_wake(futex_t *addr) {
++static inline int futex_wake(futex_type *addr) {
  	return sys_futex(addr, FUTEX_WAKE, MAXINT, NULL, NULL, 0);
  }
  
 -static inline int futex_wait(int32_t *addr, int32_t value) {
-+static inline int futex_wait(futex_t *addr, futex_t value) {
++static inline int futex_wait(futex_type *addr, futex_type value) {
  	return sys_futex(addr, FUTEX_WAIT, value, NULL, NULL, 0);
  }
  
@@ -57,7 +57,7 @@
  #define barrier() __asm__ __volatile__("": : :"memory")
  
 -static inline void atomic_store(int32_t *f, int32_t v)
-+static inline void atomic_store(futex_t *f, futex_t v)
++static inline void atomic_store(futex_type *f, futex_type v)
  {
  	barrier();
  	*f = v;
@@ -65,10 +65,10 @@
  }
  
 -static inline int32_t atomic_fetch(int32_t *a)
-+static inline futex_t atomic_fetch(futex_t *a)
++static inline futex_type atomic_fetch(futex_type *a)
  {
 -	int32_t v;
-+	futex_t v;
++	futex_type v;
  	barrier();
  	v = *a;
  	barrier();
@@ -77,7 +77,7 @@
  	
  struct xshmfence {
 -    int32_t     v;
-+	futex_t v;
++	futex_type v;
  };
  
  #define xshmfence_init(fd)
