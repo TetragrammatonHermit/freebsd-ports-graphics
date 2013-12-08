@@ -234,6 +234,7 @@ XORG_MODULES=	bigreqsproto \
 				xrender \
 				xres \
 				xscrnsaver \
+				xshmemfence \
 				xt \
 				xtrans \
 				xtrap \
@@ -320,6 +321,7 @@ xrender_LIB_PC_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/xrender.pc:${PORTSDIR}/x
 xres_LIB_PC_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/xres.pc:${PORTSDIR}/x11/libXres
 xscrnsaver_LIB_PC_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/xscrnsaver.pc:${PORTSDIR}/x11/libXScrnSaver
 xt_LIB_PC_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/xt.pc:${PORTSDIR}/x11-toolkits/libXt
+xshmfence_LIB_PC_DEPENDS=	${LOCALBASE}/libdata/pkgconfig/xshmfence.pc:${PORTSDIR}/x11/libxshmfence
 xtrans_BUILD_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/xtrans.pc:${PORTSDIR}/x11/xtrans
 xtrap_LIB_PC_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/xtrap.pc:${PORTSDIR}/x11/libXTrap
 xtst_LIB_PC_DEPENDS=		${LOCALBASE}/libdata/pkgconfig/xtst.pc:${PORTSDIR}/x11/libXtst

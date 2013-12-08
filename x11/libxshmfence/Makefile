@@ -2,7 +2,7 @@
 
 PORTNAME=	libxshmfence
 PORTVERSION=	1.1
-CATEGORIES=	devel
+CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Shared memory 'SyncFence' synchronization primitive
