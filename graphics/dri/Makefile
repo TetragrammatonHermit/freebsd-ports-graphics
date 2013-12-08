@@ -15,6 +15,18 @@ LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto xvmc
 
+OPTIONS_DEFINE=	TEXTURE
+
+OPTIONS_DEFINE_i386=	GALLIUM VDPAU
+OPTIONS_DEFAULT_i386=	GALLIUM VDPAU
+OPTIONS_DEFINE_amd64=	GALLIUM VDPAU
+OPTIONS_DEFAULT_amd64=	GALLIUM VDPAU
+
+GALLIUM_DESC=	Gallium (llvm backed) dri drivers
+TEXTURE_DESC=	Enable texture-float support (patent encumbered)
+
+PKGHELP=	${.CURDIR}/pkg-help
+
 .include <bsd.port.options.mk>
 
 # gcc from base can't handle some code in mesa 9.1+
@@ -35,10 +47,6 @@ USE_GCC=yes
 
 ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST
 
-.if !defined(WITH_NEW_XORG)
-ALL_DRI_DRIVERS+=I810 MACH64 MGA R128 R300 R600 SAVAGE SIS TDFX UNICHROME
-.endif
-
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 
 PLIST_SUB+=	VERSION=${MESADISTVERSION}
@@ -53,7 +61,7 @@ DRIREVISION=	0
 DRIREVISION=	4
 .endif
 
-.if !defined(WITHOUT_GALLIUM) && (${ARCH} == i386 || ${ARCH} == amd64)
+.if ${PORT_OPTIONS:MGALLIUM}
 . if defined(WITH_NEW_MESA)
 BUILD_DEPENDS+=	llvm34>=0:${PORTSDIR}/devel/llvm34
 CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config34
@@ -71,11 +79,11 @@ CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers \
 PLIST_SUB+=	GALLIUM="@comment "
 .endif
 
-.if defined(WITH_TEXTUREFLOAT)
+.if ${PORT_OPTIONS:MTEXTURE}
 CONFIGURE_ARGS+=--enable-texture-float
 .endif
 
-.if defined(WITH_VDPAU)
+.if ${PORT_OPTIONS:MVDPAU}
 CONFIGURE_ARGS+=--enable-vdpau
 LIB_DEPENDS+=	libvdpau.so:${PORTSDIR}/multimedia/libvdpau
 PLIST_SUB+=	VDPAU=""
@@ -103,22 +111,6 @@ PLIST_SUB+=	${_d}_DRIVER="@comment "
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
-
-pre-everything::
-.if !defined(WITH_GALLIUM) \
-	&& (${ARCH} == i386 || ${ARCH} == amd64)
-	@${ECHO_MSG} ""
-	@${ECHO_MSG} "For r300, r600, radeonsi and swrast gallium based drivers."
-	@${ECHO_MSG} "Please define WITH_GALLIUM in /etc/make.conf"
-	@${ECHO_MSG} "Note that gallium support is highly experimental."
-	@${ECHO_MSG} ""
-.endif
-.if defined(WITH_TEXTUREFLOAT)
-	@${ECHO_MSG} ""
-	@${ECHO_MSG} "TEXTUREFLOAT enabled, potentially patent encumbered code was included."
-	@${ECHO_MSG} ""
-	@sleep 4
-.endif
 
 post-install:
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/dri/*_dri.so
