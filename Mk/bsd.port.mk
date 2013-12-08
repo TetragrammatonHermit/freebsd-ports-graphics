@@ -69,7 +69,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 # PKGNAMEPREFIX	- Prefix to specify that port is language-specific, etc.
 #				  Optional.
 # PKGNAMESUFFIX	- Suffix to specify compilation options or a version
-#				  designator (in case there are different versions of 
+#				  designator (in case there are different versions of
 #				  one port as is the case for Tcl).
 #				  Optional.
 # PKGVERSION	- Always defined as ${PORTVERSION}.
@@ -215,8 +215,10 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  generated on the fly.
 #				  Default: not set.
 #
+# NO_ARCH			- Set this if port is architecture neutral.
+#
 # Set these if your port only makes sense to certain architectures.
-# They are lists containing names for them (e.g., "alpha i386").
+# They are lists containing names for them (e.g., "amd64 i386").
 # (Defaults: not set.)
 #
 # ONLY_FOR_ARCHS
@@ -365,12 +367,6 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  this is for users, not for port maintainers.  This
 #				  should not be used in Makefile.
 ##
-# USE_DISPLAY	- If set, this ports requires a (virtual) X11 environment
-#				  setup. If the environment variable DISPLAY Is not set,
-#				  then an extra build dependency on Xvfb is added. Further,
-#				  if PACKAGE_BUILDING is not set, then CONFIGURE_ENV and
-#				  MAKE_ENV are extended with a DISPLAY variable.
-#
 # USE_GL		- A list of Mesa or GL related dependencies needed by the port.
 #				  Supported components are: egl, glesv2, glut, glu, glw, and gl.
 #				  If set to "yes", this is equivalent to "glu". Note that
@@ -821,7 +817,7 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  Default: none
 # FETCH_REGET	- Times to retry fetching of files on checksum errors.
 #				  Default: 1
-# CLEAN_FETCH_ENV		
+# CLEAN_FETCH_ENV
 #				- Disable package dependency in fetch target for mass
 #				  fetching.  User settable.
 #
@@ -1145,7 +1141,7 @@ LIB_DIRS?=		/lib /usr/lib ${LOCALBASE}/lib
 .undef NO_STAGE
 .endif
 
-# make sure bmake treats -V as expected 
+# make sure bmake treats -V as expected
 .MAKE.EXPAND_VARIABLES= yes
 # tell bmake we use the old :L :U modifiers
 .MAKE.FreeBSD_UL= yes
@@ -1227,7 +1223,7 @@ WITH_PKGNG?=	yes
 # Enable new xorg for FreeBSD versions after Radeon KMS was imported unless
 # WITHOUT_NEW_XORG is set.
 # XXX - This version should switch to whatever version newcons gets.
-.if ${OSVERSION} >= 1000051
+.if ${OSVERSION} >= 1100000
 . if !defined(WITHOUT_NEW_XORG)
 WITH_NEW_XORG?=	yes
 . else
@@ -1592,7 +1588,7 @@ CONFIGURE_WRKSRC?=	${WRKSRC}
 BUILD_WRKSRC?=	${WRKSRC}
 INSTALL_WRKSRC?=${WRKSRC}
 
-PLIST_SUB+=	OSREL=${OSREL} PREFIX=%D LOCALBASE=${LOCALBASE} 
+PLIST_SUB+=	OSREL=${OSREL} PREFIX=%D LOCALBASE=${LOCALBASE}
 SUB_LIST+=	PREFIX=${PREFIX} LOCALBASE=${LOCALBASE} \
 		DATADIR=${DATADIR} DOCSDIR=${DOCSDIR} EXAMPLESDIR=${EXAMPLESDIR} \
 		WWWDIR=${WWWDIR} ETCDIR=${ETCDIR}
@@ -1919,16 +1915,8 @@ IGNORE=		cannot be built: there is no emulators/linux_base-${USE_LINUX}, perhaps
 RUN_DEPENDS+=	${LINUX_BASE_PORT}
 .endif
 
-.if defined(USE_DISPLAY) && !defined(DISPLAY)
-BUILD_DEPENDS+=	Xvfb:${PORTSDIR}/x11-servers/xorg-vfbserver \
-	${LOCALBASE}/lib/X11/fonts/misc/8x13O.pcf.gz:${PORTSDIR}/x11-fonts/xorg-fonts-miscbitmaps \
-	${LOCALBASE}/lib/X11/fonts/misc/fonts.alias:${PORTSDIR}/x11-fonts/font-alias \
-	${LOCALBASE}/share/X11/xkb/rules/base:${PORTSDIR}/x11/xkeyboard-config \
-	xkbcomp:${PORTSDIR}/x11/xkbcomp
-.if !defined(PACKAGE_BUILDING)
-CONFIGURE_ENV+=	DISPLAY="localhost:1001"
-MAKE_ENV+=		DISPLAY="localhost:1001"
-.endif
+.if defined(USE_DISPLAY)
+USES+=	display
 .endif
 
 PKG_IGNORE_DEPENDS?=		'this_port_does_not_exist'
@@ -2348,7 +2336,7 @@ INSTALL_PROGRAM= \
 INSTALL_KLD= \
 	${INSTALL} ${COPY} ${_BINOWNGRP} -m ${BINMODE}
 INSTALL_LIB= \
-	${INSTALL} ${COPY} ${STRIP} ${_SHROWNGRP} -m ${SHAREMODE} 
+	${INSTALL} ${COPY} ${STRIP} ${_SHROWNGRP} -m ${SHAREMODE}
 INSTALL_SCRIPT= \
 	${INSTALL} ${COPY} ${_BINOWNGRP} -m ${BINMODE}
 INSTALL_DATA= \
@@ -3033,7 +3021,7 @@ _MANPAGES+=	${MAN${sect}_${manlang:S%^man/%%:U}:S%^%${MAN${sect}PREFIX}/${manlan
 .endfor
 
 # Special case for English, since it is defined with "" in MANLANG rather than
-# a language name and does not have man pages installed in a lang subdirectory 
+# a language name and does not have man pages installed in a lang subdirectory
 # of MAN${sect}PREFIX.
 .for sect in 1 2 3 4 5 6 7 8 9 L N
 .if defined(MAN${sect}_EN)
@@ -3405,7 +3393,7 @@ check-deprecated:
 # Check if the port is listed in the vulnerability database
 
 .if defined(WITH_PKGNG)
-AUDITFILE?=		${PKG_DBDIR}/auditfile
+AUDITFILE?=		${PKG_DBDIR}/vuln.xml
 _EXTRACT_AUDITFILE=	${CAT} "${AUDITFILE}"
 .else
 AUDITFILE?=		/var/db/portaudit/auditfile.tbz
@@ -4321,7 +4309,7 @@ create-users-groups:
 .endif
 
 # PR ports/152498
-# XXX Make sure the commands to create group(s) 
+# XXX Make sure the commands to create group(s)
 # and user(s) are the first in pkg-plist
 .if !target(fix-plist-sequence)
 fix-plist-sequence: ${TMPPLIST}
@@ -5893,7 +5881,7 @@ generate-plist:
 	@if [ -f ${PLIST} ]; then \
 		${SED} ${PLIST_SUB:S/$/!g/:S/^/ -e s!%%/:S/=/%%!/} ${PLIST} >> ${TMPPLIST}; \
 	fi
- 
+
 .for dir in ${PLIST_DIRS}
 	@${ECHO_CMD} ${dir} | ${SED} ${PLIST_SUB:S/$/!g/:S/^/ -e s!%%/:S/=/%%!/} -e 's,^,@dirrm ,' >> ${TMPPLIST}
 .endfor
@@ -6034,12 +6022,11 @@ add-plist-info:
 		>> ${TMPPLIST}
 	@${ECHO_CMD} "@unexec [ \`info -d %D/${INFO_PATH}  --output - 2>/dev/null | grep -c '^*'\` -eq 1 ] && rm -f %D/${INFO_PATH}/dir || :"\
 		>> ${TMPPLIST}
-	@${LS} ${PREFIX}/${INFO_PATH}/$i.info* | ${SED} -e s:${PREFIX}/::g >> ${TMPPLIST}
+	@${LS} ${STAGEDIR}${PREFIX}/${INFO_PATH}/$i.info* | ${SED} -e s:${STAGEDIR}${PREFIX}/::g >> ${TMPPLIST}
 	@${ECHO_CMD} "@exec install-info --quiet %D/${INFO_PATH}/$i.info %D/${INFO_PATH}/dir" \
 		>> ${TMPPLIST}
 .else
-	@${ECHO_CMD} "@info ${INFO_PATH}/$i.info" >> ${TMPPLIST}
-	@${LS} ${PREFIX}/${INFO_PATH}/$i.info-* 2>/dev/null | ${SED} -e s:${PREFIX}/:@info\ :g >> ${TMPPLIST}
+	@${LS} ${STAGEDIR}${PREFIX}/${INFO_PATH}/$i.info* 2>/dev/null | ${SED} -e s:${STAGEDIR}${PREFIX}/:@info\ :g >> ${TMPPLIST}
 .endif
 .endfor
 .if defined(INFO_SUBDIR)
