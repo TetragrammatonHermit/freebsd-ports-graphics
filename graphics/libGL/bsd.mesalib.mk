@@ -16,8 +16,7 @@
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
-.if defined(WITH_NEW_XORG)
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
+.if defined(WITH_NEW_MESA)
 MESABASEVERSION=	10.0.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
 MESASUBVERSION=	
@@ -25,14 +24,14 @@ PLIST_SUB+=	OLD="@comment " NEW=""
 
 # work around libarchive bug?
 EXTRACT_CMD=${LOCALBASE}/bin/gtar
-BUILD_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
+EXTRACT_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
 .else
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
-MESABASEVERSION=	7.6.1
+MESABASEVERSION=	9.1.7
 MESASUBVERSION=		
 PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
 DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
 MAINTAINER?=	x11@FreeBSD.org
 
@@ -54,7 +53,6 @@ BUILD_DEPENDS+=	${LOCALBASE}/bin/flex:${PORTSDIR}/textproc/flex
 CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 .endif
 
-.if defined(WITH_NEW_XORG)
 USE_AUTOTOOLS=	autoconf:env automake:env libtool:env
 # probably be shared lib, and in it own port.
 CONFIGURE_ARGS+=        --enable-shared-glapi=no
@@ -68,20 +66,21 @@ REAPPLY_PATCHES= \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in
 
+.if !defined(WITH_NEW_MESA)
+REAPPLY_PATCHES+=	${PATCHDIR}/patch-src_mesa_libdricore_Makefile.in
+.endif
+
 python_OLD_CMD=	"/usr/bin/env[[:space:]]python"
 python_CMD=	${LOCALBASE}/bin/python2
 SHEBANG_FILES=	src/gallium/*/*/*.py src/gallium/tools/trace/*.py \
 		src/gallium/drivers/svga/svgadump/svga_dump.py \
-		src/glsl/tests/compare_ir src/mapi/glapi/gen/*.py \
-		src/mapi/mapi_abi.py
-.else
-CONFIGURE_ARGS+=--disable-glut --disable-glw --disable-glu
-
-ALL_TARGET=		default
+		src/glsl/tests/compare_ir src/mapi/glapi/gen/*.py
+.if defined(WITH_NEW_MESA)
+SHEBANG_FILES+=	src/mapi/mapi_abi.py
 .endif
 
 MASTERDIR=		${.CURDIR}/../../graphics/libGL
-.if defined(WITH_NEW_XORG)
+.if defined(WITH_NEW_MESA)
 PATCHDIR=		${MASTERDIR}/files
 .else
 PATCHDIR=		${MASTERDIR}/files-old
@@ -111,12 +110,16 @@ CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
 # done in the dri port
 .endif
 
-.if !defined(WITH_NEW_XORG)
+.if ${COMPONENT:Mvdpau} == ""
+CONFIGURE_ARGS+=--disable-vdpau
+.else
+CONFIGURE_ARGS+=--enable-vdpau
+.endif
+
 .if defined(WITHOUT_XCB)
 CONFIGURE_ARGS+=	--disable-xcb
 .else
 CONFIGURE_ARGS+=	--enable-xcb
-.endif
 .endif
 
 post-patch:
@@ -124,27 +127,22 @@ post-patch:
 		${WRKSRC}/configure
 	@${REINPLACE_CMD} -e 's|/etc/|${PREFIX}/etc/|g' \
 		${WRKSRC}/src/mesa/drivers/dri/common/xmlconfig.c
-.if !defined(WITH_NEW_XORG)
-	@${REINPLACE_CMD} -e 's|python|${PYTHON_CMD}|' \
-		${WRKSRC}/src/gallium/auxiliary/util/Makefile
-	@${REINPLACE_CMD} -e 's|[$$](INSTALL_LIB_DIR)/pkgconfig|${PREFIX}/libdata/pkgconfig|' \
-		${WRKSRC}/src/glu/Makefile \
-		${WRKSRC}/src/mesa/Makefile \
-		${WRKSRC}/src/mesa/drivers/dri/Makefile
+.if !defined(WITH_NEW_MESA)
+	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${LOCALBASE}/bin/python2|g' \
+		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py \
+		${WRKSRC}/src/glsl/builtins/tools/*.py
 .else
 	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${LOCALBASE}/bin/python2|g' \
 		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py
+.endif
 	@${REINPLACE_CMD} -e 's|!/use/bin/python2|!${LOCALBASE}/bin/python2|g' \
 		${WRKSRC}/src/mesa/main/get_hash_generator.py \
 		${WRKSRC}/src/mapi/glapi/gen/gl_enums.py \
-		${WRKSRC}/src/mapi/glapi/gen/gl_table.py \
-
-.endif
+		${WRKSRC}/src/mapi/glapi/gen/gl_table.py
 
 pre-configure:
 # workaround for stupid rerunning configure in do-build step
 # xxx
-.if defined(WITH_NEW_XORG)
 	cd ${WRKSRC} && env NOCONFIGURE=1 sh autogen.sh
 . for file in ${REAPPLY_PATCHES}
 	@cd ${WRKSRC} && ${PATCH} -p0 --quiet  < ${file}
@@ -153,5 +151,4 @@ pre-configure:
 # this was reverted by running autogen.sh
 	@${FIND} ${WRKSRC} -name Makefile.in -type f | ${XARGS} ${REINPLACE_CMD} -e \
 		's|[(]libdir[)]/pkgconfig|(prefix)/libdata/pkgconfig|g' ;
-.endif
 

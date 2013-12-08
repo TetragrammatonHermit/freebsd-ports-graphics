@@ -18,10 +18,10 @@ SUB_FILES=	pkg-install pkg-deinstall
 
 .include <bsd.port.options.mk>
 
-.if defined(WITH_NEW_XORG)
+.if defined(WITH_NEW_MESA)
 LIBGLREVISION=	0
 .else
-LIBGLREVISION=	4
+LIBGLREVISION=	0
 .endif
 
 .include "${.CURDIR}/bsd.mesalib.mk"
