@@ -1,0 +1,12 @@
+--- config.h.in.orig	2013-11-27 00:54:40.000000000 -0500
++++ config.h.in	2013-12-05 16:28:18.000000000 -0500
+@@ -33,6 +33,9 @@
+ /* Define to 1 if you have the <sys/types.h> header file. */
+ #undef HAVE_SYS_TYPES_H
+ 
++/* Use umtx */
++#undef HAVE_UMTX
++
+ /* Define to 1 if you have the <unistd.h> header file. */
+ #undef HAVE_UNISTD_H
+ 
