@@ -234,7 +234,7 @@ XORG_MODULES=	bigreqsproto \
 				xrender \
 				xres \
 				xscrnsaver \
-				xshmemfence \
+				xshmfence \
 				xt \
 				xtrans \
 				xtrap \
