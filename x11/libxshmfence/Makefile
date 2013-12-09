@@ -12,4 +12,7 @@ LICENSE=	MIT
 USE_XORG=	xproto
 XORG_CAT=	lib
 
+test: build
+	@cd ${WRKSRC} && ${MAKE} check
+
 .include <bsd.port.mk>

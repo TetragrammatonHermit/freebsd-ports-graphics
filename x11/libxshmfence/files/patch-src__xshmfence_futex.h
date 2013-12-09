@@ -17,9 +17,9 @@
 +#include <sys/types.h>
 +#include <sys/umtx.h>
 +
-+static inline int sys_futex(void *addr, int op, int val)
++static inline int sys_futex(void *addr, int op, int32_t val)
 +{
-+	return _umtx_op(addr, op, val, NULL, NULL) == -1 ? errno : 0;
++	return _umtx_op(addr, op, (uint32_t)val, NULL, NULL) == -1 ? errno : 0;
 +}
 +
 +static inline int futex_wake(int32_t *addr) {
