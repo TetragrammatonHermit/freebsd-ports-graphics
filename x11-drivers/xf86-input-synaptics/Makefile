@@ -14,13 +14,8 @@ USES=		pathfix
 USE_XORG=	x11 xtst
 XORG_CAT=	driver
 
-MAN1=		syndaemon.1 \
-		synclient.1
-MAN4=		synaptics.4x
-NO_STAGE=	yes
-
 .if defined(WITH_NEW_XORG)
-SYNAPTICS_VERSION=	1.7.1
+SYNAPTICS_VERSION=	1.7.2
 SYNAPTICS_REVISION=	0
 PLIST_SUB+=	NEW="" OLD="@comment "
 .else
