@@ -1,5 +1,5 @@
 --- configure	2013-11-27 00:54:35.000000000 -0500
-+++ configure	2013-12-05 16:30:53.000000000 -0500
++++ configure	2013-12-09 15:03:55.000000000 -0500
 @@ -17633,11 +17633,27 @@
  	ac_fn_c_check_header_mongrel "$LINENO" "linux/futex.h" "ac_cv_header_linux_futex_h" "$ac_includes_default"
  if test "x$ac_cv_header_linux_futex_h" = xyes; then :
@@ -28,3 +28,18 @@
  fi
  
  if test "x$FUTEX" = "xyes"; then
+@@ -17717,6 +17733,14 @@
+ fi
+ 
+ 
++ac_fn_c_check_func "$LINENO" "mkostemp" "ac_cv_func_mkostemp"
++if test "x$ac_cv_func_mkostemp" = xyes; then :
++
++$as_echo "#define HAVE_MKOSTEMP 1" >>confdefs.h
++
++fi
++
++
+ 
+ pkg_failed=no
+ { $as_echo "$as_me:${as_lineno-$LINENO}: checking for XPROTO" >&5
