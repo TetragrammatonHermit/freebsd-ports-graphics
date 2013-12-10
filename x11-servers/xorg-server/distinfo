@@ -1,2 +1,4 @@
-SHA256 (xorg/xserver/xorg-server-1.14.4.901.tar.bz2) = 141ee84b089f756850271f3865b2532e237a5f9271944db1ffba542c6d182dda
-SIZE (xorg/xserver/xorg-server-1.14.4.901.tar.bz2) = 5503638
+SHA256 (xorg/xserver/xorg-server-1.7.7.tar.bz2) = 54c4d32bfeb8852adbea3ddae6981f3bc2eadb330124d9b35226c617c01926ff
+SIZE (xorg/xserver/xorg-server-1.7.7.tar.bz2) = 4939257
+SHA256 (xorg/xserver/xorg-server-1.14.4.tar.bz2) = 608ccfaafb845f6e559884a30f946d365209172416710d687b190e9e1ff65dc3
+SIZE (xorg/xserver/xorg-server-1.14.4.tar.bz2) = 5507288
