@@ -25,10 +25,6 @@ PLIST_FILES=	bin/Xnest \
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/hw/xnest/Xnest ${STAGEDIR}${PREFIX}/bin/
-.if defined(WITH_NEW_XORG)
 	${INSTALL_MAN} ${WRKSRC}/hw/xnest/man/Xnest.1 ${STAGEDIR}${PREFIX}/man/man1/
-.else
-	${INSTALL_MAN} ${WRKSRC}/hw/xnest/Xnest.1 ${STAGEDIR}${PREFIX}/man/man1/
-.endif
 
 .include "${MASTERDIR}/Makefile"

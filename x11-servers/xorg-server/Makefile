@@ -33,23 +33,8 @@ OPTIONS_EXCLUDE_sparc64=	HAL
 
 .include <bsd.port.options.mk>
 
-.if defined(WITH_NEW_XORG)
 XORG_VERSION=	1.14.4
 XORG_REVISION=	0
-PLIST_SUB+=	OLD="@comment " NEW=""
-EXTRA_PATCHES+=	${FILESDIR}/extra-hw_xfree86_loader_loadmod.c
-.else
-XORG_VERSION=	1.7.7
-XORG_REVISION=	11
-PLIST_SUB+=	OLD="" NEW="@comment "
-EXTRA_PATCHES+=	${FILESDIR}/extra-Xext-xace.c \
-		${FILESDIR}/extra-Xserver-os-xprintf.c \
-		${FILESDIR}/extra-include_eventstr.h \
-		${FILESDIR}/extra-os-utils.c \
-		${FILESDIR}/extra-dix_events.c \
-		${FILESDIR}/extra-Xserver-hw-xfree86-common-xf86Config.c \
-		${FILESDIR}/extra-dix_dixfonts.c
-.endif
 
 USE_BZIP2=	yes
 USES=		gmake perl5
@@ -63,7 +48,6 @@ USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		videoproto compositeproto trapproto recordproto xineramaproto \
 		xinerama evieproto xfont fontenc xkbui pixman pciaccess
 
-MAKE_JOBS_UNSAFE=	yes
 USE_OPENSSL=	yes
 CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
@@ -96,11 +80,7 @@ CONFIGURE_ARGS+=	--enable-config-hal=no
 
 .if ${PORT_OPTIONS:MDEVD}
 EXTRA_PATCHES+=		${FILESDIR}/extra-devd
-. if defined(WITH_NEW_XORG)
-EXTRA_PATCHES+=	${FILESDIR}/extra-new-config_devd
-. else
-EXTRA_PATCHES+=	${FILESDIR}/extra-old-config_devd
-. endif
+EXTRA_PATCHES+=	${FILESDIR}/extra-config_devd
 .endif
 
 .if ${PORT_OPTIONS:MAIGLX}
@@ -119,11 +99,7 @@ PLIST_SUB+=	SUID="@comment"
 .endif
 
 .if ${ARCH} == i386
-.if defined(WITH_NEW_XORG)
-EXTRA_PATCHES+=	${FILESDIR}/extra-new-arch-i386
-.else
-EXTRA_PATCHES+=	${FILESDIR}/extra-old-arch-i386
-.endif
+EXTRA_PATCHES+=	${FILESDIR}/extra-arch-i386
 .endif
 
 .if ${ARCH} == ia64
@@ -135,11 +111,7 @@ PLIST_SUB+=	IA64_NA=""
 
 .if ${ARCH} == powerpc || ${ARCH} == powerpc64
 PLIST_SUB+=	PPC_NA="@comment "
-.if defined(WITH_NEW_XORG)
-EXTRA_PATCHES=	${.CURDIR}/files/extra-new-arch-powerpc
-.else
-EXTRA_PATCHES=	${.CURDIR}/files/extra-old-arch-powerpc
-.endif
+EXTRA_PATCHES=	${.CURDIR}/files/extra-arch-powerpc
 .else
 PLIST_SUB+=	PPC_NA=""
 .endif
@@ -147,11 +119,7 @@ PLIST_SUB+=	PPC_NA=""
 .if ${ARCH} == sparc64
 PLIST_SUB+=	SPARC64=""
 PLIST_SUB+=	SPARC64_NA="@comment "
-.if defined(WITH_NEW_XORG)
-EXTRA_PATCHES+=	${FILESDIR}/extra-new-arch-sparc64
-.else
-EXTRA_PATCHES+=	${FILESDIR}/extra-old-arch-sparc64
-.endif
+EXTRA_PATCHES+=	${FILESDIR}/extra-arch-sparc64
 .else
 PLIST_SUB+=	SPARC64="@comment "
 PLIST_SUB+=	SPARC64_NA=""
@@ -186,13 +154,8 @@ post-configure:
 	@${REINPLACE_CMD} -e 's|config\.c|config.c devd.c|g' \
 		-e 's|config\.lo|config.lo devd.lo|g' \
 		${WRKSRC}/config/Makefile
-. if defined(WITH_NEW_XORG)
 	@${REINPLACE_CMD} -e 's|^/\* #undef CONFIG_UDEV \*/|#define CONFIG_DEVD 1|' \
 		${WRKSRC}/include/dix-config.h
-.else
-	@${REINPLACE_CMD} -e 's|^/\* #undef CONFIG_HAL \*/|#define CONFIG_DEVD 1|' \
-		${WRKSRC}/include/dix-config.h
-. endif
 .endif
 
 .if ${SLAVE_PORT} == "no"
@@ -203,14 +166,8 @@ post-install:
 	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
 		${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg/
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/*.so
-.if !defined(WITH_NEW_XORG)
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/*.so
-.endif
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/multimedia/*.so
-
-.if defined(WITH_NEW_XORG)
 	@${MKDIR} ${STAGEDIR}${PREFIX}/etc/X11/xorg.conf.d
-.endif
 .endif
 
 .include <bsd.port.post.mk>

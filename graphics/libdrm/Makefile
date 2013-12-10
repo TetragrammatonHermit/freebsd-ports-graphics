@@ -2,8 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libdrm
-PORTVERSION=	${LIBDRM_VERSION}
-PORTREVISION=	${LIBDRM_REVISION}
+PORTVERSION=	2.4.50
 CATEGORIES=	graphics x11
 MASTER_SITES=	http://dri.freedesktop.org/libdrm/
 
@@ -19,17 +18,14 @@ GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 
 OPTIONS_DEFINE=	MANPAGES
-NO_STAGE=	yes
 
 .if defined(PACKAGE_BUILDING)
 OPTIONS_DEFAULT+=	MANPAGES
 .endif
 
-.include <bsd.port.options.mk>
-
-.if defined(WITH_NEW_XORG)
-
 USES+=		gmake
+
+.include <bsd.port.options.mk>
 
 # KMS support in the kernel is only build on these archs, disable others
 .if ${ARCH} == "amd64" || ${ARCH} == "i386"
@@ -50,21 +46,7 @@ CONFIGURE_ARGS+=--disable-manpages
 PLIST_SUB+=	MAN="@comment "
 .endif
 
-LIBDRM_VERSION=	2.4.50
-LIBDRM_REVISION=0
-PLIST_SUB+=	OLD="@comment " NEW=""
-EXTRA_PATCHES+=	${FILESDIR}/extra-configure \
-		${FILESDIR}/extra-tests_modetest_Makefile.in \
-		${FILESDIR}/extra-tests_modetest_modetest.c \
-		${FILESDIR}/extra-tests_modetest_strchrnul.c \
-		${FILESDIR}/extra-tests__radeon__radeon_ttm.c
 CONFIGURE_ARGS+=--disable-vmwgfx
-.else
-CONFIGURE_ARGS=	--enable-nouveau-experimental-api
-LIBDRM_VERSION=	2.4.17
-LIBDRM_REVISION=1
-PLIST_SUB+=	OLD="" NEW="@comment " NOUVEAU=""
-.endif
 
 .if ${ARCH} == "amd64" || ${ARCH} == "i386" || ${ARCH} == "ia64" || ${ARCH} == "powerpc"
 PLIST_SUB+=	INTEL_DRIVER=""

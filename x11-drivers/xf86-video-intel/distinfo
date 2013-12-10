@@ -1,4 +1,2 @@
-SHA256 (xorg/driver/xf86-video-intel-2.7.1.tar.bz2) = 255c0d54249cc0132f743254a43c21fac695fab2139c8ed96a07cf3c628e5f42
-SIZE (xorg/driver/xf86-video-intel-2.7.1.tar.bz2) = 780625
-SHA256 (xorg/driver/xf86-video-intel-2.99.905.tar.bz2) = 5ccd5325eb470765416b7d673fcd389a8331315f274e0e781038a0793b94ad79
-SIZE (xorg/driver/xf86-video-intel-2.99.905.tar.bz2) = 2013611
+SHA256 (xorg/driver/xf86-video-intel-2.99.906.tar.bz2) = 2d9343ce0257f82612ab6cb4a18ebfdcb2bc76a226d8442b2f7f210cc4f63cd6
+SIZE (xorg/driver/xf86-video-intel-2.99.906.tar.bz2) = 2029492
