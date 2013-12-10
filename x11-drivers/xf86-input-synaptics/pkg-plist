@@ -7,8 +7,9 @@ libdata/pkgconfig/xorg-synaptics.pc
 man/man1/syndaemon.1.gz
 man/man1/synclient.1.gz
 man/man4/synaptics.4x.gz
-share/X11/xorg.conf.d/50-synaptics.conf
 %%HAL%%share/hal/fdi/policy/10osvendor/11-x11-synaptics.fdi
+share/X11/xorg.conf.d/50-synaptics.conf
+@dirrmtry share/X11/xorg.conf.d
 @dirrmtry lib/xorg/modules/input
 @dirrmtry lib/xorg/modules
 @dirrmtry lib/xorg

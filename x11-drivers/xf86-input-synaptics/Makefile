@@ -16,8 +16,6 @@ USES=		pathfix
 USE_XORG=	x11
 XORG_CAT=	driver
 
-.include <bsd.port.options.mk>
-
 .if ${PORT_OPTIONS:MHAL}
 PLIST_SUB+=	HAL=""
 LIB_DEPENDS+=	hal.1:${PORTSDIR}/sysutils/hal
