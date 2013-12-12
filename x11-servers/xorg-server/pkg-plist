@@ -37,6 +37,7 @@ include/xorg/dixgrabs.h
 include/xorg/dixstruct.h
 include/xorg/dri.h
 include/xorg/dri2.h
+include/xorg/dri3.h
 include/xorg/dristruct.h
 include/xorg/edid.h
 include/xorg/exa.h
@@ -79,6 +80,8 @@ include/xorg/miscstruct.h
 include/xorg/mispans.h
 include/xorg/mistruct.h
 include/xorg/misync.h
+include/xorg/misyncfd.h
+include/xorg/misyncshm.h
 include/xorg/misyncstr.h
 include/xorg/miwideline.h
 include/xorg/mizerarc.h
@@ -93,6 +96,8 @@ include/xorg/picture.h
 include/xorg/picturestr.h
 include/xorg/pixmap.h
 include/xorg/pixmapstr.h
+include/xorg/present.h
+include/xorg/presentext.h
 include/xorg/privates.h
 include/xorg/property.h
 include/xorg/propertyst.h
@@ -147,7 +152,6 @@ include/xorg/xf86Priv.h
 include/xorg/xf86Privstr.h
 include/xorg/xf86RandR12.h
 include/xorg/xf86RamDac.h
-include/xorg/xf86Rename.h
 %%SPARC64%%include/xorg/xf86Sbus.h
 include/xorg/xf86Xinput.h
 include/xorg/xf86_OSlib.h

@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME?=	xorg-server
-PORTVERSION=	1.14.4.901
+PORTVERSION=	1.14.99.904
 PORTEPOCH?=	1
 CATEGORIES=	x11-servers
 MASTER_SITES=	XORG
@@ -38,11 +38,12 @@ USE_PERL5=	build
 USE_GL=		gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		xmu xt xpm xext randrproto renderproto fixesproto damageproto \
-		dri2proto xcmiscproto xextproto xproto xtrans xf86miscproto \
-		xf86vidmodeproto xf86bigfontproto scrnsaverproto bigreqsproto \
-		resourceproto fontsproto inputproto xf86dgaproto \
-		videoproto compositeproto trapproto recordproto xineramaproto \
-		xinerama evieproto xfont fontenc xkbui pixman pciaccess
+		dri2proto dri3proto xcmiscproto xextproto xproto xtrans \
+		xf86miscproto xf86vidmodeproto xf86bigfontproto scrnsaverproto \
+		bigreqsproto resourceproto fontsproto inputproto xf86dgaproto \
+		videoproto compositeproto trapproto presentproto recordproto \
+		xineramaproto xinerama evieproto xfont fontenc xkbui pixman \
+		pciaccess xshmfence
 
 USE_OPENSSL=	yes
 CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
@@ -56,6 +57,10 @@ SUB_FILES=	pkg-install pkg-deinstall
 # for slave ports we need to overwrite PLIST, so it doesn't overwrite
 # PLIST_FILES, with the masterport plist.
 PLIST=		${.CURDIR}/pkg-plist
+.endif
+
+.if !defined(WITH_NEW_MESA)
+BROKEN=		Needs new MESA
 .endif
 
 .include <bsd.port.pre.mk>
