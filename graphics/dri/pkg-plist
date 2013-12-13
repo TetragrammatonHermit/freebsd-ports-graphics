@@ -29,7 +29,7 @@ include/GL/internal/dri_interface.h
 %%OLD%%%%VDPAU%%lib/vdpau/libvdpau_r300.la
 %%OLD%%%%VDPAU%%lib/vdpau/libvdpau_r300.so
 %%OLD%%%%VDPAU%%lib/vdpau/libvdpau_r300.so.1
-%%OLD%%%%VDPAU%%lib/vdpau/libvdpau_r600.la
+%%VDPAU%%lib/vdpau/libvdpau_r600.la
 %%VDPAU%%lib/vdpau/libvdpau_r600.so
 %%VDPAU%%lib/vdpau/libvdpau_r600.so.1
 %%VDPAU%%lib/vdpau/libvdpau_radeonsi.la
