@@ -13,4 +13,8 @@ USE_XORG=	xf86driproto xineramaproto xf86miscproto glproto
 
 CONFIGURE_ARGS+=--disable-udev
 
+.if ${OSVERSION} < 1000051
+BROKEN=		Needs KMS support in kernel
+.endif
+
 .include <bsd.port.mk>
