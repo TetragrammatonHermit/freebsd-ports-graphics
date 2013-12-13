@@ -41,17 +41,13 @@ CPP=clang-cpp
 USE_GCC=yes
 . endif
 
-.if ${ARCH} == ia64
-#BROKEN=		does not install on ia64
-.endif
-
 ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST
 
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 
 PLIST_SUB+=	VERSION=${MESADISTVERSION}
 
-.if ${ARCH} == amd64 || ${ARCH} == i386
+.if ${ARCH} == amd64 || ${ARCH} == i386 || ${ARCH} == ia64
 DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 .endif
 
@@ -92,7 +88,7 @@ CONFIGURE_ARGS+=--disable-vdpau
 PLIST_SUB+=	VDPAU="@comment "
 .endif
 
-.if ${ARCH} == powerpc || ${ARCH} == ia64
+.if ${ARCH} == powerpc
 DRI_DRIVERS=	RADEON SWRAST
 .endif
 .if ${ARCH} == sparc64
