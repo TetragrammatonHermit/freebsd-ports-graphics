@@ -13,6 +13,7 @@ XORG_CAT=	lib
 NO_STAGE=	yes
 USE_AUTOTOOLS=	libtool
 CONFIGURE_ARGS=	--disable-gtk
+USE_GNOME=	ltverhack:30
 
 OPTIONS_DEFINE=	SIMD
 

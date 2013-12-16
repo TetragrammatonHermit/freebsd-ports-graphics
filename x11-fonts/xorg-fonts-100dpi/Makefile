@@ -22,6 +22,7 @@ CONFLICTS=	XFree86-font100dpi-*
 
 NO_BUILD=	# none
 NO_STAGE=	yes
+
 FONTDIR=	${LOCALBASE}/lib/X11/fonts
 
 do-install:	# empty

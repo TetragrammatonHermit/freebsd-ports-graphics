@@ -27,6 +27,7 @@ RUN_DEPENDS=	${FONTDIR}/misc/arabic24.pcf.gz:${PORTSDIR}/x11-fonts/font-arabic-m
 CONFLICTS=	XFree86-fontDefaultBitmaps-*
 
 NO_BUILD=	# none
+NO_MTREE=	yes
 FONTDIR=	${LOCALBASE}/lib/X11/fonts
 NO_STAGE=	yes
 

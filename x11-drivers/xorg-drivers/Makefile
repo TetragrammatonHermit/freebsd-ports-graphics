@@ -123,7 +123,7 @@ RUN_DEPENDS+=	${${type:U}DIR}/${i}_drv.so:${PORTSDIR}/x11-drivers/xf86-${type}-$
 .endfor
 
 do-install:
-		${MKDIR} ${PREFIX}/libdata/xorg
-		${TOUCH} ${PREFIX}/libdata/xorg/drivers
+		${MKDIR} ${STAGEDIR}${PREFIX}/libdata/xorg
+		${TOUCH} ${STAGEDIR}${PREFIX}/libdata/xorg/drivers
 
 .include <bsd.port.mk>

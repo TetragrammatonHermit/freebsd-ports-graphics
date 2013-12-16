@@ -12,11 +12,7 @@ XORG_CAT=	lib
 NO_STAGE=	yes
 USE_XORG=	xproto:both
 
-MAN3=		Xau.3 XauDisposeAuth.3 XauFileName.3 XauGetAuthByAddr.3 \
-		XauGetBestAuthByAddr.3 XauLockAuth.3 XauReadAuth.3 \
-		XauUnlockAuth.3 XauWriteAuth.3
-
 post-install:
-	${LN} -sf ${PREFIX}/lib/libXau.so.6 ${PREFIX}/lib/libXau.so.0
+	${LN} -sf ${PREFIX}/lib/libXau.so.6 ${STAGEDIR}${PREFIX}/lib/libXau.so.0
 
 .include <bsd.port.mk>

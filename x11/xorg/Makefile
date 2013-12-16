@@ -12,7 +12,7 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.Org complete distribution metaport
 
 NO_BUILD=	yes
-NO_STAGE=	yes
+NO_MTREE=	yes
 
 RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/dri.pc:${PORTSDIR}/graphics/dri
 

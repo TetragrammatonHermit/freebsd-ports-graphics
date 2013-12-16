@@ -11,8 +11,6 @@ XORG_CAT=	app
 NO_STAGE=	yes
 USE_XORG=	x11 libfs
 
-PLIST_FILES=	bin/fstobdf
-
-MAN1=		fstobdf.1
+PLIST_FILES=	bin/fstobdf man/man1/fstobdf.1.gz
 
 .include <bsd.port.mk>

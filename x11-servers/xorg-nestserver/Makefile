@@ -20,8 +20,9 @@ CONFIGURE_ARGS=	--disable-dmx --disable-xvfb \
 		--localstatedir=/var --without-dtrace
 
 SLAVE_PORT=	yes
-PLIST_FILES=	bin/Xnest \
-		man/man1/Xnest.1.gz
+PLIST_FILES=	bin/Xnest man/man1/Xnest.1.gz
+
+.include <bsd.port.options.mk>
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/hw/xnest/Xnest ${STAGEDIR}${PREFIX}/bin/

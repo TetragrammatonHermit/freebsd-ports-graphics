@@ -21,6 +21,7 @@ RUN_DEPENDS=	${FONTDIR}/75dpi/courB08.pcf.gz:${PORTSDIR}/x11-fonts/font-adobe-75
 CONFLICTS=	XFree86-font75dpi-*
 
 NO_BUILD=	# none
+NO_MTREE=	yes
 FONTDIR=	${LOCALBASE}/lib/X11/fonts
 NO_STAGE=	yes
 

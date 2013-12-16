@@ -24,11 +24,11 @@ USE_XORG=	glproto \
 
 .include <bsd.port.options.mk>
 
-CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
+CONFIGURE_ENV+=		xorg_cv_cc_flag__Wno_maybe_uninitialized=no
 CONFIGURE_ARGS+=	--enable-sna
-CPPFLAGS+=	-I${LOCALBASE}/include
+CPPFLAGS+=		-I${LOCALBASE}/include
 
-LIB_DEPENDS+=	libxcb-util.so:${PORTSDIR}/x11/xcb-util
+LIB_DEPENDS+=		libxcb-util.so:${PORTSDIR}/x11/xcb-util
 
 post-install:
 	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libIntelXvMC.so.1
