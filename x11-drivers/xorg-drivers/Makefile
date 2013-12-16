@@ -36,7 +36,6 @@ VIDEO_DRIVERS=		ati \
 			mach64 \
 			nv \
 			r128 \
-			radeonhd \
 			vesa \
 			apm \
 			ark \
@@ -47,7 +46,6 @@ VIDEO_DRIVERS=		ati \
 			glint \
 			i128 \
 			i740 \
-			imstt \
 			mga \
 			neomagic \
 			newport \
@@ -70,7 +68,6 @@ OPTIONS_DEFAULT=	MOUSE \
 			MACH64 \
 			NV \
 			R128 \
-			RADEONHD \
 			VESA
 
 .for type in input video
