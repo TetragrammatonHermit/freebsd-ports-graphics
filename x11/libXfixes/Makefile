@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/x11/libXfixes/Makefile 300897 2012-07-14 14:29:18Z beat $
+# $FreeBSD$
 
 PORTNAME=	libXfixes
 PORTVERSION=	5.0.1
@@ -13,7 +13,4 @@ LICENSE=	MIT
 XORG_CAT=	lib
 USE_XORG=	x11 fixesproto:both xproto:both xextproto
 
-MAN3=		Xfixes.3
-
-NO_STAGE=	yes
 .include <bsd.port.mk>
