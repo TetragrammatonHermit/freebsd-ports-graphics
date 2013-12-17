@@ -34,7 +34,7 @@ PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
 DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
-MAINTAINER?=	x11@FreeBSD.org
+MAINTAINER=	x11@FreeBSD.org
 
 BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 		python2:${PORTSDIR}/lang/python2 \
