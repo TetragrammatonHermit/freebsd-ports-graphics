@@ -11,7 +11,12 @@ LIB_DEPENDS=	libglamor.so:${PORTSDIR}/graphics/glamor
 
 USE_GL=		gl
 XORG_CAT=	driver
-USE_XORG=	xf86driproto xineramaproto xf86miscproto glproto
+USE_XORG=	xf86driproto \
+		xineramaproto \
+		xf86miscproto \
+		glproto \
+		dri3proto \
+		presentproto
 
 CONFIGURE_ARGS+=--disable-udev
 
