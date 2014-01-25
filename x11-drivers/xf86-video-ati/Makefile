@@ -20,8 +20,8 @@ ATI_REVISION=	1
 CONFIGURE_ARGS+=--disable-kms
 PLIST_SUB+=	OLD=""
 .else
-ATI_VERSION=	7.2.0
-ATI_REVISION=	1
+ATI_VERSION=	7.3.0
+ATI_REVISION=	0
 CONFIGURE_ARGS+=--disable-udev
 EXTRA_PATCHES+=	${FILESDIR}/extra-src__radeon_kms.c
 PLIST_SUB+=	OLD="@comment "
