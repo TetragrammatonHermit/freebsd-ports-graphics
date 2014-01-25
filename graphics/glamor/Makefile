@@ -5,7 +5,7 @@ PORTNAME=	glamor-egl
 PORTVERSION=	0.6.0
 CATEGORIES=	graphics
 
-MAINTAINER=	kwm@FreeBSD.org
+MAINTAINER=	x11@FreeBSD.org
 COMMENT=	2D graphics common driver for the X Window System
 
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm
