@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.99.906
+PORTVERSION=	2.99.907
 PORTREVISION=	1
 CATEGORIES=	x11-drivers
 
@@ -23,7 +23,9 @@ USE_XORG=	glproto \
 		xf86driproto \
 		xineramaproto \
 		xrender \
-		xvmc
+		xvmc \
+		dri3proto \
+		presentproto
 
 .include <bsd.port.options.mk>
 
