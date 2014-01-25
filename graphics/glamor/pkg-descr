@@ -1,0 +1,27 @@
+The glamor module is an open-source 2D graphics common driver for the 
+X Window System as implemented by X.org. It supports a variety of graphics
+chipsets which have OpenGL/EGL/GBM supports.
+
+It's a GL-based rendering acceleration library for X server:
+
+    It uses GL functions and shader to complete the 2D graphics operations.
+    It uses normal texture to represent a drawable pixmap if possible.
+
+    It calls GL functions to render to the texture directly. It's somehow
+    hardware independently. And could be a building block of any X server's
+    DDX driver:
+
+    Xorg's DDX driver could leverage glamor-egl package to create an egl
+    context without any native X system. Now the xf86-intel-video driver
+    uses glamor as one of its option. When you build it with --enable-glamor,
+    then it will use glamor as its rendering enginee. This package can support
+    every platform which has OpenGL and gbm and drm libraries.
+
+From the 0.6.0 release notes:
+Considering that glamor has been merged into xorg, this release may be the
+last major one for the external glamor project. All major feature enhancement
+or performance improvement should go to the in tree glamor project, rather
+than here. But bug fixing and minor feature enhancement will always be
+welcome here as long as there are some one still using this standalone library.
+
+WWW: http://www.freedesktop.org/wiki/Software/Glamor/

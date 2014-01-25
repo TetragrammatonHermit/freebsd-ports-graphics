@@ -1,0 +1,11 @@
+include/xorg/glamor.h
+lib/libglamor.la
+lib/libglamor.so
+lib/libglamor.so.0
+lib/xorg/modules/libglamoregl.la
+lib/xorg/modules/libglamoregl.so
+libdata/pkgconfig/glamor-egl.pc
+libdata/pkgconfig/glamor.pc
+share/X11/xorg.conf.d/glamor.conf
+@dirrmtry share/X11/xorg.conf.d
+@dirrmtry share/X11
