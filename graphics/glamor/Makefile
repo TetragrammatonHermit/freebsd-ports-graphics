@@ -15,7 +15,7 @@ GNU_CONFIGURE=	yes
 USES=		pathfix pkgconfig
 USE_GL=		gl egl
 XORG_CAT=       driver
-XORG=		server pixman
+USE_XORG=	xorg-server dri3proto presentproto pixman
 
 # needs libgbm >=9
 CONFIGURE_ARGS+=--disable-glamor-dri3
