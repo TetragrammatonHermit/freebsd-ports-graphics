@@ -23,6 +23,7 @@ PLIST_SUB+=	OLD=""
 ATI_VERSION=	7.2.0
 ATI_REVISION=	1
 CONFIGURE_ARGS+=--disable-udev
+CONFIGURE_ARGS+=--disable-glamor
 EXTRA_PATCHES+=	${FILESDIR}/extra-src__radeon_kms.c
 PLIST_SUB+=	OLD="@comment "
 .endif

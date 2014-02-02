@@ -30,6 +30,7 @@ INTEL_VERSION=	2.21.15
 INTEL_REVISION=	1
 CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
 CONFIGURE_ARGS+=	--enable-sna
+CONFIGURE_ARGS+=	--disable-glamor
 MAKE_JOBS_UNSAFE=yes
 PLIST_SUB+=	OLD="@comment "
 EXTRA_PATCHES+=	${PATCHDIR}/extra-src__sna__sna_threads.c \
