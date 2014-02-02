@@ -2,14 +2,13 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.99.907
-PORTREVISION=	1
+PORTVERSION=	2.99.909
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Driver for Intel integrated graphics chipsets
 
-LIB_DEPENDS=	libglamor.so:${PORTSDIR}/graphics/glamor
+#LIB_DEPENDS=	libglamor.so:${PORTSDIR}/graphics/glamor
 
 ONLY_FOR_ARCHS=	amd64 i386
 USE_GL=		gl
@@ -30,7 +29,9 @@ USE_XORG=	glproto \
 .include <bsd.port.options.mk>
 
 CONFIGURE_ENV+=		xorg_cv_cc_flag__Wno_maybe_uninitialized=no
-CONFIGURE_ARGS+=	--enable-sna --enable-glamor
+CONFIGURE_ARGS+=	--enable-sna
+# --enable-glamor
+CONFIGURE_ARGS+=	--disable-glamor
 CPPFLAGS+=		-I${LOCALBASE}/include
 
 LIB_DEPENDS+=		libxcb-util.so:${PORTSDIR}/x11/xcb-util
