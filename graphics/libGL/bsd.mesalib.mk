@@ -17,7 +17,7 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_MESA)
-MESABASEVERSION=	10.0.2
+MESABASEVERSION=	10.0.3
 # if there is a subversion, don't include the '-' between 7.11-rc2.
 MESASUBVERSION=	
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
@@ -41,7 +41,7 @@ BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
 
 USES+=		bison gmake pathfix pkgconfig shebangfix
-USE_PYTHON_BUILD=-2.7
+USE_PYTHON_BUILD=2
 USE_BZIP2=	yes
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
