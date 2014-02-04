@@ -117,12 +117,6 @@ CONFIGURE_ARGS+=--disable-vdpau
 CONFIGURE_ARGS+=--enable-vdpau
 .endif
 
-.if defined(WITHOUT_XCB)
-CONFIGURE_ARGS+=	--disable-xcb
-.else
-CONFIGURE_ARGS+=	--enable-xcb
-.endif
-
 post-patch:
 	@${REINPLACE_CMD} -e 's|-ffast-math|${FAST_MATH}|' -e 's|x86_64|amd64|' \
 		${WRKSRC}/configure
