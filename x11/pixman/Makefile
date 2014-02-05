@@ -7,26 +7,14 @@ CATEGORIES=	x11
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Low-level pixel manipulation library
 
-USES=		perl5
+USES=		libtool perl5
 USE_PERL5=	build
 XORG_CAT=	lib
-NO_STAGE=	yes
-USE_AUTOTOOLS=	libtool
 CONFIGURE_ARGS=	--disable-gtk
-USE_GNOME=	ltverhack:30
 
-OPTIONS_DEFINE=	SIMD
+PLIST_SUB+=	LIBVERSION=${PORTVERSION}
 
-.include <bsd.port.options.mk>
-
-.if ! {PORT_OPTIONS:MSIMD}
-CONFIGURE_ARGS=	--disable-vmx --disable-arm-simd
-. if ! ${MACHINE_CPU:Mmmx}
-CONFIGURE_ARGS+=	--disable-mmx
-. endif
-. if ! ${MACHINE_CPU:Msse2}
-CONFIGURE_ARGS+=	--disable-sse2
-. endif
-.endif
+post-install:
+	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libpixman-1.so.0.32.4
 
 .include <bsd.port.mk>
