@@ -11,10 +11,8 @@ USES=		libtool perl5
 USE_PERL5=	build
 XORG_CAT=	lib
 CONFIGURE_ARGS=	--disable-gtk
+INSTALL_TARGET=	install-strip
 
 PLIST_SUB+=	LIBVERSION=${PORTVERSION}
-
-post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libpixman-1.so.0.32.4
 
 .include <bsd.port.mk>
