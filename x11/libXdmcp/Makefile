@@ -11,7 +11,6 @@ COMMENT=	X Display Manager Control Protocol library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	xproto:both
 
 CONFIGURE_ARGS+=--disable-docs --without-xmlto

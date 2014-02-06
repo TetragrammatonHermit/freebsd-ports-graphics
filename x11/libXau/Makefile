@@ -9,7 +9,6 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Authentication Protocol library for X11
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	xproto:both
 
 post-install:

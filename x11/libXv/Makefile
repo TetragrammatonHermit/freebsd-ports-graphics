@@ -12,7 +12,6 @@ COMMENT=	X Video Extension library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 xext xextproto videoproto:both xproto:both
 
 .include <bsd.port.mk>

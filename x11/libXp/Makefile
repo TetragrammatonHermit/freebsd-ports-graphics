@@ -12,7 +12,6 @@ COMMENT=	X print library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	x11 xext xextproto xau printproto:both
 USE_AUTOTOOLS=	libtool
 

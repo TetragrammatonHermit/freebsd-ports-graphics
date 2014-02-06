@@ -12,7 +12,6 @@ COMMENT=	X11 Extension library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	xproto x11 xextproto:both xau
 CONFIGURE_ARGS+=--disable-specs --without-xmlto
 

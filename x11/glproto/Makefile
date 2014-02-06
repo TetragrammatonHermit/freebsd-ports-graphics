@@ -9,6 +9,5 @@ MAINTAINER=	x11@FreeBSD.org
 COMMENT=	GLX extension headers
 
 XORG_CAT=	proto
-NO_STAGE=	yes
 
 .include <bsd.port.mk>

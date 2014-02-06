@@ -9,6 +9,5 @@ COMMENT=	X.Org keyboard input driver
 
 XORG_CAT=	driver
 USE_XORG=	kbproto
-NO_STAGE=	yes
 
 .include <bsd.port.mk>

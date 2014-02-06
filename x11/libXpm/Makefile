@@ -11,7 +11,6 @@ COMMENT=	X Pixmap library
 LICENSE=	MIT
 
 XORG_CAT=	lib
-NO_STAGE=	yes
 USE_XORG=	xproto x11 xext xextproto xt
 
 .include <bsd.port.mk>
