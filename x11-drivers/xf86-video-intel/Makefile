@@ -2,13 +2,14 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.99.909
+PORTVERSION=	2.99.910
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Driver for Intel integrated graphics chipsets
 
 #LIB_DEPENDS=	libglamor.so:${PORTSDIR}/graphics/glamor
+LIB_DEPENDS+=	libxcb-util.so:${PORTSDIR}/x11/xcb-util
 
 ONLY_FOR_ARCHS=	amd64 i386
 USE_GL=		gl
@@ -25,20 +26,9 @@ USE_XORG=	glproto \
 		xvmc \
 		dri3proto \
 		presentproto
-
-.include <bsd.port.options.mk>
-
-CONFIGURE_ENV+=		xorg_cv_cc_flag__Wno_maybe_uninitialized=no
-CONFIGURE_ARGS+=	--enable-sna
-# --enable-glamor
-CONFIGURE_ARGS+=	--disable-glamor
-CPPFLAGS+=		-I${LOCALBASE}/include
-
-LIB_DEPENDS+=		libxcb-util.so:${PORTSDIR}/x11/xcb-util
-
-post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libIntelXvMC.so.1
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libI810XvMC.so.1
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/drivers/intel_drv.so
+CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
+CONFIGURE_ARGS+=--enable-sna --disable-glamor
+CPPFLAGS+=	-I${LOCALBASE}/include
+INSTALL_TARGET=	install-strip
 
 .include <bsd.port.mk>
