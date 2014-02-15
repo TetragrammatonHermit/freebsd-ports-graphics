@@ -1,6 +1,6 @@
---- src/mesa/main/compiler.h.orig	2013-04-06 04:01:09.000000000 +0200
-+++ src/mesa/main/compiler.h	2013-06-26 23:26:02.000000000 +0200
-@@ -171,6 +171,9 @@
+--- ./src/mesa/main/compiler.h.orig	2014-01-31 21:44:08.000000000 +0100
++++ ./src/mesa/main/compiler.h	2014-02-15 21:11:34.000000000 +0100
+@@ -162,6 +162,9 @@
  #if defined(__linux__)
  #include <byteswap.h>
  #define CPU_TO_LE32( x )	bswap_32( x )

@@ -18,8 +18,4 @@ INSTALL_WRKSRC=	${WRKSRC}/src/mapi/es2api
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
-
-post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libGLESv2.so.2
-
 .include <bsd.port.mk>

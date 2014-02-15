@@ -30,7 +30,11 @@ LIBGLREVISION=	0
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 
+.if defined(WITH_NEW_MESA)
 post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/.libGL/libGL.so.1
+	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/.libGL
+	@${MV} ${STAGEDIR}${PREFIX}/lib/libGL* \
+		${STAGEDIR}${PREFIX}/lib/.libGL/
+.endif
 
 .include <bsd.port.mk>

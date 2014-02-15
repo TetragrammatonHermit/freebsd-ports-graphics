@@ -21,8 +21,4 @@ INSTALL_WRKSRC=	${WRKSRC}/src/egl
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
-
-post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libEGL.so.1
-
 .include <bsd.port.mk>

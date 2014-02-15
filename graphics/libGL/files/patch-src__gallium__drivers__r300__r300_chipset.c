@@ -1,10 +1,8 @@
-diff --git a/src/gallium/drivers/r300/r300_chipset.c b/src/gallium/drivers/r300/r300_chipset.c
-index 11061ed..daf990e 100644
---- src/gallium/drivers/r300/r300_chipset.c
-+++ src/gallium/drivers/r300/r300_chipset.c
-@@ -48,6 +48,21 @@ static void r300_apply_hyperz_blacklist(struct r300_capabilities* caps)
-     };
-     int i;
+--- ./src/gallium/drivers/r300/r300_chipset.c.orig	2014-01-31 21:44:08.000000000 +0100
++++ ./src/gallium/drivers/r300/r300_chipset.c	2014-02-15 21:11:34.000000000 +0100
+@@ -53,6 +53,21 @@
+     if (!os_get_process_name(proc_name, sizeof(proc_name)))
+         return;
  
 +#if defined(__DragonFly__) || \
 +    defined(__FreeBSD__) ||   \
@@ -22,5 +20,5 @@ index 11061ed..daf990e 100644
 +#endif
 +
      for (i = 0; i < Elements(list); i++) {
-         if (strcmp(list[i], program_invocation_short_name) == 0) {
+         if (strcmp(list[i], proc_name) == 0) {
              caps->zmask_ram = 0;

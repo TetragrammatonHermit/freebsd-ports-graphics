@@ -1,8 +1,6 @@
-diff --git a/src/gallium/winsys/svga/drm/vmw_screen_ioctl.c b/src/gallium/winsys/svga/drm/vmw_screen_ioctl.c
-index 36888dc..62a6e6a 100644
---- src/gallium/winsys/svga/drm/vmw_screen_ioctl.c
-+++ src/gallium/winsys/svga/drm/vmw_screen_ioctl.c
-@@ -66,6 +66,13 @@ struct vmw_region
+--- ./src/gallium/winsys/svga/drm/vmw_screen_ioctl.c.orig	2014-01-31 21:40:50.000000000 +0100
++++ ./src/gallium/winsys/svga/drm/vmw_screen_ioctl.c	2014-02-15 21:11:34.000000000 +0100
+@@ -66,6 +66,13 @@
   */
  #define SVGA3D_SURFACE_HINT_SCANOUT (1 << 9)
  

@@ -1,0 +1,10 @@
+--- ./src/egl/drivers/dri2/Makefile.am.orig	2014-02-03 18:42:39.000000000 +0100
++++ ./src/egl/drivers/dri2/Makefile.am	2014-02-15 21:11:55.000000000 +0100
+@@ -31,6 +31,7 @@
+ 	$(VISIBILITY_CFLAGS) \
+ 	$(LIBDRM_CFLAGS) \
+ 	$(LIBUDEV_CFLAGS) \
++	$(LIBDEVQ_CFLAGS) \
+ 	$(LIBKMS_CFLAGS) \
+ 	-DDEFAULT_DRIVER_DIR=\"$(DRI_DRIVER_SEARCH_DIR)\"
+ 

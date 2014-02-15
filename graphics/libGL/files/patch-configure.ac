@@ -1,0 +1,102 @@
+--- ./configure.ac.orig	2014-02-03 20:16:33.000000000 +0100
++++ ./configure.ac	2014-02-15 21:11:55.000000000 +0100
+@@ -1142,8 +1142,16 @@
+     esac
+ fi
+ if test "x$enable_gbm" = xyes; then
+-    PKG_CHECK_MODULES([LIBUDEV], [libudev], [],
+-                      AC_MSG_ERROR([gbm needs udev]))
++    case "$host_os" in
++    *freebsd*)
++        PKG_CHECK_MODULES([LIBDEVQ], [libdevq-1.0], [],
++                          AC_MSG_ERROR([gbm needs libdevq]))
++        ;;
++    *)
++        PKG_CHECK_MODULES([LIBUDEV], [libudev], [],
++                          AC_MSG_ERROR([gbm needs udev]))
++        ;;
++    esac
+ 
+     if test "x$enable_dri" = xyes; then
+         GBM_BACKEND_DIRS="$GBM_BACKEND_DIRS dri"
+@@ -1153,7 +1161,14 @@
+     fi
+ fi
+ AM_CONDITIONAL(HAVE_GBM, test "x$enable_gbm" = xyes)
+-GBM_PC_REQ_PRIV="libudev"
++case "$host_os" in
++*freebsd*)
++    GBM_PC_REQ_PRIV="libdevq-1.0"
++    ;;
++*)
++    GBM_PC_REQ_PRIV="libudev"
++    ;;
++esac
+ GBM_PC_LIB_PRIV="$DLOPEN_LIBS"
+ AC_SUBST([GBM_PC_REQ_PRIV])
+ AC_SUBST([GBM_PC_LIB_PRIV])
+@@ -1170,10 +1185,20 @@
+ 
+     if test "$enable_static" != yes; then
+         # build egl_glx when libGL is built
+-        PKG_CHECK_MODULES([LIBUDEV], [libudev > 150],
+-                          [have_libudev=yes],[have_libudev=no])
++        case "$host_os" in
++        *freebsd*)
++            PKG_CHECK_MODULES([LIBDEVQ], [libdevq-1.0],
++                              [have_libdevq=yes],[have_libdevq=no])
++            ;;
++        *)
++            PKG_CHECK_MODULES([LIBUDEV], [libudev > 150],
++                              [have_libudev=yes],[have_libudev=no])
++            ;;
++        esac
+         if test "$have_libudev" = yes; then
+             DEFINES="$DEFINES -DHAVE_LIBUDEV"
++        elif test "$have_libdevq" = yes; then
++            DEFINES="$DEFINES -DHAVE_LIBDEVQ"
+         fi
+ 
+         if test "x$enable_dri" = xyes; then
+@@ -1427,9 +1452,19 @@
+ 		;;
+ 	esac
+ 
+-        case "$plat$have_libudev" in
+-                waylandno|drmno)
+-                    AC_MSG_ERROR([cannot build $plat platfrom without udev]) ;;
++        case "$host_os" in
++        *freebsd*)
++            case "$plat$have_libdevq" in
++                    waylandno|drmno)
++                        AC_MSG_ERROR([cannot build $plat platfrom without libdevq]) ;;
++            esac
++            ;;
++        *)
++            case "$plat$have_libudev" in
++                    waylandno|drmno)
++                        AC_MSG_ERROR([cannot build $plat platfrom without udev]) ;;
++            esac
++            ;;
+         esac
+ done
+ 
+@@ -1667,8 +1702,16 @@
+ 
+ gallium_require_drm_loader() {
+     if test "x$enable_gallium_loader" = xyes; then
+-        PKG_CHECK_MODULES([LIBUDEV], [libudev], [],
+-                          AC_MSG_ERROR([Gallium drm loader requires libudev]))
++        case "$host_os" in
++        *freebsd*)
++            PKG_CHECK_MODULES([LIBDEVQ], [libdevq-1.0], [],
++                              AC_MSG_ERROR([Gallium drm loader requires libdevq]))
++            ;;
++        *)
++            PKG_CHECK_MODULES([LIBUDEV], [libudev], [],
++                              AC_MSG_ERROR([Gallium drm loader requires libudev]))
++            ;;
++        esac
+         if test "x$have_libdrm" != xyes; then
+             AC_MSG_ERROR([Gallium drm loader requires libdrm >= $LIBDRM_REQUIRED])
+         fi

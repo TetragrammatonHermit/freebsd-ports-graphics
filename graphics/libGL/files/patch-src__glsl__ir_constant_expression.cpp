@@ -1,8 +1,8 @@
---- src/glsl/ir_constant_expression.cpp.orig	2011-07-23 15:08:44.000000000 +0200
-+++ src/glsl/ir_constant_expression.cpp	2011-07-23 15:09:03.000000000 +0200
-@@ -39,6 +39,11 @@
- #include "ir_visitor.h"
- #include "glsl_types.h"
+--- ./src/glsl/ir_constant_expression.cpp.orig	2014-02-03 20:16:33.000000000 +0100
++++ ./src/glsl/ir_constant_expression.cpp	2014-02-15 21:11:34.000000000 +0100
+@@ -60,6 +60,11 @@
+ }
+ #endif
  
 +#include <sys/param.h>
 +#if __FreeBSD_version <= 704100 || (__FreeBSD_version >= 800000 && __FreeBSD_version < 802502) || (__FreeBSD_version >= 900000 && __FreeBSD_version < 900027)

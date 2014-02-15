@@ -108,14 +108,4 @@ CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
 
-post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/dri/*_dri.so
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/lib*.so.*
-.if defined(WITH_VDPAU)
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/vdpau/libvdpau_*.so.1
-.endif
-.if !defined(WITH_NEW_MESA)
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libllvmradeon9.1.7.so
-.endif
-
 .include <bsd.port.mk>

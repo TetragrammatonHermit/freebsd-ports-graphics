@@ -40,7 +40,7 @@ BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 		python2:${PORTSDIR}/lang/python2 \
 		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
 
-USES+=		bison gmake pathfix pkgconfig shebangfix
+USES+=		bison gmake libtool pathfix pkgconfig shebangfix
 USE_PYTHON_BUILD=2
 USE_BZIP2=	yes
 USE_LDCONFIG=	yes
@@ -58,17 +58,18 @@ USE_AUTOTOOLS=	autoconf:env automake:env libtool:env
 # probably be shared lib, and in it own port.
 CONFIGURE_ARGS+=        --enable-shared-glapi=no
 # we need to reapply these patches because we doing wierd stuff with autogen
+.if defined(WITH_NEW_MESA)
+REAPPLY_PATCHES= \
+		${PATCHDIR}/patch-src__glx__Makefile.in \
+		${PATCHDIR}/patch-src__mapi__shared-glapi__Makefile.in \
+		${PATCHDIR}/patch-src__mesa__drivers__dri__common__Makefile.in \
+		${PATCHDIR}/patch-src__mesa__drivers__dri__common__xmlpool__Makefile.in
+.else
 REAPPLY_PATCHES= \
 		${PATCHDIR}/patch-configure \
-		${PATCHDIR}/patch-src_egl_main_Makefile.in \
 		${PATCHDIR}/patch-src_glx_Makefile.in \
-		${PATCHDIR}/patch-src_mapi_es2api_Makefile.in \
-		${PATCHDIR}/patch-src_mapi_shared-glapi_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in
-
-.if !defined(WITH_NEW_MESA)
-REAPPLY_PATCHES+=	${PATCHDIR}/patch-src_mesa_libdricore_Makefile.in
 .endif
 
 python_OLD_CMD=	"/usr/bin/env[[:space:]]python"
@@ -89,6 +90,7 @@ PATCHDIR=		${MASTERDIR}/files-old
 DESCR=			${.CURDIR}/pkg-descr
 PLIST=			${.CURDIR}/pkg-plist
 WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
+INSTALL_TARGET=		install-strip
 
 COMPONENT=		${PORTNAME:L:C/^lib//:C/mesa-//}
 
@@ -139,9 +141,11 @@ pre-configure:
 # workaround for stupid rerunning configure in do-build step
 # xxx
 	cd ${WRKSRC} && env NOCONFIGURE=1 sh autogen.sh
+.if !defined(WITH_NEW_MESA)
 . for file in ${REAPPLY_PATCHES}
 	@cd ${WRKSRC} && ${PATCH} -p0 --quiet  < ${file}
 . endfor
+.endif
 # make sure the pkg-config files are installed in the correct place.
 # this was reverted by running autogen.sh
 	@${FIND} ${WRKSRC} -name Makefile.in -type f | ${XARGS} ${REINPLACE_CMD} -e \
