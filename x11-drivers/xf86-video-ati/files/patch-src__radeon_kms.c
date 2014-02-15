@@ -32,6 +32,6 @@
 +	return FALSE;
 +    }
 +
-     info->dri2.drm_fd = drmOpen("radeon", busid);
+     info->dri2.drm_fd = drmOpen(NULL, busid);
      if (info->dri2.drm_fd == -1) {
  

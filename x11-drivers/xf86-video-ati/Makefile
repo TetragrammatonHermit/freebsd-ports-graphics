@@ -15,6 +15,7 @@ USE_XORG=	xf86driproto \
 		glproto \
 		dri3proto \
 		presentproto
+INSTALL_TARGET=	install-strip
 
 CONFIGURE_ARGS+=--disable-udev
 
@@ -30,8 +31,5 @@ GLAMOR_LIB_DEPENDS=libglamor.so:${PORTSDIR}/graphics/glamor
 .if ${OSVERSION} < 1000051
 BROKEN=		Needs KMS support in kernel
 .endif
-
-post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/drivers/*.so
 
 .include <bsd.port.post.mk>
