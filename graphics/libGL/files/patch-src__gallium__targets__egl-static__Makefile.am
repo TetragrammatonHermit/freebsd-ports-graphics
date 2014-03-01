@@ -1,0 +1,10 @@
+--- ./src/gallium/targets/egl-static/Makefile.am.orig	2014-01-23 18:02:42.000000000 +0100
++++ ./src/gallium/targets/egl-static/Makefile.am	2014-02-23 22:01:50.000000000 +0100
+@@ -64,6 +64,7 @@
+ 	$(top_builddir)/src/loader/libloader.la \
+ 	$(CLOCK_LIB) \
+ 	$(LIBUDEV_LIBS) \
++	$(LIBDEVQ_LIBS) \
+ 	$(DLOPEN_LIBS) \
+ 	$(PTHREAD_LIBS) \
+ 	-lm

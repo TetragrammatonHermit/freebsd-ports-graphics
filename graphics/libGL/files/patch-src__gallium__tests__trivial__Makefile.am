@@ -1,0 +1,10 @@
+--- ./src/gallium/tests/trivial/Makefile.am.orig	2014-01-06 22:15:40.000000000 +0100
++++ ./src/gallium/tests/trivial/Makefile.am	2014-02-23 22:01:50.000000000 +0100
+@@ -16,6 +16,7 @@
+ 	$(top_builddir)/src/gallium/winsys/sw/null/libws_null.la \
+ 	$(top_builddir)/src/gallium/auxiliary/libgallium.la \
+ 	$(LIBUDEV_LIBS) \
++	$(LIBDEVQ_LIBS) \
+ 	$(DLOPEN_LIBS) \
+ 	$(PTHREAD_LIBS) \
+ 	-lm

@@ -17,15 +17,16 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_MESA)
-MESABASEVERSION=	10.0.3
+MESABASEVERSION=	10.1.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=	
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
+MESASUBVERSION=	rc2
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
 PLIST_SUB+=	OLD="@comment " NEW=""
 
 # work around libarchive bug?
 EXTRACT_CMD=${LOCALBASE}/bin/gtar
 EXTRACT_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
+
 .else
 MESABASEVERSION=	9.1.7
 MESASUBVERSION=		
@@ -54,9 +55,9 @@ BUILD_DEPENDS+=	${LOCALBASE}/bin/flex:${PORTSDIR}/textproc/flex
 CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 .endif
 
-USE_AUTOTOOLS=	autoconf:env automake:env libtool:env
+USE_AUTOTOOLS=	autoconf:env automake:env
 # probably be shared lib, and in it own port.
-CONFIGURE_ARGS+=        --enable-shared-glapi=no
+CONFIGURE_ARGS+=        --enable-shared-glapi=yes
 # we need to reapply these patches because we doing wierd stuff with autogen
 .if defined(WITH_NEW_MESA)
 REAPPLY_PATCHES= \
@@ -141,13 +142,25 @@ pre-configure:
 # workaround for stupid rerunning configure in do-build step
 # xxx
 	cd ${WRKSRC} && env NOCONFIGURE=1 sh autogen.sh
-.if !defined(WITH_NEW_MESA)
-. for file in ${REAPPLY_PATCHES}
-	@cd ${WRKSRC} && ${PATCH} -p0 --quiet  < ${file}
-. endfor
-.endif
+#.if !defined(WITH_NEW_MESA)
+#. for file in ${REAPPLY_PATCHES}
+#	@cd ${WRKSRC} && ${PATCH} -p0 --quiet  < ${file}
+#. endfor
+#.endif
 # make sure the pkg-config files are installed in the correct place.
 # this was reverted by running autogen.sh
 	@${FIND} ${WRKSRC} -name Makefile.in -type f | ${XARGS} ${REINPLACE_CMD} -e \
 		's|[(]libdir[)]/pkgconfig|(prefix)/libdata/pkgconfig|g' ;
+#post-patch: post-mesa-patch
+
+#post-mesa-patch:
+#	@${TOUCH} ${WRKSRC}/aclocal.m4 ${WRKSRC}/configure \
+#		${WRKSRC}/src/mesa/main/config.h
+#	@${FIND} ${WRKSRC} -name Makefile.in -exec touch {} +\;
+
+pre-build: pre-mesa-build
+
+pre-mesa-build:
+# do propper gmake target.
+	@cd ${WRKSRC}/src/loader && ${MAKE_CMD} libloader.la
 

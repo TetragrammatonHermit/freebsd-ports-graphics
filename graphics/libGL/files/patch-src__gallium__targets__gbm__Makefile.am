@@ -1,5 +1,5 @@
---- ./src/gallium/targets/gbm/Makefile.am.orig	2014-01-31 21:40:50.000000000 +0100
-+++ ./src/gallium/targets/gbm/Makefile.am	2014-02-15 21:11:55.000000000 +0100
+--- ./src/gallium/targets/gbm/Makefile.am.orig	2014-01-06 22:15:40.000000000 +0100
++++ ./src/gallium/targets/gbm/Makefile.am	2014-02-23 22:01:50.000000000 +0100
 @@ -35,6 +35,7 @@
  AM_CFLAGS = \
  	$(GALLIUM_CFLAGS) \

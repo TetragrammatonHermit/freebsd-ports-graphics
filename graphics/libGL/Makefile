@@ -9,9 +9,10 @@ CATEGORIES=	graphics
 COMMENT=	OpenGL library that renders using GLX or DRI
 
 LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
+		libglapi.so:${PORTSDIR}/graphics/libglapi \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
-USES=		pkgconfig
+USES=		libtool pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both
 
 SUB_FILES=	pkg-install pkg-deinstall

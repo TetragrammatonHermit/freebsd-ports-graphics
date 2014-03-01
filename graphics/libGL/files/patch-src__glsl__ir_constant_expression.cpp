@@ -1,5 +1,5 @@
---- ./src/glsl/ir_constant_expression.cpp.orig	2014-02-03 20:16:33.000000000 +0100
-+++ ./src/glsl/ir_constant_expression.cpp	2014-02-15 21:11:34.000000000 +0100
+--- ./src/glsl/ir_constant_expression.cpp.orig	2014-02-05 21:59:10.000000000 +0100
++++ ./src/glsl/ir_constant_expression.cpp	2014-02-23 22:01:50.000000000 +0100
 @@ -60,6 +60,11 @@
  }
  #endif

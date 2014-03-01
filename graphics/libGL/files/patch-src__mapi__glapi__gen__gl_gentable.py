@@ -1,5 +1,5 @@
---- ./src/mapi/glapi/gen/gl_gentable.py.orig	2014-02-15 21:11:34.000000000 +0100
-+++ ./src/mapi/glapi/gen/gl_gentable.py	2014-02-15 21:11:34.000000000 +0100
+--- ./src/mapi/glapi/gen/gl_gentable.py.orig	2014-02-23 22:01:50.000000000 +0100
++++ ./src/mapi/glapi/gen/gl_gentable.py	2014-02-23 22:01:50.000000000 +0100
 @@ -42,7 +42,7 @@
  #endif
  
