@@ -13,7 +13,8 @@ LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
 USES=		pkgconfig
-USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto dri3proto xvmc
+USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto dri3proto \
+		presentproto xvmc
 
 OPTIONS_DEFINE=	TEXTURE
 
