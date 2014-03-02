@@ -1,0 +1,33 @@
+--- src/gbm/Makefile.in.orig	2014-03-02 12:13:44.000000000 +0100
++++ src/gbm/Makefile.in	2014-03-02 12:14:26.000000000 +0100
+@@ -135,7 +135,7 @@
+ LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES)
+ am__DEPENDENCIES_1 =
+ libgbm_la_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+-	$(am__append_2)
++	$(am__DEPENDENCIES_1) $(am__append_2)
+ am_libgbm_la_OBJECTS = gbm.lo backend.lo common.lo
+ libgbm_la_OBJECTS = $(am_libgbm_la_OBJECTS)
+ AM_V_lt = $(am__v_lt_@AM_V@)
+@@ -514,8 +514,8 @@
+ pkgconfig_DATA = main/gbm.pc
+ AM_CFLAGS = -D_OS_UNIX=1 -DMODULEDIR='"$(libdir)/gbm"' \
+ 	-I$(top_srcdir)/include -I$(top_srcdir)/src/gbm/main \
+-	$(LIBUDEV_CFLAGS) $(LIBKMS_CFLAGS) $(DLOPEN_CFLAGS) $(DEFINES) \
+-	$(am__append_1)
++	$(LIBUDEV_CFLAGS) $(LIBDEVQ_CFLAGS) $(LIBKMS_CFLAGS) \
++	$(DLOPEN_CFLAGS) $(DEFINES) $(am__append_1)
+ lib_LTLIBRARIES = libgbm.la
+ include_HEADERS = main/gbm.h
+ libgbm_la_SOURCES = \
+@@ -524,8 +524,8 @@
+ 	main/common.c
+ 
+ libgbm_la_LDFLAGS = -version-info 1:0
+-libgbm_la_LIBADD = $(LIBUDEV_LIBS) $(LIBKMS_LIBS) $(DLOPEN_LIBS) \
+-	$(am__append_2)
++libgbm_la_LIBADD = $(LIBUDEV_LIBS) $(LIBDEVQ_LIBS) $(LIBKMS_LIBS) \
++	$(DLOPEN_LIBS) $(am__append_2)
+ @HAVE_EGL_PLATFORM_WAYLAND_TRUE@AM_CPPFLAGS = -DHAVE_WAYLAND_PLATFORM
+ @HAVE_DRI_TRUE@noinst_LTLIBRARIES = libgbm_dri.la
+ @HAVE_DRI_TRUE@libgbm_dri_la_SOURCES = \

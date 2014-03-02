@@ -1,0 +1,149 @@
+--- configure.ac.orig	2013-10-05 05:59:22.000000000 +0200
++++ configure.ac	2014-03-02 11:27:30.000000000 +0100
+@@ -1032,9 +1032,34 @@
+         DEFINES="$DEFINES -DHAVE_PTHREAD -DUSE_EXTERNAL_DXTN_LIB=1"
+         DEFINES="$DEFINES -DIN_DRI_DRIVER -DHAVE_ALIAS"
+ 
+-        if test "x$DRI_DIRS" = "xyes"; then
+-            DRI_DIRS="i915 i965 nouveau r200 radeon swrast"
+-        fi
++        case "$host_cpu" in
++        x86_64|ia64)
++            # i810 is missing because there is no x86-64 system where it
++            # could *ever* be used.
++            if test "x$DRI_DIRS" = "xyes"; then
++                DRI_DIRS="i915 i965 nouveau r200 radeon swrast"
++            fi
++            ;;
++        i*86)
++            if test "x$DRI_DIRS" = "xyes"; then
++                DRI_DIRS="i915 i965 nouveau r200 radeon swrast"
++            fi
++            ;;
++        powerpc*)
++            # Build only the drivers for cards that exist on PowerPC.
++            # At some point MGA will be added, but not yet.
++            if test "x$DRI_DIRS" = "xyes"; then
++                DRI_DIRS="r200 radeon swrast"
++           fi
++            ;;
++        sparc*)
++            # Build only the drivers for cards that exist on SPARC.
++            if test "x$DRI_DIRS" = "xyes"; then
++                DRI_DIRS="r200 radeon swrast"
++            fi
++            ;;
++        esac
++
+         ;;
+     gnu*)
+         DEFINES="$DEFINES -DUSE_EXTERNAL_DXTN_LIB=1 -DIN_DRI_DRIVER"
+@@ -1203,8 +1228,16 @@
+ if test "x$enable_gbm" = xyes; then
+     SRC_DIRS="$SRC_DIRS gbm"
+ 
+-    PKG_CHECK_MODULES([LIBUDEV], [libudev], [],
+-                      AC_MSG_ERROR([gbm needs udev]))
++    case "$host_os" in
++    *freebsd*)
++        PKG_CHECK_MODULES([LIBDEVQ], [libdevq-1.0], [],
++                          AC_MSG_ERROR([gbm needs libdevq]))
++        ;;
++    *)
++        PKG_CHECK_MODULES([LIBUDEV], [libudev], [],
++                          AC_MSG_ERROR([gbm needs udev]))
++        ;;
++    esac
+ 
+     if test "x$enable_dri" = xyes; then
+         GBM_BACKEND_DIRS="$GBM_BACKEND_DIRS dri"
+@@ -1213,7 +1246,14 @@
+         fi
+     fi
+ fi
+-GBM_PC_REQ_PRIV="libudev"
++case "$host_os" in
++*freebsd*)
++    GBM_PC_REQ_PRIV="libdevq-1.0"
++    ;;
++*)
++    GBM_PC_REQ_PRIV="libudev"
++    ;;
++esac
+ GBM_PC_LIB_PRIV="$DLOPEN_LIBS"
+ AC_SUBST([GBM_PC_REQ_PRIV])
+ AC_SUBST([GBM_PC_LIB_PRIV])
+@@ -1231,10 +1271,20 @@
+ 
+     if test "$enable_static" != yes; then
+         # build egl_glx when libGL is built
+-        PKG_CHECK_MODULES([LIBUDEV], [libudev > 150],
+-                          [have_libudev=yes],[have_libudev=no])
++        case "$host_os" in
++        *freebsd*)
++            PKG_CHECK_MODULES([LIBDEVQ], [libdevq-1.0],
++                              [have_libdevq=yes],[have_libdevq=no])
++            ;;
++        *)
++            PKG_CHECK_MODULES([LIBUDEV], [libudev > 150],
++                              [have_libudev=yes],[have_libudev=no])
++            ;;
++        esac
+         if test "$have_libudev" = yes; then
+             DEFINES="$DEFINES -DHAVE_LIBUDEV"
++        elif test "$have_libdevq" = yes; then
++            DEFINES="$DEFINES -DHAVE_LIBDEVQ"
+         fi
+ 
+         if test "x$enable_dri" = xyes; then
+@@ -1538,9 +1588,19 @@
+ 		;;
+ 	esac
+ 
+-        case "$plat$have_libudev" in
+-                waylandno|drmno)
+-                    AC_MSG_ERROR([cannot build $plat platfrom without udev]) ;;
++        case "$host_os" in
++        *freebsd*)
++            case "$plat$have_libdevq" in
++                    waylandno|drmno)
++                        AC_MSG_ERROR([cannot build $plat platfrom without libdevq]) ;;
++            esac
++            ;;
++        *)
++            case "$plat$have_libudev" in
++                    waylandno|drmno)
++                        AC_MSG_ERROR([cannot build $plat platfrom without udev]) ;;
++            esac
++            ;;
+         esac
+ done
+ 
+@@ -1768,8 +1828,16 @@
+ 
+ gallium_require_drm_loader() {
+     if test "x$enable_gallium_loader" = xyes; then
+-        PKG_CHECK_MODULES([LIBUDEV], [libudev], [],
+-                          AC_MSG_ERROR([Gallium drm loader requires libudev]))
++        case "$host_os" in
++        *freebsd*)
++            PKG_CHECK_MODULES([LIBDEVQ], [libdevq-1.0], [],
++                              AC_MSG_ERROR([Gallium drm loader requires libdevq]))
++            ;;
++        *)
++            PKG_CHECK_MODULES([LIBUDEV], [libudev], [],
++                              AC_MSG_ERROR([Gallium drm loader requires libudev]))
++            ;;
++        esac
+         if test "x$have_libdrm" != xyes; then
+             AC_MSG_ERROR([Gallium drm loader requires libdrm >= $LIBDRM_REQUIRED])
+         fi
+@@ -1780,7 +1848,7 @@
+ radeon_llvm_check() {
+     LLVM_REQUIRED_VERSION_MAJOR="3"
+     LLVM_REQUIRED_VERSION_MINOR="2"
+-    if test "$LLVM_VERSION_INT" -ne "${LLVM_REQUIRED_VERSION_MAJOR}0${LLVM_REQUIRED_VERSION_MINOR}"; then
++    if test "$LLVM_VERSION_INT" -lt "${LLVM_REQUIRED_VERSION_MAJOR}0${LLVM_REQUIRED_VERSION_MINOR}"; then
+         AC_MSG_ERROR([LLVM $LLVM_REQUIRED_VERSION_MAJOR.$LLVM_REQUIRED_VERSION_MINOR with R600 target enabled is required.
+                      To use the r600/radeonsi LLVM backend, you need to fetch the LLVM source from:
+                      git://people.freedesktop.org/~tstellar/llvm master

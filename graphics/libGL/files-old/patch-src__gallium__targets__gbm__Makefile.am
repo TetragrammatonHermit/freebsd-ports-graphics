@@ -1,0 +1,18 @@
+--- ./src/gallium/targets/gbm/Makefile.am.orig	2014-01-31 21:40:50.000000000 +0100
++++ ./src/gallium/targets/gbm/Makefile.am	2014-02-15 21:11:55.000000000 +0100
+@@ -35,6 +35,7 @@
+ AM_CFLAGS = \
+ 	$(GALLIUM_CFLAGS) \
+ 	$(LIBUDEV_CFLAGS) \
++	$(LIBDEVQ_CFLAGS) \
+ 	$(LIBDRM_CFLAGS)
+ 
+ gbm_LTLIBRARIES = gbm_gallium_drm.la
+@@ -48,6 +49,7 @@
+ 	$(top_builddir)/src/gallium/state_trackers/gbm/libgbm.la \
+ 	$(top_builddir)/src/gallium/auxiliary/libgallium.la \
+ 	$(LIBUDEV_LIBS) \
++	$(LIBDEVQ_LIBS) \
+ 	$(LIBDRM_LIBS) \
+ 	-lm
+ 

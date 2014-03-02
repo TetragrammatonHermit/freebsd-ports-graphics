@@ -59,16 +59,8 @@ USE_AUTOTOOLS=	autoconf:env automake:env
 # probably be shared lib, and in it own port.
 CONFIGURE_ARGS+=        --enable-shared-glapi=yes
 # we need to reapply these patches because we doing wierd stuff with autogen
-.if defined(WITH_NEW_MESA)
+.if !defined(WITH_NEW_MESA)
 REAPPLY_PATCHES= \
-		${PATCHDIR}/patch-src__glx__Makefile.in \
-		${PATCHDIR}/patch-src__mapi__shared-glapi__Makefile.in \
-		${PATCHDIR}/patch-src__mesa__drivers__dri__common__Makefile.in \
-		${PATCHDIR}/patch-src__mesa__drivers__dri__common__xmlpool__Makefile.in
-.else
-REAPPLY_PATCHES= \
-		${PATCHDIR}/patch-configure \
-		${PATCHDIR}/patch-src_glx_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
 		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in
 .endif
@@ -142,15 +134,16 @@ pre-configure:
 # workaround for stupid rerunning configure in do-build step
 # xxx
 	cd ${WRKSRC} && env NOCONFIGURE=1 sh autogen.sh
-#.if !defined(WITH_NEW_MESA)
-#. for file in ${REAPPLY_PATCHES}
-#	@cd ${WRKSRC} && ${PATCH} -p0 --quiet  < ${file}
-#. endfor
-#.endif
+.if !defined(WITH_NEW_MESA)
+. for file in ${REAPPLY_PATCHES}
+	@cd ${WRKSRC} && ${PATCH} -p0 --quiet  < ${file}
+. endfor
+.endif
 # make sure the pkg-config files are installed in the correct place.
 # this was reverted by running autogen.sh
 	@${FIND} ${WRKSRC} -name Makefile.in -type f | ${XARGS} ${REINPLACE_CMD} -e \
 		's|[(]libdir[)]/pkgconfig|(prefix)/libdata/pkgconfig|g' ;
+
 #post-patch: post-mesa-patch
 
 #post-mesa-patch:
@@ -161,6 +154,8 @@ pre-configure:
 pre-build: pre-mesa-build
 
 pre-mesa-build:
+.if defined(WITH_NEW_MESA)
 # do propper gmake target.
 	@cd ${WRKSRC}/src/loader && ${MAKE_CMD} libloader.la
+.endif
 
