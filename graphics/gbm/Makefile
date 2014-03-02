@@ -8,7 +8,6 @@ CATEGORIES=	graphics
 COMMENT=	gbm library
 
 LIB_DEPENDS+=	libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs \
-		libdevq.so:${PORTSDIR}/devel/libdevq \
 		libglapi.so:${PORTSDIR}/graphics/libglapi
 
 USE_XORG=	x11 xau xcb xdmcp

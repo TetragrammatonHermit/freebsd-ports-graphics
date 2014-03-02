@@ -9,6 +9,7 @@ CATEGORIES=	graphics
 COMMENT=	OpenGL library that renders using GLX or DRI
 
 LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
+		libdevq.so:${PORTSDIR}/devel/libdevq \
 		libglapi.so:${PORTSDIR}/graphics/libglapi \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
