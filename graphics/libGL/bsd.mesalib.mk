@@ -40,6 +40,8 @@ MAINTAINER=	x11@FreeBSD.org
 BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 		python2:${PORTSDIR}/lang/python2 \
 		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
+# needed for autogen.sh
+BUILD_DEPENDS+=	libtool:${PORTSDIR}/devel/libtool
 
 USES+=		bison gmake libtool pathfix pkgconfig shebangfix
 USE_PYTHON_BUILD=2
