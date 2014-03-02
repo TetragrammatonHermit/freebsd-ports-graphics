@@ -67,6 +67,7 @@ CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config33
 . endif
 
 CONFIGURE_ARGS+=--enable-gallium-llvm \
+		--enable-xvmc \
 		--with-gallium-drivers=r300,r600,radeonsi,svga,swrast
 PLIST_SUB+=	GALLIUM=""
 .else
