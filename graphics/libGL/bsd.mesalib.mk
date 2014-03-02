@@ -43,6 +43,8 @@ BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 # needed for autogen.sh
 BUILD_DEPENDS+=	libtool:${PORTSDIR}/devel/libtool
 
+LIB_DEPENDS+=	libdevq.so:${PORTSDIR}/devel/libdevq
+
 USES+=		bison gmake libtool pathfix pkgconfig shebangfix
 USE_PYTHON_BUILD=2
 USE_BZIP2=	yes
