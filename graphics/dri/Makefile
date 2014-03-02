@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD$
+# $FreeBSD: head/graphics/dri/Makefile 342087 2014-01-31 22:21:43Z kwm $
 
 PORTNAME=	dri
 PORTVERSION=	${MESAVERSION}
@@ -89,12 +89,15 @@ CONFIGURE_ARGS+=--disable-vdpau
 PLIST_SUB+=	VDPAU="@comment "
 .endif
 
-.if ${ARCH} == powerpc
+.if ${ARCH} == powerpc || ${ARCH} == powerpc64
 DRI_DRIVERS=	RADEON SWRAST
 .endif
 .if ${ARCH} == sparc64
 DRI_DRIVERS=	SWRAST
 .endif
+
+# empty for unsupported arches
+DRI_DRIVERS+=
 
 .for _d in ${ALL_DRI_DRIVERS}
 . if ${DRI_DRIVERS:M${_d}}
