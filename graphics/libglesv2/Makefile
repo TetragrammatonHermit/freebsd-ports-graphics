@@ -12,7 +12,8 @@ LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
 # stuff not needed by libglesv2 but configure wants it
-USE_XORG+=	glproto dri2proto dri3proto xext xdamage xfixes presentproto
+USE_XORG+=	glproto dri2proto dri3proto xext xdamage xfixes presentproto \
+		xshmfence
 
 BUILD_WKRSRC=	${WRKSRC}/src/mapi/es2api
 INSTALL_WRKSRC=	${WRKSRC}/src/mapi/es2api

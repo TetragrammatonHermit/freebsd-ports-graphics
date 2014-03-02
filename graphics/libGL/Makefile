@@ -14,7 +14,7 @@ LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 
 USES=		libtool pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both \
-		dri3proto presentproto
+		dri3proto presentproto xshmfence
 
 SUB_FILES=	pkg-install pkg-deinstall
 
