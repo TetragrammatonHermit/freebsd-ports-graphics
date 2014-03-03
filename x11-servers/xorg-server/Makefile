@@ -60,7 +60,7 @@ PLIST=		${.CURDIR}/pkg-plist
 .endif
 
 .if !defined(WITH_NEW_MESA)
-BROKEN=		Needs new MESA
+BROKEN=		Needs Mesa version 10+, please set by WITH_NEW_MESA
 .endif
 
 .include <bsd.port.pre.mk>
