@@ -1,5 +1,5 @@
---- configure.orig	2014-02-22 02:24:12.000000000 +0100
-+++ configure	2014-02-23 22:15:04.000000000 +0100
+--- configure.orig	2014-03-13 22:05:02.000000000 +0100
++++ configure	2014-03-13 22:05:34.000000000 +0100
 @@ -848,6 +848,8 @@
  XLIBGL_CFLAGS
  LIBUDEV_LIBS
@@ -29,7 +29,7 @@
    LIBUDEV_CFLAGS
                C compiler flags for LIBUDEV, overriding pkg-config
    LIBUDEV_LIBS
-@@ -19164,6 +19172,81 @@
+@@ -19245,6 +19253,81 @@
  	DEFINES="$DEFINES -DHAVE_LIBDRM"
  fi
  
@@ -111,7 +111,7 @@
  
  pkg_failed=no
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for LIBUDEV" >&5
-@@ -19235,6 +19318,8 @@
+@@ -19316,6 +19399,8 @@
  $as_echo "yes" >&6; }
  	have_libudev=yes
  fi
@@ -120,7 +120,7 @@
  
  if test "x$enable_dri" = xyes; then
      # DRI must be shared, I think
-@@ -19557,9 +19642,18 @@
+@@ -19638,9 +19723,18 @@
  fi
          GL_PC_REQ_PRIV="$GL_PC_REQ_PRIV libdrm >= $LIBDRM_REQUIRED"
          if test x"$enable_dri3" = xyes; then
@@ -142,7 +142,7 @@
  
  pkg_failed=no
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for DRI3PROTO" >&5
-@@ -19937,6 +20031,9 @@
+@@ -20018,6 +20112,9 @@
  if test "$have_libudev" = yes; then
      DEFINES="$DEFINES -DHAVE_LIBUDEV"
  fi
@@ -152,7 +152,7 @@
  
  # This is outside the case (above) so that it is invoked even for non-GLX
  # builds.
-@@ -20608,9 +20705,18 @@
+@@ -20689,9 +20786,18 @@
      esac
  fi
  if test "x$enable_gbm" = xyes; then
@@ -174,7 +174,7 @@
  
      if test "x$enable_dri" = xyes; then
          GBM_BACKEND_DIRS="$GBM_BACKEND_DIRS dri"
-@@ -20627,7 +20733,14 @@
+@@ -20708,7 +20814,14 @@
    HAVE_GBM_FALSE=
  fi
  
@@ -190,7 +190,7 @@
  GBM_PC_LIB_PRIV="$DLOPEN_LIBS"
  
  
-@@ -21378,9 +21491,19 @@
+@@ -21459,9 +21572,19 @@
  		;;
  	esac
  
@@ -213,7 +213,17 @@
          esac
  done
  
-@@ -21896,6 +22019,81 @@
+@@ -21879,9 +22002,6 @@
+                 CLANG_LIBDIR=${LLVM_LIBDIR}
+             fi
+             CLANG_RESOURCE_DIR=$CLANG_LIBDIR/clang/${LLVM_VERSION}
+-            if test ! -f "$CLANG_RESOURCE_DIR/include/stddef.h"; then :
+-  as_fn_error $? "Could not find clang internal header stddef.h in $CLANG_RESOURCE_DIR Use --with-clang-libdir to specify the correct path to the clang libraries." "$LINENO" 5
+-fi
+         fi
+     else
+         MESA_LLVM=0
+@@ -21977,6 +22097,81 @@
  
  gallium_require_drm_loader() {
      if test "x$enable_gallium_loader" = xyes; then
@@ -295,7 +305,7 @@
  
  pkg_failed=no
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for LIBUDEV" >&5
-@@ -21967,6 +22165,8 @@
+@@ -22048,6 +22243,8 @@
  $as_echo "yes" >&6; }
  
  fi

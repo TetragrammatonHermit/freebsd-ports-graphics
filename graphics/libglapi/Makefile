@@ -5,7 +5,7 @@ PORTNAME=	libglapi
 PORTVERSION=	${MESAVERSION}
 CATEGORIES=	graphics
 
-COMMENT=	OpenEGL library
+COMMENT=	Common GL api libary used by Mesa based ports.
 
 LIB_DEPENDS+=	libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs
 

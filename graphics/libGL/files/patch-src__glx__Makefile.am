@@ -1,0 +1,18 @@
+--- src/glx/Makefile.am.orig	2014-03-04 01:01:51.000000000 +0100
++++ src/glx/Makefile.am	2014-03-04 01:02:37.000000000 +0100
+@@ -46,6 +46,7 @@
+ 	-D_REENTRANT \
+ 	-DDEFAULT_DRIVER_DIR=\"$(DRI_DRIVER_SEARCH_DIR)\" \
+ 	$(DEFINES) \
++	$(LIBDEVQ_CFLAGS) \
+ 	$(LIBDRM_CFLAGS) \
+ 	$(DRI2PROTO_CFLAGS) \
+ 	$(GLPROTO_CFLAGS) \
+@@ -107,6 +108,7 @@
+ GL_LIBS = \
+ 	libglx.la \
+ 	$(SHARED_GLAPI_LIBS) \
++	$(LIBDEVQ_LIBS) \
+ 	$(GLAPI_LIB) \
+ 	$(GL_LIB_DEPS)
+ 

@@ -12,7 +12,6 @@ LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libglapi.so:${PORTSDIR}/graphics/libglapi \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
-USES=		libtool pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both \
 		dri3proto presentproto xshmfence
 
@@ -36,5 +35,12 @@ post-install:
 	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/.libGL
 	@${MV} ${STAGEDIR}${PREFIX}/lib/libGL* \
 		${STAGEDIR}${PREFIX}/lib/.libGL/
+# kill off to be poudriere -t safe, that unless we can pkg-plist.ignore it.
+	@${RM} -rf ${STAGEDIR}${PREFIX}/include/GL/internal
+	@${CHMOD} +w ${STAGEDIR}${PREFIX}/etc/drirc \
+		${STAGEDIR}${PREFIX}/libdata/pkgconfig/dri.pc
+	@${RM} ${STAGEDIR}${PREFIX}/etc/drirc \
+		${STAGEDIR}${PREFIX}/lib/libglapi.* \
+		${STAGEDIR}${PREFIX}/libdata/pkgconfig/dri.pc
 
 .include <bsd.port.mk>

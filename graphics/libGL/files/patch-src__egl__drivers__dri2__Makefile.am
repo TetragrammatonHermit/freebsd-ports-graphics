@@ -1,5 +1,5 @@
---- ./src/egl/drivers/dri2/Makefile.am.orig	2014-01-23 18:02:42.000000000 +0100
-+++ ./src/egl/drivers/dri2/Makefile.am	2014-02-23 22:01:50.000000000 +0100
+--- src/egl/drivers/dri2/Makefile.am.orig	2014-02-27 02:56:39.000000000 +0100
++++ src/egl/drivers/dri2/Makefile.am	2014-03-04 01:11:18.000000000 +0100
 @@ -32,6 +32,7 @@
  	$(VISIBILITY_CFLAGS) \
  	$(LIBDRM_CFLAGS) \
@@ -8,3 +8,11 @@
  	$(LIBKMS_CFLAGS) \
  	-DDEFAULT_DRIVER_DIR=\"$(DRI_DRIVER_SEARCH_DIR)\"
  
+@@ -42,6 +43,7 @@
+ 
+ libegl_dri2_la_LIBADD = \
+ 	$(top_builddir)/src/loader/libloader.la \
++	$(LIBDEVQ_LIBS) \
+ 	$(EGL_LIB_DEPS)
+ 
+ if HAVE_SHARED_GLAPI

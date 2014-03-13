@@ -19,7 +19,7 @@ MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 .if defined(WITH_NEW_MESA)
 MESABASEVERSION=	10.1.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=	rc3
+MESASUBVERSION=	
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
 PLIST_SUB+=	OLD="@comment " NEW=""
 
@@ -45,9 +45,8 @@ BUILD_DEPENDS+=	libtool:${PORTSDIR}/devel/libtool
 
 LIB_DEPENDS+=	libdevq.so:${PORTSDIR}/devel/libdevq
 
-USES+=		bison gmake libtool pathfix pkgconfig shebangfix
+USES+=		bison gmake libtool pathfix pkgconfig shebangfix tar:bzip2
 USE_PYTHON_BUILD=2
-USE_BZIP2=	yes
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 
@@ -101,6 +100,12 @@ CONFIGURE_ARGS+=	--enable-gles2
 CONFIGURE_ARGS+=	--disable-egl
 .else
 CONFIGURE_ARGS+=	--enable-egl
+.endif
+
+.if ${COMPONENT:Mopencl} == ""
+CONFIGURE_ARGS+=	--disable-opencl
+.else
+CONFIGURE_ARGS+=	--enable-opencl
 .endif
 
 .if ${COMPONENT:Mdri} == ""

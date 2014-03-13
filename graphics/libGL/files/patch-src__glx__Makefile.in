@@ -1,0 +1,29 @@
+--- src/glx/Makefile.in.orig	2014-03-04 01:06:26.000000000 +0100
++++ src/glx/Makefile.in	2014-03-04 01:07:14.000000000 +0100
+@@ -154,8 +154,8 @@
+ am__installdirs = "$(DESTDIR)$(libdir)"
+ LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES)
+ am__DEPENDENCIES_1 =
+-am__DEPENDENCIES_2 = libglx.la $(SHARED_GLAPI_LIBS) $(GLAPI_LIB) \
+-	$(am__DEPENDENCIES_1)
++am__DEPENDENCIES_2 = libglx.la $(SHARED_GLAPI_LIBS) \
++	$(am__DEPENDENCIES_1) $(GLAPI_LIB) $(am__DEPENDENCIES_1)
+ lib@GL_LIB@_la_DEPENDENCIES = $(am__DEPENDENCIES_2)
+ am_lib@GL_LIB@_la_OBJECTS =
+ lib@GL_LIB@_la_OBJECTS = $(am_lib@GL_LIB@_la_OBJECTS)
+@@ -581,6 +581,7 @@
+ 	-D_REENTRANT \
+ 	-DDEFAULT_DRIVER_DIR=\"$(DRI_DRIVER_SEARCH_DIR)\" \
+ 	$(DEFINES) \
++	$(LIBDEVQ_CFLAGS) \
+ 	$(LIBDRM_CFLAGS) \
+ 	$(DRI2PROTO_CFLAGS) \
+ 	$(GLPROTO_CFLAGS) \
+@@ -603,6 +604,7 @@
+ GL_LIBS = \
+ 	libglx.la \
+ 	$(SHARED_GLAPI_LIBS) \
++	$(LIBDEVQ_LIBS) \
+ 	$(GLAPI_LIB) \
+ 	$(GL_LIB_DEPS)
+ 

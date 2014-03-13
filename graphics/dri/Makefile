@@ -12,7 +12,6 @@ COMMENT=	OpenGL hardware acceleration drivers for the DRI
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
-USES=		pkgconfig
 USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto dri3proto \
 		presentproto xvmc xshmfence
 
@@ -33,7 +32,7 @@ PKGHELP=	${.CURDIR}/pkg-help
 # gcc from base can't handle some code in mesa 9.1+
 # We only care for 9.x and 8.x, not for old pre-clang default current.
 # This is for 0b0000 binary which gcc 4.3+ understands and is in the i965 driver.
-. if ${OSVERSION} >= 901000 && ${OSVERSION} < 902502 \
+. if ${OSVERSION} >= 901500 && ${OSVERSION} < 902502 \
 		&& (${ARCH} == i386 || ${ARCH} == amd64)
 CC=clang
 CXX=clang++
@@ -60,6 +59,7 @@ DRIREVISION=	4
 
 .if ${PORT_OPTIONS:MGALLIUM}
 . if defined(WITH_NEW_MESA)
+# keep in sync with libopencl please
 BUILD_DEPENDS+=	llvm34>=0:${PORTSDIR}/devel/llvm34
 CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config34
 . else
@@ -112,5 +112,13 @@ PLIST_SUB+=	${_d}_DRIVER="@comment "
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
 CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
+
+post-install:
+# manual kill these so poudriere -t works, until we get pkg-plist.ignore
+	@${RM} -rf ${STAGEDIR}${PREFIX}/include/GL/*.h
+	@${RM} -rf ${STAGEDIR}${PREFIX}/lib/libGL.*
+	@${RM} -rf ${STAGEDIR}${PREFIX}/lib/libglapi.*
+	@${CHMOD} +w ${STAGEDIR}${PREFIX}/libdata/pkgconfig/gl.pc
+	@${RM} -f ${STAGEDIR}${PREFIX}/libdata/pkgconfig/gl.pc
 
 .include <bsd.port.mk>
