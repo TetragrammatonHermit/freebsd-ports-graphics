@@ -1,5 +1,5 @@
 --- configure.ac.orig	2013-10-05 05:59:22.000000000 +0200
-+++ configure.ac	2014-03-02 11:27:30.000000000 +0100
++++ configure.ac	2014-03-14 20:48:49.000000000 +0100
 @@ -1032,9 +1032,34 @@
          DEFINES="$DEFINES -DHAVE_PTHREAD -DUSE_EXTERNAL_DXTN_LIB=1"
          DEFINES="$DEFINES -DIN_DRI_DRIVER -DHAVE_ALIAS"
@@ -119,7 +119,16 @@
          esac
  done
  
-@@ -1768,8 +1828,16 @@
+@@ -1684,8 +1744,6 @@
+                 CLANG_LIBDIR=${LLVM_LIBDIR}
+             fi
+             CLANG_RESOURCE_DIR=$CLANG_LIBDIR/clang/${LLVM_VERSION}
+-            AC_CHECK_FILE("$CLANG_RESOURCE_DIR/include/stddef.h",,
+-                AC_MSG_ERROR([Could not find clang internal header stddef.h in $CLANG_RESOURCE_DIR Use --with-clang-libdir to specify the correct path to the clang libraries.]))
+         fi
+     else
+ 	MESA_LLVM=0
+@@ -1768,8 +1826,16 @@
  
  gallium_require_drm_loader() {
      if test "x$enable_gallium_loader" = xyes; then
@@ -138,7 +147,7 @@
          if test "x$have_libdrm" != xyes; then
              AC_MSG_ERROR([Gallium drm loader requires libdrm >= $LIBDRM_REQUIRED])
          fi
-@@ -1780,7 +1848,7 @@
+@@ -1780,7 +1846,7 @@
  radeon_llvm_check() {
      LLVM_REQUIRED_VERSION_MAJOR="3"
      LLVM_REQUIRED_VERSION_MINOR="2"
