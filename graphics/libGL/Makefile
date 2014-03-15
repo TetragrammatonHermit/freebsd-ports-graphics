@@ -37,10 +37,14 @@ post-install:
 		${STAGEDIR}${PREFIX}/lib/.libGL/
 # kill off to be poudriere -t safe, that unless we can pkg-plist.ignore it.
 	@${RM} -rf ${STAGEDIR}${PREFIX}/include/GL/internal
+.if defined(WITH_NEW_MESA)
 	@${CHMOD} +w ${STAGEDIR}${PREFIX}/etc/drirc \
 		${STAGEDIR}${PREFIX}/libdata/pkgconfig/dri.pc
-	@${RM} ${STAGEDIR}${PREFIX}/etc/drirc \
-		${STAGEDIR}${PREFIX}/lib/libglapi.* \
+	@${RM} ${STAGEDIR}${PREFIX}/etc/drirc
+.else
+	@${CHMOD} +w ${STAGEDIR}${PREFIX}/libdata/pkgconfig/dri.pc
+.endif
+	@${RM} ${STAGEDIR}${PREFIX}/lib/libglapi.* \
 		${STAGEDIR}${PREFIX}/libdata/pkgconfig/dri.pc
 
 .include <bsd.port.mk>
