@@ -11,9 +11,8 @@ COMMENT=	The X protocol C-language Binding (XCB) protocol
 
 BUILD_DEPENDS=	xmllint:${PORTSDIR}/textproc/libxml2
 
-USE_BZIP2=	yes
-USES=		pathfix
-USE_PYTHON=	2.5+
+USES=		pathfix tar:bzip2
+USE_PYTHON=	2
 GNU_CONFIGURE=	yes
 
 DATADIR=	${PREFIX}/share/xcb
