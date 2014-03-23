@@ -1,7 +1,7 @@
 #-*- tab-width: 4; -*-
 # ex:ts=4
 #
-# $FreeBSD: head/Mk/bsd.port.mk 347863 2014-03-11 07:02:30Z bapt $
+# $FreeBSD: head/Mk/bsd.port.mk 348612 2014-03-19 11:58:53Z bdrewery $
 #	$NetBSD: $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
@@ -93,8 +93,8 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #				  Default: ${DISTNAME}${EXTRACT_SUFX}
 # EXTRACT_SUFX	- Suffix for archive names
 #				  You never have to set both DISTFILES and EXTRACT_SUFX.
-#				  Default: .tar.bz2 if USE_BZIP2 is set, .lzh if USE_LHA is set,
-#				  .tar.xz if USE_XZ is set, .tar.gz otherwise).
+#				  Default: .tar.bz2 if USE_BZIP2 is set, .tar.xz if USE_XZ is set,
+#				  .tar.gz otherwise).
 # MASTER_SITES	- Primary location(s) for distribution files if not found
 #				  locally.  See bsd.sites.mk for common choices for
 #				  MASTER_SITES.
@@ -328,7 +328,6 @@ FreeBSD_MAINTAINER=	portmgr@FreeBSD.org
 #
 # USE_BZIP2		- If set, this port tarballs use bzip2, not gzip, for
 #				  compression.
-# USE_LHA		- If set, this port distfile uses lha for compression
 # USE_XZ		- If set, this port tarballs use xz (or lzma)
 #				  for compression
 # USE_GCC		- If set, this port requires this version of gcc, either in
@@ -1213,8 +1212,7 @@ WARNING+=	"If you do not want to see this message again set NO_WARNING_PKG_INSTA
 
 # Enable new xorg for FreeBSD versions after Radeon KMS was imported unless
 # WITHOUT_NEW_XORG is set.
-.if (${OSVERSION} >= 1000704 && ${OSVERSION} < 1000000) || \
-     ${OSVERSION} >= 1100000
+.if ${OSVERSION} >= 1000704
 . if !defined(WITHOUT_NEW_XORG)
 WITH_NEW_XORG?=	yes
 . else
@@ -1522,8 +1520,6 @@ ${_f}_ARGS:=	${f:C/^[^\:]*\://g}
 
 .if defined(USE_BZIP2)
 EXTRACT_SUFX?=			.tar.bz2
-.elif defined(USE_LHA)
-EXTRACT_SUFX?=			.lzh
 .elif defined(USE_XZ)
 EXTRACT_SUFX?=			.tar.xz
 .else
@@ -1692,10 +1688,6 @@ PKGNG_ORIGIN=		ports-mgmt/pkg-devel
 PKG_DEPENDS+=		${LOCALBASE}/sbin/pkg:${PORTSDIR}/${PKGNG_ORIGIN}
 .endif
 .endif
-.endif
-
-.if defined(USE_LHA)
-EXTRACT_DEPENDS+=	lha:${PORTSDIR}/archivers/lha
 .endif
 
 .if defined(USE_GCC)
@@ -2161,18 +2153,12 @@ PATCH_DIST_ARGS+=	--suffix .orig
 TAR?=	/usr/bin/tar
 
 # EXTRACT_SUFX is defined in .pre.mk section
-.if defined(USE_LHA)
-EXTRACT_CMD?=		${LHA_CMD}
-EXTRACT_BEFORE_ARGS?=	xfqw=${WRKDIR}
-EXTRACT_AFTER_ARGS?=
-.else
 EXTRACT_CMD?=	${TAR}
 EXTRACT_BEFORE_ARGS?=	-xf
 .if defined(EXTRACT_PRESERVE_OWNERSHIP)
 EXTRACT_AFTER_ARGS?=
 .else
 EXTRACT_AFTER_ARGS?=	--no-same-owner --no-same-permissions
-.endif
 .endif
 
 # Figure out where the local mtree file is
@@ -3778,7 +3764,7 @@ do-package: ${TMPPLIST}
 		_LATE_PKG_ARGS="$${_LATE_PKG_ARGS} -D ${PKGMESSAGE}"; \
 	fi; \
 	if ${PKG_CMD} -S ${STAGEDIR} ${PKG_ARGS} ${WRKDIR}/${PKGNAME}${PKG_SUFX}; then \
-		if [ -d ${PACKAGES} -a -w ${PACKAGES} ]; then \
+		if [ -d ${PKGREPOSITORY} -a -w ${PKGREPOSITORY} ]; then \
 			${LN} -f ${WRKDIR}/${PKGNAME}${PKG_SUFX} ${PKGFILE} 2>/dev/null || \
 			    ${CP} -af ${WRKDIR}/${PKGNAME}${PKG_SUFX} ${PKGFILE}; \
 			cd ${.CURDIR} && eval ${MAKE} package-links; \
