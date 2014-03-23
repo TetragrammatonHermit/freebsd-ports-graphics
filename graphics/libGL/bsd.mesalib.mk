@@ -113,6 +113,8 @@ CONFIGURE_ARGS+=--with-dri-drivers=no
 CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
 .else
 # done in the dri port
+# need to enable this globaly because it also used in dri ..# third option is wayland.
+CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm
 .endif
 
 .if ${COMPONENT:Mvdpau} == ""
