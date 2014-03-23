@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.99.910
+PORTVERSION=	2.99.911
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
