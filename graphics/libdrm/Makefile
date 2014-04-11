@@ -13,8 +13,7 @@ COMMENT=	Userspace interface to kernel Direct Rendering Module services
 LIB_DEPENDS=	libpciaccess.so:${PORTSDIR}/devel/libpciaccess \
 		libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs
 
-USES=		pkgconfig
-USE_BZIP2=	yes
+USES=		pkgconfig tar:bzip2
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
 
@@ -33,7 +32,6 @@ USES+=		gmake
 # KMS support in the kernel is only build on these archs, disable others
 .if ${ARCH} == "amd64" || ${ARCH} == "i386"
 CONFIGURE_ARGS+=--enable-libkms
-EXTRA_PATCHES+=	${FILESDIR}/extra-xf86drmMode.c
 PLIST_SUB+=	KMS="" NOUVEAU=""
 .else
 CONFIGURE_ARGS+=--disable-libkms
@@ -49,7 +47,7 @@ CONFIGURE_ARGS+=--disable-manpages
 PLIST_SUB+=	MAN="@comment "
 .endif
 
-LIBDRM_VERSION=	2.4.52
+LIBDRM_VERSION=	2.4.53
 LIBDRM_REVISION=0
 PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-configure \
