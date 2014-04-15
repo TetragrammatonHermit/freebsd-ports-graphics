@@ -1,5 +1,5 @@
---- src/xshmfence_futex.h
-+++ src/xshmfence_futex.h
+--- src/xshmfence_futex.h	2013-11-20 17:13:08.000000000 -0500
++++ src/xshmfence_futex.h	2014-04-15 14:20:27.000000000 -0400
 @@ -1,5 +1,6 @@
  /*
   * Copyright © 2013 Keith Packard
