@@ -1,8 +1,9 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD$
+# $FreeBSD: head/x11/libXdmcp/Makefile 351411 2014-04-16 18:28:47Z zeising $
 
 PORTNAME=	libXdmcp
 PORTVERSION=	1.1.1
+PORTREVISION=	1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org

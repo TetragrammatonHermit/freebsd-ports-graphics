@@ -1,8 +1,9 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD$
+# $FreeBSD: head/x11/libXxf86dga/Makefile 351411 2014-04-16 18:28:47Z zeising $
 
 PORTNAME=	libXxf86dga
 PORTVERSION=	1.1.4
+PORTREVISION=	1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org

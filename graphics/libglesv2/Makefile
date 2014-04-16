@@ -1,5 +1,5 @@
 # Created by: kwm@FreeBSD.org
-# $FreeBSD$
+# $FreeBSD: head/graphics/libglesv2/Makefile 351411 2014-04-16 18:28:47Z zeising $
 
 PORTNAME=	libglesv2
 PORTVERSION=	${MESAVERSION}
@@ -9,6 +9,8 @@ COMMENT=	OpenGL ES v2 library
 
 LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libexpat.so:${PORTSDIR}/textproc/expat2
+
+.include <bsd.port.options.mk>
 
 .if ! defined(WITH_NEW_XORG)
 IGNORE=		Please enable WITH_NEW_XORG, libglesv2 needs libdrm higher then 2.4.24

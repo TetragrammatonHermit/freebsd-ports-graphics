@@ -1,8 +1,9 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD$
+# $FreeBSD: head/x11/libXinerama/Makefile 351411 2014-04-16 18:28:47Z zeising $
 
 PORTNAME=	libXinerama
 PORTVERSION=	1.1.3
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	x11
 
@@ -13,6 +14,5 @@ LICENSE=	MIT
 
 XORG_CAT=	lib
 USE_XORG=	x11 xext xextproto xineramaproto:both
-USE_AUTOTOOLS=	libtool
 
 .include <bsd.port.mk>
