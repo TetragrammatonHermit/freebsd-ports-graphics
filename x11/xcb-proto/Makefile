@@ -1,5 +1,5 @@
 # Created by: Ashish Shukla <wahjava@gmail.com>
-# $FreeBSD$
+# $FreeBSD: head/x11/xcb-proto/Makefile 351411 2014-04-16 18:28:47Z zeising $
 
 PORTNAME=	xcb-proto
 PORTVERSION=	1.10
@@ -11,9 +11,8 @@ COMMENT=	The X protocol C-language Binding (XCB) protocol
 
 BUILD_DEPENDS=	xmllint:${PORTSDIR}/textproc/libxml2
 
-USES=		pathfix tar:bzip2
-USE_PYTHON=	2
-GNU_CONFIGURE=	yes
+XORG_CAT=	proto
+USE_PYTHON=	2.5+
 
 DATADIR=	${PREFIX}/share/xcb
 

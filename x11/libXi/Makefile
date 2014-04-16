@@ -1,8 +1,9 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD$
+# $FreeBSD: head/x11/libXi/Makefile 351411 2014-04-16 18:28:47Z zeising $
 
 PORTNAME=	libXi
 PORTVERSION=	1.7.2
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	x11
 

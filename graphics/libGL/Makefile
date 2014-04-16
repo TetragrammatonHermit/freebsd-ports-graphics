@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD$
+# $FreeBSD: head/graphics/libGL/Makefile 347435 2014-03-08 00:08:21Z miwi $
 
 PORTNAME=	libGL
 PORTVERSION=	${MESAVERSION}
