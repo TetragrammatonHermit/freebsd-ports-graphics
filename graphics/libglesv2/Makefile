@@ -1,14 +1,16 @@
 # Created by: kwm@FreeBSD.org
-# $FreeBSD: head/graphics/libglesv2/Makefile 351411 2014-04-16 18:28:47Z zeising $
+# $FreeBSD: head/graphics/libglesv2/Makefile 354307 2014-05-17 09:56:00Z kwm $
 
 PORTNAME=	libglesv2
 PORTVERSION=	${MESAVERSION}
+PORTREVISION=	1
 CATEGORIES=	graphics
 
 COMMENT=	OpenGL ES v2 library
 
+BUILD_DEPENDS=	expat>=0:${PORTSDIR}/textproc/expat2
 LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
-		libexpat.so:${PORTSDIR}/textproc/expat2
+		libglapi.so:${PORTSDIR}/graphics/libglapi
 
 .include <bsd.port.options.mk>
 

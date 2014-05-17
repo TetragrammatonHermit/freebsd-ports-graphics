@@ -1,9 +1,9 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/graphics/dri/Makefile 342087 2014-01-31 22:21:43Z kwm $
+# $FreeBSD: head/graphics/dri/Makefile 354307 2014-05-17 09:56:00Z kwm $
 
 PORTNAME=	dri
 PORTVERSION=	${MESAVERSION}
-PORTREVISION=	3
+PORTREVISION=	4
 PORTEPOCH=	2
 CATEGORIES=	graphics
 
@@ -46,7 +46,7 @@ DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 .endif
 
 .if defined(WITH_NEW_XORG)
-. if defined(WITH_GALLIUM) && (${ARCH} == i386 || ${ARCH} == amd64)
+. if !defined(WITHOUT_GALLIUM) && (${ARCH} == i386 || ${ARCH} == amd64)
 BUILD_DEPENDS+=	llvm-config33:${PORTSDIR}/devel/llvm33
 CONFIGURE_ENV+=	LLVM_CONFIG=${LOCALBASE}/bin/llvm-config33
 
@@ -86,7 +86,7 @@ PLIST_SUB+=	${_d}_DRIVER="@comment "
 .if !(${ARCH} == amd64 || ${ARCH} == i386)
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
-CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
+CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:tl}"
 
 .if defined(WITH_NEW_XORG) && !defined(WITH_GALLIUM) \
 	&& (${ARCH} == i386 || ${ARCH} == amd64)
@@ -96,6 +96,18 @@ pre-everything::
 	@${ECHO_MSG} "Please define WITH_GALLIUM in /etc/make.conf"
 	@${ECHO_MSG} "Note that gallium support is highly experimental."
 	@${ECHO_MSG} ""
+.endif
+
+post-install:
+.if defined(WITH_NEW_XORG)
+	@${RM} -f ${STAGEDIR}${PREFIX}/include/GL/*.h
+	@${RM} ${STAGEDIR}${PREFIX}/lib/libGL.*
+	@${RM} ${STAGEDIR}${PREFIX}/lib/libglapi.*
+	@${RM} -f ${STAGEDIR}${PREFIX}/libdata/pkgconfig/gl.pc	
+.else
+	@${RM} -f ${STAGEDIR}${PREFIX}/include/GL/*.h
+	@${RM} -rf ${STAGEDIR}${PREFIX}/lib/.libGL
+	@${RM} -f ${STAGEDIR}${PREFIX}/libdata/pkgconfig/gl.pc	
 .endif
 
 .include <bsd.port.mk>
