@@ -1,8 +1,9 @@
 # Created by: Ashish Shukla <wahjava@gmail.com>
-# $FreeBSD: head/x11/libxcb/Makefile 351411 2014-04-16 18:28:47Z zeising $
+# $FreeBSD: head/x11/libxcb/Makefile 351936 2014-04-23 13:25:16Z tijl $
 
 PORTNAME=	libxcb
 PORTVERSION=	1.10
+PORTREVISION=	2
 CATEGORIES=	x11 python
 MASTER_SITES=	http://xcb.freedesktop.org/dist/
 
@@ -23,7 +24,7 @@ XORG_CAT=	lib
 USES=		gmake
 USE_GNOME=	libxslt:build
 USE_XORG=	xau xdmcp
-USE_PYTHON_BUILD=YES
+USE_PYTHON_BUILD=2
 
 .for f in XPROTO_CFLAGS XPROTO_LIBS XDMCP_CFLAGS XDMCP_LIBS NEEDED_CFLAGS NEEDED_LIBS
 CONFIGURE_ARGS+=${f}="${${f}}"

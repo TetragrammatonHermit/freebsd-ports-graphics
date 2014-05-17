@@ -1,7 +1,8 @@
-# $FreeBSD: head/x11-fonts/libFS/Makefile 351411 2014-04-16 18:28:47Z zeising $
+# $FreeBSD: head/x11-fonts/libFS/Makefile 351936 2014-04-23 13:25:16Z tijl $
 
 PORTNAME=	libFS
 PORTVERSION=	1.0.6
+PORTREVISION=	1
 CATEGORIES=	x11-fonts
 
 MAINTAINER=	x11@FreeBSD.org

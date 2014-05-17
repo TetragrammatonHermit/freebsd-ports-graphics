@@ -1,4 +1,4 @@
-# $FreeBSD$
+# $FreeBSD: head/x11-drivers/xf86-input-synaptics/Makefile 351936 2014-04-23 13:25:16Z tijl $
 
 PORTNAME=	xf86-input-synaptics
 PORTVERSION=	1.7.2
@@ -16,9 +16,11 @@ USES=		pathfix
 USE_XORG=	x11
 XORG_CAT=	driver
 
+.include <bsd.port.options.mk>
+
 .if ${PORT_OPTIONS:MHAL}
 PLIST_SUB+=	HAL=""
-LIB_DEPENDS+=	hal.1:${PORTSDIR}/sysutils/hal
+LIB_DEPENDS+=	libhal.so:${PORTSDIR}/sysutils/hal
 .else
 PLIST_SUB+=	HAL="@comment "
 .endif

@@ -3,6 +3,7 @@
 
 PORTNAME=	xf86-video-intel
 PORTVERSION=	2.99.911
+PORTREVISION=	1
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -26,6 +27,7 @@ USE_XORG=	glproto \
 		xvmc \
 		dri3proto \
 		presentproto
+
 CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
 CONFIGURE_ARGS+=--enable-sna --disable-glamor
 CPPFLAGS+=	-I${LOCALBASE}/include

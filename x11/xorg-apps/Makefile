@@ -1,4 +1,4 @@
-# $FreeBSD: head/x11/xorg-apps/Makefile 317162 2013-05-02 22:10:11Z bapt $
+# $FreeBSD: head/x11/xorg-apps/Makefile 352986 2014-05-05 09:45:36Z bapt $
 
 PORTNAME=	xorg-apps
 PORTVERSION=	7.7
@@ -9,8 +9,6 @@ EXTRACT_ONLY=	# none
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X.org apps meta-port
-
-.MAKE.FreeBSD_UL=	yes
 
 COMPONENTS=	appres bitmap xf86dga:dga iceauth luit \
 		x11-fonts/mkfontdir:mkfontdir \
@@ -32,15 +30,15 @@ do-install:
 		${TOUCH} ${STAGEDIR}${PREFIX}/libdata/xorg/apps
 
 .for comp in ${COMPONENTS}
-OPTIONS_DEFINE+=	${comp:C/:.*//:C/.*\///:U}
-OPTIONS_DEFAULT+=	${comp:C/:.*//:C/.*\///:U}
-${comp:C/:.*//:C/.*\///:U}_DESC=	Install ${comp:C/:.*//:C/.*\///} application
+OPTIONS_DEFINE+=	${comp:C/:.*//:C/.*\///:tu}
+OPTIONS_DEFAULT+=	${comp:C/:.*//:C/.*\///:tu}
+${comp:C/:.*//:C/.*\///:tu}_DESC=	Install ${comp:C/:.*//:C/.*\///} application
 .endfor
 
 .include <bsd.port.options.mk>
 
 .for comp in ${COMPONENTS}
-. if ${PORT_OPTIONS:M${comp:C/:.*//:C/.*\///:U}}
+. if ${PORT_OPTIONS:M${comp:C/:.*//:C/.*\///:tu}}
 .  if ${comp:M*\:*}==""
 port=${comp}
 check=${comp:C/.*\///} # doesn't work

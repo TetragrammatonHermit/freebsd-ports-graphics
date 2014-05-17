@@ -32,8 +32,7 @@ OPTIONS_EXCLUDE_sparc64=	HAL
 
 .include <bsd.port.options.mk>
 
-USE_BZIP2=	yes
-USES=		gmake perl5
+USES=		gmake libtool:keepla perl5 tar:bzip2
 USE_PERL5=	build
 USE_GL=		gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
@@ -50,6 +49,7 @@ CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
 		--enable-record=yes
+INSTALL_TARGET=	install-strip
 
 .if ${SLAVE_PORT} == "no"
 SUB_FILES=	pkg-install pkg-deinstall
@@ -90,13 +90,12 @@ CONFIGURE_ARGS+=	--enable-aiglx=yes
 CONFIGURE_ARGS+=	--enable-aiglx=no
 .endif
 
-# We handle Xorg setuid in the plist. This allows to build xorg-server as 
-# a user.
+# We handle Xorg setuid in the plist. This allows to build xorg-server as a user.
 CONFIGURE_ARGS+=--enable-install-setuid=no
 .if ${PORT_OPTIONS:MSUID}
 PLIST_SUB+=	SUID=""
 .else
-PLIST_SUB+=	SUID="@comment"
+PLIST_SUB+=	SUID="@comment "
 .endif
 
 .if ${ARCH} == i386
@@ -166,9 +165,7 @@ post-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg
 	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
 		${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg/
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/*.so
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/multimedia/*.so
 	@${MKDIR} ${STAGEDIR}${PREFIX}/etc/X11/xorg.conf.d
-.endif
+.endif # ! SLAVE_PORT
 
 .include <bsd.port.post.mk>
