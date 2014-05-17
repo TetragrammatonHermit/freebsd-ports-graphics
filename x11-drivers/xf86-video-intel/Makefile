@@ -1,5 +1,5 @@
 # Created by: lesi@FreeBSD.org
-# $FreeBSD: head/x11-drivers/xf86-video-intel/Makefile 351411 2014-04-16 18:28:47Z zeising $
+# $FreeBSD: head/x11-drivers/xf86-video-intel/Makefile 351936 2014-04-23 13:25:16Z tijl $
 
 PORTNAME=	xf86-video-intel
 PORTVERSION=	${INTEL_VERSION}
@@ -27,7 +27,7 @@ USE_XORG=	glproto \
 
 .if defined(WITH_NEW_XORG)
 INTEL_VERSION=	2.21.15
-INTEL_REVISION=	2
+INTEL_REVISION=	3
 CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
 CONFIGURE_ARGS+=	--enable-sna
 CONFIGURE_ARGS+=	--disable-glamor
@@ -39,7 +39,7 @@ EXTRA_PATCHES+=	${PATCHDIR}/extra-src__sna__sna_threads.c \
 LIB_DEPENDS+=	libxcb-util.so:${PORTSDIR}/x11/xcb-util
 .else
 INTEL_VERSION=	2.7.1
-INTEL_REVISION=	7
+INTEL_REVISION=	8
 PLIST_SUB+=	OLD=""
 
 EXTRA_PATCHES+=	${PATCHDIR}/extra-src_ch7017_ch7017.c \

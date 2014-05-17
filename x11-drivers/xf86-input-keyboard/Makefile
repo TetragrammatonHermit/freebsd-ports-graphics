@@ -1,8 +1,8 @@
-# $FreeBSD: head/x11-drivers/xf86-input-keyboard/Makefile 351411 2014-04-16 18:28:47Z zeising $
+# $FreeBSD: head/x11-drivers/xf86-input-keyboard/Makefile 351936 2014-04-23 13:25:16Z tijl $
 
 PORTNAME=	xf86-input-keyboard
 PORTVERSION=	1.8.0
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org

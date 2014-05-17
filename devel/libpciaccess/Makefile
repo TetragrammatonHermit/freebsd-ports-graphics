@@ -1,8 +1,8 @@
-# $FreeBSD: head/devel/libpciaccess/Makefile 351411 2014-04-16 18:28:47Z zeising $
+# $FreeBSD$
 
 PORTNAME=	libpciaccess
 PORTVERSION=	0.13.2
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	devel
 
 MAINTAINER=	x11@FreeBSD.org

@@ -1,4 +1,4 @@
-# $FreeBSD: head/x11-drivers/xf86-video-ati/Makefile 351411 2014-04-16 18:28:47Z zeising $
+# $FreeBSD: head/x11-drivers/xf86-video-ati/Makefile 351936 2014-04-23 13:25:16Z tijl $
 
 PORTNAME=	xf86-video-ati
 PORTVERSION=	${ATI_VERSION}
@@ -16,12 +16,12 @@ USE_XORG=	xf86driproto xineramaproto xf86miscproto glproto
 
 .if ${OSVERSION} < 1000051 || !defined(WITH_NEW_XORG)
 ATI_VERSION=	6.14.6
-ATI_REVISION=	2
+ATI_REVISION=	3
 CONFIGURE_ARGS+=--disable-kms
 PLIST_SUB+=	OLD=""
 .else
 ATI_VERSION=	7.2.0
-ATI_REVISION=	2
+ATI_REVISION=	3
 CONFIGURE_ARGS+=--disable-udev
 CONFIGURE_ARGS+=--disable-glamor
 EXTRA_PATCHES+=	${FILESDIR}/extra-src__radeon_kms.c
