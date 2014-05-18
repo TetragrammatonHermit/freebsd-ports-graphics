@@ -6,20 +6,19 @@
 #
 #    - graphics/libEGL
 #    - graphics/libGL
+#    - graphics/libglapi
 #    - grahpics/libglesv2
 #    - graphics/dri
 #
 # $FreeBSD$
 
-.MAKE.FreeBSD_UL=	yes
-
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_MESA)
-MESABASEVERSION=	10.1.0
+MESABASEVERSION=	10.2.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=	
+MESASUBVERSION=	rc3
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
 PLIST_SUB+=	OLD="@comment " NEW=""
 
@@ -38,14 +37,12 @@ DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
 MAINTAINER=	x11@FreeBSD.org
 
 BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
-		python2:${PORTSDIR}/lang/python2 \
 		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
-# needed for autogen.sh
-BUILD_DEPENDS+=	libtool:${PORTSDIR}/devel/libtool
 
 LIB_DEPENDS+=	libdevq.so:${PORTSDIR}/devel/libdevq
 
-USES+=		bison gmake libtool pathfix pkgconfig shebangfix tar:bzip2
+USES+=		bison gmake libtool:keepla pathfix pkgconfig shebangfix \
+		tar:bzip2
 USE_PYTHON_BUILD=2
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
@@ -56,16 +53,6 @@ LDFLAGS+=	-Wl,-Y${LOCALBASE}/lib
 .if ${OSVERSION} < 1000033
 BUILD_DEPENDS+=	${LOCALBASE}/bin/flex:${PORTSDIR}/textproc/flex
 CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
-.endif
-
-USE_AUTOTOOLS=	autoconf:env automake:env
-# probably be shared lib, and in it own port.
-CONFIGURE_ARGS+=        --enable-shared-glapi=yes
-# we need to reapply these patches because we doing wierd stuff with autogen
-.if !defined(WITH_NEW_MESA)
-REAPPLY_PATCHES= \
-		${PATCHDIR}/patch-src_mesa_drivers_dri_common_Makefile.in \
-		${PATCHDIR}/patch-src_mesa_drivers_dri_common_xmlpool_Makefile.in
 .endif
 
 python_OLD_CMD=	"/usr/bin/env[[:space:]]python"
@@ -88,7 +75,7 @@ PLIST=			${.CURDIR}/pkg-plist
 WRKSRC=			${WRKDIR}/Mesa-${MESADISTVERSION}
 INSTALL_TARGET=		install-strip
 
-COMPONENT=		${PORTNAME:L:C/^lib//:C/mesa-//}
+COMPONENT=		${PORTNAME:tl:C/^lib//:C/mesa-//}
 
 .if ${COMPONENT:Mglesv2} == ""
 CONFIGURE_ARGS+=	--disable-gles2
@@ -113,7 +100,8 @@ CONFIGURE_ARGS+=--with-dri-drivers=no
 CONFIGURE_ARGS+=--enable-gallium-llvm=no --without-gallium-drivers
 .else
 # done in the dri port
-# need to enable this globaly because it also used in dri ..# third option is wayland.
+# need to enable this globaly because it also used in dri ..
+# the third possible option is wayland.
 CONFIGURE_ARGS+=	--enable-egl --with-egl-platforms=x11,drm
 .endif
 
@@ -129,38 +117,17 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|/etc/|${PREFIX}/etc/|g' \
 		${WRKSRC}/src/mesa/drivers/dri/common/xmlconfig.c
 .if !defined(WITH_NEW_MESA)
-	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${LOCALBASE}/bin/python2|g' \
+	@${REINPLACE_CMD} -e 's|#!/usr/bin/python|#!${PYTHON_CMD}|g' \
 		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py \
 		${WRKSRC}/src/glsl/builtins/tools/*.py
 .else
-	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${LOCALBASE}/bin/python2|g' \
+	@${REINPLACE_CMD} -e 's|#!/use/bin/python|#!${PYTHON_CMD}|g' \
 		${WRKSRC}/src/mesa/drivers/dri/common/xmlpool/gen_xmlpool.py
 .endif
-	@${REINPLACE_CMD} -e 's|!/use/bin/python2|!${LOCALBASE}/bin/python2|g' \
+	@${REINPLACE_CMD} -e 's|!/use/bin/python2|!${PYTHON_CMD}|g' \
 		${WRKSRC}/src/mesa/main/get_hash_generator.py \
 		${WRKSRC}/src/mapi/glapi/gen/gl_enums.py \
 		${WRKSRC}/src/mapi/glapi/gen/gl_table.py
-
-pre-configure:
-# workaround for stupid rerunning configure in do-build step
-# xxx
-	cd ${WRKSRC} && env NOCONFIGURE=1 sh autogen.sh
-.if !defined(WITH_NEW_MESA)
-. for file in ${REAPPLY_PATCHES}
-	@cd ${WRKSRC} && ${PATCH} -p0 --quiet  < ${file}
-. endfor
-.endif
-# make sure the pkg-config files are installed in the correct place.
-# this was reverted by running autogen.sh
-	@${FIND} ${WRKSRC} -name Makefile.in -type f | ${XARGS} ${REINPLACE_CMD} -e \
-		's|[(]libdir[)]/pkgconfig|(prefix)/libdata/pkgconfig|g' ;
-
-#post-patch: post-mesa-patch
-
-#post-mesa-patch:
-#	@${TOUCH} ${WRKSRC}/aclocal.m4 ${WRKSRC}/configure \
-#		${WRKSRC}/src/mesa/main/config.h
-#	@${FIND} ${WRKSRC} -name Makefile.in -exec touch {} +\;
 
 pre-build: pre-mesa-build
 

@@ -1,5 +1,5 @@
---- src/loader/loader.c.orig	2014-03-13 22:15:39.000000000 +0100
-+++ src/loader/loader.c	2014-03-13 22:15:49.000000000 +0100
+--- src/loader/loader.c.orig	2014-04-27 03:37:31.000000000 +0200
++++ src/loader/loader.c	2014-05-18 12:50:44.000000000 +0200
 @@ -67,7 +67,7 @@
  #include <stdarg.h>
  #include <stdio.h>
@@ -58,6 +58,6 @@
 +   return (*chip_id >= 0);
 +}
 +
- #elif defined(ANDROID) && !defined(__NOT_HAVE_DRM_H)
+ #elif !defined(__NOT_HAVE_DRM_H)
  
  /* for i915 */

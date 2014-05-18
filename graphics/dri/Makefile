@@ -111,7 +111,7 @@ PLIST_SUB+=	${_d}_DRIVER="@comment "
 .if !(${ARCH} == amd64 || ${ARCH} == i386)
 CONFIGURE_ARGS+=--disable-gallium-intel
 .endif
-CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:L}"
+CONFIGURE_ARGS+=--with-dri-drivers="${DRI_DRIVERS:tl}"
 
 post-install:
 # manual kill these so poudriere -t works, until we get pkg-plist.ignore
@@ -120,5 +120,17 @@ post-install:
 	@${RM} -rf ${STAGEDIR}${PREFIX}/lib/libglapi.*
 	@${CHMOD} +w ${STAGEDIR}${PREFIX}/libdata/pkgconfig/gl.pc
 	@${RM} -f ${STAGEDIR}${PREFIX}/libdata/pkgconfig/gl.pc
+	@${RM} -f ${STAGEDIR}${PREFIX}/include/gbm.h
+	@${RM} -rf ${STAGEDIR}${PREFIX}/include/EGL \
+		${STAGEDIR}${PREFIX}/include/KHR
+	@${RM} ${STAGEDIR}${PREFIX}/lib/libEGL.*
+	@${RM} ${STAGEDIR}${PREFIX}/lib/libgbm.*
+.if !defined(WITH_NEW_MESA)
+	@${RM} ${STAGEDIR}${PREFIX}/lib/libllvmradeon*
+.endif
+	@${CHMOD} +w ${STAGEDIR}${PREFIX}/libdata/pkgconfig/egl.pc
+	@${CHMOD} +w ${STAGEDIR}${PREFIX}/libdata/pkgconfig/gbm.pc
+	@${RM} ${STAGEDIR}${PREFIX}/libdata/pkgconfig/egl.pc
+	@${RM} ${STAGEDIR}${PREFIX}/libdata/pkgconfig/gbm.pc
 
 .include <bsd.port.mk>
