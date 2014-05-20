@@ -1,6 +1,15 @@
---- src/egl/drivers/dri2/Makefile.in.orig	2014-03-02 11:42:25.000000000 +0100
-+++ src/egl/drivers/dri2/Makefile.in	2014-03-02 11:53:05.000000000 +0100
-@@ -502,7 +502,8 @@
+--- src/egl/drivers/dri2/Makefile.in.orig	2014-05-20 21:03:39.000000000 +0200
++++ src/egl/drivers/dri2/Makefile.in	2014-05-20 21:14:20.000000000 +0200
+@@ -289,6 +289,8 @@
+ LIBTOOL = @LIBTOOL@
+ LIBUDEV_CFLAGS = @LIBUDEV_CFLAGS@
+ LIBUDEV_LIBS = @LIBUDEV_LIBS@
++LIBDEVQ_CFLAGS= @LIBDEVQ_CFLAGS@
++LIBDEVQ_LIBS = @LIBDEVQ_LIBS@
+ LIB_DIR = @LIB_DIR@
+ LIPO = @LIPO@
+ LLVM_BINDIR = @LLVM_BINDIR@
+@@ -455,7 +457,8 @@
  	-I$(top_srcdir)/src/egl/wayland/wayland-egl \
  	-I$(top_srcdir)/src/egl/wayland/wayland-drm \
  	-I$(top_builddir)/src/egl/wayland/wayland-drm $(DEFINES) \
