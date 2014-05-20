@@ -1,5 +1,0 @@
-bin/lsdri
-include/libdevq.h
-lib/libdevq.so
-lib/libdevq.so.0
-libdata/pkgconfig/libdevq-1.0.pc
