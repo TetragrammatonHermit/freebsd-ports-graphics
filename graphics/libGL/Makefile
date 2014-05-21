@@ -44,7 +44,7 @@ post-install:
 .else
 	@${CHMOD} +w ${STAGEDIR}${PREFIX}/libdata/pkgconfig/dri.pc
 .endif
-	@${RM} ${STAGEDIR}${PREFIX}/lib/libglapi.* \
+	@${RM} -f ${STAGEDIR}${PREFIX}/lib/libglapi.* \
 		${STAGEDIR}${PREFIX}/libdata/pkgconfig/dri.pc
 
 .include <bsd.port.mk>
