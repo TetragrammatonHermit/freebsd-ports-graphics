@@ -7,15 +7,16 @@ CATEGORIES=	graphics
 
 COMMENT=	OpenEGL library
 
-LIB_DEPENDS+=	libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs
+LIB_DEPENDS+=	libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs \
+		libexpat.so:${PORTSDIR}/textproc/expat2 \
+		libdevq.so:${PORTSDIR}/devel/libdevq \
+		libdrm.so:${PORTSDIR}/graphics/libdrm
 
 USE_XORG=	x11 xau xcb xdmcp
 
 # stuff not needed by libEGL but configure wants it
 USE_XORG+=	glproto dri2proto dri3proto xext xdamage xfixes presentproto \
 		xshmfence
-LIB_DEPENDS+=	libexpat.so:${PORTSDIR}/textproc/expat2 \
-		libdrm.so:${PORTSDIR}/graphics/libdrm
 
 .if defined(WITH_NEW_MESA)
 BUILD_WRKSRC=	src/egl/drivers/dri2 src/egl/main

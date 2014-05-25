@@ -4,11 +4,12 @@
 #
 # Remember to upgrade the following ports everytime you bump MESAVERSION:
 #
+#    - graphics/dri
+#    - graphics/gbm
 #    - graphics/libEGL
 #    - graphics/libGL
 #    - graphics/libglapi
 #    - grahpics/libglesv2
-#    - graphics/dri
 #
 # $FreeBSD$
 
@@ -18,7 +19,7 @@ MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 .if defined(WITH_NEW_MESA)
 MESABASEVERSION=	10.2.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=	rc3
+MESASUBVERSION=	rc4
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
 PLIST_SUB+=	OLD="@comment " NEW=""
 
