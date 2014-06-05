@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	libtxn_dxtn
-PORTVERSION=	20131104
+PORTVERSION=	20140604
 CATEGORIES=	graphics
 
 MAINTAINER=	x11@FreeBSD.org
@@ -15,7 +15,7 @@ BUILD_DEPENDS=	libGL>=9.1.7:${PORTSDIR}/graphics/libGL
 USE_GITHUB=	yes
 GH_ACCOUNT=	divVerent
 GH_PROJECT=	s2tc
-GH_COMMIT=	c9a70d0
+GH_COMMIT=	3d644da
 GH_TAGNAME=	${GH_COMMIT}
 
 USES=		libtool pathfix pkgconfig
