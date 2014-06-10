@@ -1,0 +1,23 @@
+include/waffle-1/waffle.h
+include/waffle-1/waffle_gbm.h
+include/waffle-1/waffle_glx.h
+include/waffle-1/waffle_version.h
+include/waffle-1/waffle_wayland.h
+include/waffle-1/waffle_x11_egl.h
+lib/libwaffle-1.so
+lib/libwaffle-1.so.0
+lib/libwaffle-1.so.0.3.0
+libdata/pkgconfig/waffle-1.pc
+share/cmake/Modules/FindWaffle.cmake
+%%PORTDOCS%%%%DOCSDIR%%/LICENSE.txt
+%%PORTDOCS%%%%DOCSDIR%%/README.txt
+%%PORTDOCS%%%%DOCSDIR%%/examples/Makefile.example
+%%PORTDOCS%%%%DOCSDIR%%/examples/gl_basic.c
+%%PORTDOCS%%%%DOCSDIR%%/examples/simple-x11-egl.c
+%%PORTDOCS%%%%DOCSDIR%%/release-notes/waffle-%%PORTVERSION%%.txt
+@dirrmtry include/waffle-1
+@dirrmtry share/cmake/Modules
+@dirrmtry share/cmake
+%%PORTDOCS%%@dirrmtry %%DOCSDIR%%/examples
+%%PORTDOCS%%@dirrmtry %%DOCSDIR%%/release-notes
+%%PORTDOCS%%@dirrmtry %%DOCSDIR%%

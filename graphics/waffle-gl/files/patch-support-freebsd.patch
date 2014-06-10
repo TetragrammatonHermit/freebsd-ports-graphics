@@ -1,0 +1,98 @@
+commit 360b2c73a32d4f3f607d533273b7b12f1a95c62d
+Author: Jean-Sébastien Pédron <jean-sebastien@yakaz.com>
+Date:   Thu Jun 5 21:57:45 2014 +0200
+
+    Define "waffle_on_freebsd" and build waffle on FreeBSD
+    
+    Conflicts:
+    	cmake/Modules/WaffleCMocka.cmake
+
+diff --git Options.cmake Options.cmake
+index 7f694e3..8fa62dd 100644
+--- Options.cmake
++++ Options.cmake
+@@ -1,4 +1,4 @@
+-if(waffle_on_linux)
++if(waffle_on_linux OR waffle_on_freebsd)
+     # On Linux, you must enable at least one of the below options.
+     option(waffle_has_glx "Build support for GLX" OFF)
+     option(waffle_has_wayland "Build support for Wayland" OFF)
+diff --git cmake/Modules/WaffleDefineCompilerFlags.cmake cmake/Modules/WaffleDefineCompilerFlags.cmake
+index 4d149c8..19ddb58 100644
+--- cmake/Modules/WaffleDefineCompilerFlags.cmake
++++ cmake/Modules/WaffleDefineCompilerFlags.cmake
+@@ -45,7 +45,7 @@ waffle_add_c_flag("-Werror=implicit-function-declaration" WERROR_IMPLICIT_FUNCTI
+ waffle_add_c_flag("-Werror=incompatible-pointer-types" WERROR_INCOMPATIBLE_POINTER_TYPES)
+ waffle_add_c_flag("-Werror=int-conversion" WERROR_INT_CONVERSION)
+ 
+-if(waffle_on_linux)
++if(waffle_on_linux OR waffle_on_freebsd)
+     # On MacOS, the SSE2 headers trigger this error.
+     waffle_add_c_flag("-Werror=missing-prototypes" WERROR_MISSING_PROTOTYPES)
+ endif()
+diff --git cmake/Modules/WaffleDefineOS.cmake cmake/Modules/WaffleDefineOS.cmake
+index e437947..b1a3079 100644
+--- cmake/Modules/WaffleDefineOS.cmake
++++ cmake/Modules/WaffleDefineOS.cmake
+@@ -25,6 +25,8 @@
+ 
+ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+     set(waffle_on_linux true)
++elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "FreeBSD")
++    set(waffle_on_freebsd true)
+ elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
+     set(waffle_on_mac true)
+ else()
+diff --git cmake/Modules/WaffleValidateOptions.cmake cmake/Modules/WaffleValidateOptions.cmake
+index 03eb4ba..8f0ca5b 100644
+--- cmake/Modules/WaffleValidateOptions.cmake
++++ cmake/Modules/WaffleValidateOptions.cmake
+@@ -44,7 +44,7 @@ if(DEFINED waffle_install_docdir)
+             "details.")
+ endif()
+ 
+-if(waffle_on_linux)
++if(waffle_on_linux OR waffle_on_freebsd)
+     if(NOT waffle_has_glx AND NOT waffle_has_wayland AND
+        NOT waffle_has_x11_egl AND NOT waffle_has_gbm)
+         message(FATAL_ERROR
+diff --git examples/CMakeLists.txt examples/CMakeLists.txt
+index 48147f9..d6d1b5a 100644
+--- examples/CMakeLists.txt
++++ examples/CMakeLists.txt
+@@ -7,7 +7,7 @@ install(FILES Makefile.example
+ # Target: simple-x11-egl (executable)
+ # ----------------------------------------------------------------------------
+ 
+-if(waffle_on_linux)
++if(waffle_on_linux OR waffle_on_freebsd)
+     add_executable(simple-x11-egl simple-x11-egl.c)
+     target_link_libraries(simple-x11-egl ${waffle_libname})
+ endif()
+diff --git src/waffle/CMakeLists.txt src/waffle/CMakeLists.txt
+index f0fb876..4d9605d 100644
+--- src/waffle/CMakeLists.txt
++++ src/waffle/CMakeLists.txt
+@@ -103,15 +103,17 @@ if(waffle_has_glx)
+         )
+ endif()
+ 
+-if(waffle_on_linux)
++if(waffle_on_linux OR waffle_on_freebsd)
+     list(APPEND waffle_sources
+         linux/linux_dl.c
+         linux/linux_platform.c
+         )
+-    list(APPEND waffle_libdeps
+-        dl
+-        pthread
+-        )
++    if(waffle_on_linux)
++        list(APPEND waffle_libdeps
++            dl
++            pthread
++            )
++    endif()
+ endif()
+ 
+ if(waffle_has_wayland)

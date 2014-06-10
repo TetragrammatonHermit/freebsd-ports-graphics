@@ -1,0 +1,13 @@
+diff --git CMakeLists.txt CMakeLists.txt
+index a6695fe..bdd71d5 100644
+--- CMakeLists.txt
++++ CMakeLists.txt
+@@ -70,7 +70,7 @@ endif()
+ configure_file(waffle.pc.in ${waffle_libname}.pc @ONLY)
+ 
+ install(FILES ${CMAKE_BINARY_DIR}/${waffle_libname}.pc
+-        DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig)
++        DESTINATION ${CMAKE_INSTALL_PREFIX}/libdata/pkgconfig)
+ 
+ install(FILES cmake/Modules/FindWaffle.cmake
+         DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/cmake/Modules")
