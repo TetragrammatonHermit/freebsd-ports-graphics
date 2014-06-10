@@ -17,9 +17,8 @@ USE_GL=		gl egl
 XORG_CAT=       driver
 USE_XORG=	xorg-server dri3proto presentproto pixman
 
-CONFIGURE_ARGS+=--disable-glx-tls
 # needs libgbm >=9
-#CONFIGURE_ARGS+=--disable-glamor-dri3
+CONFIGURE_ARGS+=--disable-glamor-dri3
 # needs libglesv2
 CONFIGURE_ARGS+=--disable-glamor-gles2
 
