@@ -27,19 +27,13 @@ CMAKE_ARGS+=	-Dwaffle_has_glx=ON					\
 
 # TODO:		-Dwaffle_has_gbm=ON
 
-.include <bsd.port.pre.mk>
+PLIST_SUB+=	PORTVERSION=${PORTVERSION}
 
-post-install:
+.include <bsd.port.options.mk>
+
 .if ! ${PORT_OPTIONS:MDOCS}
-	${RM} ${STAGEDIR}${DOCSDIR}/LICENSE.txt
-	${RM} ${STAGEDIR}${DOCSDIR}/README.txt
-	${RM} ${STAGEDIR}${DOCSDIR}/examples/Makefile.example
-	${RM} ${STAGEDIR}${DOCSDIR}/examples/gl_basic.c
-	${RM} ${STAGEDIR}${DOCSDIR}/examples/simple-x11-egl.c
-	${RM} ${STAGEDIR}${DOCSDIR}/release-notes/waffle-${PORTVERSION}.txt
-	${RMDIR} ${STAGEDIR}${DOCSDIR}/examples
-	${RMDIR} ${STAGEDIR}${DOCSDIR}/release-notes
-	${RMDIR} ${STAGEDIR}${DOCSDIR}
+post-install:
+	${RM} -rf ${STAGEDIR}${DOCSDIR}
 .endif
 
-.include <bsd.port.post.mk>
+.include <bsd.port.mk>
