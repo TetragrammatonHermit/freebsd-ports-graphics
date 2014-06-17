@@ -30,7 +30,7 @@ EXTRACT_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
 .else
 MESABASEVERSION=	9.1.7
 MESASUBVERSION=		
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/older-versions/${MESABASEVERSION:R:R}.x/${MESABASEVERSION}/
 PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
