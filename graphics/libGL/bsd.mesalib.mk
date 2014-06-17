@@ -9,7 +9,7 @@
 #    - grahpics/libglesv2
 #    - graphics/dri
 #
-# $FreeBSD: head/graphics/libGL/bsd.mesalib.mk 354307 2014-05-17 09:56:00Z kwm $
+# $FreeBSD: head/graphics/libGL/bsd.mesalib.mk 358152 2014-06-17 17:23:07Z jkim $
 
 MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
@@ -25,7 +25,7 @@ MESASUBVERSION=
 PLIST_SUB+=	OLD="" NEW="@comment "
 .endif
 
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/older-versions/${MESABASEVERSION:R:R}.x/${MESABASEVERSION}/
 DISTFILES=	MesaLib-${MESADISTVERSION}${EXTRACT_SUFX}
 MAINTAINER=	x11@FreeBSD.org
 
@@ -56,6 +56,11 @@ SHEBANG_FILES=	src/gallium/*/*/*.py src/gallium/tools/trace/*.py \
 		src/gallium/drivers/svga/svgadump/svga_dump.py \
 		src/glsl/tests/compare_ir src/mapi/glapi/gen/*.py \
 		src/mapi/mapi/mapi_abi.py
+
+# i386 triggers clang bug 19778. This happens with clang 3.4.1 and older. 
+. if ${ARCH} == i386
+USE_GCC=yes
+. endif
 .else
 CONFIGURE_ARGS+=--disable-glut --disable-glw --disable-glu
 

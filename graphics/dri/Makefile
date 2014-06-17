@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/graphics/dri/Makefile 354307 2014-05-17 09:56:00Z kwm $
+# $FreeBSD: head/graphics/dri/Makefile 355979 2014-05-31 14:15:47Z kwm $
 
 PORTNAME=	dri
 PORTVERSION=	${MESAVERSION}
@@ -26,8 +26,7 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto
 CC=clang
 CXX=clang++
 CPP=clang-cpp
-# i386 triggers clang bug 19778. This happens with clang 3.4.1 and older.
-. elif ${OSVERSION} < 901500 || ${ARCH} == i386
+. elif ${OSVERSION} < 901500
 USE_GCC=yes
 . endif
 .endif
