@@ -1,8 +1,7 @@
 include/xorg/glamor.h
-lib/libglamor.la
 lib/libglamor.so
 lib/libglamor.so.0
-lib/xorg/modules/libglamoregl.la
+lib/libglamor.so.0.0.0
 lib/xorg/modules/libglamoregl.so
 libdata/pkgconfig/glamor-egl.pc
 libdata/pkgconfig/glamor.pc
