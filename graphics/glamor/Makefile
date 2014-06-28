@@ -10,20 +10,16 @@ COMMENT=	2D graphics common driver for the X Window System
 
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm
 
-USE_BZIP2=	yes
 GNU_CONFIGURE=	yes
-USES=		pathfix pkgconfig
+USES=		libtool:keepla pathfix pkgconfig tar:bzip2
 USE_GL=		gl egl
 XORG_CAT=       driver
 USE_XORG=	xorg-server dri3proto presentproto pixman
+INSTALL_TARGET=	install-strip
 
 # needs libgbm >=9
 CONFIGURE_ARGS+=--disable-glamor-dri3
 # needs libglesv2
 CONFIGURE_ARGS+=--disable-glamor-gles2
-
-post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libglamor.so.0
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/xorg/modules/libglamoregl.so
 
 .include <bsd.port.mk>
