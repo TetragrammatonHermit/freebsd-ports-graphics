@@ -11,7 +11,7 @@ COMMENT=	2D graphics common driver for the X Window System
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm
 
 GNU_CONFIGURE=	yes
-USES=		libtool pathfix pkgconfig tar:bzip2
+USES=		libtool:keepla pathfix pkgconfig tar:bzip2
 USE_GL=		gl egl
 XORG_CAT=       driver
 USE_XORG=	xorg-server dri3proto presentproto pixman
