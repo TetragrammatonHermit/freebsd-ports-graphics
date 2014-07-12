@@ -1,7 +1,7 @@
 # $FreeBSD: head/x11/xkeyboard-config/Makefile 331937 2013-10-29 09:53:25Z danfe $
 
 PORTNAME=	xkeyboard-config
-PORTVERSION=	2.11
+PORTVERSION=	2.12
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
