@@ -17,8 +17,8 @@ XORG_CAT=	driver
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
-SYNAPTICS_VERSION=	1.7.4
-SYNAPTICS_REVISION=	1
+SYNAPTICS_VERSION=	1.8.0
+SYNAPTICS_REVISION=	0
 PLIST_SUB+=	NEW="" OLD="@comment "
 .else
 SYNAPTICS_VERSION=	1.6.4
