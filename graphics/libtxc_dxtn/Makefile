@@ -6,7 +6,7 @@ PORTVERSION=	20140604
 CATEGORIES=	graphics
 
 MAINTAINER=	x11@FreeBSD.org
-COMMENT=	Subset of a wellknown texture compression scheme
+COMMENT=	Subset of a well-known texture compression scheme
 
 LICENSE=	MIT
 

@@ -1,4 +1,7 @@
-S2TC is a subset of a wellknown texture compression scheme (actually
-Color Cell Compression).
+S2TC is a subset of a well-known texture compression scheme
+(actually Color Cell Compression).
+
+This library enables Mesa GL ports to load texture compression. This
+library is dlopen() if present.
 
 WWW: https://github.com/divVerent/s2tc
