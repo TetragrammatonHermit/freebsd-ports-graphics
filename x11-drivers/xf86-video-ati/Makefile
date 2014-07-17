@@ -28,7 +28,7 @@ GLAMOR_LIB_DEPENDS=libglamor.so:${PORTSDIR}/graphics/glamor
 
 .include <bsd.port.pre.mk>
 
-.if ${OSVERSION} < 1000051
+.if ${OSVERSION} < 902508
 BROKEN=		Needs KMS support in kernel
 .endif
 
