@@ -1,5 +1,5 @@
---- src/radeon_kms.c.orig	2013-08-07 10:44:09.000000000 +0200
-+++ src/radeon_kms.c	2013-08-31 19:29:11.369001510 +0200
+--- src/radeon_kms.c.orig	2014-06-25 15:32:37.000000000 +0200
++++ src/radeon_kms.c	2014-07-17 20:22:53.688560483 +0200
 @@ -30,6 +30,8 @@
  
  #include <errno.h>
@@ -9,16 +9,16 @@
  /* Driver data structures */
  #include "radeon.h"
  #include "radeon_reg.h"
-@@ -270,7 +272,7 @@
- radeon_dirty_update(ScreenPtr screen)
- {
- 	RegionPtr region;
--	PixmapDirtyUpdatePtr ent;
-+	PixmapDirtyUpdatePtr ent = NULL;
+@@ -597,7 +599,7 @@
+     RADEONEntPtr pRADEONEnt = RADEONEntPriv(pScrn);
+     struct pci_device *dev = info->PciInfo;
+     char *busid;
+-    int fd;
++    int err, fd;
  
- 	if (xorg_list_is_empty(&screen->pixmap_dirty_list))
- 		return;
-@@ -606,6 +608,16 @@
+ #ifdef XF86_PDEV_SERVER_FD
+     if (pRADEONEnt->platform_dev) {
+@@ -616,6 +618,16 @@
  		      dev->domain, dev->bus, dev->dev, dev->func);
  #endif
  
@@ -32,6 +32,6 @@
 +	return FALSE;
 +    }
 +
-     info->dri2.drm_fd = drmOpen(NULL, busid);
-     if (info->dri2.drm_fd == -1) {
- 
+     fd = drmOpen(NULL, busid);
+     if (fd == -1)
+ 	xf86DrvMsg(pScrn->scrnIndex, X_ERROR,
