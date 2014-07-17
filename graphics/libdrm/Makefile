@@ -12,9 +12,10 @@ COMMENT=	Userspace interface to kernel Direct Rendering Module services
 LIB_DEPENDS=	libpciaccess.so:${PORTSDIR}/devel/libpciaccess \
 		libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs
 
-USES=		pkgconfig tar:bzip2
+USES=		libtool pkgconfig tar:bzip2
 GNU_CONFIGURE=	yes
 USE_LDCONFIG=	yes
+INSTALL_TARGET=	install-strip
 
 OPTIONS_DEFINE=	MANPAGES
 
@@ -61,8 +62,5 @@ pre-patch:
 	@${REINPLACE_CMD} 's|{libdir}/pkgconfig|{prefix}/libdata/pkgconfig|g; \
 			   s,i?86|x86_64),i?86|amd64|x86_64),g' \
 		${WRKSRC}/configure
-
-post-install:
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/lib*.so.*
 
 .include <bsd.port.mk>
