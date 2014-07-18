@@ -1,4 +1,4 @@
-# $FreeBSD: head/x11-drivers/xf86-video-ati/Makefile 351936 2014-04-23 13:25:16Z tijl $
+# $FreeBSD: head/x11-drivers/xf86-video-ati/Makefile 355734 2014-05-29 19:32:08Z kwm $
 
 PORTNAME=	xf86-video-ati
 PORTVERSION=	${ATI_VERSION}
@@ -14,7 +14,8 @@ USE_XORG=	xf86driproto xineramaproto xf86miscproto glproto
 
 .include <bsd.port.options.mk>
 
-.if ${OSVERSION} < 902508 || !defined(WITH_NEW_XORG)
+.if ${OSVERSION} < 902508 || !defined(WITH_NEW_XORG) || \
+	(${ARCH} != i386 && ${ARCH} != amd64)
 ATI_VERSION=	6.14.6
 ATI_REVISION=	3
 CONFIGURE_ARGS+=--disable-kms
