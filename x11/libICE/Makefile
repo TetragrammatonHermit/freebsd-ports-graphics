@@ -11,5 +11,6 @@ COMMENT=	Inter Client Exchange library for X11
 
 XORG_CAT=	lib
 USE_XORG=	xproto:both xtrans
+INSTALL_TARGET=	install-strip
 
 .include <bsd.port.mk>
