@@ -1,9 +1,8 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/x11/libXext/Makefile 351936 2014-04-23 13:25:16Z tijl $
+# $FreeBSD$
 
 PORTNAME=	libXext
-PORTVERSION=	1.3.2
-PORTREVISION=	2
+PORTVERSION=	1.3.3
 PORTEPOCH=	1
 CATEGORIES=	x11
 
