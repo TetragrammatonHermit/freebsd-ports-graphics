@@ -2,6 +2,7 @@
 
 PORTNAME=	xkeyboard-config
 PORTVERSION=	2.12
+PORTREVISION=	1
 CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
@@ -18,6 +19,7 @@ USE_GNOME=	intlhack libxslt:build
 USES=		gmake pathfix perl5
 USE_PERL5=	build
 GNU_CONFIGURE=	yes
+INSTALL_TARGET=	install-strip
 
 CONFIGURE_ARGS=	--with-xkb-base=${PREFIX}/share/X11/xkb \
 		--with-xkb-rules-symlink=xorg
