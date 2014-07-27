@@ -24,7 +24,7 @@ include/libdrm/radeon_drm.h
 include/libdrm/savage_drm.h
 include/libdrm/sis_drm.h
 include/libdrm/via_drm.h
-include/libkms/libkms.h
+%%KMS%%include/libkms/libkms.h
 include/xf86drm.h
 include/xf86drmMode.h
 lib/libdrm.so
@@ -39,14 +39,14 @@ lib/libdrm.so.2.4.0
 %%RADEON_DRIVERS%%lib/libdrm_radeon.so
 %%RADEON_DRIVERS%%lib/libdrm_radeon.so.1
 %%RADEON_DRIVERS%%lib/libdrm_radeon.so.1.0.1
-lib/libkms.so
-lib/libkms.so.1
-lib/libkms.so.1.0.0
+%%KMS%%lib/libkms.so
+%%KMS%%lib/libkms.so.1
+%%KMS%%lib/libkms.so.1.0.0
 libdata/pkgconfig/libdrm.pc
 %%INTEL_DRIVER%%libdata/pkgconfig/libdrm_intel.pc
 %%NOUVEAU%%libdata/pkgconfig/libdrm_nouveau.pc
 %%RADEON_DRIVERS%%libdata/pkgconfig/libdrm_radeon.pc
-libdata/pkgconfig/libkms.pc
+%%KMS%%libdata/pkgconfig/libkms.pc
 %%MAN%%man/man3/drmAvailable.3.gz
 %%MAN%%man/man3/drmHandleEvent.3.gz
 %%MAN%%man/man3/drmModeGetResources.3.gz
@@ -56,5 +56,5 @@ libdata/pkgconfig/libkms.pc
 %%MAN%%man/man7/drm-mm.7.gz
 %%MAN%%man/man7/drm-ttm.7.gz
 %%MAN%%man/man7/drm.7.gz
-@dirrm include/libkms
+%%KMS%%@dirrm include/libkms
 @dirrm include/libdrm
