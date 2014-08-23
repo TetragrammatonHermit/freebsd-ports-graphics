@@ -2,9 +2,10 @@
 # $FreeBSD$
 
 PORTNAME=	wayland
-PORTVERSION=	1.2.0
+PORTVERSION=	1.5.91
 CATEGORIES=	x11
-MASTER_SITES=	http://wayland.freedesktop.org/releases/
+MASTER_SITES=	http://rainbow-runner.nl/freebsd/
+#http://wayland.freedesktop.org/releases/
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	Wayland composite "server"
@@ -13,7 +14,7 @@ LIB_DEPENDS=	libexpat.so:${PORTSDIR}/textproc/expat2 \
 		libffi.so:${PORTSDIR}/devel/libffi
 
 USE_XZ=		yes
-USES=		pathfix pkgconfig
+USES=		gmake libtool pathfix pkgconfig
 USE_GNOME=	libxslt:build
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
