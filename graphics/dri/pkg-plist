@@ -51,7 +51,7 @@ include/GL/internal/dri_interface.h
 %%OLD%%%%VDPAU%%lib/vdpau/libvdpau_softpipe.so.1
 %%OLD%%%%VDPAU%%lib/vdpau/libvdpau_softpipe.so.1.0.0
 %%VDPAU%%libdata/pkgconfig/dri.pc
-@dirrm lib/vdpau
+%%VDPAU%%@dirrm lib/vdpau
 @dirrm lib/dri
 @dirrmtry include/GL/internal
 @dirrmtry include/GL
