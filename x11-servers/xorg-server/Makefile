@@ -26,7 +26,7 @@ OPTIONS_RADIO_CONF= HAL DEVD
 AIGLX_DESC=	Compile with Accelerated Indirect GLX support
 SUID_DESC=	Install the Xorg server with setuid bit set
 HAL_DESC=	Compile with HAL config support
-DEVD_DESC=	Use devd for autoconfiguration of input devices (experimental)
+DEVD_DESC=	Use devd for autoconfiguration of input devices
 OPTIONS_DEFAULT=AIGLX SUID DEVD
 
 OPTIONS_EXCLUDE_sparc64=	HAL
@@ -94,10 +94,11 @@ CONFIGURE_ARGS+=	--enable-config-hal=no
 .endif
 
 .if ${PORT_OPTIONS:MDEVD}
-EXTRA_PATCHES+=		${FILESDIR}/extra-devd
 . if defined(WITH_NEW_XORG)
+EXTRA_PATCHES+=	${FILESDIR}/extra-new-devd
 EXTRA_PATCHES+=	${FILESDIR}/extra-new-config_devd
 . else
+EXTRA_PATCHES+=	${FILESDIR}/extra-devd
 EXTRA_PATCHES+=	${FILESDIR}/extra-old-config_devd
 . endif
 .endif
@@ -197,7 +198,7 @@ post-configure:
 post-install:
 # The .xorg dir because else the xorg-server might not load the correct 
 # libglx module.
-	${MKDIR} ${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg
+	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg
 	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
 		${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg/
 
