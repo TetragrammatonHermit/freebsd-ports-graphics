@@ -25,7 +25,7 @@ OPTIONS_RADIO_CONF= HAL DEVD
 AIGLX_DESC=	Compile with Accelerated Indirect GLX support
 SUID_DESC=	Install the Xorg server with setuid bit set
 HAL_DESC=	Compile with HAL config support
-DEVD_DESC=	Use devd for autoconfiguration of input devices (experimental)
+DEVD_DESC=	Use devd for autoconfiguration of input devices
 OPTIONS_DEFAULT=AIGLX SUID DEVD
 
 OPTIONS_EXCLUDE_sparc64=	HAL
