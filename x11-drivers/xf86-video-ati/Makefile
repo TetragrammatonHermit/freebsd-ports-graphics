@@ -14,8 +14,15 @@ USE_XORG=	xf86driproto xineramaproto xf86miscproto glproto
 
 .include <bsd.port.options.mk>
 
-.if ${OSVERSION} < 902508 || !defined(WITH_NEW_XORG) || \
-	(${ARCH} != i386 && ${ARCH} != amd64)
+# 902510 = vt(9) merged into 9.2-stable
+.if ((${OSVERSION} >= 902510 && ${OSVERSION} < 1000000) || \
+      ${OSVERSION} > 1000051) && (${ARCH} == i386 || ${ARCH} == amd64)
+NEW_ATI_DRIVER=	yes
+.else
+NEW_ATI_DRIVER=	no
+.endif
+
+.if ${NEW_ATI_DRIVER} == no && !defined(WITH_NEW_XORG)
 ATI_VERSION=	6.14.6
 ATI_REVISION=	3
 CONFIGURE_ARGS+=--disable-kms
