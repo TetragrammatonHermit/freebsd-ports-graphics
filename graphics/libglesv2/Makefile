@@ -15,13 +15,18 @@ LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 USE_XORG+=	glproto dri2proto dri3proto xext xdamage xfixes presentproto \
 		xshmfence
 
-BUILD_WKRSRC=	${WRKSRC}/src/mapi/es2api
-INSTALL_WRKSRC=	${WRKSRC}/src/mapi/es2api
+BUILD_WKRSRC=	${WRKSRC}/src/mapi
+INSTALL_WRKSRC=	${WRKSRC}/src/mapi
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 
+.if !defined(WITH_NEW_MESA)
 pre-build:
-	@cd ${WRKSRC}/src/mapi/shared-glapi && ${MAKE_CMD}
+	@cd ${WRKSRC}/src/mapi/shared-glapi && ${MAKE_CMD} ${_MAKE_JOBS}
+.else
+post-install:
+	@${RM} ${STAGEDIR}/${PREFIX}/lib/libglapi*
+.endif
 
 .include <bsd.port.mk>

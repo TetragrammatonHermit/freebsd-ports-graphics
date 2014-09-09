@@ -1,5 +1,6 @@
 include/GL/gl.h
 include/GL/gl_mangle.h
+%%NEW%%include/GL/glcorearb.h
 include/GL/glext.h
 include/GL/glx.h
 include/GL/glx_mangle.h

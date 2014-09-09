@@ -25,6 +25,10 @@ INSTALL_WRKSRC=	${WRKSRC}/src/gbm
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
 
 pre-build:
-	@cd ${WRKSRC}/src/mapi/shared-glapi && ${MAKE_CMD}
+.if defined(WITH_NEW_MESA)
+	@cd ${WRKSRC}/src/mapi/ && ${MAKE_CMD} ${_MAKE_JOBS}
+.else
+	@cd ${WRKSRC}/src/mapi/shared-glapi && ${MAKE_CMD} ${_MAKE_JOBS}
+.endif
 
 .include <bsd.port.mk>

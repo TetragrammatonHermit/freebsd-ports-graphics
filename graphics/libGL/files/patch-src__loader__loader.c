@@ -1,5 +1,5 @@
---- src/loader/loader.c.orig	2014-04-27 03:37:31.000000000 +0200
-+++ src/loader/loader.c	2014-05-18 12:50:44.000000000 +0200
+--- src/loader/loader.c.orig	2014-08-21 01:27:47.000000000 +0200
++++ src/loader/loader.c	2014-09-04 19:57:56.384142575 +0200
 @@ -67,7 +67,7 @@
  #include <stdarg.h>
  #include <stdio.h>
@@ -8,12 +8,12 @@
 +#if defined(HAVE_LIBUDEV) || defined(HAVE_LIBDEVQ)
  #include <assert.h>
  #include <dlfcn.h>
- #endif
-@@ -202,6 +202,51 @@
-    return (*chip_id >= 0);
+ #include <fcntl.h>
+@@ -488,6 +488,53 @@
  }
+ #endif
  
-+#elif defined(HAVE_LIBDEVQ)
++#if defined(HAVE_LIBDEVQ)
 +#include <libdevq.h>
 +
 +static void *devq_handle = NULL;
@@ -39,8 +39,8 @@
 +#define DEVQ_SYMBOL(ret, name, args) \
 +   ret (*name) args = asserted_dlsym(devq_dlopen_handle(), #name);
 +
-+int
-+loader_get_pci_id_for_fd(int fd, int *vendor_id, int *chip_id)
++static int
++devq_get_pci_id_from_fd(int fd, int *vendor_id, int *chip_id)
 +{
 +   int ret;
 +   DEVQ_SYMBOL(int, devq_device_get_pciid_from_fd,
@@ -58,6 +58,33 @@
 +   return (*chip_id >= 0);
 +}
 +
- #elif !defined(__NOT_HAVE_DRM_H)
- 
++#endif
++
+ #if !defined(__NOT_HAVE_DRM_H)
  /* for i915 */
+ #include <i915_drm.h>
+@@ -571,6 +618,10 @@
+    if (sysfs_get_pci_id_for_fd(fd, vendor_id, chip_id))
+       return 1;
+ #endif
++#if HAVE_LIBDEVQ
++   if (devq_get_pci_id_from_fd(fd, vendor_id, chip_id))
++      return 1;
++#endif
+ #if !defined(__NOT_HAVE_DRM_H)
+    if (drm_get_pci_id_for_fd(fd, vendor_id, chip_id))
+       return 1;
+@@ -665,6 +716,13 @@
+    if ((result = sysfs_get_device_name_for_fd(fd)))
+       return result;
+ #endif
++#if HAVE_LIBDEVQ
++#if 0
++/* XXX implement this function in libdevq */
++   if ((result = devq_device_get_name_for_fd(fd)))
++      return result;
++#endif
++#endif
+    return result;
+ }
+ 

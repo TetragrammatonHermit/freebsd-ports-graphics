@@ -54,8 +54,10 @@ DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 
 .if defined(WITH_NEW_MESA)
 DRIREVISION=	0
+PLIST=	${.CURDIR}/pkg-plist
 .else
 DRIREVISION=	4
+PLIST=	${.CURDIR}/pkg-plist-old
 .endif
 
 .if ${PORT_OPTIONS:MGALLIUM}

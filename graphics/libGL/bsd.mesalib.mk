@@ -17,14 +17,18 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_MESA)
-MESABASEVERSION=	10.2.4
+MESABASEVERSION=	10.3.0
 # if there is a subversion, don't include the '-' between 7.11-rc2.
-MESASUBVERSION=	
+MESASUBVERSION=	rc3
+.if ${MESASUBVERSION} == ""
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
+.else
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
+.endif
 PLIST_SUB+=	OLD="@comment " NEW=""
 
 # work around libarchive bug?
-EXTRACT_CMD=${LOCALBASE}/bin/gtar
+EXTRACT_CMD=		${LOCALBASE}/bin/gtar
 EXTRACT_DEPENDS+=	gtar:${PORTSDIR}/archivers/gtar
 
 .else
@@ -42,9 +46,8 @@ BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 
 LIB_DEPENDS+=	libdevq.so:${PORTSDIR}/devel/libdevq
 
-USES+=		bison gmake libtool:keepla pathfix pkgconfig shebangfix \
-		tar:bzip2
-USE_PYTHON_BUILD=2
+USES+=		bison gmake libtool:keepla pathfix pkgconfig python:2,build \
+		shebangfix tar:bzip2
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 
@@ -53,7 +56,7 @@ LDFLAGS+=	-Wl,-Y${LOCALBASE}/lib
 
 .if ${OSVERSION} < 1000033
 BUILD_DEPENDS+=	${LOCALBASE}/bin/flex:${PORTSDIR}/textproc/flex
-CONFIGURE_ENV+=ac_cv_prog_LEX=${LOCALBASE}/bin/flex
+CONFIGURE_ENV+=	ac_cv_prog_LEX=${LOCALBASE}/bin/flex
 .endif
 
 python_OLD_CMD=	"/usr/bin/env[[:space:]]python"
@@ -61,6 +64,7 @@ python_CMD=	${LOCALBASE}/bin/python2
 SHEBANG_FILES=	src/gallium/*/*/*.py src/gallium/tools/trace/*.py \
 		src/gallium/drivers/svga/svgadump/svga_dump.py \
 		src/glsl/tests/compare_ir src/mapi/glapi/gen/*.py
+
 .if defined(WITH_NEW_MESA)
 SHEBANG_FILES+=	src/mapi/mapi_abi.py
 .endif
@@ -135,6 +139,7 @@ pre-build: pre-mesa-build
 pre-mesa-build:
 .if defined(WITH_NEW_MESA)
 # do propper gmake target.
+	@cd ${WRKSRC}/src/mesa/drivers/dri/common/xmlpool && ${MAKE_CMD}
 	@cd ${WRKSRC}/src/loader && ${MAKE_CMD} libloader.la
 .endif
 
