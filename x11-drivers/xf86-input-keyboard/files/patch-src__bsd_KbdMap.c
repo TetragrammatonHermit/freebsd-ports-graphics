@@ -1,3 +1,12 @@
+Don't query console keymap
+
+This seems to be useless and doesn't work anymore with vt(4), due to the
+use of Unicode codepoints in vt(4). So remove the related code. This fixes
+a segmentation fault during X.Org server startup.
+
+PR:             191459
+Submitted by:   Claude Buisson <clbuisson@orange.fr> (earlier version)
+
 --- src/bsd_KbdMap.c.orig	2013-10-28 01:44:15.000000000 +0100
 +++ src/bsd_KbdMap.c	2014-09-08 19:22:28.000000000 +0200
 @@ -27,168 +27,6 @@
