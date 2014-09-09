@@ -1,9 +1,11 @@
-Index: config/devd.c
-@@ -0,0 +1,388 @@
+--- config/devd.c.orig	2014-09-09 21:28:03.646653866 +0200
++++ config/devd.c	2014-09-09 22:39:39.978360587 +0200
+@@ -0,0 +1,432 @@
 +/*
 + * Copyright (c) 2012 Baptiste Daroussin
 + * Copyright (c) 2013, 2014 Alex Kozlov
 + * Copyright (c) 2014 Robert Millan
++ * Copyright (c) 2014 Jean-Sébastien Pédron
 + *
 + * Permission is hereby granted, free of charge, to any person obtaining a
 + * copy of this software and associated documentation files (the "Software"),
@@ -33,6 +35,7 @@ Index: config/devd.c
 +
 +#include <sys/types.h>
 +#include <sys/socket.h>
++#include <sys/stat.h>
 +#include <sys/sysctl.h>
 +#include <sys/un.h>
 +
@@ -67,6 +70,7 @@ Index: config/devd.c
 +static struct hw_type hw_types[] = {
 +	{ "ukbd", ATTR_KEYBOARD, "kbd" },
 +	{ "atkbd", ATTR_KEYBOARD, "kbd" },
++	{ "sysmouse", ATTR_POINTER, "mouse" },
 +	{ "ums", ATTR_POINTER, "mouse" },
 +	{ "psm", ATTR_POINTER, "mouse" },
 +	{ "uhid", ATTR_POINTER, "mouse" },
@@ -77,27 +81,57 @@ Index: config/devd.c
 +};
 +
 +static bool
-+sysctl_exists(const char *format, ...)
++sysctl_exists(const struct hw_type *device, int unit,
++    char *devname, size_t devname_len)
 +{
-+	va_list args;
-+	char *name = NULL;
-+	size_t len;
-+	int ret;
++    char *sysctlname;
++    size_t len;
++    int ret;
 +
-+	if (format == NULL)
-+		return false;
++    if (device == NULL || device->driver == NULL)
++        return false;
 +
-+	va_start(args, format);
-+	vasprintf(&name, format, args);
-+	va_end(args);
++    /* Check if a sysctl exists. */
++    asprintf(&sysctlname, "dev.%s.%i.%%desc", device->driver, unit);
++    if (sysctlname == NULL)
++        return (0);
 +
-+	ret = sysctlbyname(name, NULL, &len, NULL, 0);
++    ret = sysctlbyname(sysctlname, NULL, &len, NULL, 0);
++    free(sysctlname);
 +
-+	if (ret == -1)
-+		len = 0;
++    if (ret == 0 && len > 0) {
++        snprintf(devname, devname_len, "%s%i", device->driver, unit);
++        return (1);
++    }
 +
-+	free(name);
-+	return (len > 0);
++    return (0);
++}
++
++static bool
++devpath_exists(const struct hw_type *device,
++    char *devname, size_t devname_len)
++{
++    char *devpath;
++    struct stat st;
++    int ret;
++
++    if (device == NULL || device->driver == NULL)
++        return false;
++
++    /* Check if /dev/$driver exists. */
++    asprintf(&devpath, "/dev/%s", device->driver);
++    if (devpath == NULL)
++        return (0);
++
++    ret = stat(devpath, &st);
++    free(devpath);
++
++    if (ret == 0) {
++        strncpy(devname, device->driver, devname_len);
++        return (1);
++    }
++
++    return (0);
 +}
 +
 +static char *
@@ -147,9 +181,12 @@ Index: config/devd.c
 +    int fd;
 +
 +    for (i = 0; hw_types[i].driver != NULL; i++) {
-+        if (strncmp(devname, hw_types[i].driver,
-+                    strlen(hw_types[i].driver)) == 0 &&
-+            isdigit(*(devname + strlen(hw_types[i].driver)))) {
++        size_t len;
++
++        len = strlen(hw_types[i].driver);
++        if (strcmp(devname, hw_types[i].driver) == 0 ||
++            (strncmp(devname, hw_types[i].driver, len) == 0 &&
++             isnumber(*(devname + len)))) {
 +            attrs.flags |= hw_types[i].flag;
 +            break;
 +        }
@@ -176,6 +213,7 @@ Index: config/devd.c
 +    if (vendor == NULL) {
 +        attrs.vendor = strdup("(unnamed)");
 +        attrs.product = strdup("(unnamed)");
++        options = input_option_new(options, "name", devname);
 +    }
 +    else {
 +        if ((walk = strchr(vendor, ' ')) != NULL) {
@@ -344,19 +382,26 @@ Index: config/devd.c
 +{
 +    struct sockaddr_un devd;
 +    char devicename[1024];
-+    int i, j;
++    int i, j, ret;
 +
 +    /* first scan the sysctl to determine the hardware if needed */
-+
 +    for (i = 0; hw_types[i].driver != NULL; i++) {
-+        for (j = 0; sysctl_exists("dev.%s.%i.%%desc", hw_types[i].driver, j);
-+             j++) {
-+            snprintf(devicename, sizeof(devicename), "%s%i", hw_types[i].driver,
-+                     j);
++        for (j = 0; j < 16; j++) {
++            ret = sysctl_exists(&hw_types[i], j,
++                devicename, sizeof(devicename));
++            if (!ret)
++                continue;
++
 +            device_added(devicename);
 +        }
 +
++        ret = devpath_exists(&hw_types[i], devicename, sizeof(devicename));
++        if (!ret)
++            continue;
++
++        device_added(devicename);
 +    }
++
 +    sock_devd = socket(AF_UNIX, SOCK_STREAM, 0);
 +    if (sock_devd < 0) {
 +        ErrorF("config/devd: Fail opening stream socket");
