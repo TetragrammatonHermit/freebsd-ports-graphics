@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-intel
-PORTVERSION=	2.99.914
+PORTVERSION=	2.99.916
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -10,6 +10,11 @@ COMMENT=	Driver for Intel integrated graphics chipsets
 
 #LIB_DEPENDS=	libglamor.so:${PORTSDIR}/graphics/glamor
 LIB_DEPENDS+=	libxcb-util.so:${PORTSDIR}/x11/xcb-util
+
+# only keep this until xorg-server in ports is updated. Using a function
+# not present in xorg-server.
+BUILD_DEPENDS+=	xorg-server>=1.14:${PORTSDIR}/x11-servers/xorg-server
+RUN_DEPENDS+=	xorg-server>=1.14:${PORTSDIR}/x11-servers/xorg-server
 
 ONLY_FOR_ARCHS=	amd64 i386
 USE_GL=		gl

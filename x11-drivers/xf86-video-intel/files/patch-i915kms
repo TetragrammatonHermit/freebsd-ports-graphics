@@ -1,6 +1,19 @@
---- src/intel_device.c.orig	2014-06-24 13:30:56.000000000 +0200
-+++ src/intel_device.c	2014-07-24 21:14:41.000000000 +0200
-@@ -314,8 +314,8 @@
+--- src/intel_device.c.orig	2014-08-31 12:47:52.000000000 +0200
++++ src/intel_device.c	2014-09-15 10:15:38.195258751 +0200
+@@ -85,7 +85,12 @@
+ 		return 0;
+ 
+ 	xf86DrvMsg(scrn->scrnIndex, X_INFO, "[drm] Contents of '%s':\n", path);
++
++#ifdef __GLIBC__
+ 	while (getline(&line, &len, file) != -1)
++#else
++	while ((line = fgetln(file, &len)) != (char *) NULL)
++#endif
+ 		xf86DrvMsg(scrn->scrnIndex, X_INFO, "[drm] %s", line);
+ 
+ 	free(line);
+@@ -401,8 +406,8 @@
  		 pci->domain, pci->bus, pci->dev, pci->func);
  
  	ret = drmCheckModesettingSupported(id);

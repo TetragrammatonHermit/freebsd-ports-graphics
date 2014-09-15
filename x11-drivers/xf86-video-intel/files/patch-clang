@@ -39,14 +39,3 @@
  
  	list_for_each_entry(priv, &intel->batch_pixmaps, batch)
  		priv->dirty = 0;
---- src/uxa/intel_display.c.orig	2013-08-14 12:09:25.802015629 +0200
-+++ src/uxa/intel_display.c	2013-08-14 12:09:51.034009844 +0200
-@@ -1753,7 +1753,7 @@
- static drmModeEncoderPtr
- intel_get_kencoder(struct intel_mode *mode, int num)
- {
--	struct intel_output *iterator;
-+	struct intel_output *iterator = NULL;
- 	int id = mode->mode_res->encoders[num];
- 
- 	list_for_each_entry(iterator, &mode->outputs, link)
