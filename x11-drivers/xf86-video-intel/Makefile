@@ -33,7 +33,7 @@ USE_XORG=	glproto \
 		presentproto
 
 CONFIGURE_ENV+=	xorg_cv_cc_flag__Wno_maybe_uninitialized=no
-CONFIGURE_ARGS+=--enable-sna --disable-glamor
+CONFIGURE_ARGS+=--enable-sna --disable-glamor --disable-dri3
 CPPFLAGS+=	-I${LOCALBASE}/include
 INSTALL_TARGET=	install-strip
 
