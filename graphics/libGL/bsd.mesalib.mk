@@ -33,8 +33,8 @@ BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 		python2:${PORTSDIR}/lang/python2 \
 		${PYTHON_SITELIBDIR}/libxml2.py:${PORTSDIR}/textproc/py-libxml2
 
-USES+=		bison gmake pathfix pkgconfig shebangfix tar:bzip2
-USE_PYTHON_BUILD=2
+USES+=		bison gmake pathfix pkgconfig python:2,build \
+		shebangfix tar:bzip2
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes
 

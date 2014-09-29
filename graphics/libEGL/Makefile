@@ -10,6 +10,10 @@ COMMENT=	OpenEGL library
 
 LIB_DEPENDS+=	libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs
 
+.if defined(WITH_NEW_XORG)
+LIB_DEPENDS+=	libdevq.so:${PORTSDIR}/devel/libdevq
+.endif
+
 USE_XORG=	x11 xau xcb xdmcp
 
 # stuff not needed by libEGL but configure wants it
