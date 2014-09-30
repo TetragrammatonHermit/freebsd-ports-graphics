@@ -14,8 +14,8 @@
 # $FreeBSD$
 
 # hw context support in the i915kms driver
-.if ${OPSYS} == FreeBSD && 
- (${OSVERSION} >= 1000717 && ${OSVERSION} < 1100000 ||
+.if ${OPSYS} == FreeBSD && \
+ (${OSVERSION} >= 1000717 && ${OSVERSION} < 1100000 || \
   ${OSVERSION} >= 1100035)
 WITH_NEW_MESA=1
 .endif
