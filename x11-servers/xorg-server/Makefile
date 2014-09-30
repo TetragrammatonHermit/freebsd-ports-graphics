@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME?=	xorg-server
-PORTVERSION=	1.16.0
+PORTVERSION=	1.16.1
 PORTEPOCH?=	1
 CATEGORIES=	x11-servers
 MASTER_SITES=	XORG
@@ -37,7 +37,7 @@ USE_PERL5=	build
 USE_GL=		gl
 USE_XORG?=	xf86driproto glproto xdmcp x11 xkbfile xxf86misc xxf86vm xaw7 \
 		xmu xt xpm xext randrproto renderproto fixesproto damageproto \
-		dri2proto dri3proto xcmiscproto xextproto xproto xtrans \
+		dri2proto xcmiscproto xextproto xproto xtrans \
 		xf86miscproto xf86vidmodeproto xf86bigfontproto scrnsaverproto \
 		bigreqsproto resourceproto fontsproto inputproto xf86dgaproto \
 		videoproto compositeproto trapproto presentproto recordproto \
@@ -48,7 +48,7 @@ USE_OPENSSL=	yes
 CONFIGURE_ARGS?=--disable-dmx --disable-xvfb --disable-xnest \
 		--without-xmlto --disable-docs --disable-devel-docs \
 		--localstatedir=/var --without-dtrace --disable-xephyr \
-		--enable-record=yes
+		--enable-record=yes --disable-dri3
 INSTALL_TARGET=	install-strip
 
 .if ${SLAVE_PORT} == "no"
@@ -57,10 +57,6 @@ SUB_FILES=	pkg-install pkg-deinstall
 # for slave ports we need to overwrite PLIST, so it doesn't overwrite
 # PLIST_FILES, with the masterport plist.
 PLIST=		${.CURDIR}/pkg-plist
-.endif
-
-.if !defined(WITH_NEW_MESA)
-BROKEN=		Needs Mesa version 10+, please set by WITH_NEW_MESA
 .endif
 
 .include <bsd.port.pre.mk>
@@ -96,6 +92,11 @@ CONFIGURE_ARGS+=--enable-install-setuid=no
 PLIST_SUB+=	SUID=""
 .else
 PLIST_SUB+=	SUID="@comment "
+.endif
+
+.if ${ARCH} == armv6
+EXTRA_PATCHES+=	${FILESDIR}/extra-arm-patch-hw__xfree86__os-support__bsd__Makefile.in
+EXTRA_PATCHES+=	${FILESDIR}/extra-arm-patch-include__servermd.h
 .endif
 
 .if ${ARCH} == i386
