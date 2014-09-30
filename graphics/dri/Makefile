@@ -12,7 +12,7 @@ COMMENT=	OpenGL hardware acceleration drivers for the DRI
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 		libexpat.so:${PORTSDIR}/textproc/expat2
 
-USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto dri3proto \
+USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto \
 		presentproto xvmc xshmfence
 
 OPTIONS_DEFINE=	TEXTURE

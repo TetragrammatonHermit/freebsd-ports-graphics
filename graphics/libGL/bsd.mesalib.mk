@@ -79,6 +79,7 @@ SHEBANG_FILES+=	src/mapi/mapi_abi.py
 MASTERDIR=		${.CURDIR}/../../graphics/libGL
 .if defined(WITH_NEW_MESA)
 PATCHDIR=		${MASTERDIR}/files
+CONFIGURE_ARGS+=	--disable-dri3
 .else
 PATCHDIR=		${MASTERDIR}/files-old
 .endif

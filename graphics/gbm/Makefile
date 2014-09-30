@@ -15,7 +15,7 @@ LIB_DEPENDS+=	libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs \
 USE_XORG=	x11 xau xcb xdmcp
 
 # stuff not needed by gbm but configure wants it
-USE_XORG+=	glproto dri2proto dri3proto xext xdamage xfixes presentproto \
+USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
 		xshmfence
 
 BUILD_WRKSRC=	${WRKSRC}/src/gbm
