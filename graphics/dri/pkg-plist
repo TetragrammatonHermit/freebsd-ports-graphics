@@ -10,16 +10,6 @@ include/GL/internal/dri_interface.h
 %%GALLIUM%%lib/dri/radeonsi_dri.so
 %%SWRAST_DRIVER%%lib/dri/swrast_dri.so
 %%GALLIUM%%lib/dri/vmwgfx_dri.so
-%%GALLIUM%%lib/gallium-pipe/pipe_r300.la
-%%GALLIUM%%lib/gallium-pipe/pipe_r300.so
-%%GALLIUM%%lib/gallium-pipe/pipe_r600.la
-%%GALLIUM%%lib/gallium-pipe/pipe_r600.so
-%%GALLIUM%%lib/gallium-pipe/pipe_radeonsi.la
-%%GALLIUM%%lib/gallium-pipe/pipe_radeonsi.so
-%%GALLIUM%%lib/gallium-pipe/pipe_swrast.la
-%%GALLIUM%%lib/gallium-pipe/pipe_swrast.so
-%%GALLIUM%%lib/gallium-pipe/pipe_vmwgfx.la
-%%GALLIUM%%lib/gallium-pipe/pipe_vmwgfx.so
 %%GALLIUM%%lib/libXvMCr600.so
 %%GALLIUM%%lib/libXvMCr600.so.1
 %%GALLIUM%%lib/libXvMCr600.so.1.0
@@ -34,7 +24,6 @@ include/GL/internal/dri_interface.h
 %%VDPAU%%lib/vdpau/libvdpau_radeonsi.so.1.0.0
 %%VDPAU%%libdata/pkgconfig/dri.pc
 %%VDPAU%%@dirrm lib/vdpau
-%%GALLIUM%%@dirrm lib/gallium-pipe
 @dirrm lib/dri
 @dirrmtry include/GL/internal
 @dirrmtry include/GL
