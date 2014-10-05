@@ -50,7 +50,7 @@ BUILD_DEPENDS+=	makedepend:${PORTSDIR}/devel/makedepend \
 
 LIB_DEPENDS+=	libdevq.so:${PORTSDIR}/devel/libdevq
 
-USES+=		bison gmake libtool:keepla pathfix pkgconfig python:2,build \
+USES+=		bison gmake libtool pathfix pkgconfig python:2,build \
 		shebangfix tar:bzip2
 USE_LDCONFIG=	yes
 GNU_CONFIGURE=	yes

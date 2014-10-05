@@ -4,7 +4,6 @@ include/EGL/eglext.h
 include/EGL/eglmesaext.h
 include/EGL/eglplatform.h
 include/KHR/khrplatform.h
-lib/libEGL.la
 lib/libEGL.so
 lib/libEGL.so.1
 lib/libEGL.so.1.0.0

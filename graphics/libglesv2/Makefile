@@ -15,11 +15,16 @@ LIB_DEPENDS+=	libdrm.so:${PORTSDIR}/graphics/libdrm \
 USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
 		xshmfence
 
-BUILD_WKRSRC=	${WRKSRC}/src/mapi
-INSTALL_WRKSRC=	${WRKSRC}/src/mapi
-
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+
+.if defined(WITH_NEW_MESA)
+BUILD_WRKSRC=	${WRKSRC}/src/mapi
+INSTALL_WRKSRC=	${WRKSRC}/src/mapi
+.else
+BUILD_WRKSRC=	${WRKSRC}/src/mapi/es2api
+INSTALL_WRKSRC=	${WRKSRC}/src/mapi/es2api
+.endif
 
 .if !defined(WITH_NEW_MESA)
 pre-build:
