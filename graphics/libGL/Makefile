@@ -18,14 +18,13 @@ USE_XORG=	glproto x11 xext xxf86vm xdamage xfixes dri2proto:both \
 SUB_FILES=	pkg-install pkg-deinstall
 
 .include <bsd.port.options.mk>
+.include "${.CURDIR}/bsd.mesalib.mk"
 
 .if defined(WITH_NEW_MESA)
 LIBGLREVISION=	0
 .else
-LIBGLREVISION=	0
+LIBGLREVISION=	3
 .endif
-
-.include "${.CURDIR}/bsd.mesalib.mk"
 
 .if !(${ARCH} == "amd64" || ${ARCH} == "i386")
 CONFIGURE_ARGS+=--disable-gallium-intel

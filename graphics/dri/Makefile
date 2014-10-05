@@ -56,7 +56,7 @@ DRI_DRIVERS=	${ALL_DRI_DRIVERS}
 DRIREVISION=	0
 PLIST=	${.CURDIR}/pkg-plist
 .else
-DRIREVISION=	4
+DRIREVISION=	6
 PLIST=	${.CURDIR}/pkg-plist-old
 .endif
 
@@ -96,7 +96,7 @@ PLIST_SUB+=	VDPAU="@comment "
 .if ${ARCH} == powerpc || ${ARCH} == powerpc64
 DRI_DRIVERS=	RADEON SWRAST
 .endif
-.if ${ARCH} == sparc64
+.if ${ARCH} == sparc64 || ${ARCH} == armv6
 DRI_DRIVERS=	SWRAST
 .endif
 

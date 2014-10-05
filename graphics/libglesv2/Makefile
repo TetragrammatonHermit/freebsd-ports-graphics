@@ -3,6 +3,7 @@
 
 PORTNAME=	libglesv2
 PORTVERSION=	${MESAVERSION}
+PORTREVISION=	${LIBGLES_REVISION}
 CATEGORIES=	graphics
 
 COMMENT=	OpenGL ES v2 library
@@ -17,6 +18,12 @@ USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+
+.if defined(WITH_NEW_MESA)
+LIBGLES_REVISION=	0
+.else
+LIBGLES_REVISION=	3
+.endif
 
 .if defined(WITH_NEW_MESA)
 BUILD_WRKSRC=	${WRKSRC}/src/mapi

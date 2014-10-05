@@ -3,6 +3,7 @@
 
 PORTNAME=	gbm
 PORTVERSION=	${MESAVERSION}
+PORTREVISION=	${GBM_REVISION}
 CATEGORIES=	graphics
 
 COMMENT=	gbm library
@@ -23,6 +24,12 @@ INSTALL_WRKSRC=	${WRKSRC}/src/gbm
 
 .include <bsd.port.options.mk>
 .include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+
+.if defined(WITH_NEW_MESA)
+GBM_REVISION=	0
+.else
+GBM_REVISION=	0
+.endif
 
 pre-build:
 .if defined(WITH_NEW_MESA)

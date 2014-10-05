@@ -3,6 +3,7 @@
 
 PORTNAME=	libEGL
 PORTVERSION=	${MESAVERSION}
+PORTREVISION=	${LIBEGL_REVISION}
 CATEGORIES=	graphics
 
 COMMENT=	OpenEGL library
@@ -18,6 +19,9 @@ USE_XORG=	x11 xau xcb xdmcp
 USE_XORG+=	glproto dri2proto xext xdamage xfixes presentproto \
 		xshmfence
 
+.include <bsd.port.options.mk>
+.include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+
 .if defined(WITH_NEW_MESA)
 BUILD_WRKSRC=	src/egl/drivers/dri2 src/egl/main
 INSTALL_WRKSRC=	src/egl/drivers/dri2 src/egl/main
@@ -26,8 +30,11 @@ BUILD_WRKSRC=	${WRKSRC}/src/egl
 INSTALL_WRKSRC=	${WRKSRC}/src/egl
 .endif
 
-.include <bsd.port.options.mk>
-.include "${.CURDIR}/../../graphics/libGL/bsd.mesalib.mk"
+.if defined(WITH_NEW_MESA)
+LIBEGL_REVISION=	0
+.else
+LIBEGL_REVISION=	4
+.endif
 
 .if defined(WITH_NEW_MESA)
 do-build: egl-do-build
