@@ -61,7 +61,7 @@ lib/libllvmradeon%%VERSION%%.so
 %%VDPAU%%lib/vdpau/libvdpau_softpipe.so
 %%VDPAU%%lib/vdpau/libvdpau_softpipe.so.1
 %%VDPAU%%lib/vdpau/libvdpau_softpipe.so.1.0.0
-%%VDPAU%%libdata/pkgconfig/dri.pc
+libdata/pkgconfig/dri.pc
 @comment libdata/pkgconfig/egl.pc
 @comment libdata/pkgconfig/gbm.pc
 @comment libdata/pkgconfig/gl.pc

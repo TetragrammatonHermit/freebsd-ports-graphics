@@ -52,7 +52,7 @@ include/GL/internal/dri_interface.h
 %%VDPAU%%lib/vdpau/libvdpau_radeonsi.so.1.0
 %%VDPAU%%lib/vdpau/libvdpau_radeonsi.so.1.0.0
 @comment libdata/pkgconfig/egl.pc
-%%VDPAU%%libdata/pkgconfig/dri.pc
+libdata/pkgconfig/dri.pc
 @comment libdata/pkgconfig/gbm.pc
 @comment libdata/pkgconfig/gl.pc
 %%VDPAU%%@dirrm lib/vdpau
