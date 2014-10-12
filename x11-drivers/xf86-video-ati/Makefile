@@ -1,7 +1,7 @@
 # $FreeBSD$
 
 PORTNAME=	xf86-video-ati
-PORTVERSION=	7.4.0
+PORTVERSION=	7.5.0
 CATEGORIES=	x11-drivers
 
 MAINTAINER=	x11@FreeBSD.org
@@ -13,7 +13,6 @@ USE_XORG=	xf86driproto \
 		xineramaproto \
 		xf86miscproto \
 		glproto \
-		dri3proto \
 		presentproto
 INSTALL_TARGET=	install-strip
 
