@@ -32,14 +32,10 @@ PKGHELP=	${.CURDIR}/pkg-help
 # gcc from base can't handle some code in mesa 9.1+
 # We only care for 9.x and 8.x, not for old pre-clang default current.
 # This is for 0b0000 binary which gcc 4.3+ understands and is in the i965 driver.
-. if (${OSVERSION} >= 901500 && ${OSVERSION} < 1000000) \
-		&& ${ARCH} == amd64
+. if (${OSVERSION} >= 901500 && ${OSVERSION} < 1000000)
 CC=clang
 CXX=clang++
 CPP=clang-cpp
-# i386 triggers clang bug 19778. This happens with clang 3.4.1 and older.
-. elif ${OSVERSION} < 901500 || ${ARCH} == i386
-USE_GCC=yes
 . endif
 
 ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST
