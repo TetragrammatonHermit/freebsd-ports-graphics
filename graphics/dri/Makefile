@@ -30,12 +30,14 @@ PKGHELP=	${.CURDIR}/pkg-help
 .include <bsd.port.options.mk>
 
 # gcc from base can't handle some code in mesa 9.1+
-# We only care for 9.x and 8.x, not for old pre-clang default current.
+# We only care for 9.x and 8.x. clang in 10.x is new enough.
 # This is for 0b0000 binary which gcc 4.3+ understands and is in the i965 driver.
 . if (${OSVERSION} >= 901500 && ${OSVERSION} < 1000000)
 CC=clang
 CXX=clang++
 CPP=clang-cpp
+. elif ${OSVERSION} < 901500
+USE_GCC=yes
 . endif
 
 ALL_DRI_DRIVERS=I915 I965 R200 RADEON SWRAST

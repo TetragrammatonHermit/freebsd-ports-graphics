@@ -1,8 +1,10 @@
---- src/gallium/state_trackers/xvmc/tests/xvmc_bench.c.orig	2013-10-05 05:59:22.000000000 +0200
-+++ src/gallium/state_trackers/xvmc/tests/xvmc_bench.c	2014-03-02 13:21:35.000000000 +0100
-@@ -28,8 +28,8 @@
+--- src/gallium/state_trackers/xvmc/tests/xvmc_bench.c.orig	2013-10-05 03:59:22.000000000 +0000
++++ src/gallium/state_trackers/xvmc/tests/xvmc_bench.c	2014-10-16 13:46:30.000000000 +0000
+@@ -27,9 +27,10 @@
+ 
  #include <assert.h>
  #include <stdio.h>
++#include <stdlib.h>
  #include <string.h>
 -#include <error.h>
  #include <sys/time.h>
@@ -10,7 +12,7 @@
  #include "testlib.h"
  
  #define MACROBLOCK_WIDTH		16
-@@ -144,23 +144,10 @@
+@@ -144,23 +145,10 @@
  	}
  
  	if (fail)
@@ -38,7 +40,7 @@
  
  	if (config->output_width == 0)
  		config->output_width = config->input_width;
-@@ -214,7 +201,8 @@
+@@ -214,7 +202,8 @@
  	))
  	{
  		XCloseDisplay(display);
