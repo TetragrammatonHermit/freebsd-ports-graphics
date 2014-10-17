@@ -6,7 +6,7 @@ PORTVERSION=	${MESAVERSION}
 PORTREVISION=	${LIBGLAPI_REVISION}
 CATEGORIES=	graphics
 
-COMMENT=	Common GL api libary used by Mesa based ports.
+COMMENT=	Common GL api library used by Mesa based ports
 
 LIB_DEPENDS+=	libpthread-stubs.so:${PORTSDIR}/devel/libpthread-stubs
 

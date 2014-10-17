@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/graphics/dri/Makefile 342087 2014-01-31 22:21:43Z kwm $
+# $FreeBSD$
 
 PORTNAME=	dri
 PORTVERSION=	${MESAVERSION}
@@ -24,6 +24,7 @@ OPTIONS_DEFAULT_amd64=	GALLIUM VDPAU
 
 GALLIUM_DESC=	Gallium (llvm backed) dri drivers
 TEXTURE_DESC=	Enable texture-float support (patent encumbered)
+VDPAU_DESC=	VDPAU (GPU video acceleration) support (needs Gallium)
 
 PKGHELP=	${.CURDIR}/pkg-help
 

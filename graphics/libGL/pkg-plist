@@ -18,5 +18,3 @@ lib/.libGL/libGL.so.1.2.0
 @comment lib/libglapi.so.0.0.0
 @comment libdata/pkgconfig/dri.pc
 libdata/pkgconfig/gl.pc
-@dirrm lib/.libGL
-@dirrmtry include/GL

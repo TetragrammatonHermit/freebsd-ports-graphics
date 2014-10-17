@@ -11,7 +11,7 @@
 #    - graphics/libglapi
 #    - grahpics/libglesv2
 #
-# $FreeBSD$
+# $FreeBSD: head/graphics/libGL/bsd.mesalib.mk 371035 2014-10-17 09:53:13Z kwm $
 
 # hw context support in the i915kms driver
 .if ${OPSYS} == FreeBSD && \

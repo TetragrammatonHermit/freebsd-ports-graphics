@@ -56,5 +56,3 @@ libdata/pkgconfig/libdrm.pc
 %%MAN%%man/man7/drm-mm.7.gz
 %%MAN%%man/man7/drm-ttm.7.gz
 %%MAN%%man/man7/drm.7.gz
-%%KMS%%@dirrm include/libkms
-@dirrm include/libdrm

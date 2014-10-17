@@ -48,24 +48,20 @@ lib/libdricore9.1.7.so.1.0.0
 @comment lib/libglapi.so
 @comment lib/libglapi.so.0
 @comment lib/libglapi.so.0.0.0
-lib/libllvmradeon%%VERSION%%.so
-%%VDPAU%%lib/vdpau/libvdpau_r300.so
-%%VDPAU%%lib/vdpau/libvdpau_r300.so.1
-%%VDPAU%%lib/vdpau/libvdpau_r300.so.1.0.0
-%%VDPAU%%lib/vdpau/libvdpau_r600.so
-%%VDPAU%%lib/vdpau/libvdpau_r600.so.1
-%%VDPAU%%lib/vdpau/libvdpau_r600.so.1.0.0
-%%VDPAU%%lib/vdpau/libvdpau_radeonsi.so
-%%VDPAU%%lib/vdpau/libvdpau_radeonsi.so.1
-%%VDPAU%%lib/vdpau/libvdpau_radeonsi.so.1.0.0
-%%VDPAU%%lib/vdpau/libvdpau_softpipe.so
-%%VDPAU%%lib/vdpau/libvdpau_softpipe.so.1
-%%VDPAU%%lib/vdpau/libvdpau_softpipe.so.1.0.0
+%%GALLIUM%%lib/libllvmradeon%%VERSION%%.so
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_r300.so
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_r300.so.1
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_r300.so.1.0.0
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_r600.so
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_r600.so.1
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_r600.so.1.0.0
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_radeonsi.so
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_radeonsi.so.1
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_radeonsi.so.1.0.0
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_softpipe.so
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_softpipe.so.1
+%%GALLIUM%%%%VDPAU%%lib/vdpau/libvdpau_softpipe.so.1.0.0
 libdata/pkgconfig/dri.pc
 @comment libdata/pkgconfig/egl.pc
 @comment libdata/pkgconfig/gbm.pc
 @comment libdata/pkgconfig/gl.pc
-%%VDPAU%%@dirrm lib/vdpau
-@dirrm lib/dri
-@dirrmtry include/GL/internal
-@dirrmtry include/GL
