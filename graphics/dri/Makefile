@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/graphics/dri/Makefile 342087 2014-01-31 22:21:43Z kwm $
+# $FreeBSD$
 
 PORTNAME=	dri
 PORTVERSION=	${MESAVERSION}
@@ -24,21 +24,20 @@ OPTIONS_DEFAULT_amd64=	GALLIUM VDPAU
 
 GALLIUM_DESC=	Gallium (llvm backed) dri drivers
 TEXTURE_DESC=	Enable texture-float support (patent encumbered)
+VDPAU_DESC=	VDPAU (GPU video acceleration) support (needs Gallium)
 
 PKGHELP=	${.CURDIR}/pkg-help
 
 .include <bsd.port.options.mk>
 
 # gcc from base can't handle some code in mesa 9.1+
-# We only care for 9.x and 8.x, not for old pre-clang default current.
+# We only care for 9.x and 8.x. clang in 10.x is new enough.
 # This is for 0b0000 binary which gcc 4.3+ understands and is in the i965 driver.
-. if (${OSVERSION} >= 901500 && ${OSVERSION} < 1000000) \
-		&& ${ARCH} == amd64
+. if (${OSVERSION} >= 901500 && ${OSVERSION} < 1000000)
 CC=clang
 CXX=clang++
 CPP=clang-cpp
-# i386 triggers clang bug 19778. This happens with clang 3.4.1 and older.
-. elif ${OSVERSION} < 901500 || ${ARCH} == i386
+. elif ${OSVERSION} < 901500
 USE_GCC=yes
 . endif
 

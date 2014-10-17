@@ -1,5 +1,5 @@
 # Created by: kwm@FreeBSD.org
-# $FreeBSD: head/graphics/libglesv2/Makefile 351411 2014-04-16 18:28:47Z zeising $
+# $FreeBSD$
 
 PORTNAME=	libglesv2
 PORTVERSION=	${MESAVERSION}

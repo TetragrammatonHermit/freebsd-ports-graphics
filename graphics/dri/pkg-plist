@@ -55,7 +55,3 @@ include/GL/internal/dri_interface.h
 libdata/pkgconfig/dri.pc
 @comment libdata/pkgconfig/gbm.pc
 @comment libdata/pkgconfig/gl.pc
-%%VDPAU%%@dirrm lib/vdpau
-@dirrm lib/dri
-@dirrmtry include/GL/internal
-@dirrmtry include/GL
