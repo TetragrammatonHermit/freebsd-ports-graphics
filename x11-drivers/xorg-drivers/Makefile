@@ -1,7 +1,8 @@
-# $FreeBSD: head/x11-drivers/xorg-drivers/Makefile 352986 2014-05-05 09:45:36Z bapt $
+# $FreeBSD$
 
 PORTNAME=	xorg-drivers
 PORTVERSION=	7.7
+PORTREVISION=	2
 CATEGORIES=	x11-drivers
 MASTER_SITES=	# none
 DISTFILES=	# none
@@ -26,7 +27,8 @@ INPUT_DRIVERS=		mouse \
 			penmount \
 			synaptics \
 			vmmouse \
-			void
+			void \
+			wacom
 
 VIDEO_DRIVERS=		ati \
 			mach64 \

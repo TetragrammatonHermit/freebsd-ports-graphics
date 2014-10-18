@@ -1,4 +1,4 @@
-# $FreeBSD: head/x11-drivers/xf86-video-ati/Makefile 355734 2014-05-29 19:32:08Z kwm $
+# $FreeBSD$
 
 PORTNAME=	xf86-video-ati
 PORTVERSION=	${ATI_VERSION}
@@ -40,12 +40,12 @@ NEW_ATI_DRIVER=	no
 
 .if ${NEW_ATI_DRIVER} == no
 ATI_VERSION=	6.14.6
-ATI_REVISION=	3
+ATI_REVISION=	4
 CONFIGURE_ARGS+=--disable-kms
 PLIST_SUB+=	OLD=""
 .else
 ATI_VERSION=	7.2.0
-ATI_REVISION=	3
+ATI_REVISION=	4
 CONFIGURE_ARGS+=--disable-udev
 CONFIGURE_ARGS+=--disable-glamor
 EXTRA_PATCHES+=	${FILESDIR}/extra-src__radeon_kms.c

@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/x11-fonts/xorg-fonts-truetype/Makefile 321822 2013-06-26 23:12:07Z zeising $
+# $FreeBSD$
 
 PORTNAME=	xorg-fonts-truetype
 PORTVERSION=	7.7

@@ -1,0 +1,21 @@
+# $FreeBSD$
+
+PORTNAME=	Products.ExternalEditor
+PORTVERSION=	1.1.0
+PORTREVISION=	1
+CATEGORIES=	devel python zope
+MASTER_SITES=	CHEESESHOP
+PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
+DIST_SUBDIR=	zope
+
+MAINTAINER=	zope@FreeBSD.org
+COMMENT=	Zope external editor
+
+LICENSE=	ZPL21
+
+USES=		zip
+USE_PYTHON=		yes
+USE_PYDISTUTILS=	yes
+PYDISTUTILS_AUTOPLIST=	yes
+
+.include <bsd.port.mk>

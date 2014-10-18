@@ -1,4 +1,4 @@
-# $FreeBSD: head/x11-servers/xephyr/Makefile 354175 2014-05-15 21:26:23Z kwm $
+# $FreeBSD$
 
 PORTNAME=	xephyr
 
@@ -23,10 +23,10 @@ PLIST_FILES=	bin/Xephyr man/man1/Xephyr.1.gz
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/hw/kdrive/ephyr/Xephyr ${STAGEDIR}${PREFIX}/bin/
-.if defined(WITH_NEW_XORG)
-	${INSTALL_MAN} ${WRKSRC}/hw/kdrive/ephyr/man/Xephyr.1 ${STAGEDIR}${PREFIX}/man/man1/
-.else
-	${INSTALL_MAN} ${WRKSRC}/hw/kdrive/ephyr/Xephyr.1 ${STAGEDIR}${PREFIX}/man/man1/
-.endif
+#.if defined(WITH_NEW_XORG)
+	-${INSTALL_MAN} ${WRKSRC}/hw/kdrive/ephyr/man/Xephyr.1 ${STAGEDIR}${PREFIX}/man/man1/
+#.else
+	-${INSTALL_MAN} ${WRKSRC}/hw/kdrive/ephyr/Xephyr.1 ${STAGEDIR}${PREFIX}/man/man1/
+#.endif
 
 .include "${MASTERDIR}/Makefile"

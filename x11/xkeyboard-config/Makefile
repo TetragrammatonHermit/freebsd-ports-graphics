@@ -1,4 +1,4 @@
-# $FreeBSD: head/x11/xkeyboard-config/Makefile 331937 2013-10-29 09:53:25Z danfe $
+# $FreeBSD$
 
 PORTNAME=	xkeyboard-config
 PORTVERSION=	2.12
@@ -7,16 +7,16 @@ CATEGORIES=	x11
 
 MAINTAINER=	x11@FreeBSD.org
 COMMENT=	X Keyboard Configuration Database
-MASTER_SITE_SUBDIR=	individual/${XORG_CAT}/${PORTNAME}
 
 LICENSE=	MIT
 
 BUILD_DEPENDS=	xkbcomp:${PORTSDIR}/x11/xkbcomp
+
 XORG_CAT=	data
 
-USE_BZIP2=	yes
+NO_ARCH=	yes
+USES=		gmake pathfix perl5 tar:bzip2
 USE_GNOME=	intlhack libxslt:build
-USES=		gmake pathfix perl5
 USE_PERL5=	build
 GNU_CONFIGURE=	yes
 INSTALL_TARGET=	install-strip
@@ -24,7 +24,11 @@ INSTALL_TARGET=	install-strip
 CONFIGURE_ARGS=	--with-xkb-base=${PREFIX}/share/X11/xkb \
 		--with-xkb-rules-symlink=xorg
 CPPFLAGS+=	-I${LOCALBASE}/include
-LDFLAGS+=	-L${LOCALBASE}/lib
+LIBS+=		-L${LOCALBASE}/lib
+
+OPTIONS_DEFINE=	ETERSOFT
+ETERSOFT_DESC=	Add pre-1918 Russian letters to typographic layout
+ETERSOFT_EXTRA_PATCHES=	${FILESDIR}/etersoft-patch-symbols-typo
 
 .include <bsd.port.options.mk>
 
@@ -42,7 +46,7 @@ post-patch:
 		${WRKSRC}/rules/merge.sh
 
 post-install:
-	${MKDIR} ${STAGEDIR}/var/lib/xkb
-	${LN} -sf /var/lib/xkb ${STAGEDIR}${PREFIX}/share/X11/xkb/compiled
+	@${MKDIR} ${STAGEDIR}/var/lib/xkb
+	@${LN} -sf /var/lib/xkb ${STAGEDIR}${PREFIX}/share/X11/xkb/compiled
 
 .include <bsd.port.mk>

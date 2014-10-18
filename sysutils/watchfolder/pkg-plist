@@ -1,0 +1,5 @@
+bin/watchd
+@sample etc/watchd.conf.sample
+%%PORTDOCS%%%%DOCSDIR%%/README
+%%PORTDOCS%%%%DOCSDIR%%/watchfolder.pdf
+%%PORTDOCS%%@dirrm %%DOCSDIR%%

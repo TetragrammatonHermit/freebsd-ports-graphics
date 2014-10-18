@@ -1,0 +1,4 @@
+bin/nehahra
+%%SDL%%bin/nehahra-sdl
+@dirrmtry %%Q1DIR%%/nehahra
+@exec mkdir -p %D/%%Q1DIR%%/nehahra

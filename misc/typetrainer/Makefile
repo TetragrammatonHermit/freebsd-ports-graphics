@@ -1,0 +1,19 @@
+# $FreeBSD$
+
+PORTNAME=	typetrainer
+PORTVERSION=	0.5.2
+PORTREVISION=	2
+CATEGORIES=	misc python
+MASTER_SITES=	CHEESESHOP
+
+MAINTAINER=	rm@FreeBSD.org
+COMMENT=	Typing tutor trainer
+
+LICENSE=	MIT
+
+USE_GNOME=		pygtk2
+USE_PYTHON=		2
+USE_PYDISTUTILS=	yes
+PYDISTUTILS_AUTOPLIST=	yes
+
+.include <bsd.port.mk>

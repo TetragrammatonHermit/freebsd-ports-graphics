@@ -3,6 +3,7 @@
 
 PORTNAME=	xorg
 PORTVERSION=	7.7
+PORTREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	# none
 DISTFILES=	# none
@@ -19,6 +20,8 @@ RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/dri.pc:${PORTSDIR}/graphics/dri
 # data
 RUN_DEPENDS+=	${LOCALBASE}/libdata/pkgconfig/xbitmaps.pc:${PORTSDIR}/x11/xbitmaps \
 		${LOCALBASE}/lib/X11/icons/handhelds/cursors/X_cursor:${PORTSDIR}/x11-themes/xcursor-themes
+
+OPTIONS_DEFINE=	DOCS
 
 .include <bsd.port.options.mk>
 

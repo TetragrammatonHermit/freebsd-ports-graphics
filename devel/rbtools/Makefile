@@ -1,0 +1,20 @@
+# $FreeBSD$
+
+PORTNAME=	${ORIGNAME:tl}
+DISTVERSION=	0.6.1
+CATEGORIES=	devel
+MASTER_SITES=	http://downloads.reviewboard.org/releases/${ORIGNAME}/${DISTVERSION:R}/
+DISTNAME=	${ORIGNAME}-${DISTVERSION}
+
+MAINTAINER=	rakuco@FreeBSD.org
+COMMENT=	ReviewBoard Toolset
+
+LICENSE=	MIT
+
+ORIGNAME=	RBTools
+
+USE_PYTHON=		2
+USE_PYDISTUTILS=	yes
+PYDISTUTILS_AUTOPLIST=	yes
+
+.include <bsd.port.mk>

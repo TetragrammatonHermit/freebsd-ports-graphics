@@ -11,7 +11,7 @@
 #    - graphics/libglapi
 #    - grahpics/libglesv2
 #
-# $FreeBSD: head/graphics/libGL/bsd.mesalib.mk 371102 2014-10-18 09:13:49Z kwm $
+# $FreeBSD$
 
 # hw context support in the i915kms driver
 .if ${OPSYS} == FreeBSD && \
@@ -28,11 +28,19 @@ MESAVERSION=	${MESABASEVERSION}${MESASUBVERSION:C/^(.)/.\1/}
 MESADISTVERSION=${MESABASEVERSION}${MESASUBVERSION:C/^(.)/-\1/}
 
 .if defined(WITH_NEW_MESA)
+<<<<<<< HEAD
 MESABASEVERSION=	10.3.1
 # if there is a subversion, don't include the '-' between 7.11-rc2.
 MESASUBVERSION=	
 
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
+=======
+MESABASEVERSION=	10.3.0
+# if there is a subversion, don't include the '-' between 7.11-rc2.
+MESASUBVERSION=	
+
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
+>>>>>>> freebsd-ports/master
 PLIST_SUB+=	OLD="@comment " NEW=""
 
 # work around libarchive bug?

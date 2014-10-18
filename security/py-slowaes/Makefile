@@ -1,0 +1,20 @@
+# Created by: Neil Booth
+# $FreeBSD$
+
+PORTNAME=	slowaes
+DISTVERSION=	0.1a1
+PORTREVISION=	1
+CATEGORIES=	security python
+MASTER_SITES=	CHEESESHOP
+PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
+
+MAINTAINER=	kyuupichan@gmail.com
+COMMENT=	Implementation of AES in pure Python
+
+LICENSE=	APACHE20
+
+USE_PYTHON=	2
+USE_PYDISTUTILS=	yes
+PYDISTUTILS_AUTOPLIST=	yes
+
+.include <bsd.port.mk>
