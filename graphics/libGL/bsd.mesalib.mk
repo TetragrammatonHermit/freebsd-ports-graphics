@@ -11,12 +11,16 @@
 #    - graphics/libglapi
 #    - grahpics/libglesv2
 #
-# $FreeBSD: head/graphics/libGL/bsd.mesalib.mk 371035 2014-10-17 09:53:13Z kwm $
+# $FreeBSD: head/graphics/libGL/bsd.mesalib.mk 371102 2014-10-18 09:13:49Z kwm $
 
 # hw context support in the i915kms driver
 .if ${OPSYS} == FreeBSD && \
  (${OSVERSION} >= 1000717 && ${OSVERSION} < 1100000 || \
   ${OSVERSION} >= 1100035)
+WITH_NEW_MESA=1
+.endif
+
+.if ${OPSYS} == DragonFly && ${DFLYVERSION} >= 300901
 WITH_NEW_MESA=1
 .endif
 
