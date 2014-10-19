@@ -1,5 +1,5 @@
 # Created by: Eric Anholt <anholt@FreeBSD.org>
-# $FreeBSD: head/x11-toolkits/libXmu/Makefile 351936 2014-04-23 13:25:16Z tijl $
+# $FreeBSD$
 
 PORTNAME=	libXmu
 PORTVERSION=	1.1.2

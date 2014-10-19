@@ -1,0 +1,8 @@
+lib/geany/geanyvc.so
+%%DOCSDIR%%/geanyvc/AUTHORS
+%%DOCSDIR%%/geanyvc/COPYING
+%%DOCSDIR%%/geanyvc/ChangeLog
+%%DOCSDIR%%/geanyvc/NEWS
+%%DOCSDIR%%/geanyvc/README
+@dirrm %%DOCSDIR%%/geanyvc
+@dirrmtry %%DOCSDIR%%

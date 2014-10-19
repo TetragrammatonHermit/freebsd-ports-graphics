@@ -1,7 +1,8 @@
-# $FreeBSD: head/x11/xorg-apps/Makefile 352986 2014-05-05 09:45:36Z bapt $
+# $FreeBSD$
 
 PORTNAME=	xorg-apps
 PORTVERSION=	7.7
+PORTREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	# none
 DISTFILES=	# none

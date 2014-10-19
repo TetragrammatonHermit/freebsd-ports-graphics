@@ -1,4 +1,4 @@
-# $FreeBSD: head/x11/pixman/Makefile 351936 2014-04-23 13:25:16Z tijl $
+# $FreeBSD$
 
 PORTNAME=	pixman
 PORTVERSION=	0.32.6

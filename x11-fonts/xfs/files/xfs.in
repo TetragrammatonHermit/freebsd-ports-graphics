@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $FreeBSD: ports/x11-fonts/xfs/files/xfs.in,v 1.6 2012/01/14 08:57:23 dougb Exp $
+# $FreeBSD$
 #
 
 # PROVIDE: xfs

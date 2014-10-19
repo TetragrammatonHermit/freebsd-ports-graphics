@@ -1,0 +1,4 @@
+bin/kiba-dock
+bin/akamaru
+%%DATADIR%%/populate-dock.sh
+@dirrm %%DATADIR%%

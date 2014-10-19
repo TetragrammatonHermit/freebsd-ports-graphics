@@ -1,0 +1,10 @@
+bin/constants
+%%LUA_MODLIBDIR%%/alien_c.so
+%%PORTDOCS%%%%DOCSDIR%%/alien.html
+%%PORTDOCS%%%%DOCSDIR%%/alien.md
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/gtk.lua
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/libc.lua
+%%PORTEXAMPLES%%%%EXAMPLESDIR%%/string_array.lua
+%%LUA_MODSHAREDIR%%/alien.lua
+%%PORTEXAMPLES%%@dirrm %%EXAMPLESDIR%%
+%%PORTDOCS%%@dirrm %%DOCSDIR%%

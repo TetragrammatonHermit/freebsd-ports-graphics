@@ -1,0 +1,3 @@
+bin/drjava
+%%DATADIR%%/%%DRJAVAJAR%%
+@dirrm %%DATADIR%%

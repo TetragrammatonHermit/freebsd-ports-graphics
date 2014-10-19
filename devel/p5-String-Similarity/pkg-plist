@@ -1,0 +1,7 @@
+%%SITE_PERL%%/%%PERL_ARCH%%/String/Similarity.pm
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/String/Similarity/.packlist
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/String/Similarity/Similarity.so
+%%PERL5_MAN3%%/String::Similarity.3.gz
+@dirrm %%SITE_PERL%%/%%PERL_ARCH%%/auto/String/Similarity
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/String
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/String

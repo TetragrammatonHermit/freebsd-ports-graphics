@@ -1,0 +1,24 @@
+# Created by: jpaetzel
+# $FreeBSD$
+
+PORTNAME=	htsql
+PORTVERSION=	2.3.3
+PORTREVISION=	1
+CATEGORIES=	databases python
+MASTER_SITES=	CHEESESHOP
+PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
+DISTNAME=	${PORTNAME:tu}-${PORTVERSION}
+
+MAINTAINER=	koobs@FreeBSD.org
+COMMENT=	Database Query Language (Core & SQLite Backend)
+
+LICENSE=	AGPLv3
+
+USE_PYTHON=		2
+USE_PYDISTUTILS=	yes
+PYDISTUTILS_AUTOPLIST=	yes
+
+RUN_DEPENDS+=	${PYTHON_PKGNAMEPREFIX}yaml>0:${PORTSDIR}/devel/py-yaml \
+		${PYTHON_PKGNAMEPREFIX}sqlite3>0:${PORTSDIR}/databases/py-sqlite3
+
+.include <bsd.port.mk>

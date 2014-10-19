@@ -1,0 +1,6 @@
+bin/m7773
+bin/muni
+%%PORTDOCS%%%%DOCSDIR%%/index.html
+%%PORTDOCS%%%%DOCSDIR%%/kang.gif
+%%PORTDOCS%%%%DOCSDIR%%/yung.gif
+%%PORTDOCS%%@dirrm %%DOCSDIR%%

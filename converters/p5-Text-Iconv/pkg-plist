@@ -1,0 +1,8 @@
+%%PERL5_MAN3%%/Text::Iconv.3.gz
+%%SITE_PERL%%/%%PERL_ARCH%%/Text/Iconv.pm
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/Text/Iconv/.packlist
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/Text/Iconv/Iconv.so
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/Text/Iconv/autosplit.ix
+@dirrm %%SITE_PERL%%/%%PERL_ARCH%%/auto/Text/Iconv
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Text
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/Text

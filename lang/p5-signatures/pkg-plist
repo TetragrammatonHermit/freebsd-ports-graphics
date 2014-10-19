@@ -1,0 +1,5 @@
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/signatures/.packlist
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/signatures/signatures.so
+%%SITE_PERL%%/%%PERL_ARCH%%/signatures.pm
+%%PERL5_MAN3%%/signatures.3.gz
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/signatures

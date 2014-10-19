@@ -1,5 +1,5 @@
 # Created by: Ashish Shukla <wahjava@gmail.com>
-# $FreeBSD: head/x11/xcb-proto/Makefile 351589 2014-04-19 10:16:56Z zeising $
+# $FreeBSD$
 
 PORTNAME=	xcb-proto
 PORTVERSION=	1.10

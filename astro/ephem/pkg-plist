@@ -1,0 +1,5 @@
+bin/ephem
+%%DATADIR%%/Man.txt
+@sample %%DATADIR%%/ephem.cfg.sample
+@sample %%DATADIR%%/ephem.db.sample
+@dirrm %%DATADIR%%

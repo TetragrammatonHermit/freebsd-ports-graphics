@@ -1,0 +1,20 @@
+# Created by: William Grzybowski <william88@gmail.com>
+# $FreeBSD$
+
+PORTNAME=	hghooks
+PORTVERSION=	0.6.0
+PORTREVISION=	1
+CATEGORIES=	devel python
+MASTER_SITES=	CHEESESHOP
+PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
+
+MAINTAINER=	wg@FreeBSD.org
+COMMENT=	Set of Mercurial hooks
+
+LICENSE=	LGPL3
+
+USE_PYTHON=		2
+USE_PYDISTUTILS=	yes
+PYDISTUTILS_AUTOPLIST=	yes
+
+.include <bsd.port.mk>

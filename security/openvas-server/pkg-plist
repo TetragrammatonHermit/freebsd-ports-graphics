@@ -1,0 +1,49 @@
+bin/openvas-mkcert-client
+bin/openvas-mkrand
+bin/openvasd-config
+include/openvas/config.h
+include/openvas/includes.h
+include/openvas/nessusicmp.h
+include/openvas/nessusip.h
+include/openvas/nessusraw.h
+include/openvas/nessustcp.h
+include/openvas/nessusudp.h
+include/openvas/threadcompat.h
+man/man1/openvas-mkcert-client.1.gz
+man/man1/openvas-mkrand.1.gz
+man/man1/openvasd-config.1.gz
+man/man8/openvas-adduser.8.gz
+man/man8/openvas-mkcert.8.gz
+man/man8/openvas-rmuser.8.gz
+man/man8/openvasd.8.gz
+sbin/openvas-adduser
+sbin/openvas-mkcert
+sbin/openvas-rmuser
+sbin/openvasd
+@exec mkdir -p %D/etc/openvas
+@exec install -d -m 700 %D/etc/openvas/gnupg
+@dirrmtry etc/openvas/gnupg
+@dirrmtry etc/openvas
+@cwd /var
+@exec mkdir -p %D/cache/openvas
+lib/openvas/openvas-services
+@exec mkdir -p %D/lib/openvas/CA
+@exec mkdir -p %D/lib/openvas/jobs
+@exec mkdir -p %D/lib/openvas/logs
+@exec install -d -m 700 %D/lib/openvas/private
+@exec install -d -m 700 %D/lib/openvas/private/CA
+@exec mkdir -p %D/lib/openvas/tmp
+@exec mkdir -p %D/lib/openvas/users
+@exec mkdir -p %D/log/openvas
+@dirrmtry log/openvas
+@dirrmtry lib/openvas/users
+@dirrmtry lib/openvas/tmp
+@dirrmtry lib/openvas/private/CA
+@dirrmtry lib/openvas/private
+@dirrmtry lib/openvas/logs
+@dirrmtry lib/openvas/jobs
+@dirrmtry lib/openvas/CA
+@dirrmtry lib/openvas
+@dirrmtry lib
+@dirrmtry cache/openvas
+@cwd %%RESETPREFIX%%

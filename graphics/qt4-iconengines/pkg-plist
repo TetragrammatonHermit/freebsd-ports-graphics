@@ -1,0 +1,4 @@
+%%QT_PLUGINDIR%%/iconengines/libqsvgicon.so
+%%DEBUG%%%%QT_PLUGINDIR%%/iconengines/libqsvgicon.so.debug
+@dirrmtry %%QT_PLUGINDIR%%/iconengines
+@dirrmtry %%QT_PLUGINDIR%%

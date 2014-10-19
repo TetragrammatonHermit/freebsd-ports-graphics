@@ -1,5 +1,5 @@
 # Created by: Ashish Shukla <wahjava@gmail.com>
-# $FreeBSD: head/x11/libxcb/Makefile 351936 2014-04-23 13:25:16Z tijl $
+# $FreeBSD$
 
 PORTNAME=	libxcb
 PORTVERSION=	1.10
@@ -26,14 +26,15 @@ USE_GNOME=	libxslt:build
 USE_XORG=	xau xdmcp
 USE_PYTHON_BUILD=2
 
+OPTIONS_DEFINE=	DOCS
+
 .for f in XPROTO_CFLAGS XPROTO_LIBS XDMCP_CFLAGS XDMCP_LIBS NEEDED_CFLAGS NEEDED_LIBS
 CONFIGURE_ARGS+=${f}="${${f}}"
 .endfor
 CONFIGURE_ARGS+=--enable-xkb
-CONFIGURE_ENV=	LIBS="`pkg-config --libs pthread-stubs`"
 
 NEEDED_CFLAGS=	-I${LOCALBASE}/include
-NEEDED_LIBS=	-L${LOCALBASE}/lib -lXau ${PTHREAD_STUBS_LIBS}
+NEEDED_LIBS=	-L${LOCALBASE}/lib -lXau `pkg-config --libs pthread-stubs`
 
 XDMCP_CFLAGS=	-I${LOCALBASE}/include
 XDMCP_LIBS=	-L${LOCALBASE}/lib -lXdmcp
