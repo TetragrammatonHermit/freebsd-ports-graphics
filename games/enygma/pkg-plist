@@ -1,0 +1,26 @@
+@mode 2755
+@group games
+bin/enygma
+@group
+@mode
+%%DATADIR%%/original.set
+%%DATADIR%%/original01.level
+%%DATADIR%%/original02.level
+%%DATADIR%%/original03.level
+%%DATADIR%%/original04.level
+%%DATADIR%%/original05.level
+%%DATADIR%%/original06.level
+%%DATADIR%%/original07.level
+%%DATADIR%%/original08.level
+%%DATADIR%%/original09.level
+%%DATADIR%%/original10.level
+%%DATADIR%%/original11.level
+%%DATADIR%%/original12.level
+@dirrm %%DATADIR%%
+@mode 2770
+@group games
+@exec install -d -g games -m 2770 %D/var/enygma
+@dirrm var/enygma
+@group
+@mode
+@dirrmtry var

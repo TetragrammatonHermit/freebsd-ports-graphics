@@ -1,0 +1,4 @@
+bin/paman
+share/applications/paman.desktop
+%%DATADIR%%/paman.glade
+@dirrm %%DATADIR%%

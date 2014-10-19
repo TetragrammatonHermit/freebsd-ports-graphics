@@ -1,0 +1,11 @@
+%%PERL5_MAN3%%/Config::Wrest.3.gz
+%%PERL5_MAN3%%/Data::Serializer::Config::Wrest.3.gz
+%%SITE_PERL%%/Config/Wrest.pm
+%%SITE_PERL%%/Data/Serializer/Config/Wrest.pm
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/Config/Wrest/.packlist
+@dirrm %%SITE_PERL%%/%%PERL_ARCH%%/auto/Config/Wrest
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Config
+@dirrmtry %%SITE_PERL%%/Data/Serializer/Config
+@dirrmtry %%SITE_PERL%%/Data/Serializer
+@dirrmtry %%SITE_PERL%%/Data
+@dirrmtry %%SITE_PERL%%/Config

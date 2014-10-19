@@ -1,0 +1,6 @@
+%%PERL5_MAN3%%/Params::Classify.3.gz
+%%SITE_PERL%%/%%PERL_ARCH%%/Params/Classify.pm
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/Params/Classify/Classify.so
+@dirrm %%SITE_PERL%%/%%PERL_ARCH%%/auto/Params/Classify
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Params
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/Params

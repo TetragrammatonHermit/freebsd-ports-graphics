@@ -1,0 +1,5 @@
+%%ETCDIR%%/tilecache.cfg.sample
+www/cgi-bin/tilecache.cgi
+www/cgi-bin/tilecache.fcgi
+@dirrmtry %%ETCDIR%%
+@dirrmtry www/cgi-bin

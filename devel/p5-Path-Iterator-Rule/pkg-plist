@@ -1,0 +1,10 @@
+%%PERL5_MAN3%%/PIR.3.gz
+%%PERL5_MAN3%%/Path::Iterator::Rule.3.gz
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/Path/Iterator/Rule/.packlist
+%%SITE_PERL%%/PIR.pm
+%%SITE_PERL%%/Path/Iterator/Rule.pm
+@dirrmtry %%SITE_PERL%%/Path/Iterator
+@dirrmtry %%SITE_PERL%%/Path
+@dirrm %%SITE_PERL%%/%%PERL_ARCH%%/auto/Path/Iterator/Rule
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Path/Iterator
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Path

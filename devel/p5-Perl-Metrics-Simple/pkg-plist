@@ -1,0 +1,16 @@
+bin/countperl
+man/man1/countperl.1.gz
+%%PERL5_MAN3%%/Perl::Metrics::Simple.3.gz
+%%PERL5_MAN3%%/Perl::Metrics::Simple::Analysis.3.gz
+%%PERL5_MAN3%%/Perl::Metrics::Simple::Analysis::File.3.gz
+%%SITE_PERL%%/%%PERL_ARCH%%/auto/Perl/Metrics/Simple/.packlist
+%%SITE_PERL%%/Perl/Metrics/Simple.pm
+%%SITE_PERL%%/Perl/Metrics/Simple/Analysis.pm
+%%SITE_PERL%%/Perl/Metrics/Simple/Analysis/File.pm
+@dirrm %%SITE_PERL%%/Perl/Metrics/Simple/Analysis
+@dirrm %%SITE_PERL%%/Perl/Metrics/Simple
+@dirrmtry %%SITE_PERL%%/Perl/Metrics
+@dirrmtry %%SITE_PERL%%/Perl
+@dirrm %%SITE_PERL%%/%%PERL_ARCH%%/auto/Perl/Metrics/Simple
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Perl/Metrics
+@dirrmtry %%SITE_PERL%%/%%PERL_ARCH%%/auto/Perl

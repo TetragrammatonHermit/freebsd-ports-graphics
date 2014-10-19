@@ -1,0 +1,21 @@
+# $FreeBSD$
+
+PORTNAME=	Products.SecureMailHost
+PORTVERSION=	1.1.2
+PORTREVISION=	1
+CATEGORIES=	mail python zope
+MASTER_SITES=	CHEESESHOP
+PKGNAMEPREFIX=	${PYTHON_PKGNAMEPREFIX}
+DIST_SUBDIR=	zope
+
+MAINTAINER=	zope@FreeBSD.org
+COMMENT=	Reimplementation of the standard Zope2 MailHost
+
+LICENSE=	ZPL21
+
+USES=		zip
+USE_PYTHON=		yes
+USE_PYDISTUTILS=	yes
+PYDISTUTILS_AUTOPLIST=	yes
+
+.include <bsd.port.mk>

@@ -1,0 +1,5 @@
+bin/dlookup
+bin/mkdictdb
+bin/say
+bin/nasay
+@dirrm lib/dict

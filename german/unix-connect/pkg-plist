@@ -1,0 +1,79 @@
+libexec/uconnect/januslogin
+libexec/uconnect/receiver
+libexec/uconnect/zcall
+libexec/uconnect/uuwnews
+libexec/uconnect/uuwsmtp
+libexec/uconnect/uursmtp
+libexec/uconnect/zconsplit
+libexec/uconnect/anruf
+libexec/uconnect/auspack
+libexec/uconnect/einpack
+libexec/uconnect/import
+libexec/uconnect/list-systems
+libexec/uconnect/prearc
+libexec/uconnect/uumlist
+libexec/uconnect/bsmtp
+libexec/uconnect/rcsmtp
+libexec/uconnect/rgsmtp
+libexec/uconnect/rsmtp
+libexec/uconnect/cron.d.hourly
+libexec/uconnect/logrotate.d.entry
+libexec/uconnect/uurnews
+%%SENDMAIL%%libexec/uconnect/mail.uuconnect
+%%SENDMAIL%%libexec/uconnect/zbatchsmtp
+%%POSTFIX%%libexec/uconnect/zbatchsmtp
+%%POSTFIX%%libexec/uconnect/run_as
+%%QMAIL%%libexec/uconnect/zbatchsmtp
+%%SMAIL%%libexec/uconnect/zbatchsmtp
+%%CNEWS%%libexec/uconnect/viazconnect
+%%INN%%libexec/uconnect/send-zcon
+@dirrm libexec/uconnect
+etc/uconnect/alias
+etc/uconnect/approved
+etc/uconnect/autoeintrag.zconnect
+etc/uconnect/config
+etc/uconnect/myself.zconnect
+etc/uconnect/systems.sample
+etc/uconnect/xprogs
+etc/uconnect/zconnecthosts
+@exec mkdir %D/etc/uconnect/systems || true
+@dirrm etc/uconnect/systems
+@dirrm etc/uconnect
+@exec mkdir /var/spool/uconnect
+@exec mkdir /var/spool/uconnect/backin
+@exec mkdir /var/spool/uconnect/backout
+@exec mkdir /var/spool/uconnect/error
+@exec mkdir /var/spool/uconnect/locks
+@exec mkdir /var/spool/uconnect/logfiles
+@exec mkdir /var/spool/uconnect/netcall
+@exec mkdir /var/spool/uconnect/rsmtp
+@unexec rmdir /var/spool/uconnect/backin
+@unexec rmdir /var/spool/uconnect/backout
+@unexec rmdir /var/spool/uconnect/error
+@unexec rmdir /var/spool/uconnect/locks
+@unexec rmdir /var/spool/uconnect/logfiles
+@unexec rmdir /var/spool/uconnect/netcall
+@unexec rmdir /var/spool/uconnect/rsmtp
+@unexec rmdir /var/spool/uconnect
+%%PORTDOCS%%%%DOCSDIR%%/ChangeLog
+%%PORTDOCS%%%%DOCSDIR%%/ChangeLog.configure
+%%PORTDOCS%%%%DOCSDIR%%/INSTALL
+%%PORTDOCS%%%%DOCSDIR%%/INSTALL.OLD
+%%PORTDOCS%%%%DOCSDIR%%/POLICY
+%%PORTDOCS%%%%DOCSDIR%%/PROBLEMS
+%%PORTDOCS%%%%DOCSDIR%%/README
+%%PORTDOCS%%%%DOCSDIR%%/README.systeme
+%%PORTDOCS%%%%DOCSDIR%%/THANX
+%%PORTDOCS%%%%DOCSDIR%%/TODO
+%%PORTDOCS%%%%DOCSDIR%%/bnews.patch
+%%PORTDOCS%%%%DOCSDIR%%/changes.doc
+%%PORTDOCS%%%%DOCSDIR%%/ger-texinfo.tex
+%%PORTDOCS%%%%DOCSDIR%%/iso8859-1.tex
+%%PORTDOCS%%%%DOCSDIR%%/lizenz.deutsch
+%%PORTDOCS%%%%DOCSDIR%%/texinfo.tex
+%%PORTDOCS%%%%DOCSDIR%%/unix-connect.dvi
+%%PORTDOCS%%%%DOCSDIR%%/unix-connect.texinfo
+%%PORTDOCS%%%%DOCSDIR%%/xpoint.dok
+%%PORTDOCS%%%%DOCSDIR%%/zcon31.changes
+%%PORTDOCS%%%%DOCSDIR%%/zconnect.doc
+%%PORTDOCS%%@dirrm %%DOCSDIR%%
