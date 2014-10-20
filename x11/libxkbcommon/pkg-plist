@@ -16,4 +16,3 @@ lib/libxkbcommon-x11.la
 lib/libxkbcommon-x11.so
 lib/libxkbcommon-x11.so.0
 lib/libxkbcommon-x11.so.0.0.0
-@dirrm include/xkbcommon
