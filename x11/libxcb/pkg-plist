@@ -1968,6 +1968,9 @@ man/man3/xcb_x_print_print_end_job_checked.3.gz
 man/man3/xcb_x_print_print_end_page.3.gz
 man/man3/xcb_x_print_print_end_page_checked.3.gz
 man/man3/xcb_x_print_print_get_attributes.3.gz
+man/man3/xcb_x_print_print_get_attributes_attributes.3.gz
+man/man3/xcb_x_print_print_get_attributes_attributes_end.3.gz
+man/man3/xcb_x_print_print_get_attributes_attributes_length.3.gz
 man/man3/xcb_x_print_print_get_attributes_reply.3.gz
 man/man3/xcb_x_print_print_get_attributes_unchecked.3.gz
 man/man3/xcb_x_print_print_get_context.3.gz
