@@ -1,6 +1,5 @@
---- /dev/null	2013-08-03 00:44:23.000000000 +0200
-+++ config/devd.c	2013-08-03 00:45:15.162836806 +0200
-@@ -0,0 +1,478 @@
+Index: config/devd.c
+@@ -0,0 +1,487 @@
 +/*
 + * Copyright © 2012 Baptiste Daroussin
 + *
@@ -36,6 +35,7 @@
 +#include <sys/un.h>
 +
 +#include <ctype.h>
++#include <fcntl.h>
 +#include <stdlib.h>
 +#include <stdio.h>
 +#include <stdarg.h>
@@ -72,8 +72,8 @@
 +};
 +
 +static struct hw_type hw_types[] = {
-+	{ "ukbd", ATTR_KEYBOARD, "kdb" },
-+	{ "atkbd", ATTR_KEYBOARD, "kdb" },
++	{ "ukbd", ATTR_KEYBOARD, "kbd" },
++	{ "atkbd", ATTR_KEYBOARD, "kbd" },
 +	{ "ums", ATTR_POINTER, "mouse" },
 +	{ "psm", ATTR_POINTER, "mouse" },
 +	{ "uhid", ATTR_POINTER, "mouse" },
@@ -201,6 +201,7 @@
 +#endif
 +    DeviceIntPtr dev = NULL;
 +    int i, rc;
++    int fd;
 +
 +    walk = strchr(line, ' ');
 +    if (walk != NULL)
@@ -220,13 +221,10 @@
 +        LogMessageVerb(X_INFO, 10, "config/devd: ignoring device %s\n", line);
 +        return;
 +    }
-+
-+#if XORG_VERSION_CURRENT < 10800000
 +    if (hw_types[i].xdriver == NULL) {
 +        LogMessageVerb(X_INFO, 10, "config/devd: ignoring device %s\n", line);
 +        return;
 +    }
-+#endif
 +    if (asprintf(&path, "/dev/%s", line) == -1)
 +        return;
 +
@@ -259,21 +257,31 @@
 +            walk[0] = '\0';
 +#if XORG_VERSION_CURRENT > 10800000
 +        attrs.product = strdup(product != NULL ? product : "(unnamed)");
-+	options = input_option_new(options, "name", product != NULL ? product : "(unnamed)");
++        options = input_option_new(options, "name", product != NULL ? product : "(unnamed)");
 +#else
 +        add_option(&options, "name", product != NULL ? product : "(unnamed)");
 +#endif
 +    }
 +#if XORG_VERSION_CURRENT > 10800000
 +    attrs.usb_id = NULL;
-+    options = input_option_new(options, "path", path);
-+    options = input_option_new(options, "device", path);
++    attrs.device = strdup(path);
++    options = input_option_new(options, "driver", hw_types[i].xdriver);
++    if (attrs.flags & ATTR_KEYBOARD) {
++      /*
++       * Don't pass device option if keyboard is attached to console (open fails),
++       * thus activating special logic in xf86-input-keyboard.
++       */
++       fd = open(path, O_RDONLY | O_NONBLOCK | O_EXCL);
++       if (fd > 0) {
++          close(fd);
++          options = input_option_new(options, "device", path);
++       }
++    } else {
++          options = input_option_new(options, "device", path);
++    }
 +#else
 +    add_option(&options, "path", path);
 +    add_option(&options, "device", path);
-+#endif
-+
-+#if XORG_VERSION_CURRENT < 10800000
 +    add_option(&options, "driver", hw_types[i].xdriver);
 +#endif
 +
@@ -293,7 +301,7 @@
 +#else
 +    options = input_option_new(options, "config_info", config_info);
 +#endif
-+    LogMessage(X_INFO, "config/devd: Adding input device %s (%s)\n",
++    LogMessage(X_INFO, "config/devd: adding input device %s (%s)\n",
 +               product != NULL ? product : "(unnamed)", path);
 +
 +#if XORG_VERSION_CURRENT > 10800000
@@ -345,7 +353,7 @@
 +        return;
 +
 +#if XORG_VERSION_CURRENT > 10800000
-+    remove_devices("dev", value);
++    remove_devices("devd", value);
 +#else
 +    for (dev = inputInfo.devices; dev; dev = next) {
 +        next = dev->next;
@@ -415,10 +423,10 @@
 +
 +        switch(*line) {
 +		case DEVD_EVENT_ADD:
-+			device_added(line++);
++			device_added(++line);
 +			break;
 +		case DEVD_EVENT_REMOVE:
-+			device_removed(line++);
++			device_removed(++line);
 +			break;
 +		default:
 +			break;

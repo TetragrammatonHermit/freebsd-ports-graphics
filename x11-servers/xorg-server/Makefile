@@ -26,24 +26,21 @@ OPTIONS_RADIO_CONF= HAL DEVD
 AIGLX_DESC=	Compile with Accelerated Indirect GLX support
 SUID_DESC=	Install the Xorg server with setuid bit set
 HAL_DESC=	Compile with HAL config support
-DEVD_DESC=	Use devd for autoconfiguration of input devices (experimental)
-OPTIONS_DEFAULT=AIGLX SUID HAL
+DEVD_DESC=	Use devd for autoconfiguration of input devices
+OPTIONS_DEFAULT=AIGLX SUID DEVD
 
 OPTIONS_EXCLUDE_sparc64=	HAL
 
 .include <bsd.port.options.mk>
 
 .if defined(WITH_NEW_XORG)
-XORG_VERSION=	1.12.4
-XORG_REVISION=	9
+XORG_VERSION=	1.14.5
+XORG_REVISION=	0
 PLIST_SUB+=	OLD="@comment " NEW=""
-EXTRA_PATCHES+=	${FILESDIR}/extra-clang \
-		${FILESDIR}/extra-configure \
-		${FILESDIR}/extra-new-bad-impl \
-		${FILESDIR}/extra-new-dix_dixfonts.c
+EXTRA_PATCHES+=	${FILESDIR}/extra-hw_xfree86_loader_loadmod.c
 .else
 XORG_VERSION=	1.7.7
-XORG_REVISION=	14
+XORG_REVISION=	11
 PLIST_SUB+=	OLD="" NEW="@comment "
 EXTRA_PATCHES+=	${FILESDIR}/extra-Xext-xace.c \
 		${FILESDIR}/extra-Xserver-os-xprintf.c \
@@ -51,7 +48,7 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-Xext-xace.c \
 		${FILESDIR}/extra-os-utils.c \
 		${FILESDIR}/extra-dix_events.c \
 		${FILESDIR}/extra-Xserver-hw-xfree86-common-xf86Config.c \
-		${FILESDIR}/extra-old-dix_dixfonts.c
+		${FILESDIR}/extra-dix_dixfonts.c
 .endif
 
 USES=		gmake libtool:keepla perl5 tar:bzip2
@@ -97,7 +94,13 @@ CONFIGURE_ARGS+=	--enable-config-hal=no
 .endif
 
 .if ${PORT_OPTIONS:MDEVD}
-EXTRA_PATCHES+=		${FILESDIR}/extra-config_devd.c
+. if defined(WITH_NEW_XORG)
+EXTRA_PATCHES+=	${FILESDIR}/extra-new-devd
+EXTRA_PATCHES+=	${FILESDIR}/extra-new-config_devd
+. else
+EXTRA_PATCHES+=	${FILESDIR}/extra-old-devd
+EXTRA_PATCHES+=	${FILESDIR}/extra-old-config_devd
+. endif
 .endif
 
 .if ${PORT_OPTIONS:MAIGLX}
@@ -106,7 +109,7 @@ CONFIGURE_ARGS+=	--enable-aiglx=yes
 CONFIGURE_ARGS+=	--enable-aiglx=no
 .endif
 
-# We handle Xorg setuid in the plist. This allows to build xorg-server as a user
+# We handle Xorg setuid in the plist. This allows to build xorg-server as a user.
 CONFIGURE_ARGS+=--enable-install-setuid=no
 .if ${PORT_OPTIONS:MSUID}
 PLIST_SUB+=	SUID=""
@@ -183,23 +186,26 @@ post-patch:
 	@${REINPLACE_CMD} -e 's|@GLX_TRUE@GLXMODS =|@GLX_BOGUS@GLXMODS =|g' \
 		-e 's|^LTLIBRARIES = |LTLIBRARIES = libglx.la |g' \
 		${WRKSRC}/hw/xfree86/dixmods/Makefile.in
-.if ${PORT_OPTIONS:MDEVD}
-	@${ECHO_CMD} -e "\nint config_devd_init(void);\nvoid config_devd_fini(void);" \
-		>> ${WRKSRC}/config/config-backends.h
-.endif
- 
+
 post-configure:
 .if ${PORT_OPTIONS:MDEVD}
 	@${REINPLACE_CMD} -e 's|config\.c|config.c devd.c|g' \
 		-e 's|config\.lo|config.lo devd.lo|g' \
 		${WRKSRC}/config/Makefile
+. if defined(WITH_NEW_XORG)
+	@${REINPLACE_CMD} -e 's|^/\* #undef CONFIG_UDEV \*/|#define CONFIG_DEVD 1|' \
+		${WRKSRC}/include/dix-config.h
+.else
+	@${REINPLACE_CMD} -e 's|^/\* #undef CONFIG_HAL \*/|#define CONFIG_DEVD 1|' \
+		${WRKSRC}/include/dix-config.h
+. endif
 .endif
 
 .if ${SLAVE_PORT} == "no"
 post-install:
-# The .xorg dir because else the xorg-server might not load the correct 
+# The .xorg dir because else the xorg-server might not load the correct
 # libglx module.
-	${MKDIR} ${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg
+	@${MKDIR} ${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg
 	${INSTALL_LIB} ${WRKSRC}/hw/xfree86/dixmods/.libs/libglx.so \
 		${STAGEDIR}${PREFIX}/lib/xorg/modules/extensions/.xorg/
 
