@@ -13,6 +13,8 @@ DISTNAME=	xorg-server-${PORTVERSION}
 MAINTAINER=	x11@FreeBSD.org
 COMMENT?=	X.Org X server and related programs
 
+LICENSE=	MIT
+
 LIB_DEPENDS=	libdrm.so:${PORTSDIR}/graphics/libdrm
 RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 		xkbcomp:${PORTSDIR}/x11/xkbcomp
@@ -107,14 +109,14 @@ EXTRA_PATCHES+=	${FILESDIR}/extra-arch-i386
 
 .if ${ARCH} == ia64
 PLIST_SUB+=	IA64_NA="@comment "
-EXTRA_PATCHES+=	${.CURDIR}/files/extra-arch-ia64
+EXTRA_PATCHES+=	${FILESDIR}/extra-arch-ia64
 .else
 PLIST_SUB+=	IA64_NA=""
 .endif
 
 .if ${ARCH} == powerpc || ${ARCH} == powerpc64
 PLIST_SUB+=	PPC_NA="@comment "
-EXTRA_PATCHES+=	${.CURDIR}/files/extra-arch-powerpc
+EXTRA_PATCHES+=	${FILESDIR}/extra-arch-powerpc
 .else
 PLIST_SUB+=	PPC_NA=""
 .endif
