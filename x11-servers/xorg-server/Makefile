@@ -2,8 +2,8 @@
 # $FreeBSD$
 
 PORTNAME?=	xorg-server
-PORTVERSION=	${XORG_VERSION}
-PORTREVISION?=	${XORG_REVISION}
+PORTVERSION=	1.14.5
+PORTREVISION?=	0
 PORTEPOCH?=	1
 CATEGORIES=	x11-servers
 MASTER_SITES=	XORG
@@ -33,9 +33,6 @@ OPTIONS_EXCLUDE_sparc64=	HAL
 
 .include <bsd.port.options.mk>
 
-XORG_VERSION=	1.14.5
-XORG_REVISION=	0
-PLIST_SUB+=	OLD="@comment " NEW=""
 EXTRA_PATCHES+=	${FILESDIR}/extra-hw_xfree86_loader_loadmod.c
 
 USES=		gmake libtool:keepla perl5 tar:bzip2
