@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	zoneinfo
-DISTVERSION=	2014f
+DISTVERSION=	2014i
 CATEGORIES=	misc
 MASTER_SITES=	ftp://ftp.iana.org/tz/releases/ \
 		ftp://munnari.oz.au/pub/
@@ -17,6 +17,8 @@ PREFIX=		/usr
 TZFILES=	africa antarctica asia australasia etcetera europe \
 		factory northamerica southamerica systemv
 POSIXRULES=	America/New_York
+
+# Run with "DEVELOPER=1 make check-plist" before commiting!
 
 # Prevent packages if on the FreeBSD building cluster. This because
 # it overwrites system files and directories.

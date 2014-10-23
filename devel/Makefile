@@ -71,6 +71,8 @@
     SUBDIR += argtable
     SUBDIR += arm-elf-binutils
     SUBDIR += arm-gnueabi-binutils
+    SUBDIR += arm-none-eabi-binutils
+    SUBDIR += arm-none-eabi-gcc
     SUBDIR += armv6-freebsd10.0-xdev
     SUBDIR += aros-sdk
     SUBDIR += art
@@ -1370,6 +1372,7 @@
     SUBDIR += omake
     SUBDIR += omniNotify
     SUBDIR += omniORB
+    SUBDIR += omniORB-4.1
     SUBDIR += oniguruma
     SUBDIR += oniguruma4
     SUBDIR += oniguruma5
@@ -3815,6 +3818,7 @@
     SUBDIR += py-oletools
     SUBDIR += py-omnijson
     SUBDIR += py-omniorb
+    SUBDIR += py-omniorb-3
     SUBDIR += py-optik
     SUBDIR += py-orbit
     SUBDIR += py-ordereddict
