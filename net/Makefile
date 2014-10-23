@@ -340,6 +340,7 @@
     SUBDIR += luasocket
     SUBDIR += lvwimax
     SUBDIR += mDNSResponder
+    SUBDIR += macchanger
     SUBDIR += mad_fcl
     SUBDIR += mcast-tools
     SUBDIR += mediastreamer
@@ -392,6 +393,7 @@
     SUBDIR += netwib
     SUBDIR += neubot
     SUBDIR += nfsshell
+    SUBDIR += ng_mikrotik_eoip
     SUBDIR += ngrep
     SUBDIR += nifmon
     SUBDIR += nload

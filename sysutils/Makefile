@@ -118,6 +118,7 @@
     SUBDIR += cfengine36-rc
     SUBDIR += chgrep
     SUBDIR += ciso
+    SUBDIR += ciso-maker
     SUBDIR += ck4up
     SUBDIR += clean
     SUBDIR += clockspeed
@@ -905,6 +906,7 @@
     SUBDIR += syslog-ng-incubator
     SUBDIR += syslog-ng33
     SUBDIR += syslog-ng34
+    SUBDIR += syslog-ng35
     SUBDIR += syslogger
     SUBDIR += sysrc
     SUBDIR += system-tools-backends
