@@ -32,10 +32,10 @@ MESABASEVERSION=	10.3.2
 # if there is a subversion, don't include the '-' between 7.11-rc2.
 MESASUBVERSION=	
 
-.if ${MESABASEVERSION:E} == 0
-MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
-.else
+.if ${MESASUBVERSION} == "" && ${MESABASEVERSION:E} != 0
 MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION}/
+.else
+MASTER_SITES=	ftp://ftp.freedesktop.org/pub/mesa/${MESABASEVERSION:R}/
 .endif
 PLIST_SUB+=	OLD="@comment " NEW=""
 
