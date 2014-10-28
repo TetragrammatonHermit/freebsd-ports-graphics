@@ -31,8 +31,6 @@ SHEBANG_FILES=	node/sbin/munin-node node/sbin/munin-sched \
 
 .include "${.CURDIR}/../munin-common/munin.mk"
 
-DISTINFO_FILE=	${MUNIN_DISTINFO}
-EXTRA_PATCHES+=	${MUNIN_PATCHES}
 ALL_TARGET=	build-node build-plugins
 INSTALL_TARGET=	install-node-prime install-plugins-prime
 NO_ARCH=	yes
