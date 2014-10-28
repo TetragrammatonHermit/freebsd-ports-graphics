@@ -18,10 +18,12 @@ USES=		gettext:build
 
 OPTIONS_DEFINE=	TEXTURE
 
-OPTIONS_DEFINE_i386=	GALLIUM VDPAU
-OPTIONS_DEFAULT_i386=	GALLIUM VDPAU
-OPTIONS_DEFINE_amd64=	GALLIUM VDPAU
-OPTIONS_DEFAULT_amd64=	GALLIUM VDPAU
+# VDPAU support is disabled because we lack kernel support at this moment
+# 2014-10-28
+OPTIONS_DEFINE_i386=	GALLIUM
+OPTIONS_DEFAULT_i386=	GALLIUM
+OPTIONS_DEFINE_amd64=	GALLIUM
+OPTIONS_DEFAULT_amd64=	GALLIUM
 
 GALLIUM_DESC=	Gallium (llvm backed) dri drivers
 TEXTURE_DESC=	Enable texture-float support (patent encumbered)
@@ -84,14 +86,15 @@ PLIST_SUB+=	GALLIUM="@comment "
 CONFIGURE_ARGS+=--enable-texture-float
 .endif
 
-.if ${PORT_OPTIONS:MVDPAU}
-CONFIGURE_ARGS+=--enable-vdpau
-LIB_DEPENDS+=	libvdpau.so:${PORTSDIR}/multimedia/libvdpau
-PLIST_SUB+=	VDPAU=""
-.else
+# VDPAU needs llvm libraries at runtime.
+#.if ${PORT_OPTIONS:MVDPAU}
+#CONFIGURE_ARGS+=--enable-vdpau
+#LIB_DEPENDS+=	libvdpau.so:${PORTSDIR}/multimedia/libvdpau
+#PLIST_SUB+=	VDPAU=""
+#.else
 CONFIGURE_ARGS+=--disable-vdpau
 PLIST_SUB+=	VDPAU="@comment "
-.endif
+#.endif
 
 .if ${ARCH} == powerpc || ${ARCH} == powerpc64
 DRI_DRIVERS=	RADEON SWRAST
