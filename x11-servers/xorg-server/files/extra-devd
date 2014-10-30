@@ -1,5 +1,5 @@
 Index: config/devd.c
-@@ -0,0 +1,486 @@
+@@ -0,0 +1,472 @@
 +/*
 + * Copyright (c) 2012 Baptiste Daroussin
 + * Copyright (c) 2013, 2014 Alex Kozlov
@@ -95,17 +95,17 @@ Index: config/devd.c
 +	/* Check if a sysctl exists. */
 +	asprintf(&sysctlname, "dev.%s.%i.%%desc", device->driver, unit);
 +	if (sysctlname == NULL)
-+		return (0);
++		return false;
 +
 +	ret = sysctlbyname(sysctlname, NULL, &len, NULL, 0);
 +	free(sysctlname);
 +
 +	if (ret == 0 && len > 0) {
 +		snprintf(devname, devname_len, "%s%i", device->driver, unit);
-+		return (1);
++		return true;
 +	}
 +
-+	return (0);
++	return false;
 +}
 +
 +static bool
@@ -122,17 +122,17 @@ Index: config/devd.c
 +	/* Check if /dev/$driver exists. */
 +	asprintf(&devpath, "/dev/%s", device->driver);
 +	if (devpath == NULL)
-+		return (0);
++		return false;
 +
 +	ret = stat(devpath, &st);
 +	free(devpath);
 +
 +	if (ret == 0) {
 +		strncpy(devname, device->driver, devname_len);
-+		return (1);
++		return true;
 +	}
 +
-+	return (0);
++	return false;
 +}
 +
 +static char *
@@ -152,17 +152,16 @@ Index: config/devd.c
 +
 +	if (sysctlbyname(name, NULL, &len, NULL, 0) == 0) {
 +		dest = malloc(len + 1);
-+		if (!dest)
-+			goto unwind;
-+		if (sysctlbyname(name, dest, &len, NULL, 0) == 0)
-+			dest[len] = '\0';
-+		else {
-+			free(dest);
-+			dest = NULL;
++		if (dest) {
++			if (sysctlbyname(name, dest, &len, NULL, 0) == 0)
++				dest[len] = '\0';
++			else {
++				free(dest);
++				dest = NULL;
++			}
 +		}
 +	}
 +
-+ unwind:
 +	free(name);
 +	return dest;
 +}
@@ -178,7 +177,7 @@ Index: config/devd.c
 +	InputOption *options = NULL;
 +	InputAttributes attrs = { };
 +	DeviceIntPtr dev = NULL;
-+	int i, rc;
++	int i;
 +	int fd;
 +
 +	for (i = 0; hw_types[i].driver != NULL; i++) {
@@ -193,14 +192,8 @@ Index: config/devd.c
 +		}
 +	}
 +
-+	if (hw_types[i].driver == NULL) {
-+		LogMessageVerb(X_INFO, 10, "config/devd: ignoring device %s\n",
-+				devname);
-+		return;
-+	}
-+
-+	if (hw_types[i].xdriver == NULL) {
-+		LogMessageVerb(X_INFO, 10, "config/devd: ignoring device %s\n",
++	if (hw_types[i].driver == NULL || hw_types[i].xdriver == NULL) {
++		LogMessage(X_INFO, 10, "config/devd: ignoring device %s\n",
 +				devname);
 +		return;
 +	}
@@ -238,6 +231,7 @@ Index: config/devd.c
 +		free(vendor);
 +	}
 +
++	/* XXX implement usb_id */
 +	attrs.usb_id = NULL;
 +	attrs.device = strdup(path);
 +	options = input_option_new(options, "driver", hw_types[i].xdriver);
@@ -275,12 +269,9 @@ Index: config/devd.c
 +	LogMessage(X_INFO, "config/devd: adding input device %s (%s)\n",
 +			attrs.product, path);
 +
-+	rc = NewInputDeviceRequest(options, &attrs, &dev);
++	NewInputDeviceRequest(options, &attrs, &dev);
 +
-+	if (rc != Success)
-+		goto unwind;
-+
-+ unwind:
++unwind:
 +	free(config_info);
 +	input_option_free_list(&options);
 +
@@ -320,7 +311,7 @@ Index: config/devd.c
 +
 +	sock = socket(AF_UNIX, SOCK_STREAM, 0);
 +	if (sock < 0) {
-+		LogMessage(X_ERROR, "config/devd: Fail opening stream socket\n");
++		LogMessage(X_ERROR, "config/devd: fail opening stream socket\n");
 +		return -1;
 +	}
 +
@@ -329,7 +320,7 @@ Index: config/devd.c
 +
 +	if (connect(sock, (struct sockaddr *) &devd, sizeof(devd)) < 0) {
 +		close(sock);
-+		LogMessage(X_ERROR, "config/devd: Fail to connect to devd\n");
++		LogMessage(X_ERROR, "config/devd: fail to connect to devd\n");
 +		return -1;
 +	}
 +
@@ -403,7 +394,8 @@ Index: config/devd.c
 +	else
 +		free(buf);
 +
-+	return sz; /* number of bytes in the line, not counting the line break */
++	/* number of bytes in the line, not counting the line break */
++	return sz;
 +}
 +
 +static void
@@ -446,24 +438,18 @@ Index: config/devd.c
 +config_devd_init(void)
 +{
 +	char devicename[1024];
-+	int i, j, ret;
++	int i, j;
 +
-+	/* first scan the sysctl to determine the hardware if needed */
 +	for (i = 0; hw_types[i].driver != NULL; i++) {
++		/* first scan the sysctl to determine the hardware */
 +		for (j = 0; j < 16; j++) {
-+			ret = sysctl_exists(&hw_types[i], j,
-+				devicename, sizeof(devicename));
-+			if (!ret)
-+				continue;
-+
-+			device_added(devicename);
++			if (sysctl_exists(&hw_types[i], j,
++					devicename, sizeof(devicename)) != 0)
++				device_added(devicename);
 +		}
 +
-+		ret = devpath_exists(&hw_types[i], devicename, sizeof(devicename));
-+		if (!ret)
-+			continue;
-+
-+		device_added(devicename);
++		if (devpath_exists(&hw_types[i], devicename, sizeof(devicename)) != 0)
++			device_added(devicename);
 +	}
 +
 +	if ((sock_devd = connect_devd()) < 0)
