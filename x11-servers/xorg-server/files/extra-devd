@@ -1,5 +1,5 @@
 Index: config/devd.c
-@@ -0,0 +1,472 @@
+@@ -0,0 +1,471 @@
 +/*
 + * Copyright (c) 2012 Baptiste Daroussin
 + * Copyright (c) 2013, 2014 Alex Kozlov
@@ -193,7 +193,7 @@ Index: config/devd.c
 +	}
 +
 +	if (hw_types[i].driver == NULL || hw_types[i].xdriver == NULL) {
-+		LogMessage(X_INFO, 10, "config/devd: ignoring device %s\n",
++		LogMessage(X_INFO, "config/devd: ignoring device %s\n",
 +				devname);
 +		return;
 +	}
@@ -260,8 +260,8 @@ Index: config/devd.c
 +	}
 +
 +	if (device_is_duplicate(config_info)) {
-+		LogMessage(X_WARNING, "config/devd: device %s already added. "
-+				"Ignoring\n", attrs.product);
++		LogMessage(X_WARNING, "config/devd: device %s (%s) already added. "
++				"Ignoring\n", attrs.product, path);
 +		goto unwind;
 +	}
 +
@@ -274,7 +274,6 @@ Index: config/devd.c
 +unwind:
 +	free(config_info);
 +	input_option_free_list(&options);
-+
 +	free(attrs.usb_id);
 +	free(attrs.product);
 +	free(attrs.device);
