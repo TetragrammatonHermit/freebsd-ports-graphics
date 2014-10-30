@@ -1,5 +1,5 @@
 Index: config/devd.c
-@@ -0,0 +1,480 @@
+@@ -0,0 +1,481 @@
 +/*
 + * Copyright (c) 2012 Baptiste Daroussin
 + * Copyright (c) 2013, 2014 Alex Kozlov
@@ -245,8 +245,9 @@ Index: config/devd.c
 +    }
 +	else {
 +		  /*
-+		   * Don't pass device option if devoce is keyboard and it attached to
-+		   * console (open fails), thus activating special logic in xf86-input-keyboard.
++		   * Don't pass "device" option if the device is a keyboard and is
++		   * already attached to the console (ie. open() fails).
++		   * This would activate a special logic in xf86-input-keyboard.
 +		   */
 +          if (attrs.flags & ~ATTR_KEYBOARD) {
 +			  options = input_option_new(options, "device", xstrdup(path));
