@@ -10,7 +10,6 @@
     SUBDIR += bind-tools
     SUBDIR += bind10
     SUBDIR += bind910
-    SUBDIR += bind98
     SUBDIR += bind99
     SUBDIR += bindgraph
     SUBDIR += bundy
@@ -142,7 +141,6 @@
     SUBDIR += pear-Net_DNS
     SUBDIR += pear-Net_DNS2
     SUBDIR += powerdns
-    SUBDIR += powerdns-devel
     SUBDIR += powerdns-recursor
     SUBDIR += py-adns
     SUBDIR += py-bonjour
