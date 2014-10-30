@@ -1,6 +1,5 @@
---- config/devd.c.orig	2014-09-09 21:28:03.646653866 +0200
-+++ config/devd.c	2014-09-09 22:39:39.978360587 +0200
-@@ -0,0 +1,432 @@
+Index: config/devd.c
+@@ -0,0 +1,480 @@
 +/*
 + * Copyright (c) 2012 Baptiste Daroussin
 + * Copyright (c) 2013, 2014 Alex Kozlov
@@ -59,7 +58,10 @@
 +#define DEVD_EVENT_ADD		'+'
 +#define DEVD_EVENT_REMOVE	'-'
 +
-+static int sock_devd = -1;
++#define RECONNECT_DELAY		5 * 1000
++
++static int sock_devd;
++OsTimerPtr rtimer;
 +
 +struct hw_type {
 +	const char *driver;
@@ -73,7 +75,6 @@
 +	{ "sysmouse", ATTR_POINTER, "mouse" },
 +	{ "ums", ATTR_POINTER, "mouse" },
 +	{ "psm", ATTR_POINTER, "mouse" },
-+	{ "uhid", ATTR_POINTER, "mouse" },
 +	{ "joy", ATTR_JOYSTICK, NULL },
 +	{ "atp", ATTR_TOUCHPAD, NULL },
 +	{ "uep", ATTR_TOUCHSCREEN, NULL },
@@ -237,19 +238,21 @@
 +    attrs.usb_id = NULL;
 +    attrs.device = strdup(path);
 +    options = input_option_new(options, "driver", hw_types[i].xdriver);
-+    if (attrs.flags & ATTR_KEYBOARD) {
-+      /*
-+       * Don't pass device option if keyboard is attached to console (open fails),
-+       * thus activating special logic in xf86-input-keyboard.
-+       */
-+       fd = open(path, O_RDONLY | O_NONBLOCK | O_EXCL);
-+       if (fd > 0) {
++    fd = open(path, O_RDONLY | O_NONBLOCK | O_EXCL);
++    if (fd > 0) {
 +          close(fd);
 +          options = input_option_new(options, "device", xstrdup(path));
-+       }
 +    }
 +	else {
-+          options = input_option_new(options, "device", xstrdup(path));
++		  /*
++		   * Don't pass device option if devoce is keyboard and it attached to
++		   * console (open fails), thus activating special logic in xf86-input-keyboard.
++		   */
++          if (attrs.flags & ~ATTR_KEYBOARD) {
++			  options = input_option_new(options, "device", xstrdup(path));
++          }
++          LogMessage(X_WARNING, "config/devd: device %s already opened\n",
++                     path);
 +    }
 +
 +    if (asprintf(&config_info, "devd:%s", devname) == -1) {
@@ -259,7 +262,7 @@
 +
 +    if (device_is_duplicate(config_info)) {
 +        LogMessage(X_WARNING, "config/devd: device %s already added. "
-+                   "Ignoring.\n", attrs.product);
++                   "Ignoring\n", attrs.product);
 +        goto unwind;
 +    }
 +
@@ -295,6 +298,58 @@
 +    free(value);
 +}
 +
++static void
++disconnect_devd(int sock)
++{
++	if (sock >= 0) {
++		RemoveGeneralSocket(sock);
++		close(sock);
++	}
++}
++
++static int
++connect_devd(void)
++{
++	struct sockaddr_un devd;
++	int sock;
++
++	sock = socket(AF_UNIX, SOCK_STREAM, 0);
++	if (sock < 0) {
++		LogMessage(X_ERROR, "config/devd: Fail opening stream socket\n");
++		return -1;
++	}
++
++	devd.sun_family = AF_UNIX;
++	strlcpy(devd.sun_path, DEVD_SOCK_PATH, sizeof(devd.sun_path));
++
++	if (connect(sock, (struct sockaddr *) &devd, sizeof(devd)) < 0) {
++		close(sock);
++		LogMessage(X_ERROR, "config/devd: Fail to connect to devd\n");
++		return -1;
++	}
++
++	AddGeneralSocket(sock);
++
++	return	sock;
++}
++
++static CARD32
++reconnect_handler(OsTimerPtr timer, CARD32 time, pointer arg)
++{
++	int newsock;
++
++	if ((newsock = connect_devd()) > 0) {
++		sock_devd = newsock;
++		TimerFree(rtimer);
++		rtimer = NULL;
++		LogMessage(X_INFO, "config/devd: reopening devd socket\n");
++		return 0;
++	}
++
++	/* try again after RECONNECT_DELAY */
++	return RECONNECT_DELAY;
++}
++
 +static ssize_t
 +socket_getline(int fd, char **out)
 +{
@@ -309,13 +364,18 @@
 +
 +	for (;;) {
 +		ret = read(sock_devd, &c, 1);
-+		if (ret < 1) {
++		if (ret < 0) {
 +			if (errno == EINTR)
 +				continue;
 +			free(buf);
 +			return -1;
++		/* EOF - devd socket is lost */
++		} else if (ret == 0) {
++			disconnect_devd(sock_devd);
++			rtimer = TimerSet(NULL, 0, 1, reconnect_handler, NULL);
++			LogMessage(X_WARNING, "config/devd: devd socket is lost\n");
++			return -1;
 +		}
-+
 +		if (c == '\n')
 +			break;
 +
@@ -380,7 +440,6 @@
 +int
 +config_devd_init(void)
 +{
-+    struct sockaddr_un devd;
 +    char devicename[1024];
 +    int i, j, ret;
 +
@@ -402,23 +461,10 @@
 +        device_added(devicename);
 +    }
 +
-+    sock_devd = socket(AF_UNIX, SOCK_STREAM, 0);
-+    if (sock_devd < 0) {
-+        ErrorF("config/devd: Fail opening stream socket");
++	if ((sock_devd = connect_devd()) < 0)
 +        return 0;
-+    }
-+
-+    devd.sun_family = AF_UNIX;
-+    strlcpy(devd.sun_path, DEVD_SOCK_PATH, sizeof(devd.sun_path));
-+
-+    if (connect(sock_devd, (struct sockaddr *) &devd, sizeof(devd)) < 0) {
-+        close(sock_devd);
-+        ErrorF("config/devd: Fail to connect to devd");
-+        return 0;
-+    }
 +
 +    RegisterBlockAndWakeupHandlers(block_handler, wakeup_handler, NULL);
-+    AddGeneralSocket(sock_devd);
 +
 +    return 1;
 +}
@@ -426,10 +472,11 @@
 +void
 +config_devd_fini(void)
 +{
-+    if (sock_devd < 0)
-+        return;
++	if (rtimer) {
++		TimerFree(rtimer);
++		rtimer = NULL;
++	}
++	disconnect_devd(sock_devd);
 +
-+    RemoveGeneralSocket(sock_devd);
-+    RemoveBlockAndWakeupHandlers(block_handler, wakeup_handler, NULL);
-+    close(sock_devd);
++	RemoveBlockAndWakeupHandlers(block_handler, wakeup_handler, NULL);
 +}
