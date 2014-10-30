@@ -35,8 +35,6 @@ OPTIONS_EXCLUDE_sparc64=	HAL
 
 .include <bsd.port.options.mk>
 
-EXTRA_PATCHES+=	${FILESDIR}/extra-hw_xfree86_loader_loadmod.c
-
 USES=		gmake libtool perl5 tar:bzip2
 USE_PERL5=	build
 USE_GL=		gl
@@ -77,11 +75,6 @@ LIB_DEPENDS+=	libhal.so:${PORTSDIR}/sysutils/hal
 CONFIGURE_ARGS+=	--enable-config-hal=yes
 .else
 CONFIGURE_ARGS+=	--enable-config-hal=no
-.endif
-
-.if ${PORT_OPTIONS:MDEVD}
-EXTRA_PATCHES+=	${FILESDIR}/extra-devd
-EXTRA_PATCHES+=	${FILESDIR}/extra-config_devd
 .endif
 
 .if ${PORT_OPTIONS:MAIGLX}
