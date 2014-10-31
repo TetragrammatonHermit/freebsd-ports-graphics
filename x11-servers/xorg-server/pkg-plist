@@ -3,8 +3,8 @@ bin/X
 %%SUID%%@group wheel
 %%SUID%%@mode 4555
 bin/Xorg
-%%SUID%%@owner
-%%SUID%%@group
+%%SUID%%@owner root
+%%SUID%%@group wheel
 %%SUID%%@mode
 bin/cvt
 bin/gtf
