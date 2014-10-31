@@ -1729,7 +1729,6 @@
     SUBDIR += rssroll
     SUBDIR += rsstail
     SUBDIR += rsstool
-    SUBDIR += rt38
     SUBDIR += rt40
     SUBDIR += rt42
     SUBDIR += ruby-amazon
@@ -2086,7 +2085,6 @@
     SUBDIR += typo3
     SUBDIR += typo3-lts
     SUBDIR += typo345
-    SUBDIR += typo347
     SUBDIR += typolight
     SUBDIR += udmsearch
     SUBDIR += uglifyjs
