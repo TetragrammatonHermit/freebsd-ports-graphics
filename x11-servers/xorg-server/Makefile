@@ -22,6 +22,7 @@ RUN_DEPENDS=	xkeyboard-config>=2.5:${PORTSDIR}/x11/xkeyboard-config \
 XORG_CAT=	xserver
 SLAVE_PORT?=	no
 
+OPTIONS_SUB=	yes
 OPTIONS_DEFINE=	AIGLX SUID
 OPTIONS_RADIO=	CONF
 OPTIONS_RADIO_CONF= HAL DEVD
@@ -32,6 +33,9 @@ DEVD_DESC=	Use devd for autoconfiguration of input devices
 OPTIONS_DEFAULT=AIGLX SUID DEVD
 
 OPTIONS_EXCLUDE_sparc64=	HAL
+
+# We handle Xorg setuid in the plist. This allows to build xorg-server as a user.
+CONFIGURE_ARGS+=--enable-install-setuid=no
 
 .include <bsd.port.options.mk>
 
@@ -83,14 +87,6 @@ CONFIGURE_ARGS+=	--enable-aiglx=yes
 CONFIGURE_ARGS+=	--enable-aiglx=no
 .endif
 
-# We handle Xorg setuid in the plist. This allows to build xorg-server as a user.
-CONFIGURE_ARGS+=--enable-install-setuid=no
-.if ${PORT_OPTIONS:MSUID}
-PLIST_SUB+=	SUID=""
-.else
-PLIST_SUB+=	SUID="@comment "
-.endif
-
 .if ${ARCH} == armv6
 EXTRA_PATCHES+=	${FILESDIR}/extra-arm-patch-hw__xfree86__os-support__bsd__Makefile.in
 EXTRA_PATCHES+=	${FILESDIR}/extra-arm-patch-include__servermd.h
@@ -108,25 +104,14 @@ PLIST_SUB+=	IA64_NA=""
 .endif
 
 .if ${ARCH} == powerpc || ${ARCH} == powerpc64
-PLIST_SUB+=	PPC_NA="@comment "
 EXTRA_PATCHES+=	${FILESDIR}/extra-arch-powerpc
-.else
-PLIST_SUB+=	PPC_NA=""
 .endif
 
 .if ${ARCH} == sparc64
 PLIST_SUB+=	SPARC64=""
-PLIST_SUB+=	SPARC64_NA="@comment "
 EXTRA_PATCHES+=	${FILESDIR}/extra-arch-sparc64
 .else
 PLIST_SUB+=	SPARC64="@comment "
-PLIST_SUB+=	SPARC64_NA=""
-.endif
-
-.if ${ARCH} == amd64 || ${ARCH} == i386 || ${ARCH} == sparc64
-PLIST_SUB+=	AMD64_I386_SPARC64=""
-.else
-PLIST_SUB+=	AMD64_I386_SPARC64="@comment "
 .endif
 
 .if ${PORT_OPTIONS:MSUID}
