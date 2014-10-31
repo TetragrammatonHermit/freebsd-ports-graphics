@@ -1,5 +1,6 @@
-Index: config/devd.c
-@@ -0,0 +1,471 @@
+--- config/devd.c.orig	2014-10-30 22:58:01.116847441 +0100
++++ config/devd.c	2014-10-31 10:01:12.200208323 +0100
+@@ -0,0 +1,472 @@
 +/*
 + * Copyright (c) 2012 Baptiste Daroussin
 + * Copyright (c) 2013, 2014 Alex Kozlov
@@ -75,6 +76,7 @@ Index: config/devd.c
 +	{ "sysmouse", ATTR_POINTER, "mouse" },
 +	{ "ums", ATTR_POINTER, "mouse" },
 +	{ "psm", ATTR_POINTER, "mouse" },
++	{ "uhid", ATTR_POINTER, "mouse" },
 +	{ "joy", ATTR_JOYSTICK, NULL },
 +	{ "atp", ATTR_TOUCHPAD, NULL },
 +	{ "uep", ATTR_TOUCHSCREEN, NULL },
