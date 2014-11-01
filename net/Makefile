@@ -62,6 +62,7 @@
     SUBDIR += chrony
     SUBDIR += citrix_ica
     SUBDIR += clamz
+    SUBDIR += cloud-init
     SUBDIR += clusterit
     SUBDIR += cnd
     SUBDIR += coda6_client
@@ -359,6 +360,7 @@
     SUBDIR += morebalance
     SUBDIR += mosh
     SUBDIR += mosquitto
+    SUBDIR += motsognir
     SUBDIR += mpd-l2tp-ipv6pd-client
     SUBDIR += mpd5
     SUBDIR += mpich
@@ -1084,7 +1086,6 @@
     SUBDIR += sixxs-aiccu
     SUBDIR += skstream
     SUBDIR += sl2tps
-    SUBDIR += slirp
     SUBDIR += slurm
     SUBDIR += smb4k-kde4
     SUBDIR += smbldap-tools

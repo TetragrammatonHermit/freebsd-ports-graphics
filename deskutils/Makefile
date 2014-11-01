@@ -9,7 +9,6 @@
     SUBDIR += appwrapper
     SUBDIR += aspostit
     SUBDIR += autocutsel
-    SUBDIR += babytrans
     SUBDIR += basket
     SUBDIR += bigyear
     SUBDIR += bitcollider
@@ -223,6 +222,7 @@
     SUBDIR += toolboxkit
     SUBDIR += tpb
     SUBDIR += treeline
+    SUBDIR += treesheets
     SUBDIR += tuxcards
     SUBDIR += vboxgtk
     SUBDIR += virt-manager

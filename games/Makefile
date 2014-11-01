@@ -669,6 +669,7 @@
     SUBDIR += openmortal
     SUBDIR += openmsx
     SUBDIR += openpref
+    SUBDIR += openra
     SUBDIR += opensfx
     SUBDIR += opensonic
     SUBDIR += openspades
@@ -715,6 +716,7 @@
     SUBDIR += pinball
     SUBDIR += pingus
     SUBDIR += pink-pony
+    SUBDIR += pioneer
     SUBDIR += pioneers
     SUBDIR += pipenightdreams
     SUBDIR += pipepanic

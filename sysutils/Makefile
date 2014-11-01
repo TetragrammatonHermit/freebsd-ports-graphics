@@ -49,6 +49,7 @@
     SUBDIR += autopsy
     SUBDIR += b43-fwcutter
     SUBDIR += backuppc
+    SUBDIR += backuppc-devel
     SUBDIR += bacula-bat
     SUBDIR += bacula-client
     SUBDIR += bacula-client-static
@@ -470,6 +471,7 @@
     SUBDIR += logrotate
     SUBDIR += logstalgia
     SUBDIR += logstash
+    SUBDIR += logstash-contrib
     SUBDIR += logstash-forwarder
     SUBDIR += logtool
     SUBDIR += logwatch
@@ -774,6 +776,7 @@
     SUBDIR += respond
     SUBDIR += retail
     SUBDIR += rfstool
+    SUBDIR += rinse
     SUBDIR += rmonitor
     SUBDIR += roottail
     SUBDIR += rsnapshot
@@ -851,6 +854,7 @@
     SUBDIR += screenfetch
     SUBDIR += screenie
     SUBDIR += scterc
+    SUBDIR += sd-agent
     SUBDIR += sdd
     SUBDIR += sdparm
     SUBDIR += searchmonkey
