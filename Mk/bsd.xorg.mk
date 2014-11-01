@@ -33,6 +33,7 @@ Xorg_Pre_Include=		bsd.xorg.mk
 USE_BZIP2=    	yes
 .endif
 GNU_CONFIGURE= 	yes
+INSTALL_TARGET=	install-strip
 DIST_SUBDIR=	xorg/${XORG_CAT}
 
 MASTER_SITES?=	${MASTER_SITE_XORG}
