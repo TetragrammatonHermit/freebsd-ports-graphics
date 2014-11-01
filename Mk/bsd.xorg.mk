@@ -118,7 +118,7 @@ post-install:
 .endif
 
 . if ${XORG_CAT} == "lib"
-USES+=		pathfix libtool:keepla
+USES+=		pathfix libtool
 USE_LDCONFIG=	yes
 CONFIGURE_ARGS+=--enable-malloc0returnsnull
 . endif
