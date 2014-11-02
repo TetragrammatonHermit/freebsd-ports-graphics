@@ -2,7 +2,7 @@
 
 PORTNAME=	libXft
 PORTVERSION=	2.3.1
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	x11-fonts
 
 MAINTAINER=	gnome@FreeBSD.org
@@ -25,6 +25,5 @@ post-patch:
 post-install:
 	@${INSTALL_SCRIPT} ${WRKSRC}/xft-config \
 		${STAGEDIR}${PREFIX}/bin/
-	@${STRIP_CMD} ${STAGEDIR}${PREFIX}/lib/libXft.so.2
 
 .include <bsd.port.mk>

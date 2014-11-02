@@ -3,6 +3,7 @@
 
 PORTNAME=	libXext
 PORTVERSION=	1.3.3
+PORTREVISION=	1
 PORTEPOCH=	1
 CATEGORIES=	x11
 
@@ -14,6 +15,5 @@ LICENSE=	MIT
 XORG_CAT=	lib
 USE_XORG=	xproto x11 xextproto:both xau
 CONFIGURE_ARGS+=--disable-specs --without-xmlto
-INSTALL_TARGET=	install-strip
 
 .include <bsd.port.mk>

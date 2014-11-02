@@ -2,6 +2,7 @@
 
 PORTNAME=	libxkbcommon
 PORTVERSION=	0.5.0
+PORTREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	http://xkbcommon.org/download/
 
@@ -15,7 +16,6 @@ USES=		gmake bison tar:xz
 
 USE_XORG=	xcb
 MAKE_JOBS_UNSAFE=	yes
-INSTALL_TARGET=	install-strip
 
 CONFIGURE_ARGS=	--without-default-layout \
 		--without-default-model \

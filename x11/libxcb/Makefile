@@ -3,6 +3,7 @@
 
 PORTNAME=	libxcb
 PORTVERSION=	1.11
+PORTREVISION=	1
 CATEGORIES=	x11 python
 MASTER_SITES=	http://xcb.freedesktop.org/dist/
 
@@ -23,7 +24,6 @@ XORG_CAT=	lib
 USES=		gmake python:2,build
 USE_GNOME=	libxslt:build
 USE_XORG=	xau xdmcp
-INSTALL_TARGET=	install-strip
 
 OPTIONS_DEFINE=	DOCS
 
